@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//opt/**)",
+      "Read(//usr/local/**)",
+      "Read(//TGM/Apps/**)",
+      "Bash(module avail *)",
+      "Bash(module load *)",
+      "Bash(sinfo)",
+      "Bash(sinfo -s)",
+      "Bash(squeue -u jaegwan97)",
+      "Bash(python3)",
+      "Bash(python3 *.py)",
+      "WebSearch"
+    ]
+  }
+}
