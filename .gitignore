@@ -1,0 +1,11 @@
+# 모든 파일을 기본적으로 무시
+*
+
+# Claude 관련 파일만 허용
+!.gitignore
+!CLAUDE.md
+!.claude/
+!.claude/**
+
+# 로컬 전용 설정은 제외
+.claude/settings.local.json
