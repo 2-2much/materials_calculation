@@ -5,7 +5,6 @@ metadata:
   node_type: memory
   type: project
   originSessionId: efba5fd5-ccfb-407c-9da5-9aed92ace44e
-  server: kohn
 ---
 
 For As_In (q0/q+1/q+2), `02_vacuum_scan/coulomb_trunc/new_c_40A`, the FWP finite-size

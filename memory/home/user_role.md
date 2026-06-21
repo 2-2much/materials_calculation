@@ -5,7 +5,6 @@ metadata:
   node_type: memory
   type: user
   originSessionId: 38487651-eef0-4408-8101-c448086f52a2
-  server: kohn
 ---
 
 - Computational materials scientist / condensed matter physics researcher

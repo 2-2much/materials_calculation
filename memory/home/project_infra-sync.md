@@ -5,7 +5,6 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 8eb65f43-70c9-449a-95ce-27d3f33a4b7b
-  server: kohn
 ---
 
 ## 프로젝트 분리

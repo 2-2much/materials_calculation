@@ -5,7 +5,6 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 38487651-eef0-4408-8101-c448086f52a2
-  server: kohn
 ---
 
 Reproduce Fig.8 from Vijay et al. PRB 112, 045409 (2025) for InAs surface In interstitial defect.

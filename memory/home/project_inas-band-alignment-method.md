@@ -5,7 +5,6 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 38487651-eef0-4408-8101-c448086f52a2
-  server: kohn
 ---
 
 User prefers band alignment over LOCPOT-based potential alignment for delta_V correction in charged defect calculations.
