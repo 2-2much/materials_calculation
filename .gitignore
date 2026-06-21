@@ -6,6 +6,8 @@
 !CLAUDE.md
 !.claude/
 !.claude/**
+!memory/
+!memory/**
 
 # 로컬 전용 설정은 제외
 .claude/settings.local.json
