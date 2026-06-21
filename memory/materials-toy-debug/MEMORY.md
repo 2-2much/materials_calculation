@@ -1,0 +1,1 @@
+- [CKT in-plane FWP correction check](project_ckt_inplane_correction.md) — concluded unnecessary/non-physical; keep CKT+ΔV(q) (1a) as final result; 3x2x1 supercell check planned next.
