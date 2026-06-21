@@ -1,1 +1,0 @@
-- [Todo 앱 프로젝트](project_todo-app.md) — 이전 대화에서 Python CLI Todo 앱(추가/목록/완료/삭제) 구현함

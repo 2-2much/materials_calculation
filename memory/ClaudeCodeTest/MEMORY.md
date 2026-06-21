@@ -1,1 +1,0 @@
-- [Project Hosting](project_hosting.md) — GitHub에 저장, 다른 서버에서 clone으로 작업 가능

@@ -22,9 +22,9 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "cd ~/materials && git pull --rebase origin main 2>&1 || echo 'git pull 실패'; CMEM=~/.claude/projects/-home-jaegwan97-materials/memory; if [ -d memory ] && [ \"$(ls -A memory 2>/dev/null)\" ]; then mkdir -p \"$CMEM\" && cp -a memory/* \"$CMEM\"/; fi"],
-            "timeout": 15,
-            "statusMessage": "최신 설정 및 메모리 동기화 중..."
+            "args": ["-c", "~/materials/.claude/sync-memory.sh pull"],
+            "timeout": 30,
+            "statusMessage": "최신 설정 및 메모리 동기화 중 (git pull)..."
           }
         ]
       }
@@ -36,9 +36,9 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "CMEM=~/.claude/projects/-home-jaegwan97-materials/memory; cd ~/materials && if [ -d \"$CMEM\" ] && [ \"$(ls -A \"$CMEM\" 2>/dev/null)\" ]; then mkdir -p memory && cp -a \"$CMEM\"/* memory/; fi; if [ -n \"$(git status --porcelain)\" ]; then git add -A && git commit -m 'Auto-sync: Claude Code session' && git push origin main 2>&1; fi"],
-            "timeout": 15,
-            "statusMessage": "메모리 및 변경사항 동기화 중..."
+            "args": ["-c", "~/materials/.claude/sync-memory.sh push"],
+            "timeout": 30,
+            "statusMessage": "메모리 및 변경사항 동기화 중 (git push)..."
           }
         ]
       }
