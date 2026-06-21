@@ -1,6 +1,6 @@
 # Materials Project
 
-VASP DFT 계산 프로젝트. 서버 3대(kohn, sham, bloch)에서 공유.
+KAIST VASP DFT 계산 프로젝트. 서버 3대(kohn, sham, bloch)에서 공유.
 
 ## 폴더 구조
 - 물질별 폴더: InAs, InP, InSb, CdS, PbS, Si, SiC 등
