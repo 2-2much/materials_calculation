@@ -4,7 +4,12 @@
 
 REPO_MEM=~/materials/memory
 CLAUDE_BASE=~/.claude/projects
-SERVER=$(hostname -s)
+# 모든 마스터 노드가 tgm-master이므로 SLURM ClusterName으로 서버 식별
+CLUSTER=$(scontrol show config 2>/dev/null | awk '/^ClusterName/{print $3}')
+case "$CLUSTER" in
+  tgmv2)  SERVER="kohn" ;;
+  *)      SERVER="${CLUSTER:-unknown}" ;;
+esac
 MODE=$1
 
 is_syncable_project() {
