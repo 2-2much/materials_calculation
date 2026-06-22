@@ -1,0 +1,2 @@
+- [Defect 계산 폴더 구조](project_defect-calc-folder-structure.md) — calc/{defect}/{charge}/01_Relax→02_Band 패턴, config/inputs/scripts 분리
+- [Surface defect POSCAR 생성](project_surface-defect-poscar-generation.md) — In_As, V_In, V_As, In_i, As_i 5종 생성 완료, Td_In site(z=0.630) 사용, /make-surface-defect 스킬

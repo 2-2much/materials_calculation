@@ -1,1 +1,2 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
+- [Lab Members](lab_members.md) — 연구실 구성원 명단
