@@ -1,5 +1,5 @@
 #!/bin/bash
-# materials 관련 프로젝트 + home 의 Claude 메모리를 Git으로 동기화
+# materials/papers 관련 프로젝트 + home 의 Claude 메모리를 Git으로 동기화
 # Usage: sync-memory.sh pull|push
 
 REPO_MEM=~/materials/memory
@@ -7,9 +7,11 @@ CLAUDE_BASE=~/.claude/projects
 SERVER=$(hostname -s)
 MODE=$1
 
-is_materials_project() {
+is_syncable_project() {
   local dir="$1"
-  [[ "$dir" == "-home-jaegwan97" ]] || [[ "$dir" == -home-jaegwan97-materials* ]]
+  [[ "$dir" == "-home-jaegwan97" ]] || \
+  [[ "$dir" == -home-jaegwan97-materials* ]] || \
+  [[ "$dir" == -mnt-hohenberg-*-papers* ]]
 }
 
 case $MODE in
@@ -28,7 +30,7 @@ case $MODE in
     for proj_mem in "$CLAUDE_BASE"/*/memory; do
       [ -d "$proj_mem" ] || continue
       proj_dir=$(basename "$(dirname "$proj_mem")")
-      is_materials_project "$proj_dir" || continue
+      is_syncable_project "$proj_dir" || continue
 
       short_name=""
       for source_file in "$REPO_MEM"/*/.source; do
