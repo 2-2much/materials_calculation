@@ -23,7 +23,7 @@ case $MODE in
       short_name=$(basename "$(dirname "$source_file")")
       target="$CLAUDE_BASE/$proj_dir/memory"
       mkdir -p "$target"
-      cp -a "$REPO_MEM/$short_name"/*.md "$target/" 2>/dev/null
+      cp -a "$REPO_MEM/$short_name"/*.md "$target/" 2>/dev/null || true
     done
     ;;
   push)
