@@ -1,0 +1,1 @@
+- [Save conversation notes](feedback_save_notes.md) — 매 대화 종료 전 마크다운 노트 저장 필수, Stop 훅이 auto commit+push
