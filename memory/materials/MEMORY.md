@@ -1,2 +1,4 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
+- [SCPC Debug](scpc_debug.md) — SCPC: CKT 비호환, getgrid 버그, INVCOR 가이드, 수렴 문제, 권장 설정
+- [SCPC Reference](scpc_reference.md) — SCPC GitHub README 참조, INVCOR/REFCHG 그리드 호환 주의

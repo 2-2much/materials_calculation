@@ -31,7 +31,7 @@ SCPC는 3D Coulomb kernel 기반 계산을 전제로 보정량을 산출하고, 
 
 ### 원인 분석
 1. **셀 크기 부족**: in-plane 8.75 × 12.38 Å ← GitHub 권장 **15-20 Å 이상** 미달. 작은 셀에서 δρ가 셀의 큰 비율을 차지하고 boundary damping 영역이 defect과 겹침
-2. **IN=1**: SCPC가 첫 DAV step부터 적용되어 초기 charge density 불안정 상태에서 큰 보정이 가해짐
+2. **IN(INVCOR) 설정**: 아래 "INVCOR 가이드" 참조
 3. **EDIFF=1E-4 너무 loose**: SCPC+SCF 동시 수렴에 불충분
 4. **PREC=N, LREAL=A**: GitHub은 PREC=Accurate, LREAL=.FALSE. 권장
 
@@ -50,7 +50,7 @@ NELM = 200         # (현재 60 default → 증가)
 
 SCPC {
      USE   = T
-     IN    = 5      # (현재 1 → 증가, GitHub 권장 3-8)
+     IN    = 1      # pre-converged WAVECAR 사용 시 필수. scratch면 3-8
      QTOT  = -1.0
      DIEL  = 15.15
      ZLOW  = 0.30
@@ -66,7 +66,13 @@ SCPC {
 }
 ```
 
-**How to apply:** SCPC slab 계산 시 in-plane ≥ 15 Å 확보, IN=5~8, EDIFF ≤ 1E-5, NELM ≥ 200, PREC=Accurate.
+## INVCOR(IN) 가이드 ([[scpc-reference]])
+
+GitHub README 2.11 항목 기준:
+- **pre-converged WAVECAR/CHGCAR를 사용하는 경우 (charged, uncorrected)** → **INVCOR=1 필수**. 이미 수렴된 charge에 보정을 즉시 적용해야 하므로.
+- **scratch부터 시작하는 경우** → INVCOR=3~8. 초기 charge density가 불안정하므로 몇 step 후 SCPC 적용.
+
+**How to apply:** SCPC slab 계산 시 in-plane ≥ 15 Å 확보, EDIFF ≤ 1E-5, NELM ≥ 200, PREC=Accurate. INVCOR(IN) 값은 WAVECAR 재사용 여부에 따라 결정.
 
 ## SCPC integer divide by zero 해결 (2026-06-22)
 
