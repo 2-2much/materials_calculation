@@ -3,3 +3,4 @@
 - [SCPC Debug](scpc_debug.md) — SCPC: CKT 비호환, getgrid 버그, SCPCOUT interleaving, OSZICAR 유실, 권장 설정
 - [SCPC Reference](scpc_reference.md) — SCPC GitHub README 참조, INVCOR/REFCHG 그리드 호환 주의
 - [Surface Defect Gam Tight](surface_defect_gam_tight.md) — InAs surface defect 00_Gam-relax EDIFFG -0.02→-0.01 tightening (2026-06-24)
+- [Bloch Workspace Setup](bloch_workspace_setup.md) — bloch 서버 VS Code workspace 설정 진행 중, config.txt→config 이름 변경 필요
