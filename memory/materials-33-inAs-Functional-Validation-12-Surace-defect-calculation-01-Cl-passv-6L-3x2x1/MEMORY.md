@@ -3,3 +3,4 @@
 - [slabcc correction Cl_As_In](project_slabcc-correction-Cl-As-In.md) — 3가지 시도(single/multi/fixed) 모두 부적합, E_corr=0.018~0.079 eV, Falletta 필요
 - [slabcc z-shift 주의](feedback_slabcc-z-shift.md) — slabcc가 slab_center 기준으로 출력 CHGCAR z좌표를 shift함
 - [보고서 grid 보간](feedback_report-grid-interpolation.md) — DFT/model z-grid 다르므로 np.interp 필수
+- [MPI hang 사건](project_mpi-hang-incident.md) — 2026-06-23 In_As q0 Relax, PMPI_Alltoallv 교착(n001), 서버 관리자 보고 필요
