@@ -1,6 +1,6 @@
 ---
 name: scpc-debug
-description: "VASP SCPC: CKT 비호환, getgrid 버그, bare SCPC 수렴 불완전(작은 셀+IN=1), 권장 설정 정리"
+description: "VASP SCPC: CKT 비호환, getgrid 버그, SCPCOUT interleaving, OSZICAR 유실, 수렴 문제, 권장 설정"
 metadata: 
   node_type: memory
   type: project
@@ -103,3 +103,32 @@ SCPC {
 - `lhfskip` 바이너리: MPI 1 rank만 인식 → 주석 처리
 - NCORE=32 (cascade2 노드 기준)
 - 매 실행 전 z-diel.dat, SCPCOUT, MGSolver_* 삭제 필요 (누적)
+
+## SCPCOUT interleaving 현상 (2026-06-24 분석)
+
+경로: `.../12-Surace-defect_calculation/01-Cl-passv_6L_3x2x1/calc/Cl-As_In/__SCPC-test__/`
+
+### 증상
+SCPCOUT에 **두 개의 SCPC 시리즈**가 번갈아 출력됨:
+- Series A (header "start at cycle: 1"): Cycle 1~37, E_corr → 2.7692 eV
+- Series B (header "start at cycle: 5"): Cycle 5~50, E_corr → 2.9984 eV
+- 총 83 SCPC Cycle 엔트리 (37 + 46)
+
+### 원인
+동시 실행이 아님 (SLURM 확인: job 52274 13초 CANCELLED → job 52275 3h46m COMPLETED, 순차적). **단일 실행(job 52275) 내에서** SCPC 플러그인이 COR(correction)과 PER(periodic) 두 Poisson solver를 각각 별도로 cycle하면서 SCPCOUT에 interleaving 출력.
+- MGSolver_COR 파일 46개 = Series B(cycle 5~50) cycle 수와 일치
+- MGSolver_PER 파일 46개 = 동일
+
+### OSZICAR 중간 step 유실
+SCPC는 매 cycle마다 electronic SCF를 재수행하면서 OSZICAR를 덮어씀. 최종 출력만 남음:
+- 초기 SCF(SCPC 적용 전): DAV 1~35
+- 최종 SCF(SCPC 마지막 cycle 후): DAV 43~48
+- 중간 SCPC cycle들의 DAV step은 정상적으로 유실됨 → **버그 아님**
+
+### 결과
+- 최종 에너지: -342.406 eV (SCPC 반영)
+- 두 시리즈 모두 수치적으로 수렴 (변동 < 0.001 eV)
+- 명시적 "SCPC converged" 메시지 없음 (NMAX 기본값 50 도달로 종료)
+- OUTCAR에서 "reached required accuracy" 없지만 electronic SCF dE < EDIFF(1E-6) 달성
+
+**How to apply:** SCPC 출력 분석 시 SCPCOUT의 interleaving에 주의. COR/PER 두 시리즈를 cycle 번호로 구분해서 읽어야 함. OSZICAR 중간 step 유실은 정상.
