@@ -4,3 +4,4 @@
 - [SCPC Reference](scpc_reference.md) — SCPC GitHub README 참조, INVCOR/REFCHG 그리드 호환 주의
 - [Surface Defect Gam Tight](surface_defect_gam_tight.md) — InAs surface defect 00_Gam-relax EDIFFG -0.02→-0.01 tightening (2026-06-24)
 - [Bloch Workspace Setup](bloch_workspace_setup.md) — bloch 서버 VS Code workspace 설정 진행 중, config.txt→config 이름 변경 필요
+- [SCPC Vacuum Scan](scpc_vacuum_scan.md) — Cl-As_In SCPC vacuum convergence test (c=35/45/55 Å), 2026-06-25 submit, 결과 대기 중
