@@ -1,10 +1,10 @@
 ---
 name: surface-defect-gam-tight
-description: InAs (110) surface defect 00_Gam-relax EDIFFG -0.02→-0.01 tightening 작업 (2026-06-24)
+description: "InAs (110) surface defect EDIFFG -0.02→-0.01 tightening 결과 — V_Cl-V_As 구조 재배열 확인, 1shot 검증 완료 (2026-06-25)"
 metadata: 
   node_type: memory
   type: project
-  originSessionId: 4b38a661-c729-4ba3-9bac-a210765574d3
+  originSessionId: d0d8276b-ba73-4bec-9a16-ab74deaab2ba
 ---
 
 ## 작업 내용
@@ -12,20 +12,22 @@ metadata:
 
 **Why:** Force convergence를 더 타이트하게 하여 정확한 relaxed geometry 확보.
 
-**How to apply:** 후속 01_Relax, 02_Band 단계 진행 시 새 CONTCAR 기반으로 진행해야 함.
+**How to apply:** 후속 01_Relax, 02_Band 단계 진행 시 새 CONTCAR 기반으로 진행해야 함. 특히 V_Cl-V_As는 반드시 -0.01 구조를 사용해야 함.
 
-## 셋업 상세
-- 기존 결과 → `00_Gam-relax_bak/` (OUTCAR, OSZICAR, POSCAR, CONTCAR, vasprun.xml, std.log)
-- `00_Gam-relax/`: CONTCAR→POSCAR, EDIFFG=-1E-2, WAVECAR/CHGCAR 유지 (restart)
-- config 템플릿 `INCAR_00.Gam-relax`도 -1E-2로 업데이트됨
-- `run_gam_tight.sh` — 00_Gam-relax만 실행 (01_Relax 진행 안 함)
-- `submit_gam_tight.sh` — 일괄 제출 스크립트
+## 수렴 결과 (2026-06-25 확인)
+- 12개 전부 "reached required accuracy"로 수렴 완료
+- 10개 defect: max displacement < 0.11 Å, ΔE < 6 meV → -0.02에서 이미 충분히 수렴
+- **In_As/q0**: max disp 0.77 Å, ΔE -24 meV, ionic 127 steps → 약간의 추가 relaxation
+- **V_Cl-V_As/q0**: max disp **1.53 Å**, ΔE **-172 meV**, ionic 257 steps → 구조 재배열 발생
+  - In#27이 0.87Å 상승, Cl#86/#88이 ~1Å씩 이동
+  - 1shot (2×2×1 k-mesh) 검증: ΔE = **-177.5 meV** → 실제 안정 구조 확인 (spurious 아님)
 
-## 대상 defect (12개)
-As_In/q0, As_i_Td_In/q0, Cl-As_In/q0, Cl-As_In/q+1, In_As/q0, In_i_Td_As/q0, In_i_Td_In/q0, pure/q0, V_Cl-Cl_As/q0, V_Cl-Cl_In/q0, V_Cl-V_As/q0, V_Cl-V_In/q0
+## V_Cl-Cl_As DFE 이슈
+- DFE가 -2.73 eV (In-rich), -1.97 eV (As-rich)로 매우 낮음 → 전자구조 분석 필요
+- 1shot 계산 세팅 완료 (`01_1shot/`, `01_1shot_F002/`)
 
-## 제외
-- In_i/q0, In_i2/q0 — 00_Gam-relax 없이 바로 01_Relax로 진행된 케이스
-
-## 제출 상태
-- 2026-06-24 sbatch 제출 완료 (Job ID 52329~52340, partition g1, 12 nodes each)
+## 디렉토리 구조
+- `00_Gam-relax_bak/` — 기존 -0.02 결과
+- `00_Gam-relax/` — -0.01 결과 (현재 사용)
+- `01_1shot/` — -0.01 CONTCAR 기반 1shot (2×2×1)
+- `01_1shot_F002/` — -0.02 CONTCAR 기반 1shot (비교용)
