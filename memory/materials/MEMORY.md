@@ -4,4 +4,5 @@
 - [SCPC Reference](scpc_reference.md) — SCPC GitHub README 참조, INVCOR/REFCHG 그리드 호환 주의
 - [Surface Defect Gam Tight](surface_defect_gam_tight.md) — InAs surface defect 00_Gam-relax EDIFFG -0.02→-0.01 tightening (2026-06-24)
 - [Bloch Workspace Setup](bloch_workspace_setup.md) — bloch 서버 VS Code workspace 설정 진행 중, config.txt→config 이름 변경 필요
-- [SCPC Vacuum Scan](scpc_vacuum_scan.md) — Cl-As_In SCPC vacuum convergence test (c=35/45/55 Å), 2026-06-25 submit, 결과 대기 중
+- [SCPC Vacuum Scan](scpc_vacuum_scan.md) — Cl-As_In SCPC vacuum scan: 20A=2.46eV, 30A=2.16eV 수렴, 40A 진행중(job 52416). 수렴 판단은 E_tot+E_corr로 해야 함
+- [Cl2 HSE06 Calc](cl2_hse06_calc.md) — Cl2 분자 HSE06 이완 (AEXX=0.27, LHFSKIP, VASP6.5.1), ENCUT300 완료(-5.3953 eV), ENCUT400 진행중(job 52424)
