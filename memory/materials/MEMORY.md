@@ -6,3 +6,4 @@
 - [Bloch Workspace Setup](bloch_workspace_setup.md) — bloch 서버 VS Code workspace 설정 진행 중, config.txt→config 이름 변경 필요
 - [SCPC Vacuum Scan](scpc_vacuum_scan.md) — Cl-As_In SCPC vacuum scan: 20A=2.46eV, 30A=2.16eV 수렴, 40A 진행중(job 52416). 수렴 판단은 E_tot+E_corr로 해야 함
 - [Cl2 HSE06 Calc](cl2_hse06_calc.md) — Cl2 분자 HSE06 이완 (AEXX=0.27, LHFSKIP, VASP6.5.1), ENCUT300 완료(-5.3953 eV), ENCUT400 진행중(job 52424)
+- [SLURM Jobname Distinct](slurm_jobname_distinct.md) — SLURM 잡 제출 시 jobname을 calc별로 구분되게 작성(예: cd-k2x2x1_G-qp1)
