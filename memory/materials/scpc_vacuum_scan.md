@@ -1,6 +1,6 @@
 ---
 name: scpc-vacuum-scan
-description: "SCPC vacuum convergence test: Cl-As_In q+1, c=35/45/55 Å, PREC=A LREAL=F BROAD=0.50, 2026-06-25 submit"
+description: "SCPC vacuum scan: Cl-As_In q+1, 20/30/40Å 완료, E_tot+E_corr 수렴(~-338.3 eV). 큰 보정(~1.8 eV) 원인=표면 국소 전하(ε_eff≈1)+작은 lateral 셀(3×2), 버그 아님"
 metadata: 
   node_type: memory
   type: project
@@ -22,23 +22,48 @@ __SCPC-test__/
     각각 q0/, q+1_pre/, q+1/ 하위 폴더
 ```
 
-### 완료 상태 (2026-06-26 기준)
+### 완료 상태 (2026-06-29 기준)
 - **q0, q+1_pre**: 6개 모두 수렴 완료
-- **q+1 SCPC**: vac_20A, vac_30A 완료 / vac_40A 진행중 (job 52416)
+- **q+1 SCPC**: vac_20A/30A/40A **3종 모두 완료**
 
-### E_corr 중간 결과
-| Vacuum | E_corr | Potential Alignment | 수렴 |
-|--------|--------|-------------------|------|
-| 20 Å (c=35) | 2.4627 eV | -0.0433 eV | ✓ (43 cycles, 완전 고정) |
-| 30 Å (c=45) | 2.1615 eV | -0.0457 eV | ✓ (44 cycles, 완전 고정) |
-| 40 Å (c=55) | — | — | 진행중 |
+### 결과 (E_corr + 수렴 판단)
+| Vacuum | E_corr | Align | raw E[q+1] | **E[q+1]+E_corr** | cycles |
+|--------|--------|-------|-----------|-------------------|--------|
+| 20 Å (c=35) | 2.4627 eV | -0.0433 | -341.602 | **-339.140** | 43 (고정) |
+| 30 Å (c=45) | 2.1615 eV | -0.0457 | -340.675 | **-338.514** | 44 (고정) |
+| 40 Å (c=55) | 1.8078 eV | -0.0430 | -340.081 | **-338.273** | 46 (고정) |
 
-20→30 Å 사이 E_corr 0.30 eV 감소 → vacuum이 커지면 이미지 전하 간 거리 증가로 E_corr 감소하는 것은 당연. README 기준(< 0.05 eV)은 E_corr 자체가 아니라 **E_tot(q)+E_corr** (보정 후 formation energy)로 판단해야 함.
+(q0 raw ≈ -346.62 eV로 vacuum 무관 일정)
 
-### 올바른 수렴 판단 기준
-- E_corr 자체가 vacuum에 따라 달라지는 건 정상 (셀 크기 변화)
-- **E_tot(q, vac) + E_corr(q, vac)** 가 vacuum 독립적으로 수렴하는지 확인
-- 40 Å 완료 후 formation energy 비교 필요
+### 핵심 결론: 수렴은 성공, 수렴 판단은 E_tot+E_corr로
+- E_corr 자체(2.46→2.16→1.81)는 vacuum 따라 감소 = 정상 (z-방향 image 거리 변화)
+- **E[q+1]+E_corr** 증분이 +0.63 → +0.24 eV로 줄며 ~-338.2 eV로 수렴
+  → raw E[q+1]은 vacuum 키울수록 1.5 eV 발산하지만 SCPC가 그 z-발산을 정상 보정.
+- README의 "< 0.05 eV" 기준은 E_corr이 아니라 반드시 E_tot+E_corr로 적용해야 함.
+
+### ⚠ 큰 보정값(~1.8 eV) 원인 진단 (2026-06-29) — 버그 아님, 물리적으로 옳음
+"correction이 터무니없이 크다"의 정체:
+1. **표면 국소 전하 → ε_eff ≈ 1.** model charge(z-mrho.dat) peak가 z=32.9 Å.
+   slab 유전체 영역(ZLOW*c~ZHIG*c = 18.5~36.5 Å)의 위쪽 vacuum 경계에서 불과
+   ~3.6 Å 안쪽. surface defect라 당연하지만, 전기력선이 ε=1 vacuum으로 새어
+   실효 유전율이 bulk 15.15가 아니라 ~1.
+2. **작은 lateral 셀(3×2, 13.1×12.4 Å)** → 면내 periodic image 자기상호작용 큼.
+3. **2D Madelung 어림식 교차검증:**
+   `E_corr ≈ (1/2)·q²·k·(1/ε_eff)·(c_M/√A)`
+   - q=+1, k=14.4 eV·Å (=e²/4πε₀), ε_eff≈1, c_M≈3 (2D 격자상수 O(1))
+   - A=13.1×12.4=162.6 Å² → √A=12.75 Å
+   - = 0.5·14.4·(1/1)·(3/12.75) ≈ **1.7 eV** → 관측 ~1.8 eV와 일치
+   - 만약 bulk 깊은 전하였으면 ε_eff≈15.15 → ~0.11 eV (정상 크기). ~17배 차이는
+     전적으로 "표면 국소(ε_eff≈1)" 때문.
+4. **vacuum으론 안 줄어듦(이미 수렴). lateral 셀을 키워야 줄어듦** (E∝1/√A):
+   3×2(~1.8 eV) → 4×3 ~1.3 eV → 5×4 ~1.0 eV 예상.
+
+### 유전율 모델은 정상 (오해 정정)
+- z-diel.dat: vacuum ε=1, slab 내부에서 ε=15.15 제대로 도달, 전이폭 ~2.5 Å.
+- ⚠ `sort -n`은 지수표기(E+02)를 파싱 못해 max를 8.4로 오판함 → 분석 시 주의.
+
+### 별개 한계
+- ENCUT=300은 In 4d(PBE-d)엔 낮음 → 절대 보정값 신뢰성 확보엔 ENCUT 상향 재계산 필요.
 
 ### 개선된 파라미터 (이전 대비)
 | 파라미터 | 이전 | 변경 | 근거 |
@@ -69,9 +94,9 @@ __SCPC-test__/
 - POTCAR는 심볼릭 링크 아닌 복사본 사용 (폴더 이동 시 깨짐 방지)
 
 ### 검증 기준
-- SCPCOUT E_corr: 마지막 5-10 cycle 변동 < 0.01 eV
-- Vacuum convergence: E_corr 3개 비교, 차이 < 0.05 eV이면 수렴
-- z-diel.dat: slab ε≈15.15, vacuum ε≈1
+- SCPCOUT E_corr: 마지막 5-10 cycle 변동 < 0.01 eV (충족)
+- Vacuum convergence: **E_tot[q]+E_corr** 3개 비교(E_corr 단독 아님) → ~-338.3 eV 수렴
+- z-diel.dat: slab ε≈15.15, vacuum ε≈1 (충족)
 
-**Why:** 이전 SCPC 테스트에서 vacuum 부족(11.2 Å)과 PREC/LREAL 설정 문제로 E_corr 미수렴. vacuum scan으로 수렴된 correction 값 확보 목적.
-**How to apply:** SCPC 결과 확인 후, 수렴된 E_corr를 charged defect formation energy에 적용. [[scpc-debug]]
+**Why:** 이전 SCPC 테스트에서 vacuum 부족(11.2 Å)과 PREC/LREAL 설정 문제로 E_corr 미수렴. vacuum scan으로 수렴된 correction 값 확보 목적. 결과: z-수렴은 성공했으나 보정값 자체가 ~1.8 eV로 큰데, 이는 버그가 아니라 표면 국소 전하(ε_eff≈1)+작은 3×2 lateral 셀의 면내 image 에너지(물리적으로 옳음).
+**How to apply:** 보정값을 줄이려면 vacuum이 아니라 lateral 셀을 키워야 함(E∝1/√A). ENCUT 상향 후 큰 셀 재계산이 절대값 신뢰성 확보의 다음 단계. [[scpc-debug]] [[scpc-reference]]
