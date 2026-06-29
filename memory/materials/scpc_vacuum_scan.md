@@ -1,6 +1,6 @@
 ---
 name: scpc-vacuum-scan
-description: "SCPC vacuum scan: Cl-As_In q+1, 20/30/40Å 완료, E_tot+E_corr 수렴(~-338.3 eV). 큰 보정(~1.8 eV) 원인=표면 국소 전하(ε_eff≈1)+작은 lateral 셀(3×2), 버그 아님"
+description: "SCPC vacuum scan: Cl-As_In q+1, 20/30/40Å 완료. SCPC formation E_f 수렴(In-rich 4.49→4.51eV; SCPC TOTEN이 이미 보정포함→E_corr 별도가산 금지). 큰 E_corr(~1.8eV)=표면 국소전하(ε_eff≈1)+작은 3×2 셀(버그아님). 리포트 make_report.py로 재생성(ZLOW/ZHIG 버그 수정)"
 metadata: 
   node_type: memory
   type: project
@@ -26,20 +26,32 @@ __SCPC-test__/
 - **q0, q+1_pre**: 6개 모두 수렴 완료
 - **q+1 SCPC**: vac_20A/30A/40A **3종 모두 완료**
 
-### 결과 (E_corr + 수렴 판단)
-| Vacuum | E_corr | Align | raw E[q+1] | **E[q+1]+E_corr** | cycles |
-|--------|--------|-------|-----------|-------------------|--------|
-| 20 Å (c=35) | 2.4627 eV | -0.0433 | -341.602 | **-339.140** | 43 (고정) |
-| 30 Å (c=45) | 2.1615 eV | -0.0457 | -340.675 | **-338.514** | 44 (고정) |
-| 40 Å (c=55) | 1.8078 eV | -0.0430 | -340.081 | **-338.273** | 46 (고정) |
+### 결과 (E_corr, SCPCOUT)
+| Vacuum | E_corr | Align(z) | raw E[q+1,SCPC] | raw E[q+1,bare] | VBM(pri) | cycles |
+|--------|--------|----------|-----------------|-----------------|----------|--------|
+| 20 Å (c=35) | 2.4627 eV | -0.0433 | -341.602 | -344.686 | -1.8605 | 43 (고정) |
+| 30 Å (c=45) | 2.1615 eV | -0.0457 | -340.675 | -343.477 | -2.7548 | 44 (고정) |
+| 40 Å (c=55) | 1.8078 eV | -0.0430 | -340.081 | -342.542 | -3.3244 | 46 (고정) |
 
-(q0 raw ≈ -346.62 eV로 vacuum 무관 일정)
+(q0 raw ≈ -346.62 eV로 vacuum 무관; pristine VBM/CBM = EIGENVAL band 372/373)
 
-### 핵심 결론: 수렴은 성공, 수렴 판단은 E_tot+E_corr로
-- E_corr 자체(2.46→2.16→1.81)는 vacuum 따라 감소 = 정상 (z-방향 image 거리 변화)
-- **E[q+1]+E_corr** 증분이 +0.63 → +0.24 eV로 줄며 ~-338.2 eV로 수렴
-  → raw E[q+1]은 vacuum 키울수록 1.5 eV 발산하지만 SCPC가 그 z-발산을 정상 보정.
-- README의 "< 0.05 eV" 기준은 E_corr이 아니라 반드시 E_tot+E_corr로 적용해야 함.
+### ⚠ 수렴 판정: formation energy로 판단 (E_corr 별도 가산 금지!)
+**중요 정정**: SCPC run 의 TOTEN(E[q+1,SCPC])은 correction 이 SCF 에 **이미 반영**됨.
+→ formation energy 에 SCPCOUT 의 E_corr 를 **다시 더하면 이중계산**. (이전 메모리의
+"E_tot+E_corr 로 수렴 판단" 및 "→-338.2 eV 수렴" 서술은 잘못 — 폐기.)
+
+올바른 공식: `E_f = E[q+1,method] - E[pristine] + Δμ + q·VBM(pristine)`
+(Δμ_In-rich=4.3789, Δμ_As-rich=3.4059; Δμ=+μ_In-μ_As-μ_Cl)
+
+| Vacuum | DEFAULT(bare) In | SCPC In | DEFAULT As | SCPC As |
+|--------|------------------|---------|------------|---------|
+| 20 Å | 1.4047 | **4.4889** | 0.4317 | 3.5159 |
+| 30 Å | 1.7001 | **4.5016** | 0.7271 | 3.5286 |
+| 40 Å | 2.0531 | **4.5144** | 1.0801 | 3.5414 |
+
+- **SCPC E_f 는 vacuum 에 수렴** (In-rich 4.49→4.50→4.51, spread 0.025 eV).
+- DEFAULT(bare)는 발산(1.40→2.05) → SCPC 가 z-방향 발산을 제대로 보정함을 입증.
+- 즉 SCPC 자체는 정상 작동. (E_corr 단독값 2.46→1.81 감소는 셀 변화일 뿐.)
 
 ### ⚠ 큰 보정값(~1.8 eV) 원인 진단 (2026-06-29) — 버그 아님, 물리적으로 옳음
 "correction이 터무니없이 크다"의 정체:
@@ -58,9 +70,21 @@ __SCPC-test__/
 4. **vacuum으론 안 줄어듦(이미 수렴). lateral 셀을 키워야 줄어듦** (E∝1/√A):
    3×2(~1.8 eV) → 4×3 ~1.3 eV → 5×4 ~1.0 eV 예상.
 
-### 유전율 모델은 정상 (오해 정정)
+### 유전율 모델 + ZLOW/ZHIG 정상 (오해 2건 정정)
 - z-diel.dat: vacuum ε=1, slab 내부에서 ε=15.15 제대로 도달, 전이폭 ~2.5 Å.
 - ⚠ `sort -n`은 지수표기(E+02)를 파싱 못해 max를 8.4로 오판함 → 분석 시 주의.
+- **ZLOW/ZHIG 는 각 INCAR 에서 vacuum별로 올바르게 스케일됨** (slab 두께 18.07 Å
+  3종 동일): 20A=0.2419/0.7581, 30A=0.2992/0.7008, 40A=0.3357/0.6643.
+
+### 리포트/그림 재생성 (2026-06-29)
+- 생성기: `__SCPC-test__/make_report.py` (한글 폰트=Noto Sans CJK JP).
+  파일에서 자동 추출(ZLOW/ZHIG는 각 INCAR 직독) → dielectric/charge_profile/Ef PNG
+  + 7페이지 PDF 재생성. 원본 백업은 세션 scratchpad.
+- **고친 버그**: 이전 리포트(06-26)는 ZLOW/ZHIG 를 vac_20A 값(0.2419/0.7581)으로
+  모든 vacuum 에 하드코딩 → dielectric 점선·z-profile 경계·6페이지 비교표가
+  vac_30A/40A 에서 틀렸고, 7페이지에 "ZLOW/ZHIG 오류 → 결과 신뢰불가"라는 **잘못된
+  결론**을 냈음. 실제 INCAR/OUTCAR 는 정상. 재생성본은 전부 정상 표시 + 7페이지 결론을
+  올바른 진단(표면 국소 전하 + 작은 lateral 셀)으로 교체, vac_40A 도 추가.
 
 ### 별개 한계
 - ENCUT=300은 In 4d(PBE-d)엔 낮음 → 절대 보정값 신뢰성 확보엔 ENCUT 상향 재계산 필요.

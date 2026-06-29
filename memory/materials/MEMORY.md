@@ -4,7 +4,7 @@
 - [SCPC Reference](scpc_reference.md) — SCPC GitHub README 참조, INVCOR/REFCHG 그리드 호환 주의
 - [Surface Defect Gam Tight](surface_defect_gam_tight.md) — InAs surface defect 00_Gam-relax EDIFFG -0.02→-0.01 tightening (2026-06-24)
 - [Bloch Workspace Setup](bloch_workspace_setup.md) — bloch 서버 VS Code workspace 설정 진행 중, config.txt→config 이름 변경 필요
-- [SCPC Vacuum Scan](scpc_vacuum_scan.md) — Cl-As_In SCPC 20/30/40Å 완료, E_tot+E_corr 수렴(~-338.3eV). 큰 보정(~1.8eV) 원인=표면 국소(ε_eff≈1)+작은 3×2 셀(버그 아님), lateral 셀 키워야 줄어듦(E∝1/√A)
+- [SCPC Vacuum Scan](scpc_vacuum_scan.md) — Cl-As_In SCPC 20/30/40Å 완료. SCPC formation E_f 수렴(In-rich 4.49→4.51eV); ⚠SCPC TOTEN은 이미 보정포함→E_corr 별도가산 금지. 큰 E_corr(~1.8eV)=표면 국소전하+작은 3×2 셀(버그 아님, lateral 키워야 줄어듦). 리포트 make_report.py로 재생성(ZLOW/ZHIG 버그 수정)
 - [Cl2 HSE06 Calc](cl2_hse06_calc.md) — Cl2 분자 HSE06 이완 (AEXX=0.27, LHFSKIP, VASP6.5.1), ENCUT300 완료(-5.3953 eV), ENCUT400 진행중(job 52424)
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — SLURM 잡 제출 시 jobname을 calc별로 구분되게 작성(예: cd-k2x2x1_G-qp1)
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — Cl-As_In CHG-DIFF k-point 수렴: k1x1x1 미수렴, k2x2x1_MP=k1_bald 수렴. vaspkit 314는 상대경로 필수
