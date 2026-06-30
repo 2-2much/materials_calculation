@@ -8,3 +8,4 @@
 - [Cl2 HSE06 Calc](cl2_hse06_calc.md) — Cl2 분자 HSE06 이완 (AEXX=0.27, LHFSKIP, VASP6.5.1), ENCUT300 완료(-5.3953 eV), ENCUT400 진행중(job 52424)
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — SLURM 잡 제출 시 jobname을 calc별로 구분되게 작성(예: cd-k2x2x1_G-qp1)
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — Cl-As_In CHG-DIFF k-point 수렴: k1x1x1 미수렴, k2x2x1_MP=k1_bald 수렴. vaspkit 314는 상대경로 필수
+- [pydefect_2d Setup](pydefect_2d_setup.md) — 03-pydefect_2d/ NK 보정 셋업(Cl-As_In q+1). 유전율은 슬랩 셀-평균(이방성)이어야 함(벌크 직접입력 금지), effective-medium 근사 레시피, 면수직 plateau<벌크는 정상, LOCPOT 원소명 H. 파싱 함정
