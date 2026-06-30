@@ -22,4 +22,6 @@ static·electronic 각각 계산, ion=static−ele. W는 sdd의 `-w`와 **반드
 
 **Cl-As_In 결함 위치(중요):** As_In antisite = CONTCAR **atom #36**(0-idx 35), frac [0.4173,0.5653,0.7394], **z=19.42Å(표면 상단)**. 판별법: nearest perfect-In≈1.02Å(In 자리에 앉음)이 antisite 기준 — "perfect-As에서 가장 먼 As"로 찾으면 틀림(그건 정상 As의 2nd-neighbor). atom36은 Cl 2개와 2.16Å 결합 = Cl-As_In 표면 복합체. 1fp가 찾은 charge center=z frac **0.81**(antisite+Cl 표면). defect_entry.json: charge=+1, defect_center=atom36 좌표. (1fp는 charge만 사용, defect_center는 1sm eigenvalue shift용)
 
-워크플로우 순서(README): unitcell.yaml(Step5) → sdd(6) → 1gm(7) → 1fp(8) → gmz(9-10) → ge(11) → 1sm(12, correction.json). 최종 보정값은 기존 [[scpc_vacuum_scan]] / slabcc 결과와 대조 예정. 정확한 값 필요시 추후 perfect 슬랩 LEPSILON 계산으로 unitcell.yaml 교체.
+워크플로우 순서(README): unitcell.yaml(Step5) → sdd(6) → 1gm(7) → 1fp(8) → gmz(9-10) → ge(11) → 1sm(12, correction.json).
+
+**전체 완주 완료(2026-06-30)**: 1gm `-r 0.5 0.82`(33점), 1fp→charge center z=0.81, gmz `-z 0.70~0.92`(12점, 백그라운드 ~3분, 2분 timeout 주의), ge 보간, 1sm. **최종 correction.json (Cl-As_In q+1)**: periodic=1.751, isolated=1.894, alignment=0.181 → **gauss항 +0.143, 정렬항 −0.181, 총 E_corr = −0.038 eV**. eigenvalue_shift=0.471 eV. ⚠전하가 슬랩 표면(z=0.81, 가파른 구간)에 국소화돼 z0 민감. ⚠이 작은/음수 보정은 SCPC(~1.8eV)와 크게 다름 → effective-medium 근사 유전율·lateral 셀·표면 전하 때문일 수 있음, 비교검증 필요. 정확값 필요시 perfect 슬랩 LEPSILON 계산으로 unitcell.yaml 교체(Option A). 결과는 [[scpc_vacuum_scan]] / slabcc(`_chgcar_diff_/`)와 대조 예정.
