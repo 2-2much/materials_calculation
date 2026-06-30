@@ -20,4 +20,6 @@ static·electronic 각각 계산, ion=static−ele. W는 sdd의 `-w`와 **반드
 
 **LOCPOT 파싱 함정:** VASP LOCPOT 6번째 줄 원소명이 `In As H1 H. Cl`(패시베이션 분수전하 H 라벨) → pymatgen이 `H.`를 못 읽음. 스테이징 LOCPOT 복사본의 6번째 줄을 `In As H H Cl`로 치환하면 됨(보정엔 원소정체성 무관, counts/격자/포텐셜 유지).
 
+**Cl-As_In 결함 위치(중요):** As_In antisite = CONTCAR **atom #36**(0-idx 35), frac [0.4173,0.5653,0.7394], **z=19.42Å(표면 상단)**. 판별법: nearest perfect-In≈1.02Å(In 자리에 앉음)이 antisite 기준 — "perfect-As에서 가장 먼 As"로 찾으면 틀림(그건 정상 As의 2nd-neighbor). atom36은 Cl 2개와 2.16Å 결합 = Cl-As_In 표면 복합체. 1fp가 찾은 charge center=z frac **0.81**(antisite+Cl 표면). defect_entry.json: charge=+1, defect_center=atom36 좌표. (1fp는 charge만 사용, defect_center는 1sm eigenvalue shift용)
+
 워크플로우 순서(README): unitcell.yaml(Step5) → sdd(6) → 1gm(7) → 1fp(8) → gmz(9-10) → ge(11) → 1sm(12, correction.json). 최종 보정값은 기존 [[scpc_vacuum_scan]] / slabcc 결과와 대조 예정. 정확한 값 필요시 추후 perfect 슬랩 LEPSILON 계산으로 unitcell.yaml 교체.
