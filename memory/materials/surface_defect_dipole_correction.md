@@ -7,7 +7,14 @@ metadata:
   originSessionId: 0b838ed2-3a0f-4b92-a22c-131ab8936454
 ---
 
-## 결정: q0는 dipole correction ON, 하전 상태는 OFF
+## ⚠️ 최종 결정 번복 (2026-07-01): 전체 dipole correction OFF
+pure/q0 DOS를 dipole ON(LDIPOL auto-center)으로 돌렸더니 HSE SCF가 1h42m/DAV50에서 E≈−421.4로 진동·정체(EDIFF의 50배)하며 사실상 미수렴 → **pure(job 55132) 취소하고, q0 포함 전체를 dipole correction 없이(LDIPOL/IDIPOL 주석, DIPOL 삭제) 재계산하기로 결정.**
+- 처리: 템플릿 2개(INCAR_02.G221-DOS/03.Band) + 모든 02_G221-DOS/03_Band INCAR 12개 dipole OFF. 검증: 활성 LDIPOL/IDIPOL/DIPOL 0개
+- As_In(55133) 실행 중 OUTCAR에 `LDIPOL=F, IDIPOL=0` 확인. pure는 55141로 재제출(dipole off)
+- prepare_defect_workflow.py의 charge-conditional dipole 삭제 블록은 이제 no-op(템플릿에 dipole 없음)이나 defensive용으로 남겨둠 — 나중에 q0 dipole 재활성화 시 하전셀은 자동 off 유지됨
+- 아래 "q0 ON / 하전 OFF" 및 DIPOL=0.518 관련 내용은 **이 번복 이전 방침**(참고용). 향후 dipole 재도입 시 이 값·논리 재사용 가능
+
+## (이전 방침, 번복됨) 결정: q0는 dipole correction ON, 하전 상태는 OFF
 Cl-passivation이 슬랩 한쪽에만 있는 비대칭 구조라 주기적 슬랩 이미지 간 인위적 dipole field가 발생함.
 
 - **q0(중성)**: `LDIPOL=T, IDIPOL=3(z), DIPOL=<charge center>`를 01_G221-1shot(DOS)부터 켜서 WAVECAR/CHGCAR를 이어받는 02_Band(hybrid)까지 일관되게 적용 — sawtooth potential 보정으로 vacuum/band eigenvalue의 인위적 field artifact 제거

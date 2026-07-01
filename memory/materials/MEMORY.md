@@ -12,7 +12,7 @@
 - [Surface Defect 1shot Band Workflow](surface_defect_1shot_band_workflow.md) — 02-Cl-passv 3단계(spin-Gam-relax→G221-1shot tetrahedral DOS→hybrid Band). 전 defect ISPIN=2 계산 진행중(2026-07-01)
 - [Surface Defect Spin Test](surface_defect_spin_test.md) — Spin test 결과: Cl-As_In/q0만 자성(1.0 μB, -125 meV) → 본계산 ISPIN=2 필요. V_Cl-Cl_As 재실행 예정
 - [Surface Defect Gam-relax Spin Comparison](surface_defect_gam_relax_spin_comparison.md) — Cl-As_In/q0 non-mag vs spin ΔE=-171meV(open-shell radical). 결정: 12-Surace-defect_calculation 본계산 전체 ISPIN=2로 통일
-- [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — DOS/Band 단계 dipole correction: q0는 ON(비대칭 슬랩 dipole field 보정), 하전상태는 OFF(jellium+dipole correction 미검증). Falletta correction용 reference potential과 설정 맞출 것
+- [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — ⚠️번복(2026-07-01): dipole ON시 HSE SCF 미수렴 → 전체 dipole OFF로 재계산 결정. 이전 방침(q0 ON/DIPOL=0.518, 하전 OFF)은 참고용 보존. 스크립트 charge-conditional 블록은 defensive로 유지
 - [Surface Defect Spin Screening Full](surface_defect_spin_screening_full.md) — 전 defect 스핀 스크리닝 완료(PRECFOCK=N기준): V_Cl-Cl_In/q0(-268meV), Cl-As_In/q0(-171meV)만 강자성. In_i_Td_In/q0는 mag=0.5인데 ΔE=-7meV로 애매, 재확인 필요
 - [Surface Defect ICORELEVEL Bug](surface_defect_icorelevel_bug.md) — DOS/Band INCAR의 ICORELEVEL=1<TAB># 이 IERR=5 파싱오류로 즉사. config 템플릿(02.G221-DOS/03.Band) 버그. 12개 파일 주석처리 완료(2026-07-01)
 - [Surface Defect OSZICAR Buffering](surface_defect_oszicar_buffering.md) — HSE 잡 실행 중 OSZICAR 갱신 안 됨(버퍼링) → std.log/OUTCAR로 모니터링. HSE 이중루프(exchange 갱신 점프)로 step 많이 필요, NELM 120~150 권장
