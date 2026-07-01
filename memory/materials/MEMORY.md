@@ -12,3 +12,4 @@
 - [Surface Defect 1shot Band Workflow](surface_defect_1shot_band_workflow.md) — 02-Cl-passv 3단계(spin-Gam-relax→G221-1shot tetrahedral DOS→hybrid Band). 전 defect ISPIN=2 계산 진행중(2026-07-01)
 - [Surface Defect Spin Test](surface_defect_spin_test.md) — Spin test 결과: Cl-As_In/q0만 자성(1.0 μB, -125 meV) → 본계산 ISPIN=2 필요. V_Cl-Cl_As 재실행 예정
 - [Surface Defect Gam-relax Spin Comparison](surface_defect_gam_relax_spin_comparison.md) — Cl-As_In/q0 non-mag vs spin ΔE=-171meV(open-shell radical). 결정: 12-Surace-defect_calculation 본계산 전체 ISPIN=2로 통일
+- [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — DOS/Band 단계 dipole correction: q0는 ON(비대칭 슬랩 dipole field 보정), 하전상태는 OFF(jellium+dipole correction 미검증). Falletta correction용 reference potential과 설정 맞출 것
