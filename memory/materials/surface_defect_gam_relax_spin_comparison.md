@@ -31,3 +31,10 @@ metadata:
 
 **Why:** formation energy 계산 전에 non-mag/spin 비교가 PRECFOCK 불일치로 왜곡되어 있었음. 00의 기본값이 Normal임을 확인해 올바른 짝을 찾음
 **How to apply:** 다른 defect도 00_Gam-relax와 스핀 비교 시 반드시 `01_Spin-gam-relax_PRECFOCK=N` (또는 PRECFOCK=Normal로 새로 생성한) 폴더와 비교할 것. PRECFOCK=Fast 버전과 00을 직접 비교하지 말 것
+
+## 최종 방법론 결정 (2026-07-01)
+Cl-As_In/q0는 As_In(2+ donor)+Cl(1− acceptor) 결합으로 전자수가 홀수인 open-shell radical(S=1/2) 성격 — ISPIN=1(restricted)은 이런 계에 원천적으로 부적합한 ansatz이며, 171 meV급 안정화 + shallow 준위치고 큰 exchange splitting은 이 state가 완전히 delocalize되지 않고 어느 정도 국소화되어 있다는 물리적 신호이기도 함.
+→ **전면 non-magnetic 스크리닝 대신, 12-Surace-defect_calculation 본계산은 처음부터 ISPIN=2로 통일해서 진행하기로 결정.** (defect별로 홀수/짝수 전자수 판별해서 selective하게 spin 체크하는 방식 대신 채택)
+
+**Why:** odd-electron/compensated-pair defect를 non-mag으로 스크리닝하면 놓칠 위험이 있고, 이런 실수는 formation energy와 defect state 성격(shallow vs localized) 판단을 둘 다 틀리게 만들 수 있음
+**How to apply:** 12-Surace-defect_calculation 이하 모든 defect 본계산(00_Gam-relax 포함)은 ISPIN=2를 기본으로 설정
