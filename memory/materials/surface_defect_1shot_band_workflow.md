@@ -17,6 +17,7 @@ metadata:
 ## 진행 상황 (2026-07-01)
 - 전체 defect에 대해 00_Gam-relax를 ISPIN=2(spin-polarized)로 계산 진행중
 - 완료 후 01_G221-1shot(tetrahedral DOS) → 02_Band(hybrid band, WAVECAR/CHGCAR 재사용) 순서로 이어질 예정
+- **`config/stages.yaml`에서 01(DOS)/02(Band) 단계는 현재 의도적으로 비활성화됨** — 00_Gam-relax 전체 완료 후 활성화 예정. 지금 01/02가 안 돌아도 정상(버그 아님)
 
 ## 클러스터 설정
 - partition: cascade2, 12 nodes × 32 cores = 384 total MPI
