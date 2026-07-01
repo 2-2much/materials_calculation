@@ -14,3 +14,4 @@
 - [Surface Defect Gam-relax Spin Comparison](surface_defect_gam_relax_spin_comparison.md) — Cl-As_In/q0 non-mag vs spin ΔE=-171meV(open-shell radical). 결정: 12-Surace-defect_calculation 본계산 전체 ISPIN=2로 통일
 - [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — DOS/Band 단계 dipole correction: q0는 ON(비대칭 슬랩 dipole field 보정), 하전상태는 OFF(jellium+dipole correction 미검증). Falletta correction용 reference potential과 설정 맞출 것
 - [Surface Defect Spin Screening Full](surface_defect_spin_screening_full.md) — 전 defect 스핀 스크리닝 완료(PRECFOCK=N기준): V_Cl-Cl_In/q0(-268meV), Cl-As_In/q0(-171meV)만 강자성. In_i_Td_In/q0는 mag=0.5인데 ΔE=-7meV로 애매, 재확인 필요
+- [Surface Defect ICORELEVEL Bug](surface_defect_icorelevel_bug.md) — DOS/Band INCAR의 ICORELEVEL=1<TAB># 이 IERR=5 파싱오류로 즉사. config 템플릿(02.G221-DOS/03.Band) 버그. 12개 파일 주석처리 완료(2026-07-01)
