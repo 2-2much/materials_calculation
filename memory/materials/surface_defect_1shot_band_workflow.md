@@ -1,6 +1,6 @@
 ---
 name: surface-defect-1shot-band-workflow
-description: "02-Cl-passv_6L_3x2x1_HSE06 워크플로우 config 검토 결과, spin test 결과, 본계산 진행 상황 (2026-06-30)"
+description: "02-Cl-passv_6L_3x2x1_HSE06 워크플로우 config 검토 결과, spin test 결과, 본계산 진행 상황 (2026-07-01 업데이트)"
 metadata: 
   node_type: memory
   type: project
@@ -8,11 +8,15 @@ metadata:
 ---
 
 ## 워크플로우 구성 (3단계)
-- Stage 00: `00_Gam-relax` — vasp.gam, Gamma-only, 구조 이완
-- Stage 01: `01_G221-1shot` — vasp.std, 2×2×1 G-centered, single-point SCF
-- Stage 02: `02_Band` — vasp.std, IBZKPT+k-path 조합 KPOINTS, band structure
+- Stage 00: `00_Gam-relax` — vasp.gam, Gamma-only, 구조 이완 (ISPIN=2로 전 defect 통일, [[surface-defect-gam-relax-spin-comparison]] 참조)
+- Stage 01: `01_G221-1shot` — vasp.std, 2×2×1 G-centered, single-point SCF. **DOS 산출용, tetrahedral method(ISMEAR=-5) 사용**
+- Stage 02: `02_Band` — vasp.std, IBZKPT+k-path 조합 KPOINTS, hybrid band structure. **Stage 01의 WAVECAR/CHGCAR를 읽어서 진행**
 
 **대상 defect**: Cl-As_In (q0, q+1), V_Cl-Cl_As (q0), As_In (q0), pure (q0)
+
+## 진행 상황 (2026-07-01)
+- 전체 defect에 대해 00_Gam-relax를 ISPIN=2(spin-polarized)로 계산 진행중
+- 완료 후 01_G221-1shot(tetrahedral DOS) → 02_Band(hybrid band, WAVECAR/CHGCAR 재사용) 순서로 이어질 예정
 
 ## 클러스터 설정
 - partition: cascade2, 12 nodes × 32 cores = 384 total MPI

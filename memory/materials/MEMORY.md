@@ -9,6 +9,6 @@
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — SLURM 잡 제출 시 jobname을 calc별로 구분되게 작성(예: cd-k2x2x1_G-qp1)
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — Cl-As_In CHG-DIFF k-point 수렴: k1x1x1 미수렴, k2x2x1_MP=k1_bald 수렴. vaspkit 314는 상대경로 필수
 - [pydefect_2d Setup](pydefect_2d_setup.md) — 03-pydefect_2d/ NK 보정 셋업(Cl-As_In q+1). 유전율은 슬랩 셀-평균(이방성)이어야 함(벌크 직접입력 금지), effective-medium 근사 레시피, 면수직 plateau<벌크는 정상, LOCPOT 원소명 H. 파싱 함정
-- [Surface Defect 1shot Band Workflow](surface_defect_1shot_band_workflow.md) — 02-Cl-passv 3단계 워크플로우 config 검토, cascade2 설정, KPOINTS_02.Band 구성, vacancy MAGMOM 주의
+- [Surface Defect 1shot Band Workflow](surface_defect_1shot_band_workflow.md) — 02-Cl-passv 3단계(spin-Gam-relax→G221-1shot tetrahedral DOS→hybrid Band). 전 defect ISPIN=2 계산 진행중(2026-07-01)
 - [Surface Defect Spin Test](surface_defect_spin_test.md) — Spin test 결과: Cl-As_In/q0만 자성(1.0 μB, -125 meV) → 본계산 ISPIN=2 필요. V_Cl-Cl_As 재실행 예정
 - [Surface Defect Gam-relax Spin Comparison](surface_defect_gam_relax_spin_comparison.md) — Cl-As_In/q0 non-mag vs spin ΔE=-171meV(open-shell radical). 결정: 12-Surace-defect_calculation 본계산 전체 ISPIN=2로 통일
