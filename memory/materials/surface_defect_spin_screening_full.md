@@ -1,6 +1,6 @@
 ---
 name: surface-defect-spin-screening-full
-description: "02-Cl-passv_6L_3x2x1_HSE06 전 defect 00_Gam-relax(non-mag) vs 01_Spin-gam-relax_PRECFOCK=N(spin) 스크리닝 완료 결과 (2026-07-01)"
+description: "02-Cl-passv_6L_3x2x1_HSE06 전 defect 스핀 스크리닝 결과 + ISPIN 분기 방침(2026-07-02 갱신: 전체 ISPIN=2 통일 → 스핀에너지 기반 분기로 전환)"
 metadata:
   node_type: memory
   type: project
@@ -27,9 +27,17 @@ metadata:
 
 ## 결론
 - **100 meV 이상 강한 안정화 + 정수 moment(1.0 μB) = V_Cl-Cl_In/q0, Cl-As_In/q0 둘뿐**. 둘 다 donor-acceptor 보상쌍(compensated pair) 구조 → 홀수 전자수 → open-shell radical (S=1/2) 패턴 공통. V_Cl-Cl_In은 V_Cl(도너성)+V_In(억셉터성) 조합으로 추정
-- 나머지 defect는 짝수전자계로 ΔE가 대부분 1 meV 이하 → ISPIN=1로도 충분했을 것이나, 이미 전체 ISPIN=2로 통일하기로 결정함([[surface-defect-gam-relax-spin-comparison]])
-- V_Cl-Cl_As는 이번 PRECFOCK=N 재실행으로 mag=0.0045 → 비자성으로 최종 확인(과거 old run의 미신뢰 문제 해소)
-- **In_i_Td_In/q0는 예외적 케이스**: mag=0.50 μB로 뚜렷한 moment가 있는데 ΔE=−7 meV로 안정화가 미미함. 자성/비자성 solution이 거의 축퇴되어 있거나 SCF 미수렴 가능성 — 재확인 필요
+- 나머지 defect는 ΔE가 대부분 1 meV 이하 → 비자성
+- **charge parity 효과 실증**: Cl-As_In은 q0=자성(mag=1.0), q+1=비자성(mag=0) → ISPIN 결정은 defect 단위가 아니라 **(defect × charge)별**로 해야 함
+- V_Cl-Cl_As는 PRECFOCK=N 재실행으로 mag=0.0045 → 비자성 최종 확인
+- **In_i_Td_In/q0는 예외적 케이스**: mag=0.50 μB moment 있는데 ΔE=−7 meV로 안정화 미미. 자성/비자성 solution 거의 축퇴 or SCF 미수렴 가능성 — ISPIN=2 잠정, 본계산 재확인 필요
 
-**Why:** DOS/Band 본계산 전 spin-polarization이 유의미한 defect만 별도로 추적/검증할 필요
-**How to apply:** V_Cl-Cl_In/q0, Cl-As_In/q0는 확실한 자성 defect로 formation energy/electronic structure 해석 시 반드시 고려. In_i_Td_In/q0는 본계산 진행 전 SCF 수렴 재확인 권장
+## ISPIN 분기 방침 (2026-07-02 갱신, 이전 "전체 ISPIN=2 통일" 번복)
+- **전환 이유**: 지금 단계는 무거운 본계산 전 가벼운 Gamma 스크리닝. 스핀에너지 없으면 ISPIN=1로 비용 절감이 합리적. 큰 초기 MAGMOM으로 편극 기회를 주고도 mag→0, ΔE≈0이면 진짜 비자성 확정(seeding 충분히 확인됨)
+- **판정 기준**: mag > ~0.5 μB 또는 |ΔE_spin| > ~10 meV → ISPIN=2 ; 아니면 ISPIN=1
+- **odd-electron 주의(개념)**: 홀수 전자수가 자동으로 자성은 아님. ISPIN=1은 frontier 상태를 up 0.5/down 0.5 분수점유로 강제하는데, 국소 준위면 편극이 유리(자성)·metallic이면 0.5/0.5가 진짜 바닥상태(비자성). 그래서 홀수 charge는 반드시 큰 MAGMOM으로 ISPIN=2 테스트 후 판정
+- **적용 시점**: 현재 큐(V_Cl-Cl_As/q0 R, pure/q0 PD)는 이미 ISPIN=2로 돌고 있어 그대로 완주(mag=0이라 값 동일). **다음 배치부터** 위 판정으로 분기
+- **ispin 값의 저장 위치**: ispin은 a priori 입력이 아니라 스크리닝 파생 결과 → defects.yaml(정의 파일)에 넣지 않기로 함(2026-07-02 넣었다가 되돌림). **B안 채택 예정: 별도 `config/spin_screening.yaml`(mag/ΔE 원본 포함)로 분리 후 stage 생성 코드가 읽도록 배선 — 2026-07-03에 작업 예정**
+
+**Why:** DOS/Band 본계산 전 spin-polarization이 유의미한 defect만 ISPIN=2로 추적/검증, 나머지는 비용 절감
+**How to apply:** 다음 배치부터 (defect,charge)별 mag/ΔE로 ISPIN 분기. V_Cl-Cl_In/q0, Cl-As_In/q0=ISPIN=2. In_i_Td_In/q0=ISPIN=2 잠정+재확인. 나머지 비자성=ISPIN=1. ispin은 spin_screening.yaml로 관리(내일 배선)
