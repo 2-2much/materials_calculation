@@ -17,3 +17,4 @@
 - [Surface Defect ICORELEVEL Bug](surface_defect_icorelevel_bug.md) — DOS/Band INCAR의 ICORELEVEL=1<TAB># 이 IERR=5 파싱오류로 즉사. config 템플릿(02.G221-DOS/03.Band) 버그. 12개 파일 주석처리 완료(2026-07-01)
 - [Surface Defect OSZICAR Buffering](surface_defect_oszicar_buffering.md) — HSE 잡 실행 중 OSZICAR 갱신 안 됨(버퍼링) → std.log/OUTCAR로 모니터링. HSE 이중루프(exchange 갱신 점프)로 step 많이 필요, NELM 120~150 권장
 - [Surface Defect ISTART/WAVECAR gam-std](surface_defect_istart_wavecar_gam_std.md) — gam(Gamma-only) WAVECAR을 std가 못 읽음(plane wave coeff 48187≈2×24094). DOS 단계만 ISTART=0(ICHARG=1 유지), 03_Band(std→std)는 ISTART=1 무방
+- [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As Fermi pinned. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
