@@ -31,13 +31,27 @@ bloch일 수 있으나 tmux·잡제출은 tgm-master). 재접속: `ssh tgm-maste
 SCPC(EDIFF=1E-4 가속)→slabcc(tol=0.05)→`collect_results.py`(vac_40 포함 3개 요약)까지 진행.
 vac_40은 세션에서 이미 처리(52533 SCPC 마무리 중).
 
-**다음 단계(내일 2026-07-03 재개 시 확인):**
-1. `__vertical_scan__/PIPELINE_DONE` 존재 + `pipeline.log` 확인, `tmux attach -t vscan`.
-2. `summary.txt`/`summary.csv`: **VBM-corrected E_f가 slabcc·SCPC 각각 vacuum 수렴 + 두 방법 일치**(vac_40에서 −0.859 vs −0.866 확인됨) 검증.
-3. relaxation 항 가산해 relaxed E_f 산출, 최종 리포트.
-5. **고정-위치 slabcc(52543) 결과 확인**: `__slabcc_vertical__/vac_40A_fixed/slabcc.out` — charge@defect 고정 시 E_corr가 −0.86 유지되는지(위치 robust) vs 크게 달라지는지.
-6. **defect 준위 성격 진단(사용자 요청, 내일)**: q0(중성)의 EIGENVAL/DOSCAR/PROCAR로 문제 준위가 gap 내 deep인지 CBM 근처 shallow/공명인지 판별. deep이면 lateral 셀(3×2→4×3 등) 확대가 국소화·수렴 개선에 도움, shallow면 셀 키워도 더 delocalize돼 다른 접근 필요. (진공 확대는 국소화엔 무관, z-image만.) 이걸로 "셀 키우면 수렴하나?" 질문 판정.
-4. 유의: base 1shot=6.5.1, SCPC=6.6.0 바이너리 — TOTEN 교차비교 시 감안(E_corr 자체는 무관).
-   SCPC EDIFF: vac_40=1E-6, vac_30/50=1E-4(가속, WAVECAR restart라 E_corr 동일 예상).
+**■ 최종 결과 (2026-07-03, vacuum scan 30/40/50Å 전 잡 완료):**
+
+E_DFT(q+1@q0 TOTEN, 보정전): 30Å −343.7825 / 40Å −343.1937 / 50Å −342.7845 (진공 늘수록 발산 = 하전 슬랩 image self-energy).
+
+| 진공 | SCPC E_corr | slabcc auto E_corr | slabcc fixed E_corr |
+|------|-------------|--------------------|--------------------|
+| 30Å | −0.5001 | ❌ delocalized abort(σ4.01) | **−0.4550**(σ1.70) |
+| 40Å | −0.8656 | −0.859(σ2.58) | −0.815(σ1.73) |
+| 50Å | −1.2588 | −1.253(σ2.71) | −1.203(σ1.85) |
+
+보정 총에너지 E_DFT+E_corr — **40→50Å Δ**: SCPC 16 meV, slabcc auto 16 meV, slabcc fixed 21 meV → **세 방법 다 40Å부터 수렴**(30Å은 얇아 수렴영역 밖). **slabcc auto ≡ SCPC 6 meV 일치**(40Å −344.053 vs −344.059; 50Å −344.037 vs −344.043) ✅.
+- **position-fix가 30Å delocalization 해결**: auto는 위치 최적화가 σ를 키워 abort하나, `optimize_charge_position=no`+실제 defect 위치(atom36: 30Å z=0.625/40Å 0.603/50Å 0.587, in-plane 0.417/0.582 공통) 고정하면 σ~1.7로 정상. fixed는 auto보다 |E_corr| 40–50 meV 작음(defect에 묶으니 delocalized model보다 보정 작게). `__slabcc_vertical__/vac_{30,50}A_fixed/`.
+
+**■ Alignment 규약 확정 (scpc.F rev7 소스 추적):** SCPCOUT `Energy Correction`은 **이미 전기적 정렬 포함** (line 1037 `ecor1−ealig`, ealig=½qΔV_ref). 따로 찍히는 `Potential Alignment(x,y,z)`(−0.048)는 별개 진단량 → **추가로 더하면 이중계산**. slabcc E_corr도 `E_iso−E_per−q·dV`로 정렬 내장 → 두 코드 직접 비교 가능(6meV). 상세 [[scpc-dfe-formula]].
+
+**■ 리포트:** `__vertical_scan__/REPORT.md` 생성함.
+
+**남은 단계:**
+1. relaxation 항 가산(E_relax = E[q+1/01_Relax] − E[q+1@q0_pre])해 relaxed 형성E 산출.
+2. band-reference ΔV(defect↔pristine)는 SCPC 출력 아닌 별도 산출 후 DFE 조립.
+3. **defect 준위 성격 진단(미완, 사용자 요청)**: q0의 EIGENVAL/DOSCAR/PROCAR로 deep vs shallow 판별 → lateral 셀 확대(3×2→4×3)가 수렴 개선에 유효한지 판정. (delocalized 증거 여럿 관측됨: auto model이 슬랩중앙 이동, δρ center z=27.67Å.)
+- 유의: base 1shot=6.5.1, SCPC=6.6.0 바이너리. SCPC EDIFF vac_40=1E-6, vac_30/50=1E-4(가속).
 
 계획서: `/home/jaegwan97/.claude/plans/rosy-hatching-quilt.md`. 기존 실패 이력 [[project_slabcc-correction-Cl-As-In]].
