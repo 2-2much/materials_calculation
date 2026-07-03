@@ -16,7 +16,7 @@ metadata:
 - **As_In q0**: 깊은 gap 상태 없음. antisite As 성분은 VBM 아래 ~-0.4eV 공명 + CB. shallow/비자성.
 - **Cl-As_In q0**: 자성 S=1/2. As36 국소 스핀분열 level — ↑점유 VBM위 ~+0.5eV, ↓비점유 ~+0.9~1.4eV. 안티사이트 라디칼. → ISPIN=2 필수.
 - **Cl-As_In q+1**: 비자성. As36 비점유 level VBM위 +0.76~1.17eV(upper gap). (+1/0) donor.
-- **V_Cl-Cl_As q0**: 단일 level 아님. As공공 dangling In-bond(이웃 In 28,30,33) defect 다발이 gap 채움. 실질 gap≈0.08eV, Fermi pinned(near-metallic). 비자성.
+- **V_Cl-Cl_As q0**: As자리에 Cl 치환(Cl_As, atom95=defect_atom_index)+passiv Cl공공. **gap 깨끗, 깊은 defect state 없음**. Cl_As는 shallow double donor(+2e): 자체 준위(Cl 3p ~-6eV, Cl 3s -19.8eV)는 VB 깊이, 공여전자는 **CBM 위 전도띠 채움**(진공정렬시 Fermi=pure CBM+0.86eV, 축퇴 n형). 비자성. ⚠초기 "gap 채우는 manifold/near-metallic" 서술은 진공정렬 전 오해였음(실제 CBM 위 CB 채워짐). 검증법: planar-avg LOCPOT 진공준위 정렬(plateau std<0.1eV)로 pure CBM과 비교.
 
 **도구 인덱싱 규칙(중요, 서로 다름)**:
 - `zeroband.py`(03_Band): POSCAR **1-based**. proj 예 `--proj "36 tot"`, orbital `tot/s/p/d` 지원. `--fermi <E> --ylim lo hi --spin 1|2 --colors`.
