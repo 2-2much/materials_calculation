@@ -13,6 +13,7 @@
 - [pydefect_2d Setup](pydefect_2d_setup.md) — 03-pydefect_2d/ NK 보정 셋업(Cl-As_In q+1). 유전율은 슬랩 셀-평균(이방성)이어야 함(벌크 직접입력 금지), effective-medium 근사 레시피, 면수직 plateau<벌크는 정상, LOCPOT 원소명 H. 파싱 함정
 - [Surface Defect 1shot Band Workflow](surface_defect_1shot_band_workflow.md) — 02-Cl-passv 3단계(spin-Gam-relax→G221-1shot tetrahedral DOS→hybrid Band). 전 defect ISPIN=2 계산 진행중(2026-07-01)
 - [Surface Defect Spin Test](surface_defect_spin_test.md) — Spin test 결과: Cl-As_In/q0만 자성(1.0 μB, -125 meV) → 본계산 ISPIN=2 필요. V_Cl-Cl_As 재실행 예정
+- [a-Dispersion Scan PBE-d](adispersion_scan_pbed.md) — Cl-As_In a축 dispersion 수렴 스캔(PBE-d p3/p4/p5×2, Y-Γ-X-S). ⚠큰셀 결함은 strip-insertion(reference q0 이식)으로 만들 것(ideal배치→Cl2 desorption). run script ROOT 절대경로
 - [Surface Defect Gam-relax Spin Comparison](surface_defect_gam_relax_spin_comparison.md) — Cl-As_In/q0 non-mag vs spin ΔE=-171meV(open-shell radical). 결정: 12-Surace-defect_calculation 본계산 전체 ISPIN=2로 통일
 - [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — ⚠️번복(2026-07-01): dipole ON시 HSE SCF 미수렴 → 전체 dipole OFF로 재계산 결정. 이전 방침(q0 ON/DIPOL=0.518, 하전 OFF)은 참고용 보존. 스크립트 charge-conditional 블록은 defensive로 유지
 - [Surface Defect Spin Screening Full](surface_defect_spin_screening_full.md) — 전 defect 스핀 스크리닝 + ISPIN 분기 방침. 자성=V_Cl-Cl_In/q0(-268meV),Cl-As_In/q0(-171meV); In_i_Td_In/q0 애매(mag0.5,-7meV) 재확인. charge parity 실증(Cl-As_In q0자성/q+1비자성). 방침전환: 전체ISPIN=2통일→스핀에너지 기반 분기(현큐 완주, 다음배치부터). ispin은 defects.yaml 아님→별도 spin_screening.yaml(B안, 내일 배선). git관리도 내일 논의
