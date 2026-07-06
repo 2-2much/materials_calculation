@@ -23,4 +23,6 @@ metadata:
 
 **물리결론(§7)**: E_relax(+1)=88meV. ε_thermo(0/+1)=VBM+0.81eV로 **CBM(+0.24) 위 → shallow/resonant donor**(중성 여분전자 CB로 자동이온화 = delocalization 근거). ⚠PBE gap 0.24eV 과소평가 → HSE06 확정 필요.
 
-[[scpc_vacuum_scan]]는 formation E_f 수렴(slabcc 없음)으로 별개 작업. [[scpc_debug]] [[pydefect_2d_setup]].
+**후속 in-plane 스캔 재작업(2026-07-06)**: `__a-dispersion-scan_PBE-d__/__vertical-transition_slabcc__`(p3/4/5x2 in-plane 확장)이 **진공 11Å + `optimize_charge_position=yes`(free)**로 크게 틀림 — slabcc가 model charge를 슬랩중앙으로 끌고 σ_x=3.85 발산. 교훈 재확인(진공≥40Å + charge position 고정). 재작업 폴더 `__vertical-transition_slabcc_vac40__`: relaxed R_q0(00_q0-relax/CONTCAR) 재사용, c=slab두께+40≈**55.05Å**(bloch값, 슬랩 z=0.5 센터·양쪽20Å)로만 재빌드, INCAR/POTCAR는 기존 1shot 복사(NELECT/ISPIN동일). slabcc를 **fixed(optimize_charge_position=no)/free(yes) 두 변형** 모두 생성해 직접 비교. build_vac40.py+make_slabcc_input.py(fixed+free 자동생성, charge_position·interfaces를 40Å POSCAR에서 자동)+collect_vac40.py. 제출 jobs 55172-55177(tgm-master cascade2).
+
+[[scpc_vacuum_scan]]는 formation E_f 수렴(slabcc 없음)으로 별개 작업. [[adispersion_scan_pbed]] [[scpc_debug]] [[pydefect_2d_setup]].
