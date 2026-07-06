@@ -1,4 +1,5 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
+- [Defect Package Repo](defect_package_repo.md) — Defect_Package git repo=/mnt/hohenberg/.../scripts/Defect_Package(로컬only, 원격없음). 계산폴더는 clone아닌 복사본→수동동기화. scripts 3개 커밋(2026-07-06), surface config 미반영
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
 - [SCPC Debug](scpc_debug.md) — SCPC: CKT 비호환, getgrid 버그, SCPCOUT interleaving, OSZICAR 유실, 권장 설정
 - [SCPC Reference](scpc_reference.md) — SCPC GitHub README 참조, INVCOR/REFCHG 그리드 호환 주의
