@@ -19,3 +19,5 @@ metadata:
 **⚠ 큰 셀 결함구조 만드는 법 (핵심 교훈)**: pristine을 primitive로 접어 타일링 후 antisite+Cl을 **ideal 위치+offset으로 새로 심으면 relax 중 Cl2 desorption**(Cl 표면 위 4.5Å로 이탈) 발생 → 폐기. 반드시 **strip insertion**: relaxed reference(`CONTCARs_PBE-d/Cl-As_In/CONTCAR_Cl-As_In_q0`) 셀을 통째로 유지(결함 클러스터 그대로)하고 pristine 컬럼(폭 w=a/3)을 가장자리에 (N−3)개 삽입. → binding mode(Cl 표면 위 ~1.82Å) 초기구조에 보존. `build_scan.py`가 이 방식.
 
 **운영 함정**: run_pNx2.sh는 `ROOT=$(pwd)` 쓰면 제출 위치(스캔루트)로 잡혀 즉사 → **ROOT 절대경로 하드코딩**. 관련 [[surface_defect_istart_wavecar_gam_std]](gam WAVECAR을 std가 못읽음→01은 fresh SCF), [[defect_states_02_clpassv]].
+
+**결과/결론 (2026-07-06 완료, `ANALYSIS.md`)**: aDisp(Γ→X) = 0.335→0.233→0.198 eV (p3→p4→p5, a=13.1/17.5/21.9Å). 한계효용 p4에서 급감(p3→p4 −0.10 / p4→p5 −0.035eV). concave(λ 12→27Å), 완전평탄은 ~p8-10×2 비현실적. b축(2×고정): Y→Γ ~0.09-0.13eV 불변, X→S≈0 flat → 대각결합 t_ab≈t_b, antisite는 a축 delocalized resonant-ish donor. **방침: HSE06 본계산 셀 = p4×2 채택**(완전수렴 아닌 "충분히 작음", 잔여~0.23eV). CTL/formation E는 dispersion 무관 경로(total-E + Falletta correction)로, dispersion은 진단용.
