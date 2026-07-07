@@ -4,12 +4,13 @@
 
 REPO_MEM=~/materials/memory
 CLAUDE_BASE=~/.claude/projects
-# 모든 마스터 노드가 tgm-master이므로 SLURM ClusterName으로 서버 식별
-CLUSTER=$(scontrol show config 2>/dev/null | awk '/^ClusterName/{print $3}')
-case "$CLUSTER" in
-  tgmv2)  SERVER="kohn" ;;
-  *)      SERVER="${CLUSTER:-unknown}" ;;
-esac
+# 서버 식별: 4대 모두 내부 hostname이 tgm-master.hpc, ClusterName도 tgmv2로 동일해
+# 구분 불가. 실제 서버 이름은 공개 FQDN(*.kaist.ac.kr)에만 담겨 있음(예: sham.kaist.ac.kr).
+# 우선순위: KAIST FQDN → hostname -s → ClusterName → unknown
+SERVER=$(hostname -A 2>/dev/null | tr ' ' '\n' | grep -iE '\.kaist\.ac\.kr$' | head -1 | cut -d. -f1)
+[ -z "$SERVER" ] && SERVER=$(hostname -s 2>/dev/null)
+[ -z "$SERVER" ] && SERVER=$(scontrol show config 2>/dev/null | awk '/^ClusterName/{print $3}')
+[ -z "$SERVER" ] && SERVER="unknown"
 MODE=$1
 
 is_syncable_project() {
