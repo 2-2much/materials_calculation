@@ -58,7 +58,13 @@ case $MODE in
 
     cd ~/materials
     if [ -n "$(git status --porcelain)" ]; then
-      git add -A && git commit -m "Auto-sync: Claude Code session ($SERVER)" && git push origin main 2>&1
+      git add -A && git commit -m "Auto-sync: Claude Code session ($SERVER)"
+    fi
+    # 로컬에 미푸시 커밋이 있으면(이번 커밋 또는 이전에 push 거부로 남은 것) 항상 푸시 시도.
+    # 멀티서버 공유로 원격이 앞설 수 있으므로 rebase 후 푸시, 실패 시 1회 재시도.
+    if [ -n "$(git log origin/main..HEAD --oneline 2>/dev/null)" ]; then
+      git pull --rebase origin main 2>&1 || echo 'git pull(rebase) 실패'
+      git push origin main 2>&1 || { git pull --rebase origin main 2>&1 && git push origin main 2>&1; }
     fi
     ;;
 esac
