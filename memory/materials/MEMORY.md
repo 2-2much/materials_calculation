@@ -1,4 +1,5 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
+- [scaLAPACK mlx OFI Hang](scalapack_mlx_ofi_hang.md) — VASP hang(rank 99%CPU/OUTCAR정지): scaLAPACK BLACS Bcast가 Intel MPI mlx OFI collective서 정지. fix=LSCALAPACK=.FALSE. 또는 I_MPI_COLL_DIRECT=off. 노드축소는 지연만. gstack으로 진단. Cl_i-As 고유(V_As 재실행 정상완주로 환경 기각)
 - [Defect Package Repo](defect_package_repo.md) — Defect_Package git repo=/mnt/hohenberg/.../scripts/Defect_Package(로컬only, 원격없음). 계산폴더는 clone아닌 복사본→수동동기화. scripts 3개 커밋(2026-07-06), surface config 미반영
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
 - [SCPC Debug](scpc_debug.md) — SCPC: CKT 비호환, getgrid 버그, SCPCOUT interleaving, OSZICAR 유실, 권장 설정
