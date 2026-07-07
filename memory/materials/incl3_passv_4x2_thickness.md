@@ -27,4 +27,6 @@ metadata:
 
 **5L 검증 실측(2026-07-07, `__thickness_scan__/5L_2x1_pristine/`):** 6L CONTCAR→내부 L4 제거+상부블록 glide(−0.25,−0.5)로 28원자 ABABA 5L 생성(build_5L.py). 제약: L1/L2/pseudo-H 고정, In-As 2.6803Å 유지, 진공 13.7Å 보존. 계산=screening 프로토콜(Γrelax→2×2×1 1shot, ENCUT300, PBE-d, dipoleOFF, LVHAR). ⚠VASP: 6.5.0 바이너리 g1노드서 illegal instruction→**6.3.2 써야 함**(gam/std). IBRION=2가 최소점 근처 ZBRENT bracket실패(benign, maxF 0.026)→IBRION=1 이어받기로 수렴. **결과(2.18Å macro, 공통 pseudo-H 바닥진공 기준정렬)**: plateau값 6L −9.297 vs 5L −9.327 eV=**Δ30meV**(값 수렴 통과, 경계선). 평탄도 6L 103meV vs **5L 232meV**(2배 덜 평평, bow형+InCl3 dip이 z15로 근접=살짝 얇음). **판정: 경계선.** 정렬오차 ~30meV×q라 light-screening엔 방어가능(5L 채택시 ≈17%절감), 단 charged transition level은 6L이 확실히 안전. 중성 E_f는 정렬불필요라 5L/6L 무관 동일신뢰. 결정경계 근처 charged는 6L 재확인 권장. LOCPOT절대값은 계산마다 기준달라 직접비교 금지→반드시 공통 고정종단(pseudo-H쪽) 진공기준 정렬 후 비교.
 
+**최종 결정(2026-07-07): 두께 = 6L 확정, 5L 기각.** 근거: 5L은 plateau 값은 6L과 30meV로 수렴하나 plateau가 bow져서 "기준면을 어디서 읽느냐"에 따라 ~150meV 흔들림(그래프 `5L_2x1_pristine/compare_5L_6L_macro.png`로 육안확인) → 6L은 평평해 기준 명확. 절감(~17%)보다 charged 정렬 안정성 우선. **본계산 정렬 기준면 = 6L 하부 plateau(z≈9–16, L2–L5), pseudo-H 바닥진공 기준 ≈−9.3eV.** 후속 작업은 **bloch 서버**에서 진행(계산폴더는 서버간 미동기화, 이 결정은 memory로만 전달). 5L 검증셋(`__thickness_scan__/5L_2x1_pristine/`)은 tgm-master에만 존재, 기록용 보존.
+
 관련: [[surface_defect_1shot_band_workflow]], [[adispersion_scan_pbed]], [[surface_defect_dipole_correction]]
