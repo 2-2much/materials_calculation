@@ -2,6 +2,7 @@
 - [CQD n-type Origin Goal](cqd_ntype_origin_goal.md) — 최상위 목표: InAs CQD intrinsic n-type origin을 표면 point defect로 규명. 판정=CTL(shallow donor?)+μ-diagram. (110) Cl→InCl3 passivation reference. ↔ 문헌 근거는 [[read_papers_memory]] 통해 papers 논문 분석 노트 참조
 - [Read Papers Memory](read_papers_memory.md) — (범용 다리) 논문/문헌 근거 필요 시 ~/papers/memory/paper_notes/README.md 인덱스 먼저 읽고 관련 주제 .md만 열기. paper_notes는 hohenberg 경로로만 닿음
 - [InCl3 Cl-As_In Unbound](incl3_cl_as_in_unbound.md) — 03-InCl3-passv Cl-As_In q0: Cl이 As_In 아닌 표면 In으로(In-Cl 2.41Å), bound complex 아님. complex→독립 donor(As_In,In_i,Cl_i) 스캔+CTL 비교로 재정렬 권고
+- [In_i_2 Adatom Ejection](in_i_2_adatom_ejection.md) — 03-InCl3-passv In_i_2/q0: interstitial In이 3.76Å 튕겨나가 Cl층 위 저배위 adatom으로 배출(무결합). 음의 E_form(In-rich −0.20eV)은 안정결함 아니라 In이 금속기준 회귀 신호. 내일 ISPIN·saddle판정·결합자리 재이완 TODO
 - [scaLAPACK mlx OFI Hang](scalapack_mlx_ofi_hang.md) — VASP hang(rank 99%CPU/OUTCAR정지): scaLAPACK BLACS Bcast가 Intel MPI mlx OFI collective서 정지. fix=LSCALAPACK=.FALSE. 또는 I_MPI_COLL_DIRECT=off. 노드축소는 지연만. gstack으로 진단. Cl_i-As 고유(V_As 재실행 정상완주로 환경 기각)
 - [Defect Package Repo](defect_package_repo.md) — Defect_Package git repo=/mnt/hohenberg/.../scripts/Defect_Package(로컬only, 원격없음). 계산폴더는 clone아닌 복사본→수동동기화. scripts 3개 커밋(2026-07-06), surface config 미반영
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
