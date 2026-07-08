@@ -17,8 +17,9 @@ Fermi level을 CBM 근처로 pin시켜 표면 전자 축적층을 만드는 데�
 리간드·As전구체 종류와 무관하게 robust n-type이며, p-type으로 뒤집으려면 리간드 조정이 아니라
 격자 내 치환형 억셉터(Zn_In, Cd_In) + donor state passivation이 필요.
 
-관련 논문 폴더: `n-type InAs QDs/`
-상세 노트: `n-type InAs QDs/intrinsic_n-type_origin_notes.md`
+관련 논문 폴더(PDF): `n-type InAs QDs/`
+상세 분석 노트(single source): `~/papers/memory/paper_notes/n-type_InAs_QDs.md`
+논문 분석 인덱스: `~/papers/memory/paper_notes/README.md`
 주요 논문: Yoon et al. Sci.Adv.2023(환원제로 극성 제어), Asor&Banin AFM 2021(Cd p-doping),
 Song&Jeong Nat.Commun.2018(리간드로 준위 0.4eV tuning, 극성은 항상 n-type).
 

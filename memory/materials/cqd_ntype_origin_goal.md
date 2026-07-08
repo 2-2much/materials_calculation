@@ -19,6 +19,6 @@ metadata:
 ---
 
 **↔ 문헌 근거 (papers 프로젝트, cross-link)**: 이 DFT 규명의 실험/문헌 배경은 papers 저장소에 정리됨.
-- 상세 문헌 노트(hohenberg, 어느 서버든 읽기 가능): `~/papers/n-type InAs QDs/intrinsic_n-type_origin_notes.md`
+- 상세 문헌 노트(hohenberg, 어느 서버든 읽기 가능): `~/papers/memory/paper_notes/n-type_InAs_QDs.md` (논문 분석 인덱스: `~/papers/memory/paper_notes/README.md`)
 - papers auto-memory(동기화 사본): `~/materials/memory/papers/research_topic_n-type_InAs_QD.md`
 - 요지: Yoon Sci.Adv.2023(합성 환원제로 극성제어, n-type=표면 donor라 문헌인용만·DFT 미계산 ← 우리가 메울 공백), Asor&Banin AFM2021(In-rich 표면 donor→Cd로 상쇄 p-type), Song&Jeong Nat.Commun.2018(리간드로 준위 0.4eV tuning, 극성은 항상 n-type). 세 논문 모두 "표면 donor/In-rich → universal n-type" 수렴.
