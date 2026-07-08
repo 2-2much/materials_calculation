@@ -1,5 +1,5 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
-- [CQD n-type Origin Goal](cqd_ntype_origin_goal.md) — 최상위 목표: InAs CQD intrinsic n-type origin을 표면 point defect로 규명. 판정=CTL(shallow donor?)+μ-diagram. (110) Cl→InCl3 passivation reference
+- [CQD n-type Origin Goal](cqd_ntype_origin_goal.md) — 최상위 목표: InAs CQD intrinsic n-type origin을 표면 point defect로 규명. 판정=CTL(shallow donor?)+μ-diagram. (110) Cl→InCl3 passivation reference. ↔ 문헌 근거는 papers 프로젝트 ~/papers/n-type InAs QDs/ 참조
 - [InCl3 Cl-As_In Unbound](incl3_cl_as_in_unbound.md) — 03-InCl3-passv Cl-As_In q0: Cl이 As_In 아닌 표면 In으로(In-Cl 2.41Å), bound complex 아님. complex→독립 donor(As_In,In_i,Cl_i) 스캔+CTL 비교로 재정렬 권고
 - [scaLAPACK mlx OFI Hang](scalapack_mlx_ofi_hang.md) — VASP hang(rank 99%CPU/OUTCAR정지): scaLAPACK BLACS Bcast가 Intel MPI mlx OFI collective서 정지. fix=LSCALAPACK=.FALSE. 또는 I_MPI_COLL_DIRECT=off. 노드축소는 지연만. gstack으로 진단. Cl_i-As 고유(V_As 재실행 정상완주로 환경 기각)
 - [Defect Package Repo](defect_package_repo.md) — Defect_Package git repo=/mnt/hohenberg/.../scripts/Defect_Package(로컬only, 원격없음). 계산폴더는 clone아닌 복사본→수동동기화. scripts 3개 커밋(2026-07-06), surface config 미반영

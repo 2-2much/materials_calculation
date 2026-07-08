@@ -15,3 +15,10 @@ metadata:
 **판정 기준(중요)**: defect가 n-type origin이냐는 배치가 아니라 **charge transition level(CTL)** 로 결정 — (+/0),(2+/+) 전이준위가 CBM 근처 shallow donor인가. formation energy를 Fermi level 함수로 그리고, In-rich/Cl-rich 코너를 **μ-diagram(μ_In,μ_Cl)** 으로 표현해 지배 donor를 찾는다. X-type(halide) 표면=cation-rich+halogen-donor 조건이 donor defect 안정화 → 실험의 universal n-type과 연결.
 
 핵심 donor 후보: As_In(anion-on-cation antisite=double donor), In_i(In 석출=shallow donor), Cl_i/Cl_As(halogen donor). 관련: [[incl3_cl_as_in_unbound]] [[defect_states_02_clpassv]]
+
+---
+
+**↔ 문헌 근거 (papers 프로젝트, cross-link)**: 이 DFT 규명의 실험/문헌 배경은 papers 저장소에 정리됨.
+- 상세 문헌 노트(hohenberg, 어느 서버든 읽기 가능): `~/papers/n-type InAs QDs/intrinsic_n-type_origin_notes.md`
+- papers auto-memory(동기화 사본): `~/materials/memory/papers/research_topic_n-type_InAs_QD.md`
+- 요지: Yoon Sci.Adv.2023(합성 환원제로 극성제어, n-type=표면 donor라 문헌인용만·DFT 미계산 ← 우리가 메울 공백), Asor&Banin AFM2021(In-rich 표면 donor→Cd로 상쇄 p-type), Song&Jeong Nat.Commun.2018(리간드로 준위 0.4eV tuning, 극성은 항상 n-type). 세 논문 모두 "표면 donor/In-rich → universal n-type" 수렴.

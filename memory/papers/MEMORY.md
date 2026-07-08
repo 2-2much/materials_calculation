@@ -1,2 +1,2 @@
 - [Save conversation notes](feedback_save_notes.md) — 매 대화 종료 전 마크다운 노트 저장 필수, Stop 훅이 auto commit+push
-- [Research topic: n-type InAs QD](research_topic_n-type_InAs_QD.md) — 주 연구 주제, intrinsic n-type CQD의 기원 (표면 donor/In-rich)
+- [Research topic: n-type InAs QD](research_topic_n-type_InAs_QD.md) — 주 연구 주제, intrinsic n-type CQD의 기원 (표면 donor/In-rich). ↔ DFT는 materials 프로젝트 cqd_ntype_origin_goal 참조
