@@ -18,6 +18,8 @@ metadata:
 - CTL: `ε(q/q')={[E_tot+E_corr]_q−[E_tot+E_corr]_q'}/(q'−q)−(VBM_pure+ΔV)`
 - **μ·E_pure는 charge state 간 상쇄 → CTL은 μ-diagram과 무관**. μ는 E_f 절대높이·지배donor에만. ∴ 알고리즘을 **CTL계산(μ불필요) / E_f절대화(μ코너)** 2단 분리 권장. VBM ref 규칙은 [[charged_defect_vbm_ref]].
 
+**optical transition 병행(2026-07-13 추가 확정)**: adiabatic(thermodynamic) CTL만이 아니라 **optical transition level(vertical, 고정 geometry, Franck-Condon)도 같이 계산**. double donor(Cl_As, As_In 등)의 (+2/+1),(+1/0) CTL을 adiabatic으로 뽑고, 거기 더해 같은 charge 쌍의 vertical transition을 뽑아 **Stokes shift(=완화에너지, adiabatic−optical)**를 본다. 방법=이니셜 charge의 relaxed geometry를 고정한 채 파이널 charge로 1shot(SCF만) → E_tot. thermodynamic ε는 [[charged_defect_vbm_ref]] 규칙대로, optical은 동일 geometry라 정렬항 재사용 가능. 특히 **+2 double donor**에서 실험 광학(UPS/광흡수)과 대조하려면 vertical이 물리적으로 맞음 → n-type origin 규명([[cqd_ntype_origin_goal]])에 광학 관측량 직접 연결.
+
 **미해결 알고리즘 결정지점 4개(다음 세션 논의 대상)**:
 1. **geometry seeding** — 각 q가 다른 local min으로 완화(In_i ejection [[in_i_2_adatom_ejection]], As_In 큰완화). q0먼저→다른q는 R_q0(+R_{q±1})에서 seed→최저E 채택.
 2. **shallow/resonant correction 붕괴**(가장 크리티컬, n-type 직결) — resonant donor는 δρ 안잦아듦 → 국소전하 slabcc/SCPC 깨짐 + band-filling(Moss-Burstein) 필요. delocalization 감지기(δρ국소성/gap-state점유) → localized vs shallow(정렬만/외삽) 분기 로직 필요. deep/shallow가 donor마다 섞임.
