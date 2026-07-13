@@ -1,0 +1,3 @@
+# MEMORY.md 인덱스는 각 서버가 개별 메모리 파일로부터 재생성(reconcile)하므로
+# 충돌 시 양쪽 줄을 합쳐두면 다음 sync에서 중복 제거되고 최신 상태로 수렴한다.
+memory/*/MEMORY.md merge=union

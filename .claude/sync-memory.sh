@@ -4,6 +4,11 @@
 
 REPO_MEM=~/materials/memory
 CLAUDE_BASE=~/.claude/projects
+GEN_INDEX=~/materials/.claude/gen-memory-index.py  # MEMORY.md를 개별 파일로부터 재구성
+
+reconcile_index() {  # $1 = memory dir; MEMORY.md를 실제 존재하는 .md들에 맞춰 자동 보정
+  [ -f "$GEN_INDEX" ] && python3 "$GEN_INDEX" "$1" 2>/dev/null || true
+}
 # 서버 식별: 4대 모두 내부 hostname이 tgm-master.hpc, ClusterName도 tgmv2로 동일해
 # 구분 불가. 실제 서버 이름은 공개 FQDN(*.kaist.ac.kr)에만 담겨 있음(예: sham.kaist.ac.kr).
 # 우선순위: KAIST FQDN → hostname -s → ClusterName → unknown
@@ -30,6 +35,7 @@ case $MODE in
       target="$CLAUDE_BASE/$proj_dir/memory"
       mkdir -p "$target"
       cp -a "$REPO_MEM/$short_name"/*.md "$target/" 2>/dev/null || true
+      reconcile_index "$target"   # 오래된 MEMORY.md가 덮어써도 개별 파일 기준으로 복구
     done
     ;;
   push)
@@ -54,7 +60,9 @@ case $MODE in
         echo "$proj_dir" > "$REPO_MEM/$short_name/.source"
       fi
 
+      reconcile_index "$proj_mem"   # 올리기 전에 인덱스를 개별 파일 기준으로 최신화
       cp -a "$proj_mem"/*.md "$REPO_MEM/$short_name/" 2>/dev/null
+      reconcile_index "$REPO_MEM/$short_name"   # repo쪽도 실제 파일 집합에 맞춤
     done
 
     cd ~/materials

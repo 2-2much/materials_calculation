@@ -72,3 +72,13 @@ GitHub ↕ 로컬 PC (papers만 clone)
 - 하지만 Claude 프로젝트 메모리(`~/.claude/projects/.../memory/`)는 서버별 로컬
 - `sync-memory.sh`의 `is_syncable_project()` 필터에 papers slug(`-mnt-hohenberg-*-papers*`) 추가하여 해결
 - `~/materials/memory/papers/.source`에 매핑 저장
+
+## MEMORY.md 인덱스 자동 재구성 (2026-07-13 추가)
+
+**문제:** 개별 메모리 `.md`는 별도 파일이라 충돌 없이 머지되지만, `MEMORY.md`(단일 공유 인덱스)는 여러 서버가 동시 편집 → 오래된 버전이 push→pull로 계속 덮어써 항목이 사라짐. (repo `memory/home/`엔 파일 9개 다 있는데 MEMORY.md만 옛 4개짜리인 상태로 확인됨.)
+
+**해결 (2중 안전망):**
+1. `~/materials/.claude/gen-memory-index.py <memdir>` — MEMORY.md를 실제 존재하는 `.md`들의 frontmatter(name/description/metadata.type)로 reconcile: 빠진 파일 자동 추가, 사라진 파일 줄 제거, 중복 제거. 멱등. 기존 큐레이션 줄은 보존. `sync-memory.sh`의 pull(내려받은 뒤)·push(올리기 전) 양쪽에서 `reconcile_index()` 호출.
+2. `.gitattributes`에 `memory/*/MEMORY.md merge=union` — rebase 충돌 시 양쪽 줄을 합쳐 abort 방지(다음 reconcile이 중복 정리). `.gitignore` 화이트리스트에 `!.gitattributes` 추가해야 추적됨(안 하면 무시됨).
+
+→ 오래된 MEMORY.md가 덮어써도 다음 sync에서 개별 파일 기준으로 완전 복구됨. 즉 **MEMORY.md는 이제 파생 인덱스**이며 개별 `.md`가 진실源.
