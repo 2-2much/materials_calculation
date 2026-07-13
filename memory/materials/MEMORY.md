@@ -30,6 +30,7 @@
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As Fermi pinned. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
 
 ## 연구 / 프로젝트
+- [SCPC E_rel Vacuum Convergence](scpc_erel_vacuum_convergence.md) — Cl-As_In q+1 relaxation energy E_rel=E(+1,Rq0)−E(+1,Rq+1) vacuum 수렴 확인(20/30/40Å: 101→109→113meV, spread 11.7meV, 증분 단조감소→수렴). monopole self-energy 상쇄로 vacuum-무관. g2 8노드 KPAR=4
 - [Adiabatic DFE Algorithm Plan](adiabatic_dfe_algorithm_plan.md) — surface defect thermodynamic(adiabatic) DFE 파이프라인 알고리즘 설계 중. (A)geometry완화 확정, 전 donor 적용. relax는 이미 charge별 adiabatic·correction+assembly 레이어가 신규. CTL은 μ무관(2단분리). 미해결 결정 4개(seeding/shallow-correction분기/cross-defect기준/E_corr재사용). 플랜모드 이어서
 - [incl3 passv 4x2 thickness](incl3_passv_4x2_thickness.md) — 03-InCl3-passv 4x2 슬랩 셀 구성(위 InCl3/아래 pseudo-H, 6층 11.3Å) + 두께 6L→5L 검토 진행상태·판단기준
 - [slabcc correction](slabcc_correction.md) — Cl-As_In CHG-DIFF slabcc correction 시도 결과 및 슈퍼셀 크기 문제
