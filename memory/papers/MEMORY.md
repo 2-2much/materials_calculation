@@ -1,3 +1,4 @@
 - [Save conversation notes](feedback_save_notes.md) — 매 대화 종료 전 마크다운 노트 저장 필수, Stop 훅이 auto commit+push
 - [Research topic: n-type InAs QD](research_topic_n-type_InAs_QD.md) — 주 연구 주제, intrinsic n-type CQD의 기원 (표면 donor/In-rich). ↔ DFT는 materials 프로젝트 cqd_ntype_origin_goal 참조
 - [Interactive lecture notes](feedback_interactive_lecture_notes.md) — 논문 공부는 /lecture-note 스킬로 인터랙티브 HTML 렉노. 질문복사→터미널 붙여넣기→그 자리에 답 채우기 순환
+- [HTML preview, no port-forward](feedback_html_preview.md) — HTML 산출물은 파일 경로만 안내, http.server/포트포워딩 보는법 생략 (사용자가 미리보기로 직접 엶)
