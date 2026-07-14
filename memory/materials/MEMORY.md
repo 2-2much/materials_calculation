@@ -35,11 +35,13 @@
 - [incl3 passv 4x2 thickness](incl3_passv_4x2_thickness.md) — 03-InCl3-passv 4x2 슬랩 셀 구성(위 InCl3/아래 pseudo-H, 6층 11.3Å) + 두께 6L→5L 검토 진행상태·판단기준
 - [slabcc correction](slabcc_correction.md) — Cl-As_In CHG-DIFF slabcc correction 시도 결과 및 슈퍼셀 크기 문제
 - [Slab Correction Workflow](slab_correction_workflow.md) — Defect_Package에 추가한 slab(2D) slabcc charged-defect correction(adiabatic/optical R_0 스킴). optical(고정 R_0) single-point→slabcc→plot_DFE. diel_in=ε_∞. CLI=--charged-stage(필수)+--neutral-stage/--relax-stage(선택). prepare에 reference_charge_contcar+q0 skip/symlink. 01-Cl-passv 적용
+- [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — Cl-As_In(+1) As-rich VBM 형성E 진공수렴(current+vac30/40/50 fixed slabcc): 보정후 0.384/0.380/0.379eV 수렴(vac≥40 신뢰), current(vac~11Å)=0.423 RMSE warn 신뢰낮음. Δμ_As=+3.4059. vertical값→adiabatic −88meV(≈0.29eV). 플롯=results/DFE_plots/DFE_Cl-As_In_p1_vacuum_Asrich.py
 - [KP slabcc NaCl Reproduction](kp_slabcc_nacl_reproduction.md) — Komsa-Pasquarello NaCl Cl-vac(q+1) E_f 재현 toy(11-Surface/KP_slabcc_reproduction). 저자 구조+CKT footing+KPAR3, 입력완비. tgm-master 자리부족→잡취소, kohn 이전 진행. slabcc _test_값 +0.556/−0.174 검증됨
 - [vclclas atom95 fatband](vclclas_atom95_fatband.md) — V_Cl-Cl_As/q0 03_Band fatband — atom 95(passivation Cl) spin up=dw 동일, 순 스핀 없음
 
 ## 참고 자료
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
+- [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — slabcc optimize_tolerance는 목표 RMSE 임계값 아니라 BOBYQA 상대수렴 tolerance. 최종 RMSE>tol이어도 정상(local min). 남은 RMSE=등방 Gaussian 모델 한계, 줄이려면 charge_trivariate=yes/다중Gaussian
 - [zeroband fatband tool](zeroband_fatband_tool.md) — zeroband.py — hybrid band(zero-weight kpt) projected fatband 플로터 위치/사용법
 - [zeroband spin parsing](zeroband_spin_parsing.md) — zeroband.py 밴드플롯 --spin 옵션 및 collinear ISPIN=2 PROCAR 파싱 수정
 
