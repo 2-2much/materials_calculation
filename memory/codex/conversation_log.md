@@ -38,3 +38,8 @@ metadata:
 
 - User asked for a formation-energy plot of NaCl Cl-vacancy q=+1 and q=0 over the VBM-CBM Fermi-level range.
 - Codex added `plot_formation_vs_fermi.py` in `KP_slabcc_reproduction/`, generated PNG/PDF/CSV outputs, and found mean values: gap 4.8731 eV, `E_f(+1; VBM)=1.7788 eV`, `E_f(0)=4.5643 eV`, and `epsilon(+/0)=2.7856 eV` above VBM.
+
+## 2026-07-14 13:34 KST
+
+- User asked for the difference between Claude and Codex.
+- Codex compared Claude as Anthropic's general AI assistant/model family, Claude Code as Anthropic's coding agent, and Codex as OpenAI's coding agent focused on repository-aware software work.
