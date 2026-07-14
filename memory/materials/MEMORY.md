@@ -41,3 +41,6 @@
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
 - [zeroband fatband tool](zeroband_fatband_tool.md) — zeroband.py — hybrid band(zero-weight kpt) projected fatband 플로터 위치/사용법
 - [zeroband spin parsing](zeroband_spin_parsing.md) — zeroband.py 밴드플롯 --spin 옵션 및 collinear ISPIN=2 PROCAR 파싱 수정
+
+## 작업 방식 / 피드백
+- [shared memory mirror](feedback_shared-memory-mirror.md) — Codex durable memories should be mirrored to both memory/materials and memory/codex, with matching slugs and refreshed indexes
