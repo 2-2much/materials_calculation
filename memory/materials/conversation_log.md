@@ -33,3 +33,8 @@ metadata:
 
 - User asked which potential was actually written/used when both `LVTOT=.TRUE.` and `LVHAR=.TRUE.` were set in the KP slabcc reproduction.
 - Codex checked the live OUTCARs: VASP echoed the input tags but resolved them to `LVTOT=F`, `LVHAR=T`; slabcc read `defect_q+1/LOCPOT` and `defect_q0/LOCPOT`, so the correction used the LVHAR electrostatic/ionic+Hartree potential without XC.
+
+## 2026-07-14 13:27 KST
+
+- User asked for a formation-energy plot of NaCl Cl-vacancy q=+1 and q=0 over the VBM-CBM Fermi-level range.
+- Codex added `plot_formation_vs_fermi.py` in `KP_slabcc_reproduction/`, generated PNG/PDF/CSV outputs, and found mean values: gap 4.8731 eV, `E_f(+1; VBM)=1.7788 eV`, `E_f(0)=4.5643 eV`, and `epsilon(+/0)=2.7856 eV` above VBM.
