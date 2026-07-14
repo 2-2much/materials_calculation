@@ -23,3 +23,8 @@ metadata:
 
 - User asked whether this conversation was also recorded.
 - Codex confirmed the previous request had already been recorded and committed, and recorded this confirmation in the Codex-owned conversation logs only.
+
+## 2026-07-14 12:00 KST
+
+- User asked Codex to inspect Claude home/materials memory for `KP_slabcc_reproduction`.
+- Codex found Claude/materials memory says the KP NaCl Cl-vacancy slabcc reproduction was set up for Komsa-Pasquarello validation, but the live folder now contains completed VASP and slabcc outputs. `analyze_formation_energy.py` gives corrected E_f 1.7824 eV (case01) and 1.7752 eV (case02), a 7.2 meV spread.
