@@ -28,3 +28,8 @@ metadata:
 
 - User asked Codex to inspect Claude home/materials memory for `KP_slabcc_reproduction`.
 - Codex found Claude/materials memory says the KP NaCl Cl-vacancy slabcc reproduction was set up for Komsa-Pasquarello validation, but the live folder now contains completed VASP and slabcc outputs. `analyze_formation_energy.py` gives corrected E_f 1.7824 eV (case01) and 1.7752 eV (case02), a 7.2 meV spread.
+
+## 2026-07-14 13:19 KST
+
+- User asked which potential was actually written/used when both `LVTOT=.TRUE.` and `LVHAR=.TRUE.` were set in the KP slabcc reproduction.
+- Codex checked the live OUTCARs: VASP echoed the input tags but resolved them to `LVTOT=F`, `LVHAR=T`; slabcc read `defect_q+1/LOCPOT` and `defect_q0/LOCPOT`, so the correction used the LVHAR electrostatic/ionic+Hartree potential without XC.
