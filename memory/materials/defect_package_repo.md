@@ -22,3 +22,9 @@ Defect 계산 패키지의 실제 git repo: `/mnt/hohenberg/byuid/jaegwan97/scri
 - **패키지 개발 흐름**: 정본 repo(`/mnt/hohenberg/.../Defect_Package/`, 이미 clean·최신, 원격 없음)에서 **직접 edit + git commit**. clone/push 불필요(로컬 repo라 commit이 곧 배포). 별도 sandbox 원하면 clone.
 - **계산 폴더로 스크립트 반영**: 손으로 라인 복붙 금지. `scripts/`는 순수 패키지 코드여야 하므로 (A) 계산폴더 `scripts/`를 정본 `scripts/`로 **symlink**(zero-copy, 항상 최신·재현성은 주의) 또는 (B) `cp -f <PKG>/scripts/*.py <calc>/scripts/` **한 방 복사**.
 - ⚠계산폴더 `plot_DFE_from_raw_energies.py`에 계산-로컬 수정 12줄 존재 → symlink/cp 전에 이게 패키지에 올릴 개선인지(→upstream) 계산전용인지 판별 필요. plot_DFE.sh의 μ/vbm/stage는 계산전용 값이므로 패키지에 안 올림.
+
+## 커밋 컨벤션 & 워크플로우 (2026-07-14 확정): 로컬 커밋만, push 안 함
+현재 상태: 브랜치 `master`, tree clean, 커밋 5개(최신 5a10665). `git remote -v` 비어있음 = 원격 없음(`.git`은 존재 ≠ remote 존재). 사용자 결정: **원격 없이 로컬에서만 체계적 커밋, push 하지 않음**.
+- **커밋 메시지 규칙**(기존 커밋 톤 유지): 제목=영어 명령형 한 줄 ~72자, 접두어 `Add`/`Fix`/`Support`/`Refactor`/`Remove`/`Update`. 본문(선택)=한 줄 비우고 *왜* 바꿨는지(논문·파라미터 근거 명시). **원자적 커밋**(논리 단위별 분리), 커밋 전 항상 `git diff` 확인.
+- **명령어**: cwd가 매 호출 리셋되고 repo가 작업디렉토리 밖이라 `cd` 대신 **`git -C /mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package ...`** 사용. 순서: `status`→`diff`→`add <파일명시>`(add . 금지)→`diff --cached`→`commit -F -`(heredoc으로 제목+본문)→`log --oneline -3`.
+- **미결정**: `Co-Authored-By` 트레일러를 이 로컬 repo에도 넣을지 사용자에게 물어봄(답 대기). 다음 세션: **/clear 후 플랜모드로 패키지 업그레이드** 진행 예정 — 무엇을 업그레이드할지는 플랜모드에서 정함.
