@@ -34,6 +34,7 @@
 - [Adiabatic DFE Algorithm Plan](adiabatic_dfe_algorithm_plan.md) — surface defect thermodynamic(adiabatic) DFE 파이프라인 알고리즘 설계 중. (A)geometry완화 확정, 전 donor 적용. relax는 이미 charge별 adiabatic·correction+assembly 레이어가 신규. CTL은 μ무관(2단분리). 미해결 결정 4개(seeding/shallow-correction분기/cross-defect기준/E_corr재사용). 플랜모드 이어서
 - [incl3 passv 4x2 thickness](incl3_passv_4x2_thickness.md) — 03-InCl3-passv 4x2 슬랩 셀 구성(위 InCl3/아래 pseudo-H, 6층 11.3Å) + 두께 6L→5L 검토 진행상태·판단기준
 - [slabcc correction](slabcc_correction.md) — Cl-As_In CHG-DIFF slabcc correction 시도 결과 및 슈퍼셀 크기 문제
+- [Slab Correction Workflow](slab_correction_workflow.md) — Defect_Package에 추가한 slab(2D) slabcc charged-defect correction(adiabatic/optical R_0 스킴). optical(고정 R_0) single-point→slabcc→plot_DFE. diel_in=ε_∞. CLI=--charged-stage(필수)+--neutral-stage/--relax-stage(선택). prepare에 reference_charge_contcar+q0 skip/symlink. 01-Cl-passv 적용
 - [KP slabcc NaCl Reproduction](kp_slabcc_nacl_reproduction.md) — Komsa-Pasquarello NaCl Cl-vac(q+1) E_f 재현 toy(11-Surface/KP_slabcc_reproduction). 저자 구조+CKT footing+KPAR3, 입력완비. tgm-master 자리부족→잡취소, kohn 이전 진행. slabcc _test_값 +0.556/−0.174 검증됨
 - [vclclas atom95 fatband](vclclas_atom95_fatband.md) — V_Cl-Cl_As/q0 03_Band fatband — atom 95(passivation Cl) spin up=dw 동일, 순 스핀 없음
 
