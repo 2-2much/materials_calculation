@@ -34,8 +34,10 @@
 - [Adiabatic DFE Algorithm Plan](adiabatic_dfe_algorithm_plan.md) — surface defect thermodynamic(adiabatic) DFE 파이프라인 알고리즘 설계 중. (A)geometry완화 확정, 전 donor 적용. relax는 이미 charge별 adiabatic·correction+assembly 레이어가 신규. CTL은 μ무관(2단분리). 미해결 결정 4개(seeding/shallow-correction분기/cross-defect기준/E_corr재사용). 플랜모드 이어서
 - [incl3 passv 4x2 thickness](incl3_passv_4x2_thickness.md) — 03-InCl3-passv 4x2 슬랩 셀 구성(위 InCl3/아래 pseudo-H, 6층 11.3Å) + 두께 6L→5L 검토 진행상태·판단기준
 - [slabcc correction](slabcc_correction.md) — Cl-As_In CHG-DIFF slabcc correction 시도 결과 및 슈퍼셀 크기 문제
+- [KP slabcc NaCl Reproduction](kp_slabcc_nacl_reproduction.md) — Komsa-Pasquarello NaCl Cl-vac(q+1) E_f 재현 toy(11-Surface/KP_slabcc_reproduction). 저자 구조+CKT footing+KPAR3, 입력완비. tgm-master 자리부족→잡취소, kohn 이전 진행. slabcc _test_값 +0.556/−0.174 검증됨
 - [vclclas atom95 fatband](vclclas_atom95_fatband.md) — V_Cl-Cl_As/q0 03_Band fatband — atom 95(passivation Cl) spin up=dw 동일, 순 스핀 없음
 
 ## 참고 자료
+- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
 - [zeroband fatband tool](zeroband_fatband_tool.md) — zeroband.py — hybrid band(zero-weight kpt) projected fatband 플로터 위치/사용법
 - [zeroband spin parsing](zeroband_spin_parsing.md) — zeroband.py 밴드플롯 --spin 옵션 및 collinear ISPIN=2 PROCAR 파싱 수정
