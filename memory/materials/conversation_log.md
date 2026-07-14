@@ -1,0 +1,15 @@
+---
+name: conversation-log
+description: Concise dated summaries of Codex conversations in this repo, mirrored with memory/codex/conversation_log.md
+metadata:
+  type: feedback
+---
+
+# Conversation Log
+
+## 2026-07-14 11:54 KST
+
+- User asked whether Claude memory sync code existed nearby. Codex found `.claude/sync-memory.sh`, `.claude/gen-memory-index.py`, `.claude/settings.json`, and `.gitattributes` as the current Claude memory Git sync implementation.
+- User asked whether Codex memory could also be synchronized. Codex found Codex local memory uses `~/.codex/memories_1.sqlite`, currently with zero rows, and proposed a safer Markdown shared-memory mirror.
+- User chose the shared-memory approach and asked to mirror Codex durable memory to both `memory/codex/*.md` and `memory/materials/*.md`. Codex added `AGENTS.md`, initialized `memory/codex/`, mirrored `feedback_shared-memory-mirror.md`, refreshed indexes, committed, rebased, and pushed commit `bc865c9`.
+- User then asked to record every conversation and commit/push each time. Codex set the durable rule to append concise dated summaries to both conversation logs and to commit/push memory updates when feasible.

@@ -12,4 +12,8 @@ Codex durable memory for this repo should be saved as Markdown in both:
 
 Use the same filename slug in both locations and refresh both `MEMORY.md` indexes with `.claude/gen-memory-index.py`.
 
+For every conversation in this repo, append a concise dated summary to both `memory/materials/conversation_log.md` and `memory/codex/conversation_log.md`, then commit and push the memory update when feasible.
+
+Store concise durable summaries rather than raw full transcripts, secrets, credentials, or long private logs.
+
 Do not add `memory/codex/.source`; that file type is reserved for Claude project memory mappings consumed by `.claude/sync-memory.sh`.
