@@ -13,3 +13,8 @@ metadata:
 - User asked whether Codex memory could also be synchronized. Codex found Codex local memory uses `~/.codex/memories_1.sqlite`, currently with zero rows, and proposed a safer Markdown shared-memory mirror.
 - User chose the shared-memory approach and asked to mirror Codex durable memory to both `memory/codex/*.md` and `memory/materials/*.md`. Codex added `AGENTS.md`, initialized `memory/codex/`, mirrored `feedback_shared-memory-mirror.md`, refreshed indexes, committed, rebased, and pushed commit `bc865c9`.
 - User then asked to record every conversation and commit/push each time. Codex set the durable rule to append concise dated summaries to both conversation logs and to commit/push memory updates when feasible.
+
+## 2026-07-14 11:56 KST
+
+- User asked Codex to be careful not to touch other memory files created by Claude.
+- Codex recorded the constraint: only edit Codex-owned mirror/log memory files unless the user explicitly asks for a specific existing Claude memory edit.
