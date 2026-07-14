@@ -18,3 +18,8 @@ metadata:
 
 - User asked Codex to be careful not to touch other memory files created by Claude.
 - Codex recorded the constraint: only edit Codex-owned mirror/log memory files unless the user explicitly asks for a specific existing Claude memory edit.
+
+## 2026-07-14 11:57 KST
+
+- User asked whether this conversation was also recorded.
+- Codex confirmed the previous request had already been recorded and committed, and recorded this confirmation in the Codex-owned conversation logs only.
