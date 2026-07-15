@@ -28,3 +28,9 @@ Defect 계산 패키지의 실제 git repo: `/mnt/hohenberg/byuid/jaegwan97/scri
 - **커밋 메시지 규칙**(기존 커밋 톤 유지): 제목=영어 명령형 한 줄 ~72자, 접두어 `Add`/`Fix`/`Support`/`Refactor`/`Remove`/`Update`. 본문(선택)=한 줄 비우고 *왜* 바꿨는지(논문·파라미터 근거 명시). **원자적 커밋**(논리 단위별 분리), 커밋 전 항상 `git diff` 확인.
 - **명령어**: cwd가 매 호출 리셋되고 repo가 작업디렉토리 밖이라 `cd` 대신 **`git -C /mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package ...`** 사용. 순서: `status`→`diff`→`add <파일명시>`(add . 금지)→`diff --cached`→`commit -F -`(heredoc으로 제목+본문)→`log --oneline -3`.
 - **미결정**: `Co-Authored-By` 트레일러를 이 로컬 repo에도 넣을지 사용자에게 물어봄(답 대기). 다음 세션: **/clear 후 플랜모드로 패키지 업그레이드** 진행 예정 — 무엇을 업그레이드할지는 플랜모드에서 정함.
+
+## ⚠️ 사고 사례 & 재발 방지 (2026-07-15): scripts 미동기화 → seed 잡 즉사 → 체인 데드락
+- **증상**: 01-Cl-passv_6L_3x2x1 잡 대량 제출 후, 각 defect charged 체인의 **첫 잡(seed)이 Elapsed 0초·ExitCode 2로 FAILED**. `afterok` 체인이라 뒤 잡 전부 `Dependency`/`DependencyNeverSatisfied`로 데드락(약 29개 PD 잔류).
+- **원인**: `run_case.sh`가 `scripts/resolve_initial_poscar.py`를 호출하는데 **제출 시점에 calc 폴더 `scripts/`에 그 파일이 아직 없었음**(`prepare_defect_workflow.py`가 생성한 run_case.sh는 참조하지만 헬퍼는 미동기화). std.err = `python3: can't open file .../scripts/resolve_initial_poscar.py: No such file`. compute node가 std.out은 정상 기록 → FS 가시성 아님, **순수 파일 부재**.
+- **복구**: 막힌 PD 잡 `scancel` → `bash scripts/run_joblist.sh calc/joblist.txt submit-defect-chains` 재제출. `run_case.sh`는 **멱등**(`stage_finished`=OUTCAR "General timing and accounting")이라 이미 완료된 q0/Cl-As_In q+1은 수초 스킵, 실패분만 재실행. 재제출 후 DependencyNeverSatisfied 0 확인.
+- **재발 방지**: sbatch 전에 `grep -oE "scripts/[^ ]+\.(py|sh)" run_case.sh` 참조 파일이 **calc `scripts/`에 전부 존재**하는지 확인. 근본은 symlink(A안)로 calc `scripts/`를 정본에 걸면 미동기화 창 자체가 사라짐(위 운용모델 참조).
