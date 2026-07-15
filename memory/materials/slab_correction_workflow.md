@@ -50,6 +50,14 @@ vertical_scan −0.86(optimize_charge_position=yes)과 큰 차이=여분전하 d
 [[cqd_ntype_origin_goal]], [[vertical_scan_slabcc_scpc]], [[scpc_erel_vacuum_convergence]],
 [[adiabatic_dfe_algorithm_plan]] 참조.
 
+**04-InCl3-passv 이식(2026-07-15, kohn/HSE06):** `12-Surace-defect_calculation/04-InCl3-passv_6L_4x2x1_HSE06`
+에 워크플로우 셋업. 원래 이 폴더는 Defect_Package clone(origin=/mnt/hohenberg/.../Defect_Package)이라 pull merge
+위험 → 운용모델대로 **origin remote 제거**(로컬 .git 히스토리는 보존). **scripts/는 package/scripts로 symlink**
+(package가 공유 NFS라 서버 무관 동일경로 resolve; 04 고유 스크립트 없어 안전). config/slab_correction.yaml 복사,
+stages.yaml에 optical stage(id=02, dirname=optical_Rq0, reference_stage=`01_Spin-gam-relax`) 추가. bloch 01(PBE)은
+bloch 로컬디스크라 kohn서 접근불가. **미완(사용자 TODO):** INCAR_optical_1shot/KPOINTS_optical_1shot 작성(NSW=0,
+LCHARG/LVHAR, NELECT 금지) + reference_stage가 실제 최종 이완 stage인지 확인(현 calc는 00_Gam-relax까지만).
+
 **q0 optical skip(구현됨, 6ef61be):** reference charge(q0)의 optical stage는 reference_stage(01_Relax)와
 동일 계산이므로, run_case.sh가 reference_stage에 완료 OUTCAR+LOCPOT+CHGCAR가 있으면 VASP 건너뛰고
 symlink 재사용(없으면 정상 실행). grid는 charged optical과 일치해야 함(드라이버 on_grid_mismatch가 방지).
