@@ -40,6 +40,7 @@
 - [vclclas atom95 fatband](vclclas_atom95_fatband.md) — V_Cl-Cl_As/q0 03_Band fatband — atom 95(passivation Cl) spin up=dw 동일, 순 스핀 없음
 - [Spin Screening 04-InCl3](spin_screening_04_incl3.md) — 04-InCl3-passv HSE06 spin screening: 11개 q0에 magnetic_seed(runtime.yaml)로 01_Spin-gam-relax 제출(5노드, jobid 55291~). ΔE_spin=E(01)−E(00)<0이면 자성. 00 baseline TOTEN 기록. ⚠SLURM 완료 미통보
 - [optical correction adiabatic rationale](optical_correction_adiabatic_rationale.md) — 표면 결함 adiabatic DFE에서 finite-size 보정은 frozen-R_0 optical(E_corr^opt)을 채택하는 이유와 부기 항등식
+- [charge state + optical/slabcc setup](chargestate_optical_slabcc_setup.md) — 02-Cl-passv 프로덕션 셋업. ⚠유연히: charge state=neutral DOS Fermi 위치(하부 core-level 정렬, 진공 금지), 노드/CPU=쓰려는 노드 코어 수. optical 1shot(grid-lock)→slabcc(diel=ε_∞) 워크플로우
 
 ## 참고 자료
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
