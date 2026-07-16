@@ -1,16 +1,25 @@
 ---
 name: defect_package_repo
-description: "Defect_Package git repo 위치(로컬 only, 원격 없음)와 계산 폴더가 clone 아닌 복사본이라는 점"
+description: "Defect_Package 정본 위치 + GitHub 배포(2-2much/Defect_Package, private) + scripts/·example/ 2폴더 구조"
 metadata: 
   node_type: memory
   type: reference
   originSessionId: 57d09abc-dc4b-4d3d-8be0-c86f99fef821
 ---
 
-Defect 계산 패키지의 실제 git repo: `/mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/`
+Defect 계산 패키지의 정본 git repo: `/mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/`
 (심링크 해석 시 `/mnt/hohenberg/byname/정재관/scripts/Defect_Package`). tgm-master에서 마운트로 직접 쓰기 가능.
 
-- **로컬 git only, 원격(GitHub) 없음** → push 없이 로컬 커밋으로 관리.
+## ⚠️ 최신 상태 (2026-07-16): GitHub 배포 + 패키지 재구성 (이 아래 옛 "원격 없음" 전제 supersede)
+- **GitHub 원격 생성**: `https://github.com/2-2much/Defect_Package` (**private**, org=2-2much, materials와 동일). 정본에 `origin` 연결·push 완료. 이제 다른 서버/계산노드에서 `git clone`/`git pull`로 배포. (이전 "로컬 only 원격 없음" 무효.)
+- **2폴더 구조로 재구성**(커밋 c79e3c6): 추적=`scripts/`(코드, 그대로 실행) + `example/`(복사용 템플릿: config/, correction_DFE.sh, correction_slab.sh, defect_colors.yaml, lattice_2_PBE-d_const.sh, plot_DFE.sh, README_CHARGED/SLAB_CORRECTION.md). 루트엔 개요 README.md + .gitignore.
+- **untrack + gitignore**(per-system, 배포 안 함): `inputs/`, `Initial_converged_POSCARs/`, **`POTCAR`**(라이선스). 디스크엔 남김.
+- ⚠️ **POTCAR·데이터가 git 히스토리(이전 커밋)엔 아직 존재** → private라 org 멤버 한정 노출. **public 전환 전 반드시 `git filter-repo`로 스크럽 또는 orphan 재시작** 필요.
+- **사용 모델**: 계산할 땐 `example/*`를 repo 밖 계산폴더로 복사해 거기서 편집·실행(커밋 안 함). 패키지 개선(scripts/ 버그, 템플릿 기본값)은 clone에서 편집→commit→push. ⚠계산폴더에서 example/config를 시스템별로 고친 뒤 push하면 템플릿 오염되니 금지.
+- **계산폴더 scripts 심링크 사고 해소**(커밋 53d6e42, 01-Cl-passv_6L_3x2x1): scripts 심링크→실복사 후 계산폴더 자체 git에 추적. 앞으로 scripts 갱신은 clone/pull 또는 scoped fetch(`git fetch <정본> HEAD && git checkout FETCH_HEAD -- scripts`).
+
+## (이하 옛 기록, 히스토리 참고용 — "원격 없음"은 위에서 무효화됨)
+- ~~로컬 git only, 원격(GitHub) 없음~~ → 2026-07-16 GitHub private 배포로 대체.
 - repo는 아직 **bulk defect** 버전(config에 `INCAR_01.Mid-point_relax`, defect명 As_In/V_As 등).
 - 계산 폴더 `12-Surace-defect_calculation/02-Cl-passv_6L_3x2x1_HSE06/`는 이 repo를 **clone하지 않고 파일만 복사**해 쓰다가 surface defect 워크플로우로 분화됨 → repo와 자동 동기화 안 됨(수동 복사 필요).
 - 2026-07-06: generic 스크립트 3개(`generate_surface_defect.py` 신규, `prepare_defect_workflow.py` 하전셀 dipole 태그 제거, `plot_DFE_from_raw_energies.py`)를 repo에 커밋(5730796). kpt_scan 스크립트 2개는 PROJ 절대경로 하드코딩·Cl-As_In 전용이라 제외.
