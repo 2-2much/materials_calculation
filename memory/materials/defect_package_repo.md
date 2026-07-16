@@ -15,7 +15,10 @@ Defect 계산 패키지의 정본 git repo: `/mnt/hohenberg/byuid/jaegwan97/scri
 - **2폴더 구조로 재구성**(커밋 c79e3c6): 추적=`scripts/`(코드, 그대로 실행) + `example/`(복사용 템플릿: config/, correction_DFE.sh, correction_slab.sh, defect_colors.yaml, lattice_2_PBE-d_const.sh, plot_DFE.sh, README_CHARGED/SLAB_CORRECTION.md). 루트엔 개요 README.md + .gitignore.
 - **untrack + gitignore**(per-system, 배포 안 함): `inputs/`, `Initial_converged_POSCARs/`, **`POTCAR`**(라이선스). 디스크엔 남김.
 - ⚠️ **POTCAR·데이터가 git 히스토리(이전 커밋)엔 아직 존재** → private라 org 멤버 한정 노출. **public 전환 전 반드시 `git filter-repo`로 스크럽 또는 orphan 재시작** 필요.
-- **사용 모델**: 계산할 땐 `example/*`를 repo 밖 계산폴더로 복사해 거기서 편집·실행(커밋 안 함). 패키지 개선(scripts/ 버그, 템플릿 기본값)은 clone에서 편집→commit→push. ⚠계산폴더에서 example/config를 시스템별로 고친 뒤 push하면 템플릿 오염되니 금지.
+- **사용 모델(2026-07-16 확정, 커밋 1a17657)**: **clone 안에서 바로 계산**. `cp -r example/config config && cp example/*.sh example/defect_colors.yaml .`로 편집용 사본 만들고(이 사본·inputs/·POTCAR·calc/·results/ 전부 gitignore), scripts는 `git pull`로 갱신. helper `.sh`는 cwd=clone루트 기준 상대경로(`scripts/`,`config/`)라 루트에서 실행하면 수정 없이 동작. 여러 시스템=clone 여러 개.
+- **allowlist `.gitignore`**: `/*`로 전부 무시 후 `!/scripts/ !/example/ !/README.md !/.gitignore`만 재포함(+ `__pycache__/`,`*.pyc` 등 junk). ⚠추적할 새 top-level 파일 추가 시 `!/<name>` 라인 필요. 핵심 원리: **.gitignore는 미추적 파일만 막음** → 편집하는 config는 추적 템플릿(example/config)과 **다른 경로(config/)**여야 pull 충돌·템플릿 오염 없음.
+- **패키지 개선**: clone에서 `scripts/`·`example/` 편집→commit→push. ⚠example/config를 시스템값으로 고쳐 push 금지(공유 템플릿 오염).
+- **README 재작성 완료**: clone-and-run 워크플로우, "반드시 바꿀 값" 체크리스트(μ/vbm/gap in plot_DFE.sh, vasp_bins·slurm in runtime.yaml, defects.yaml, lattice const, POTCAR), stale참조(Gamma_relax/MP_static/Initial_POSCARs/run_case.sh/POTCAR_info) 제거. 남은 감사 항목: config INCAR가 01_Mid-point_relax 단일단계, surface config 미포함, requirements.txt/LICENSE 없음, __Hold__ 보관폴더 노출.
 - **계산폴더 scripts 심링크 사고 해소**(커밋 53d6e42, 01-Cl-passv_6L_3x2x1): scripts 심링크→실복사 후 계산폴더 자체 git에 추적. 앞으로 scripts 갱신은 clone/pull 또는 scoped fetch(`git fetch <정본> HEAD && git checkout FETCH_HEAD -- scripts`).
 
 ## (이하 옛 기록, 히스토리 참고용 — "원격 없음"은 위에서 무효화됨)
