@@ -27,6 +27,7 @@
 - [Surface Defect OSZICAR Buffering](surface_defect_oszicar_buffering.md) — HSE 잡 실행 중 OSZICAR 갱신 안 됨(버퍼링) → std.log/OUTCAR로 모니터링. HSE 이중루프(exchange 갱신 점프)로 step 많이 필요, NELM 120~150 권장
 - [Surface Defect ISTART/WAVECAR gam-std](surface_defect_istart_wavecar_gam_std.md) — gam(Gamma-only) WAVECAR을 std가 못 읽음(plane wave coeff 48187≈2×24094). DOS 단계만 ISTART=0(ICHARG=1 유지), 03_Band(std→std)는 ISTART=1 무방
 - [Species Aliases Mechanism](species_aliases_mechanism.md) — In_L→In_d POTCAR alias(runtime.yaml species_aliases). 오류는 VASP아닌 prep 파이썬(check_species_order/NELECT). VASP는 라벨 안읽음
+- [LOBSTER COHP Setup](lobster_cohp_setup.md) — 02-Cl-passv 슬랩 COHP: 최소 NBANDS=524(LOBSTER가 직접 산출), LREAL=.FALSE. 필수(템플릿 LREAL=A 금지), In_d는 4d 기저 포함, pseudo-H 파싱 OK. lobster는 ~/bin 절대경로
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As Fermi pinned. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
 
 ## 연구 / 프로젝트
