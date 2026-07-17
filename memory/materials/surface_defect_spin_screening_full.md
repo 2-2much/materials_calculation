@@ -1,5 +1,5 @@
 ---
-name: surface-defect-spin-screening-full
+name: surface_defect_spin_screening_full
 description: "02-Cl-passv_6L_3x2x1_HSE06 전 defect 스핀 스크리닝 결과 + ISPIN 분기 방침(2026-07-02 갱신: 전체 ISPIN=2 통일 → 스핀에너지 기반 분기로 전환)"
 metadata:
   node_type: memory
@@ -7,7 +7,7 @@ metadata:
   originSessionId: 0b838ed2-3a0f-4b92-a22c-131ab8936454
 ---
 
-## 전체 defect 스핀 스크리닝 결과 (PRECFOCK=N으로 통일, [[surface-defect-gam-relax-spin-comparison]] 방식)
+## 전체 defect 스핀 스크리닝 결과 (PRECFOCK=N으로 통일, [[surface_defect_gam_relax_spin_comparison]] 방식)
 ΔE = E0(spin) − E0(nonmag), OSZICAR 마지막 줄 기준
 
 | Defect/charge | ΔE (meV) | mag (μB) | 판정 |

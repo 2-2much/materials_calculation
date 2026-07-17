@@ -1,5 +1,5 @@
 ---
-name: surface-defect-dipole-correction
+name: surface_defect_dipole_correction
 description: "02-Cl-passv_6L_3x2x1_HSE06 DOS/Band 단계 dipole correction(LDIPOL/IDIPOL) 적용 여부 결정 (2026-07-01)"
 metadata:
   node_type: memory

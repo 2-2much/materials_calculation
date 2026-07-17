@@ -1,5 +1,5 @@
 ---
-name: bloch-workspace-setup
+name: bloch_workspace_setup
 description: bloch 서버 VS Code workspace 파일 설정 진행 중 (로컬 Windows PC)
 metadata: 
   node_type: memory

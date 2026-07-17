@@ -1,5 +1,5 @@
 ---
-name: surface-defect-gam-relax-spin-comparison
+name: surface_defect_gam_relax_spin_comparison
 description: "02-Cl-passv_6L_3x2x1_HSE06 Cl-As_In/q0 00_Gam-relax(non-mag) vs 01_Spin-gam-relax(spin) 비교, PRECFOCK 기본값 확인, projected magnetization 해석 (2026-07-01)"
 metadata:
   node_type: memory
@@ -23,7 +23,7 @@ metadata:
 - OUTCAR magnetization table 합: `tot = 0.639 μB` (PAW sphere 내부만 적분)
 - 차이(~0.36 μB)는 PAW sphere 바깥(interstitial/vacuum)에 분포 → **delocalized shallow acceptor state의 정상적 특징이지 오류 아님**
 - 원자별 분포: atom 62(0.146), 64(0.134), 97(0.070), 91(0.034), 93(0.031), 36(0.065)에 상대적 집중, 나머지는 0.001~0.01 수준으로 넓게 퍼짐. p-orbital 성분이 s보다 훨씬 큼(예: atom62 p=0.126 vs s=0.020) → 표면 p-like acceptor state 그림과 일치
-- 이전 spin test(ISPIN=2 single-point) 결과의 atom 62/64/97 집중 패턴(0.137/0.130/0.078)과 정성적으로 일치 → [[surface-defect-spin-test]]
+- 이전 spin test(ISPIN=2 single-point) 결과의 atom 62/64/97 집중 패턴(0.137/0.130/0.078)과 정성적으로 일치 → [[surface_defect_spin_test]]
 
 ## 결론
 - Total moment가 정수(1.0 μB)로 수렴 + ΔE=−171 meV(수렴 noise 대비 훨씬 큼) → **실제 자성 ground state, 작은 per-atom 값에도 불구하고 유효**

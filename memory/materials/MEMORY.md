@@ -32,6 +32,7 @@
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음(CB resonant)/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As=**shallow single donor(+1)**(gap 깨끗, CB resonant, 공여전자 1개가 host CB 채움). ⚠2026-07-17 정정 2건: "double donor(+2e)"는 틀림(NELECT 744→739, Cl 12개 불변, band370 occ=0.5=전자1개) / "Fermi pinned"도 철회. ⚠진공정렬 LOCPOT은 dipole OFF+비대칭슬랩이라 plateau 없음(1.4eV 기울기)→ill-defined, 셀-내부 기준 쓸 것. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
 
 ## 연구 / 프로젝트
+- [Next Steps 2026-07-18](next_steps_2026_07_18.md) — ⏭내일 이어서: (1)미수확 slabcc 잡 55361~55382 확인·수확(bound인 것만), (2)04-InCl3 spin 배치 복구(8개 POSCAR 누락·Cl-As_In walltime), (3)adiabatic DFE 플랜 4개 결정. 오늘 완료분 재작업 금지
 - [SCPC E_rel Vacuum Convergence](scpc_erel_vacuum_convergence.md) — Cl-As_In q+1 relaxation energy E_rel=E(+1,Rq0)−E(+1,Rq+1) vacuum 수렴 확인(20/30/40Å: 101→109→113meV, spread 11.7meV, 증분 단조감소→수렴). monopole self-energy 상쇄로 vacuum-무관. g2 8노드 KPAR=4
 - [Adiabatic DFE Algorithm Plan](adiabatic_dfe_algorithm_plan.md) — surface defect thermodynamic(adiabatic) DFE 파이프라인 알고리즘 설계 중. (A)geometry완화 확정, 전 donor 적용. relax는 이미 charge별 adiabatic·correction+assembly 레이어가 신규. CTL은 μ무관(2단분리). 미해결 결정 4개(seeding/shallow-correction분기/cross-defect기준/E_corr재사용). 플랜모드 이어서
 - [incl3 passv 4x2 thickness](incl3_passv_4x2_thickness.md) — 03-InCl3-passv 4x2 슬랩 셀 구성(위 InCl3/아래 pseudo-H, 6층 11.3Å) + 두께 6L→5L 검토 진행상태·판단기준
@@ -41,13 +42,14 @@
 - [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — Cl-As_In(+1) As-rich VBM 형성E 진공수렴(current+vac30/40/50 fixed slabcc): 보정후 0.384/0.380/0.379eV 수렴(vac≥40 신뢰), current(vac~11Å)=0.423 RMSE warn 신뢰낮음. Δμ_As=+3.4059. vertical값→adiabatic −88meV(≈0.29eV). 플롯=results/DFE_plots/DFE_Cl-As_In_p1_vacuum_Asrich.py
 - [KP slabcc NaCl Reproduction](kp_slabcc_nacl_reproduction.md) — Komsa-Pasquarello NaCl Cl-vac(q+1) E_f 재현 toy(11-Surface/KP_slabcc_reproduction). 저자 구조+CKT footing+KPAR3, 입력완비. tgm-master 자리부족→잡취소, kohn 이전 진행. slabcc _test_값 +0.556/−0.174 검증됨
 - [vclclas atom95 fatband](vclclas_atom95_fatband.md) — ⚠정정(2026-07-17): atom 95는 passivation Cl 아니라 Cl_As antisite(z=17.97, In 3배위). passv Cl=84-94(z≈20). up=dw 순스핀없음 결과는 유효하나 해석대상이 뒤바뀌어 있었음
-- [Spin Screening 04-InCl3](spin_screening_04_incl3.md) — 04-InCl3-passv HSE06 spin screening: 11개 q0에 magnetic_seed(runtime.yaml)로 01_Spin-gam-relax 제출(5노드, jobid 55291~). ΔE_spin=E(01)−E(00)<0이면 자성. 00 baseline TOTEN 기록. ⚠SLURM 완료 미통보
+- [Spin Screening 04-InCl3](spin_screening_04_incl3.md) — ⚠배치 대부분 실패(2026-07-17 확인): 11개 중 완주 2개(As_In −0.7meV, pure −0.3meV, 둘 다 비자성). 8개는 01_Spin-gam-relax에 POSCAR 없어 미실행, Cl-As_In은 walltime SIGTERM. 재제출 필요. 00 baseline TOTEN 기록 있음
 - [optical correction adiabatic rationale](optical_correction_adiabatic_rationale.md) — 표면 결함 adiabatic DFE에서 finite-size 보정은 frozen-R_0 optical(E_corr^opt)을 채택하는 이유와 부기 항등식
 - [charge state + optical/slabcc setup](chargestate_optical_slabcc_setup.md) — 02-Cl-passv 프로덕션 셋업. ⚠유연히: charge state=neutral DOS Fermi 위치(하부 core-level 정렬, 진공 금지), 노드/CPU=쓰려는 노드 코어 수. optical 1shot(grid-lock)→slabcc(diel=ε_∞) 워크플로우
 
 ## 참고 자료
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — slabcc optimize_tolerance는 목표 RMSE 임계값 아니라 BOBYQA 상대수렴 tolerance. 최종 RMSE>tol이어도 정상(local min). 남은 RMSE=등방 Gaussian 모델 한계, 줄이려면 charge_trivariate=yes/다중Gaussian
+- [IPR Gate Tool](ipr_gate_tool.md) — scripts/ipr_gate.py: 전 defect·전 charge 국소화 판정 자동화(00_Gam-relax PROCAR→IPR, pure 밴드모서리 2배 초과=bound). ⚠q>0은 LUMO를 봐야 함(HOMO는 host VBM이라 오판). slabcc 적용 여부 결정용
 - [zeroband fatband tool](zeroband_fatband_tool.md) — zeroband.py — hybrid band(zero-weight kpt) projected fatband 플로터 위치/사용법
 - [zeroband spin parsing](zeroband_spin_parsing.md) — zeroband.py 밴드플롯 --spin 옵션 및 collinear ISPIN=2 PROCAR 파싱 수정
 

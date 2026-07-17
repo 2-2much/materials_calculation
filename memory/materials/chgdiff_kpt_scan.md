@@ -1,5 +1,5 @@
 ---
-name: chgdiff-kpt-scan
+name: chgdiff_kpt_scan
 description: Cl-As_In CHG-DIFF k-point 수렴 테스트 결과 및 vaspkit 314 사용법
 metadata: 
   node_type: memory

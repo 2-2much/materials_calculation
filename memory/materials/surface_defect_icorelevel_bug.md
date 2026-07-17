@@ -1,5 +1,5 @@
 ---
-name: surface-defect-icorelevel-bug
+name: surface_defect_icorelevel_bug
 description: "02-Cl-passv_6L_3x2x1_HSE06 DOS/Band 단계 ICORELEVEL=1 파싱오류(IERR=5) config 버그 및 수정 (2026-07-01)"
 metadata:
   node_type: memory
@@ -32,4 +32,4 @@ OUTCAR가 INCAR echo 직후(ICORELEVEL 라인) 사망 → **CHGCAR/WAVECAR 읽�
 - calc 10개: As_In/q0, Cl-As_In/q0, Cl-As_In/q+1, pure/q0, V_Cl-Cl_As/q0 각 02_G221-DOS + 03_Band
 
 **Why:** 템플릿 버그라 defect 재생성 시 재발 가능. 탭+주석 포맷은 VASP 정수 파서에서 위험
-**How to apply:** 새 defect 생성/재생성 후 DOS/Band INCAR에 `^ICORELEVEL=1`(활성) 남아있는지 확인. INCAR 작성 시 값 뒤 구분자는 탭 대신 공백 사용. 관련 워크플로우 [[surface-defect-1shot-band-workflow]]
+**How to apply:** 새 defect 생성/재생성 후 DOS/Band INCAR에 `^ICORELEVEL=1`(활성) 남아있는지 확인. INCAR 작성 시 값 뒤 구분자는 탭 대신 공백 사용. 관련 워크플로우 [[surface_defect_1shot_band_workflow]]

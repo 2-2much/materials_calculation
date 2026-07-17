@@ -1,5 +1,5 @@
 ---
-name: scpc-debug
+name: scpc_debug
 description: "VASP SCPC: CKT 비호환, getgrid 버그, SCPCOUT interleaving, OSZICAR 유실, 수렴 문제, 권장 설정"
 metadata: 
   node_type: memory
@@ -66,7 +66,7 @@ SCPC {
 }
 ```
 
-## INVCOR(IN) 가이드 ([[scpc-reference]])
+## INVCOR(IN) 가이드 ([[scpc_reference]])
 
 GitHub README 2.11 항목 기준:
 - **pre-converged WAVECAR/CHGCAR를 사용하는 경우 (charged, uncorrected)** → **INVCOR=1 필수**. 이미 수렴된 charge에 보정을 즉시 적용해야 하므로.

@@ -1,5 +1,5 @@
 ---
-name: scpc-vacuum-scan
+name: scpc_vacuum_scan
 description: "SCPC vacuum scan: Cl-As_In q+1, 20/30/40Å 완료. SCPC formation E_f 수렴(In-rich 4.49→4.51eV; SCPC TOTEN이 이미 보정포함→E_corr 별도가산 금지). 큰 E_corr(~1.8eV)=표면 국소전하(ε_eff≈1)+작은 3×2 셀(버그아님). 리포트 make_report.py로 재생성(ZLOW/ZHIG 버그 수정)"
 metadata: 
   node_type: memory
@@ -123,4 +123,4 @@ __SCPC-test__/
 - z-diel.dat: slab ε≈15.15, vacuum ε≈1 (충족)
 
 **Why:** 이전 SCPC 테스트에서 vacuum 부족(11.2 Å)과 PREC/LREAL 설정 문제로 E_corr 미수렴. vacuum scan으로 수렴된 correction 값 확보 목적. 결과: z-수렴은 성공했으나 보정값 자체가 ~1.8 eV로 큰데, 이는 버그가 아니라 표면 국소 전하(ε_eff≈1)+작은 3×2 lateral 셀의 면내 image 에너지(물리적으로 옳음).
-**How to apply:** 보정값을 줄이려면 vacuum이 아니라 lateral 셀을 키워야 함(E∝1/√A). ENCUT 상향 후 큰 셀 재계산이 절대값 신뢰성 확보의 다음 단계. [[scpc-debug]] [[scpc-reference]]
+**How to apply:** 보정값을 줄이려면 vacuum이 아니라 lateral 셀을 키워야 함(E∝1/√A). ENCUT 상향 후 큰 셀 재계산이 절대값 신뢰성 확보의 다음 단계. [[scpc_debug]] [[scpc_reference]]

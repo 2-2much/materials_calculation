@@ -1,5 +1,5 @@
 ---
-name: surface-defect-oszicar-buffering
+name: surface_defect_oszicar_buffering
 description: "12-Surace-defect_calculation HSE 잡에서 OSZICAR가 실행 중 갱신 안 되는 버퍼링 이슈 + HSE 이중루프 수렴 판독법 (2026-07-01)"
 metadata:
   node_type: memory
@@ -25,4 +25,4 @@ stale OSZICAR(step 28, E=−435.0)만 보면 "매끄러운 단조수렴"으로 �
 **따라서 HSE 잡 수렴 판단은 반드시 std.log 전체 DAV 궤적으로**. exchange 갱신 점프 때문에 step 수가 예상보다 많이 필요(96-atom 2×2×1 HSE에서 70~85 step). NELM=100이 여유 크지 않으니 향후 잡은 NELM=120~150 권장.
 
 **Why:** 실행 중 잡 상태를 OSZICAR로 판단하면 (a)진행 스텝을 과소평가, (b)이중루프 점프를 못 봐 수렴성 오판
-**How to apply:** 12-Surace-defect_calculation HSE 잡 모니터링은 `grep '^DAV:' std.log | tail` 또는 OUTCAR로. 수렴 애매하면 NELM 상향. 관련 [[surface-defect-1shot-band-workflow]] [[surface-defect-dipole-correction]]
+**How to apply:** 12-Surace-defect_calculation HSE 잡 모니터링은 `grep '^DAV:' std.log | tail` 또는 OUTCAR로. 수렴 애매하면 NELM 상향. 관련 [[surface_defect_1shot_band_workflow]] [[surface_defect_dipole_correction]]

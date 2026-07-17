@@ -1,5 +1,5 @@
 ---
-name: surface-defect-1shot-band-workflow
+name: surface_defect_1shot_band_workflow
 description: "02-Cl-passv_6L_3x2x1_HSE06 워크플로우 config 검토 결과, spin test 결과, 본계산 진행 상황 (2026-07-01 업데이트)"
 metadata: 
   node_type: memory
@@ -8,7 +8,7 @@ metadata:
 ---
 
 ## 워크플로우 구성 (3단계)
-- Stage 00: `00_Gam-relax` — vasp.gam, Gamma-only, 구조 이완 (ISPIN=2로 전 defect 통일, [[surface-defect-gam-relax-spin-comparison]] 참조)
+- Stage 00: `00_Gam-relax` — vasp.gam, Gamma-only, 구조 이완 (ISPIN=2로 전 defect 통일, [[surface_defect_gam_relax_spin_comparison]] 참조)
 - Stage 01: `01_G221-1shot` — vasp.std, 2×2×1 G-centered, single-point SCF. **DOS 산출용, tetrahedral method(ISMEAR=-5) 사용**
 - Stage 02: `02_Band` — vasp.std, IBZKPT+k-path 조합 KPOINTS, hybrid band structure. **Stage 01의 WAVECAR/CHGCAR를 읽어서 진행**
 

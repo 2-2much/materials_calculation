@@ -1,5 +1,5 @@
 ---
-name: lab-members
+name: lab_members
 description: 연구실 구성원 명단
 metadata: 
   node_type: memory

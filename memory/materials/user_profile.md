@@ -1,5 +1,5 @@
 ---
-name: user-profile
+name: user_profile
 description: "KAIST 소속 연구자, VASP DFT 계산 프로젝트 수행"
 metadata: 
   node_type: memory

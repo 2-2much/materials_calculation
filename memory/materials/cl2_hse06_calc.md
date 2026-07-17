@@ -1,5 +1,5 @@
 ---
-name: cl2-hse06-calc
+name: cl2_hse06_calc
 description: "Cl2 분자 HSE06 이완 계산 (12-HSE06-Gamma), AEXX=0.27, LHFSKIP, VASP 6.5.1, 2026-06-26 submit"
 metadata: 
   node_type: memory

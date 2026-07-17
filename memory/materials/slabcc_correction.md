@@ -1,5 +1,5 @@
 ---
-name: slabcc-correction
+name: slabcc_correction
 description: Cl-As_In CHG-DIFF slabcc correction 시도 결과 및 슈퍼셀 크기 문제
 metadata: 
   node_type: memory
@@ -41,4 +41,4 @@ metadata:
 ## 결론 및 다음 단계
 **Why:** slabcc correction은 sigma ≪ cell 크기가 필요 (통상 σ < 10% of cell). 현재 28%로 의미 있는 보정값 불가.
 **How to apply:** 4×3×1 이상 슈퍼셀이 필요하거나, Falletta method(z-CKT) 등 다른 보정 방법 적용 검토.
-- [[chgdiff-kpt-scan]] — k-point 수렴은 k2x2x1_MP로 확인됨
+- [[chgdiff_kpt_scan]] — k-point 수렴은 k2x2x1_MP로 확인됨

@@ -1,5 +1,5 @@
 ---
-name: surface-defect-spin-test
+name: surface_defect_spin_test
 description: "InAs (110) Cl-passivated surface defect spin test 결과 (2026-06-30), Cl-As_In/q0 자성 ground state 확인"
 metadata: 
   node_type: memory

@@ -1,5 +1,5 @@
 ---
-name: conversation-log
+name: conversation_log
 description: Concise dated summaries of Codex conversations in this repo, mirrored with memory/codex/conversation_log.md
 metadata:
   type: feedback

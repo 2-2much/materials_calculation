@@ -1,5 +1,5 @@
 ---
-name: lobster-cohp-setup
+name: lobster_cohp_setup
 description: "02-Cl-passv 슬랩 COHP/LOBSTER 셋업 — 최소 524밴드, LREAL=.FALSE. 필수, In_d는 4d 기저 포함"
 metadata: 
   node_type: memory

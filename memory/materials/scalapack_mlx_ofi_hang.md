@@ -1,5 +1,5 @@
 ---
-name: scalapack-mlx-ofi-hang
+name: scalapack_mlx_ofi_hang
 description: VASP scaLAPACK BLACS Bcast가 Intel MPI mlx OFI collective에서 간헐 hang; fix=LSCALAPACK=.FALSE. 또는 I_MPI_COLL_DIRECT=off
 metadata: 
   node_type: memory

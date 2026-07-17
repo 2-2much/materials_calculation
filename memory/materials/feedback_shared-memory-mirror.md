@@ -1,5 +1,5 @@
 ---
-name: shared-memory-mirror
+name: feedback_shared-memory-mirror
 description: Codex durable memories should be mirrored to both memory/materials and memory/codex, with matching slugs and refreshed indexes
 metadata:
   type: feedback

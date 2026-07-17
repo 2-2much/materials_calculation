@@ -1,5 +1,5 @@
 ---
-name: surface-defect-gam-tight
+name: surface_defect_gam_tight
 description: "InAs (110) surface defect EDIFFG -0.02→-0.01 tightening 결과 — V_Cl-V_As 구조 재배열 확인, 1shot 검증 완료 (2026-06-25)"
 metadata: 
   node_type: memory

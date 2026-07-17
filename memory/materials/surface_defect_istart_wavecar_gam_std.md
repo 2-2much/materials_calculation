@@ -1,5 +1,5 @@
 ---
-name: surface-defect-istart-wavecar-gam-std
+name: surface_defect_istart_wavecar_gam_std
 description: "12-Surace-defect DOS 단계에서 Gamma-only WAVECAR을 std 바이너리가 못 읽는 문제 → ISTART=0 수정 (2026-07-01)"
 metadata:
   node_type: memory
@@ -26,7 +26,7 @@ ERROR: while reading WAVECAR, plane wave coefficients changed 48187 24094
 - ISTART=0이면 STAGE_PREP_2가 복사한 gam WAVECAR이 있어도 무시되므로 무해
 
 ## 부작용: HSE-from-scratch 수렴 느림
-ISTART=0은 HSE를 맨바닥 오비탈에서 시작 → 초기 SCF 느림([[surface-defect-oszicar-buffering]]의 이중루프와 겹쳐 step 많이 필요). 근본 가속은 "2×2×1 PBE 1shot으로 std-호환 WAVECAR 만든 뒤 HSE ISTART=1로 읽기"이나 stage 하나 추가됨. 현재는 미도입.
+ISTART=0은 HSE를 맨바닥 오비탈에서 시작 → 초기 SCF 느림([[surface_defect_oszicar_buffering]]의 이중루프와 겹쳐 step 많이 필요). 근본 가속은 "2×2×1 PBE 1shot으로 std-호환 WAVECAR 만든 뒤 HSE ISTART=1로 읽기"이나 stage 하나 추가됨. 현재는 미도입.
 
 **Why:** gam↔std WAVECAR은 plane-wave 저장방식이 달라 호환 안 됨. 바이너리 종류가 바뀌는 stage 경계에서 ISTART=1 restart는 위험
-**How to apply:** vasp.gam → vasp.std 넘어가는 첫 std stage는 ISTART=0(WAVECAR 무시), ICHARG=1(CHGCAR seed는 OK). std→std 경계는 ISTART=1 무방. 관련 [[surface-defect-1shot-band-workflow]] [[surface-defect-icorelevel-bug]]
+**How to apply:** vasp.gam → vasp.std 넘어가는 첫 std stage는 ISTART=0(WAVECAR 무시), ICHARG=1(CHGCAR seed는 OK). std→std 경계는 ISTART=1 무방. 관련 [[surface_defect_1shot_band_workflow]] [[surface_defect_icorelevel_bug]]
