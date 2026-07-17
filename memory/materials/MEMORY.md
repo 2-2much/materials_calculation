@@ -27,7 +27,8 @@
 - [Surface Defect OSZICAR Buffering](surface_defect_oszicar_buffering.md) — HSE 잡 실행 중 OSZICAR 갱신 안 됨(버퍼링) → std.log/OUTCAR로 모니터링. HSE 이중루프(exchange 갱신 점프)로 step 많이 필요, NELM 120~150 권장
 - [Surface Defect ISTART/WAVECAR gam-std](surface_defect_istart_wavecar_gam_std.md) — gam(Gamma-only) WAVECAR을 std가 못 읽음(plane wave coeff 48187≈2×24094). DOS 단계만 ISTART=0(ICHARG=1 유지), 03_Band(std→std)는 ISTART=1 무방
 - [Species Aliases Mechanism](species_aliases_mechanism.md) — In_L→In_d POTCAR alias(runtime.yaml species_aliases). 오류는 VASP아닌 prep 파이썬(check_species_order/NELECT). VASP는 라벨 안읽음
-- [LOBSTER COHP Setup](lobster_cohp_setup.md) — 02-Cl-passv 슬랩 COHP: 최소 NBANDS=524(LOBSTER가 직접 산출), LREAL=.FALSE. 필수(템플릿 LREAL=A 금지), In_d는 4d 기저 포함, pseudo-H 파싱 OK. lobster는 ~/bin 절대경로
+- [LOBSTER COHP Setup](lobster_cohp_setup.md) — 02-Cl-passv 슬랩 COHP: 최소 NBANDS=524, LREAL=.FALSE. 필수(템플릿 LREAL=A 금지), In_d는 4d 기저 포함. ⚠pseudo-H "738.9999 of 742"는 LOBSTER ZVAL 오집계(실제 739/739=100%), spilling 0.86%는 우수·기저 A/B로 감소 불가, 밴드525+ 무시 정상. lobster는 ~/bin 절대경로
+- [V_Cl-Cl_As COHP Donor Evidence](vclclas_cohp_donor_evidence.md) — V_Cl-Cl_As/q0 n형 미시기원 확정: 국소 결함준위 없음(pure CBM IPR=defect b370 IPR=0.0128), Cl_As는 이온성 반차수 결합(ICOBI 0.4 vs host In-As 0.8), 도너전자 밴드의 Cl-In COHP≈0.006. "섞여 보임"은 artifact 아니라 실체
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음(CB resonant)/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As=shallow double donor(gap 깨끗, 공여전자가 CBM+0.86eV CB 채움, 축퇴 n형). ⚠"Fermi pinned"는 진공정렬 전 오해로 철회됨. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
 
 ## 연구 / 프로젝트
@@ -38,7 +39,7 @@
 - [Slab Correction Workflow](slab_correction_workflow.md) — Defect_Package에 추가한 slab(2D) slabcc charged-defect correction(adiabatic/optical R_0 스킴). optical(고정 R_0) single-point→slabcc→plot_DFE. diel_in=ε_∞. CLI=--charged-stage(필수)+--neutral-stage/--relax-stage(선택). prepare에 reference_charge_contcar+q0 skip/symlink. 01-Cl-passv 적용
 - [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — Cl-As_In(+1) As-rich VBM 형성E 진공수렴(current+vac30/40/50 fixed slabcc): 보정후 0.384/0.380/0.379eV 수렴(vac≥40 신뢰), current(vac~11Å)=0.423 RMSE warn 신뢰낮음. Δμ_As=+3.4059. vertical값→adiabatic −88meV(≈0.29eV). 플롯=results/DFE_plots/DFE_Cl-As_In_p1_vacuum_Asrich.py
 - [KP slabcc NaCl Reproduction](kp_slabcc_nacl_reproduction.md) — Komsa-Pasquarello NaCl Cl-vac(q+1) E_f 재현 toy(11-Surface/KP_slabcc_reproduction). 저자 구조+CKT footing+KPAR3, 입력완비. tgm-master 자리부족→잡취소, kohn 이전 진행. slabcc _test_값 +0.556/−0.174 검증됨
-- [vclclas atom95 fatband](vclclas_atom95_fatband.md) — V_Cl-Cl_As/q0 03_Band fatband — atom 95(passivation Cl) spin up=dw 동일, 순 스핀 없음
+- [vclclas atom95 fatband](vclclas_atom95_fatband.md) — ⚠정정(2026-07-17): atom 95는 passivation Cl 아니라 Cl_As antisite(z=17.97, In 3배위). passv Cl=84-94(z≈20). up=dw 순스핀없음 결과는 유효하나 해석대상이 뒤바뀌어 있었음
 - [Spin Screening 04-InCl3](spin_screening_04_incl3.md) — 04-InCl3-passv HSE06 spin screening: 11개 q0에 magnetic_seed(runtime.yaml)로 01_Spin-gam-relax 제출(5노드, jobid 55291~). ΔE_spin=E(01)−E(00)<0이면 자성. 00 baseline TOTEN 기록. ⚠SLURM 완료 미통보
 - [optical correction adiabatic rationale](optical_correction_adiabatic_rationale.md) — 표면 결함 adiabatic DFE에서 finite-size 보정은 frozen-R_0 optical(E_corr^opt)을 채택하는 이유와 부기 항등식
 - [charge state + optical/slabcc setup](chargestate_optical_slabcc_setup.md) — 02-Cl-passv 프로덕션 셋업. ⚠유연히: charge state=neutral DOS Fermi 위치(하부 core-level 정렬, 진공 금지), 노드/CPU=쓰려는 노드 코어 수. optical 1shot(grid-lock)→slabcc(diel=ε_∞) 워크플로우
