@@ -28,7 +28,7 @@
 - [Surface Defect ISTART/WAVECAR gam-std](surface_defect_istart_wavecar_gam_std.md) — gam(Gamma-only) WAVECAR을 std가 못 읽음(plane wave coeff 48187≈2×24094). DOS 단계만 ISTART=0(ICHARG=1 유지), 03_Band(std→std)는 ISTART=1 무방
 - [Species Aliases Mechanism](species_aliases_mechanism.md) — In_L→In_d POTCAR alias(runtime.yaml species_aliases). 오류는 VASP아닌 prep 파이썬(check_species_order/NELECT). VASP는 라벨 안읽음
 - [LOBSTER COHP Setup](lobster_cohp_setup.md) — 02-Cl-passv 슬랩 COHP: 최소 NBANDS=524(LOBSTER가 직접 산출), LREAL=.FALSE. 필수(템플릿 LREAL=A 금지), In_d는 4d 기저 포함, pseudo-H 파싱 OK. lobster는 ~/bin 절대경로
-- [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As Fermi pinned. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
+- [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음(CB resonant)/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As=shallow double donor(gap 깨끗, 공여전자가 CBM+0.86eV CB 채움, 축퇴 n형). ⚠"Fermi pinned"는 진공정렬 전 오해로 철회됨. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
 
 ## 연구 / 프로젝트
 - [SCPC E_rel Vacuum Convergence](scpc_erel_vacuum_convergence.md) — Cl-As_In q+1 relaxation energy E_rel=E(+1,Rq0)−E(+1,Rq+1) vacuum 수렴 확인(20/30/40Å: 101→109→113meV, spread 11.7meV, 증분 단조감소→수렴). monopole self-energy 상쇄로 vacuum-무관. g2 8노드 KPAR=4
