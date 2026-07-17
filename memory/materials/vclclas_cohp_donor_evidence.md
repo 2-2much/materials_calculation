@@ -28,6 +28,15 @@ pure 슬랩 CBM과 defect band 370의 IPR이 **0.0128로 소수점까지 동일*
 
 **미시 그림:** Cl_As는 As 자리의 공유결합 네트워크에 참여하지 않고 닫힌 껍질 이온성 Cl로 앉아 반차수 In–Cl 결합 3개만 맺는다. 그 자리가 공유결합에 필요로 하던 전자는 갈 곳이 없어 전도대로 올라간다 → 축퇴 n형. 미결합 라디칼이 없으므로 자성도 없고([[vclclas_atom95_fatband]]) gap도 깨끗하다([[defect_states_02_clpassv]]). [[cqd_ntype_origin_goal]]의 표면 결함 n형 기원에 직접 대응.
 
+**LPARD 실공간 검증 완료 (2026-07-17).** PAW 구를 전혀 쓰지 않는 독립 증거로, IPR 결론을 재확인했다.
+경로: defect `.../01-DOS_NBANDS=740/02-LPARD/` (PARCHG.0369/0370/0371.0001), pure `.../pure/q0/02_G221-DOS/02-LPARD/` (PARCHG.0372/0373.0001).
+
+- 국소화 부피 V_loc = V_cell·(Σρ)²/(N·Σρ²): **defect b370 = 748 Å³ vs pure CBM(b373) = 771 Å³ (3% 이내 일치)**. 대조로 VBM은 defect 282 / pure 386 Å³. V_cell=4082 Å³.
+- z planar-average 프로파일 **overlap coefficient 0.958, Pearson 0.990** — 결함 평면에서조차 갈라지지 않음. 그림: `calc/__defect-states-summary__/06_V_Cl-Cl_As_LPARD_zprofile.png` (스크립트 `plot_lpard_zprofile.py` 동봉).
+- Cl_As 자리 구적분: r=2/3/4/5 Å에서 균일분포 대비 enhancement **1.57/1.55/1.59/1.58× — 반경 무관하게 평평**. 전하가 정확히 r³로 자람 = 균일밀도. 속박상태라면 작은 r에서 급증해야 함. 이 1.57배도 결함이 아니라 슬랩이 셀의 ~58%인 데서 나옴(1/0.58≈1.7). pure CBM을 같은 자리(pure As64, 0.142 Å 일치)에서 재보면 3.25% vs defect 4.28%로 사실상 동일.
+
 **Why:** "gap level 그림"을 뽑으려던 시도가 실패한 게 아니라, 뽑을 대상이 없는 것이었다. deliverable은 "국소 준위 부재 + 도너 전자의 CB 점유 증명"으로 재설정해야 한다.
 
-**How to apply:** 논문 논거는 (1) IPR 대조표(pure CBM 0.0128 = defect b370 0.0128 vs In4d 0.94), (2) 위 ICOBI 반차수 표, (3) band370 COHP≈0. 셋 다 이미 계산 완료. 보강하려면 LPARD(`IBAND=370 371 KPUSE=1`, WAVECAR 있음)로 실공간 PARCHG를 pure CBM과 나란히 보이면 "PAW 구 밖 40% charge" 반론이 차단됨. ⚠difference DOS는 pure(`LREAL=A`, ISPIN=2, NBANDS=450) vs defect(`LREAL=.FALSE.`, ISPIN=1, NBANDS=740) 설정 불일치로 후순위. LOBSTER 셋업 함정은 [[lobster_cohp_setup]].
+**How to apply:** 논문 논거 4종 모두 계산 완료 — (1) IPR 대조표(pure CBM 0.0128 = defect b370 0.0128 vs In4d 0.94), (2) ICOBI 반차수 표, (3) band370 COHP≈0.006, (4) LPARD V_loc 748≈771 Å³ + z-프로파일 겹침 0.958.
+⚠**LPARD 재현 시 함정 2개**: HSE(LHFCALC)에 `ICHARG>10`을 주면 VASP가 "I REFUSE TO CONTINUE"로 즉사 → **ICHARG=0**(WAVECAR에서 ρ 생성) 쓸 것. 그리고 WAVECAR이 부모 심링크이므로 **LWAVE=.FALSE./LCHARG=.FALSE. 필수**(안 하면 부모 DOS 계산 파손). 노드 수는 NBANDS 보존으로 결정 — 1노드(32랭크)+NCORE=16 → band group 2 → 740/2, 450/2 정수라 안전. cf. [[lobster_cohp_setup]] 병렬화 항.
+⚠difference DOS는 pure(`LREAL=A`, ISPIN=2, NBANDS=450) vs defect(`LREAL=.FALSE.`, ISPIN=1, NBANDS=740) 설정 불일치로 후순위이며, 위 4종이 이미 충분해 불필요.

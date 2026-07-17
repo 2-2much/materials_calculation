@@ -28,7 +28,7 @@
 - [Surface Defect ISTART/WAVECAR gam-std](surface_defect_istart_wavecar_gam_std.md) — gam(Gamma-only) WAVECAR을 std가 못 읽음(plane wave coeff 48187≈2×24094). DOS 단계만 ISTART=0(ICHARG=1 유지), 03_Band(std→std)는 ISTART=1 무방
 - [Species Aliases Mechanism](species_aliases_mechanism.md) — In_L→In_d POTCAR alias(runtime.yaml species_aliases). 오류는 VASP아닌 prep 파이썬(check_species_order/NELECT). VASP는 라벨 안읽음
 - [LOBSTER COHP Setup](lobster_cohp_setup.md) — 02-Cl-passv 슬랩 COHP: 최소 NBANDS=524, LREAL=.FALSE. 필수(템플릿 LREAL=A 금지), In_d는 4d 기저 포함. ⚠pseudo-H "738.9999 of 742"는 LOBSTER ZVAL 오집계(실제 739/739=100%), spilling 0.86%는 우수·기저 A/B로 감소 불가, 밴드525+ 무시 정상. lobster는 ~/bin 절대경로
-- [V_Cl-Cl_As COHP Donor Evidence](vclclas_cohp_donor_evidence.md) — V_Cl-Cl_As/q0 n형 미시기원 확정: 국소 결함준위 없음(pure CBM IPR=defect b370 IPR=0.0128), Cl_As는 이온성 반차수 결합(ICOBI 0.4 vs host In-As 0.8), 도너전자 밴드의 Cl-In COHP≈0.006. "섞여 보임"은 artifact 아니라 실체
+- [V_Cl-Cl_As COHP Donor Evidence](vclclas_cohp_donor_evidence.md) — V_Cl-Cl_As/q0 n형 미시기원 확정(증거 4종 완료): 국소 결함준위 없음(IPR 0.0128=pure CBM, LPARD V_loc 748≈771Å³, z겹침 0.958), Cl_As는 이온성 반차수 결합(ICOBI 0.4 vs host 0.8), 도너전자 밴드 COHP≈0.006. ⚠LPARD+HSE는 ICHARG=0 필수(>10이면 즉사), 심링크 WAVECAR엔 LWAVE=.FALSE.
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02-Cl-passv defect state 정리(pure gap 1.19eV): As_In 얕음(CB resonant)/Cl-As_In q0 스핀분열 라디칼/q+1 비점유 upper-gap/V_Cl-Cl_As=shallow double donor(gap 깨끗, 공여전자가 CBM+0.86eV CB 채움, 축퇴 n형). ⚠"Fermi pinned"는 진공정렬 전 오해로 철회됨. ⚠도구 인덱싱: zeroband 1-based, bandos dos 0-based(N-1)
 
 ## 연구 / 프로젝트
