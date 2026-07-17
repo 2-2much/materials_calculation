@@ -12,13 +12,19 @@ metadata:
 **원칙**: 전하가 host 밴드 상태(PHS)에 있으면 어떤 model-charge 보정도 **범주 오류**다. 면내로 균일해지는 극한은 하전 시트이고 **무한 시트의 E_isolated는 발산** → slabcc의 (E_iso − E_per) 스킴 자체가 정의되지 않는다. "vacuum이 있으니 z error를 어떻게든 보정해야 한다"는 전제가 틀림 — shallow donor의 DFE는 전자를 CBM에 놓고 평가하는 것. SCPC 원논문(Deák, PRL 126, 076401 (2021))도 명시: *"a posteriori corrections do not yield reasonable results, since a substantial part of the charge is fully delocalized."*
 
 **판정 기준** (판별자는 σ가 아님 — 잘 맞는 Cl-As_In q+1이 σ 2.29로 오히려 최대. σ는 V_Cl-Cl_As의 5.36Å=셀42% 같은 명백 붕괴에만 유효):
-1. **IPR** — 상세 표는 [[defect_states_02_clpassv]]. ≥6× uniform=국소(적용가능), ~1.2×=host 밴드(불가). [[vclclas_cohp_donor_evidence]]의 COHP가 독립 확인(pure CBM IPR=defect IPR=0.0128).
+1. **IPR** — **자동화됨(2026-07-17)**: `scripts/ipr_gate.py` → `results/DFE_plots/IPR_gate.csv`. 전 defect·전 charge를 `00_Gam-relax`(Γ-only, ISPIN=1, 전 케이스 공통 단계)에서 PROCAR로 읽어 pure 밴드모서리 대비 비율로 판정. **핵심: q>0은 LUMO(전자를 빼앗긴 준위)를 봐야 함** — HOMO는 host VBM이라 무의미(초판에서 Cl-As_In q+1을 shallow로 오판했다가 수정). 게이트=pure edge의 2× 초과면 bound. 상세 표는 [[defect_states_02_clpassv]], [[vclclas_cohp_donor_evidence]]의 COHP·LPARD가 독립 확인(pure CBM IPR=defect IPR=0.0128).
 2. **E_relax** — 0.28~0.37eV(국소) vs 0.01~0.05eV(밴드류), 10배 이산 갭.
 3. **slabcc 자체 abort** — `optimize_charge_position=yes`로 돌리면 σ가 하드코딩 상한 7Å(src/slabcc_model.cpp:264)을 때리고 exit(1). 프로덕션의 `=no`는 전하를 결함 위치에 묶어 실패를 단순 RMSE 경고로 **강등시켜 숨김** → 별도 게이트 런으로 병행 권장.
 
 **케이스별 결론**: Cl-As_In q+1만 신뢰(E_corr=0.109eV; position 풀어도 0.086 생존 → 23meV를 불확실도로 인용). Cl-As_In q+2=혼합(E_corr 0.376 < q²스케일 0.436 → 2번째 정공은 host VBM), q-1=미확정(trivariate 재시도 가치: z/면내 RMSE 비 ~3배가 전 케이스 일관=실재 이방성). As_In·V_Cl-Cl_As=폐기 후 shallow 재분류.
 
-**⚠파이프라인 버그(미수정)**: slabcc 실패 → CSV `E_corr_eV` 공란 → `plot_DFE_from_raw_energies.py:92` parse_float("")=NaN → **383행이 조용히 ecorr=0.0으로 대체**, stderr 경고만 내고 산출물엔 안 남음. 결과: CTL_summary.csv에 **V_Cl-Cl_As +1/0 = 0.99eV, inside_gap=True**라는 가짜 준위 등재(E_corr=0 아티팩트 + 애초에 없는 준위). coverage의 `missing E_corr: 0`도 거짓(status=submitted라 pending 분류). → fallback 제거하고 drop/flag 필요.
+**게이트 일괄 결과 (ipr_gate.py, 2026-07-17)** — pure Γ 기준 VBM IPR=0.0193(1/IPR=52), CBM IPR=0.0128(78), uniform=0.0104(96 ions):
+- **bound(deep) = slabcc 적용가능**: Cl-As_In 전 하전(q0 6.25×/1per12, q+1 5.47×, q+2 4.29×, q−1 3.93×), **V_Cl-Cl_In q0 8.35×(1/IPR=9, 최다국소)**.
+- **delocalized(shallow) = slabcc 금지**: V_Cl-Cl_As 전 하전(q0/q+1/q+2 모두 **정확히 1.00×**, 1/IPR=78=pure CBM), As_In(1.00~1.14×), As_i_Td_In(1.06×), In_As(0.94×), In_i_Td_As(1.08×), In_i_Td_In(1.41×), V_Cl-V_As(1.27×), V_Cl-V_In(1.23×).
+- 교차검증 3건 자동 재현: V_Cl-Cl_As 1.00×(별개 단계 02_G221-DOS 결론과 일치), As_In "얕음(CB resonant)"([[defect_states_02_clpassv]]), V_Cl-Cl_In 최다국소↔최강자성(−268meV, [[surface_defect_spin_screening_full]]) = 국소 라디칼→자성 인과.
+
+**✅파이프라인 버그(2026-07-17 수정 완료)**: slabcc 실패/미수확 → CSV `E_corr_eV` 공란 → parse_float("")=NaN → 조용히 ecorr=0.0 대체 → CTL_summary.csv에 **V_Cl-Cl_As +1/0 = 0.99eV, inside_gap=True** 가짜 준위 등재. (근본 원인은 slabcc 잡이 `status=submitted:55381`로 제출만 되고 수확 안 됨. 다만 delocalized라 수확해도 쓰면 안 됨.)
+수정 내용(`scripts/plot_DFE_from_raw_energies.py`): `DFERow.uncorrected` 플래그 추가 → `compute_envelope_ctl`이 미보정 charge state에 의존하는 CTL에 `CTLRow.reject_reason` 부여 → `write_ctl_summary`가 **CTL_summary.csv엔 신뢰행만**, 거부행은 이유와 함께 `CTL_rejected.csv`로 분리(조용히 버리지 않음, stale 파일 자동 삭제). 플롯도 거부 CTL 미표시 + 범례에 `q+1 (uncorrected)` 명시. 결과: 6행 → **신뢰 4행(Cl-As_In만) + 거부 2행**. Cl-As_In CTL(0.591/0.780)은 회귀 없이 유지.
 
 **셀 확대는 해법이 아님**: `__a-dispersion-scan_PBE-d__/ANALYSIS.md` — 가장 국소적인 Cl-As_In조차 aDisp가 0이 아닌 ~0.24eV로 수렴(무한셀 극한). 정량값이 꼭 필요하면 SCPC(가우시안 가정 없음, Cl-As_In(+1)서 slabcc와 6meV 일치 [[vertical_scan_slabcc_scpc]]) 또는 CKT+lateral 외삽. 단 SCPC도 PHS면 "발산 안 하는 수"를 줄 뿐 물리를 구제 못 함. NK/pydefect_2d는 여전히 가우시안 모델 → dead end [[pydefect_2d_setup]].
 
