@@ -16,7 +16,11 @@ metadata:
 - **As_In q0**: 깊은 gap 상태 없음. antisite As 성분은 VBM 아래 ~-0.4eV 공명 + CB. shallow/비자성.
 - **Cl-As_In q0**: 자성 S=1/2. As36 국소 스핀분열 level — ↑점유 VBM위 ~+0.5eV, ↓비점유 ~+0.9~1.4eV. 안티사이트 라디칼. → ISPIN=2 필수.
 - **Cl-As_In q+1**: 비자성. As36 비점유 level VBM위 +0.76~1.17eV(upper gap). (+1/0) donor.
-- **V_Cl-Cl_As q0**: As자리에 Cl 치환(Cl_As, atom95=defect_atom_index)+passiv Cl공공. **gap 깨끗, 깊은 defect state 없음**. Cl_As는 shallow double donor(+2e): 자체 준위(Cl 3p ~-6eV, Cl 3s -19.8eV)는 VB 깊이, 공여전자는 **CBM 위 전도띠 채움**(진공정렬시 Fermi=pure CBM+0.86eV, 축퇴 n형). 비자성. ⚠초기 "gap 채우는 manifold/near-metallic" 서술은 진공정렬 전 오해였음(실제 CBM 위 CB 채워짐). 검증법: planar-avg LOCPOT 진공준위 정렬(plateau std<0.1eV)로 pure CBM과 비교.
+- **V_Cl-Cl_As q0**: As자리에 Cl 치환(Cl_As, atom95=defect_atom_index)+passiv Cl공공. **gap 깨끗, 깊은 defect state 없음**. Cl_As 자체 준위(Cl 3p ~-6eV, Cl 3s -19.8eV)는 VB 깊이, 공여전자는 **CBM 위 전도띠 채움**(축퇴 n형). 비자성. ⚠초기 "gap 채우는 manifold/near-metallic" 서술은 오해였음.
+  - ⚠**2026-07-17 정정: "shallow double donor(+2e)"는 틀림 → single donor(+1)**. Ground truth 3종 일치: (1) NELECT pure **744** → defect **739**, Δ=−5=ZVAL(As) 정확히, **Cl 개수 12→12 불변**(As 36→35). 즉 결함=표면 As 하나 빠지고 그 passivating Cl이 그 자리로 내려앉음. (2) NELECT 739=**홀수**, EIGENVAL(Gam) band369까지 occ=1.0, **band370 occ=0.500=전자 정확히 1개**(band371은 0). (3) ε(+2/+1)=−0.28eV(VBM 아래)→두번째 전자 안 나옴. Cl_As 단독이면 +2지만 **표면**(3배위) As자리 + 같은 결함이 passivating Cl 하나를 소모 ⇒ 순 **+1**.
+  - band370은 국소준위 아님 **실증**: 02_G221-DOS 4k에서 0.329(Γ)→1.044→1.373→1.522eV로 **1.19eV 분산**(국소면 평평해야). IPR도 pure CBM과 동일.
+  - Moss-Burstein 크기: **셀-내부 기준(정렬 불필요, 신뢰) E_F(tetra) 1.1064 − 결함셀 CBmin 0.3288 = 0.778eV**. 전자 1개/157.78Å² = 6.3e13 cm⁻²(≈5.8e20 cm⁻³)의 인공 고농도 탓 = **supercell artifact**(희박극한선 CBM에 앉음). k_F가 BZ의 77~82%라 band-edge m*(0.023) 아닌 **chord mass 0.275 mₑ**가 옳은 질량 → 2D 추정 0.55eV로 관측과 정합(m*=0.023 쓰면 6.6eV로 10× 과대).
+  - ⚠**"진공정렬 LOCPOT"은 이 셀에서 ill-defined** — dipole 보정 OFF(INCAR에 `#IDIPOL=3` 주석)+비대칭 슬랩이라 **진공에 plateau가 없고 1.40eV에 걸쳐 ~0.155eV/Å 직선 기울기**(실측). 과거 "+0.86eV"(README) vs 재계산 "+0.70eV" 불일치가 이 정렬 모호성의 산물. **정렬 필요한 양은 semicore(In 4d) 등 셀-내부 기준으로 재도출할 것.** 관련 [[surface_defect_dipole_correction]]
 
 **IPR 판별 지표 (2026-07-17 추가, PROCAR 원자료 검증)**: "이 charge state에 model-charge correction이 적용 가능한가"를 판정하는 기준. IPR = 원자별 투영weight의 역참여비, uniform = 1/96 = 0.0104.
 | state | IPR | ×uniform | w[defect atom] |
