@@ -32,7 +32,8 @@ metadata:
 | As_In q0 LUMO | 0.0128 | 1.2× | 0.019 |
 - **≥6× uniform = 국소 defect level → slabcc 적용 가능. ~1.2× = host 밴드 상태(PHS) → 어떤 model-charge 보정도 범주 오류.**
 - 보조 지표 **E_relax**: 0.28~0.37 eV(국소) vs 0.01~0.05 eV(밴드류)로 10배 이산 갭. 전하가 host 밴드로 가면 반응할 국소 준위가 없어 이완이 사라짐.
-- ⚠**As_In ≠ V_Cl-Cl_As** (뭉뚱그리지 말 것): V_Cl-Cl_As q0는 pure CBM+0.70eV 점유 **축퇴 n형**(→ CB에 캐리어 공여, n-type origin 후보). As_In q0는 **축퇴 n형 아님** — HOMO=VBM+0.13, gap 깨끗, donor 성분은 **비점유** CB(+1.58/+1.75eV, w≈0.10-0.13). 따라서 **As_In q+1 = donor ionization이 아니라 host VB 정공**(w[36]=0.0000). 둘 다 Gaussian 불가지만 물리가 다름.
+- ⚠**As_In ≠ V_Cl-Cl_As** (뭉뚱그리지 말 것): V_Cl-Cl_As q0는 CBM 위 점유 **축퇴 n형**(→ CB에 캐리어 공여, n-type origin 후보; Moss-Burstein 크기는 위 셀-내부 기준 0.778eV). As_In q0는 **축퇴 n형 아님** — HOMO=VBM+0.13, gap 깨끗, donor 성분은 **비점유** CB(+1.58/+1.75eV, w≈0.10-0.13). 따라서 **As_In q+1 = donor ionization이 아니라 host VB 정공**(w[36]=0.0000). 둘 다 Gaussian 불가지만 물리가 다름.
+- ⚠**"공명(resonant)" 용어 주의**: 위 기준으로 **As_In만 진짜 공명**(CB 밴드에 퍼진 w≈0.10-0.13). **V_Cl-Cl_As는 공명 아님** — Cl이 Cl⁻ 닫힌껍질로 완성돼 자체 준위가 전부 VB 깊이, gap 근처 기여 0.4%뿐 → **"닫힌껍질 이온성 도너"**(앉을 결함 궤도가 애초에 없어서 전자가 host CB로 감). 그리고 InAs는 a_B=349Å이라 속박 도너를 12.8Å 셀에 **표현 자체가 불가** → "도너준위가 CB 근처에 안 보임"은 정상이며, 이 셀에선 공명 vs 1.4meV 속박을 **구별 불가**. 상세: [[shallow_donor_inas_supercell_limit]]
 - V_Cl-Cl_As "(+1/0) CTL"은 결함준위 이온화가 아니라 **CB 전자 제거(Burstein-Moss band-filling)** → gap 내 CTL로 보고하면 안 됨(삭제 대상). 관련: [[slabcc_delocalized_defect_policy]]
 
 **도구 인덱싱 규칙(중요, 서로 다름)**:

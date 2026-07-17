@@ -28,6 +28,13 @@ metadata:
 **3. Adiabatic DFE 알고리즘 플랜 재개** → [[adiabatic_dfe_algorithm_plan]]. 미해결 결정 4개(seeding/shallow-correction분기/cross-defect기준/E_corr재사용). 플랜모드로 이어가기로 했었음.
 ※ 이 중 "shallow-correction 분기"는 오늘 [[ipr_gate_tool]]이 사실상 답을 준다 — 게이트가 shallow로 찍으면 보정 자체를 건너뛰고 CTL을 만들지 않는 쪽.
 
+**4. band-filling(Moss-Burstein) 보정 — 오늘 새로 드러난 최대 구멍.** 상세 [[shallow_limit_dfe_construction]].
+파이프라인에 **아예 없다**(`grep band.?fill|moss|burstein scripts/` → 0건). V_Cl-Cl_As q0에서 **~0.78eV** = 형성에너지와 맞먹는 크기라, **V_Cl-Cl_As 선이 틀린 규모는 E_corr의 ~0.1eV가 아니라 이쪽 ~1eV**다.
+⚠단 **지금 상태로 구현하면 어떤 기준을 쓰든 틀린 숫자가 나온다**: 에너지를 뽑는 `00_Gam-relax`가 Γ-only라 자기 기준 band-filling을 **0으로 오판**(4k 기준 0.33 / 셀-내부 0.78 — 기준별로 제각각). **k-mesh 상향(4×4×1↑)이 선행**이고 근본 해법은 **lateral 셀 확대(3×2→4×3)**. 순서상 아래 5번보다 뒤.
+
+**5. Cl-As_In q-1 판정** — [[ipr_gate_tool]]로 즉시 가능(계산 불필요). 유일한 미확정 케이스: E_relax 0.277(국소적)인데 slabcc RMSE 경고, spin-down 준위(VBM+0.9~1.4eV) 안에 CBM=1.19가 들어옴. `03_Band` PROCAR에서 LUMO의 atom36 IPR — 6× uniform 이상이면 bound, 1.2×면 CB.
+
 ## 열려 있는 판단
-- V_Cl-Cl_As 같은 shallow donor의 DFE를 논문에 **어떻게 제시할지** 아직 미정. CTL이 없으므로 (a) q+1 선만 제시하고 "CB에 전자 공여"로 서술하거나 (b) shallow donor 전용 표기를 쓰거나. [[cqd_ntype_origin_goal]] 판정 형식과 함께 결정 필요.
+- ~~V_Cl-Cl_As 같은 shallow donor의 DFE를 논문에 어떻게 제시할지~~ → **작도법은 2026-07-17 확정**: [[shallow_limit_dfe_construction]] (E_f(+1,E_F)=E_f(0)+(E_F−E_g), 점선/bound 표기, CTL 없음). **남은 결정은 band-filling 보정을 넣은 뒤 최종 수치를 어떻게 인용할지**와 [[cqd_ntype_origin_goal]] 판정 형식.
+- E_f(V_Cl-Cl_As q0)는 이미 In-rich −1.08eV인데 band-filling 보정 시 **더 음수로** 내려감 → 표면 donor 안정성 주장이 강해지는 방향. n-type origin 결론에 직접 영향이라 확인 필요.
 - difference DOS는 pure(`LREAL=A`/ISPIN=2/NBANDS=450) vs defect(`LREAL=.FALSE.`/ISPIN=1/NBANDS=740) 불일치로 **불필요 판정**(증거 4종으로 충분). 되살릴 이유 생기면 설정부터 맞출 것.
