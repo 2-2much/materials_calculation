@@ -5,7 +5,19 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 0b838ed2-3a0f-4b92-a22c-131ab8936454
+  modified: 2026-07-20T05:30:03.741Z
 ---
+
+> ⚠️ **2026-07-20 부분 무효화 — [[spin_stage_symmetry_never_broken]] 먼저 읽을 것.**
+> `01_Spin` 단계가 `ISTART=1`+`ICHARG=1`로 **비자성 WAVECAR을 물려받아 MAGMOM이 무시**된다.
+> 02 전 결함 자화 이력이 **11개 모두 mag(1단계)≈mag(최종)** — 자화가 0에서 자라난 사례가 없다.
+> 따라서 아래 "비자성 확정" 판정들은 **탐색의 결과가 아니라 탐색 부재의 결과**다.
+> 특히 무효: (1) L32 "V_Cl-Cl_As는 mag=0.0045 → 비자성 최종 확인", (2) L36 "seeding 충분히 확인됨",
+> (3) L38의 홀수-전하 판정 절차(실제로는 MAGMOM이 안 먹었음).
+> 독립 진단자: 홀수 전자인데 ISPIN=2 결과의 **EENTRO≠0이면 스핀 미수렴** — V_Cl-Cl_As(0.0282)와
+> In_i_Td_In(0.0224)이 여기 걸린다. Cl-As_In·V_Cl-Cl_In은 0.0000이라 이 둘의 자성은 유효.
+> 아래 ΔE 표 자체는 양쪽 다 PRECFOCK=Normal·σ→0 기반이라 **수치는 유효**하다.
+> (별건 무효: "단일점 스크리닝은 오판한다"는 교훈은 PRECFOCK Fast↔Normal 혼용 비교였다.)
 
 ## 전체 defect 스핀 스크리닝 결과 (PRECFOCK=N으로 통일, [[surface_defect_gam_relax_spin_comparison]] 방식)
 ΔE = E0(spin) − E0(nonmag), OSZICAR 마지막 줄 기준
