@@ -15,12 +15,23 @@ metadata:
 - CTL_summary 가짜 0.99eV 버그 **수정 완료** → [[slabcc_delocalized_defect_policy]].
 - COHP charge spilling은 **문제가 아니었음**(0.86%=우수, 742는 LOBSTER ZVAL 오집계) → [[lobster_cohp_setup]].
 
-## 내일 할 일 (우선순위)
+## 진행 상황 (2026-07-20 갱신)
 
-**1. 미수확 slabcc 잡 확인** — 오늘 새로 드러난 사안.
-`02-Cl-passv.../results/corrections/slab_slabcc/slab_corrections.csv`와 `corrections_optimize_charge_position_yes_Gam-only/`에 `status=submitted:55361`~`55382`인 채 **E_corr이 공란인 행이 다수**다. 큐는 비었으므로 이미 끝났거나 죽었다. 각 `slabcc.out`을 열어 실제 결과가 있는지 확인하고 수확할 것.
-⚠단 [[ipr_gate_tool]] 판정상 **bound인 것만 수확 가치 있음**: Cl-As_In(전 하전), V_Cl-Cl_In q0. V_Cl-Cl_As·As_In은 수확해도 **쓰면 안 된다**(delocalized → 범주 오류).
-⚠`coverage`의 `missing E_corr: 0`은 거짓 — status=submitted를 pending으로 분류해서 놓친다.
+**1. 미수확 slabcc 잡 — 해소 완료.** 공란+submitted는 **V_Cl-Cl_As q+1(55381)·q+2(55382) 딱 2개**뿐이고 나머지는 전부 done. 두 slabcc.out 모두 `[critical] ... model charge is fairly delocalized!`로 자체 중단(큐 비었음=정상 실패). IPR 게이트상 delocalized라 **수확 대상 아님** → "correction N/A (delocalized)"로 확정. 더 볼 것 없음.
+
+**3. Cl-As_In q-1 판정 — bound (deep) 확정.** IPR 3.93× + E_relax 0.277(bound) 일치. slabcc E_corr=0.142(done) 유효. Cl-As_In 전 하전(−1/0/+1/+2) 전부 bound.
+
+**4. shallow 기준 + acceptor 작도 — 구현·검증 완료(2026-07-20).** 상세 [[ipr_gate_tool]] [[shallow_limit_dfe_construction]]. fork 검증에서 CSV 컬럼 스왑 버그·band-filling 부호·auto-inference 과잉 3건 잡아 수정 완료.
+
+**2. k-point 수렴성 계획 — 확정(미제출).** 아래 별도 섹션.
+
+### (옛 1번 원문 보존)
+`02-Cl-passv.../results/corrections/slab_slabcc/slab_corrections.csv`와 `corrections_optimize_charge_position_yes_Gam-only/`에 `status=submitted:55361`~`55382`인 채 **E_corr이 공란인 행**. ⚠`coverage`의 `missing E_corr: 0`은 거짓(status=submitted를 pending으로 분류해 놓침).
+
+## k-point 수렴성 테스트 계획 (2번, fork 검증 반영)
+**필요함**(LDA bare-As_In 선례 전이 불가): bare→Cl passivation 밴드모서리 변화 / As_In(절연체 중성)→V_Cl-Cl_As q0(CB 부분점유=느린 수렴) / LDA→HSE(gap·m* 변화가 band-filling 크기·수렴속도 결정) / band-filling은 Γ-only에서 0.
+LDA 선례 수치: Γ 형성E ~80meV 과소, 2×2×1 ~15meV, 3×3×1 ~4meV 수렴(하한선).
+**조건**: 대상=**V_Cl-Cl_As q0 + pure(매 mesh 둘 다)**. **Single-shot on fixed Γ-relaxed geom**(재이완 X). **ISPIN=1**(둘 다 비자성). **Γ-centered 필수**(CBM@Γ, MP-miss-Γ 금지). **aspect-matched**(3×2 셀→3×방향 k 적게, 예 2×3×1/3×4×1), z×1. **ISYM=0**(단일전자 CB 점유 평균화 방지). 2단: Tier-1 PBE-d로 mesh만 특정(⚠PBE는 gap 붕괴→**총에너지 차이 plateau 위치만** 신뢰, band-filling 절대값은 금지), Tier-2 HSE06 Γ/2×2×1/수렴mesh로 확정. **수렴 목표량=보정후 E_f=E_f_raw−E_bf(k)**(각 조각보다 빨리 수렴). 4×4×1도 미수렴이면 근본해법=lateral 셀 확대(3×2→4×3).
 
 **2. 04-InCl3 spin screening 배치 복구** → 상세는 [[spin_screening_04_incl3]].
 11개 중 2개만 완주(As_In −0.7meV, pure −0.3meV, 둘 다 비자성). 8개는 `01_Spin-gam-relax/`에 **POSCAR가 없어 미실행**(원인 규명 먼저), Cl-As_In은 walltime SIGTERM(NELM/walltime 상향 후 재제출).

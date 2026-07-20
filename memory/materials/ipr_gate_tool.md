@@ -22,3 +22,9 @@ metadata:
 **Why:** 어느 결함에 model-charge 보정을 신뢰할지가 CTL의 진위를 결정하고, 그게 [[cqd_ntype_origin_goal]]의 판정 근거다. 손으로 내리던 판단을 재현 가능한 게이트로 굳혔다(실제로 기존 수동 판단 3건을 자동 재현).
 
 **How to apply:** 새 charge state나 새 결함을 추가하면 먼저 이걸 돌려 shallow/deep을 확정한 뒤 slabcc 여부를 정한다. 04-InCl3 등 다른 프로젝트엔 `--calc`로 겨냥. 실공간 교차검증이 필요하면 LPARD V_loc([[vclclas_cohp_donor_evidence]])을 병행 — PAW 구 밖 전하 반론을 차단한다.
+
+**⚠2026-07-20 3축化 + carrier 대칭.** IPR은 여전히 **권위(authoritative) 축**이고 verdict는 IPR만으로 결정. 추가 2축은 확인·플래그용:
+- **축2 E_relax**(하전상태): `--relax-csv`(기본 `results/corrections/slab_slabcc/slab_corrections.csv`)에서 읽음. >0.10 bound / <0.05 shallow. ⚠**q0는 E_relax=0이 정의상 값**이라 shallow 투표에서 제외(안 하면 Cl-As_In q0 가짜 CONFLICT). 실측상 IPR과 완벽 일치(bound 0.28~0.37 vs shallow 0.01~0.05).
+- **축3 dispersion**(확인용): `--disp-stage 02_G221-DOS`로 multi-k PROCAR에서 frontier 밴드폭. <0.05 bound / >0.30 shallow. 없으면 n/a(방어적, 절대 안 깨짐).
+- **carrier 프레이밍**: donor(q>0→LUMO vs CBM) / acceptor(q≤0→HOMO vs VBM). 2축이 IPR과 어긋나면 `CONFLICT` 플래그(예: 경계 케이스 재검토용).
+전체 판정표(2026-07-20 재실행): Cl-As_In −1/0/+1/+2 전부 bound(IPR+relax 일치), V_Cl-Cl_As·As_In·In_As·In_i·V_Cl-V_* shallow, V_Cl-Cl_In q0 bound(8.35×). 짝 스크립트=[[shallow_limit_dfe_construction]]의 `plot_shallow_limit_DFE.py`.

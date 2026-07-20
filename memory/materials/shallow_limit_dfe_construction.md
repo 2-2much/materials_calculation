@@ -36,4 +36,13 @@ E_f 기울기는 항상 q. shallow 한계에서 (+1/0)을 CBM에 못박아 절�
 ## 미확인 함의
 E_f(V_Cl-Cl_As q0)는 이미 In-rich에서 −1.08eV인데, band-filling 보정을 넣으면 E_tot 과대평가가 걷혀 **더 음수로 내려간다** → 표면 donor 안정성 주장이 오히려 강해지는 방향. [[cqd_ntype_origin_goal]]에 직접 영향.
 
+## 구현 (2026-07-20, fork 검증 완료) — `scripts/plot_shallow_limit_DFE.py`
+plot_DFE 본체(1120줄) 건드리지 않고 그 출력 `DFE_at_EF0_summary.csv`(q0의 E_f(0))를 소비하는 전용 스크립트. **donor/acceptor 대칭**:
+- shallow **donor**: `E_f(+1,E_F)=anchor+(E_F−E_g)` (CBM에서 anchor와 만남, 점선 dashed)
+- shallow **acceptor**: `E_f(−1,E_F)=anchor−E_F` (VBM에서 anchor와 만남, 점선 dotted). 채택 사유=donor의 부호대칭(VBM 앵커, 기울기 −1).
+- **band-filling 부호**: `anchor=E_f(0)−E_bf` (E_bf≥0 **차감**, Lany-Zunger는 밴드모서리서 밀려난 캐리어 초과에너지 제거 → E_f 더 음수로). V_Cl-Cl_As In-rich raw −1.078 → 0.78 차감 → −1.858. **`+E_bf`는 부호오류**(초판 버그, 수정됨).
+- 미입력 시 `PRELIMINARY` 태그(raw 앵커, Moss-Burstein 안 걷힘). CTL 미작도. shallow 집합은 IPR_gate.csv 자동추론(`--donor/--acceptor` override).
+- ⚠**auto-inference는 +1·−1 둘 다 delocalized면(예 As_In) 양쪽 라벨=모호** → 자동에서 제외+경고, 명시 지정 요구(전하부호는 이상격자 대비 전자수가 정함, "이 전하가 delocalized"만으론 결정 못 함).
+- ⚠CSV 컬럼: `Ef0_raw_eV, bandfill_eV, anchor_eV, Ef_at_VBM_eV, Ef_at_CBM_eV`. 초판서 VBM/CBM 스왑 버그 있었음(수정됨, PNG는 원래 정상).
+
 물리적 배경(왜 도너 준위가 안 보이는가, 공명 vs 닫힌껍질 이온성 도너): [[shallow_donor_inas_supercell_limit]]
