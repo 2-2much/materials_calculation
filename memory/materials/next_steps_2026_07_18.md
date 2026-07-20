@@ -15,6 +15,14 @@ metadata:
 - CTL_summary 가짜 0.99eV 버그 **수정 완료** → [[slabcc_delocalized_defect_policy]].
 - COHP charge spilling은 **문제가 아니었음**(0.86%=우수, 742는 LOBSTER ZVAL 오집계) → [[lobster_cohp_setup]].
 
+## 2026-07-20 저녁 — spin q±1 배치 제출 + 워크플로우 리팩터 (완료)
+- **PRECFOCK 버그 정정**: 전 defect의 `01_Spin-gam-relax`가 `PRECFOCK=Fast`(coarse HF grid)로 잘못 돌아갔었음. 올바른 `PRECFOCK=Normal` 버전(`_PRECFOCK=N` 폴더)을 정본으로 승격, 옛것은 `01_Spin-gam-relax_legacy`로 rename(12쌍).
+- **spin_mode를 stage별 속성으로 리팩터**: `runtime.yaml` 전역 토글 → `config/stages.yaml` 각 stage `spin_mode:` 키(00=nonmagnetic, 01/01_opt=magnetic_seed). 스크립트는 `prepare_defect_workflow.py:76` 한 줄(stage값 우선, runtime는 폴백). 정의(set/delete·MAGMOM seeding)는 runtime에 유지. 이제 stages.yaml만으로 00(비스핀)→01(스핀) 한 번에 prep됨. ⚠순서함정: `previous_CONTCAR` seed는 바로 위 stage에서 옴 → 체인(00→01→02→03) 연속, optical(leaf)은 맨 끝.
+- **01_opt 신설**: 사용자가 stages.yaml에 `01_opt`(dirname `01_Spin-gam-optical_Rq0`, R_0=`01_Spin-gam-relax` 중성 CONTCAR) 추가. 템플릿 신규작성 `config/INCAR/INCAR_01.Spin-gam-optical_1shot`(ISPIN=2, NSW=0, PRECFOCK=Normal, LVHAR)·`KPOINTS_01.Spin-gam-optical_1shot`(Γ). 00_opt는 주석처리됨.
+- **defects.yaml charge 확장**: In_As·V_Cl-V_As→[0,1,-1], V_Cl-Cl_As→[0,1,2,-1].
+- **제출**: 저형성E 5개 defect(V_Cl-Cl_As, As_In, Cl-As_In, In_As, V_Cl-V_As)의 **q±1 9개 잡** → cascade2 **4노드**/잡, NCORE=16/NSIM=32, job-name `Cl-passv_*`, **JobID 55499~55507**. 각 잡=00(nonmag scratch)→01(spin, 00 WAVECAR/CHGCAR seed)→01_opt(spin optical 1shot) 체인. q0는 이미 완료(seed로 사용), q+2는 미제출.
+- ⏭**다음**: 이 9개 완주 확인 → 스핀 에너지/자성 판정 → shallow-limit DFE(+band-filling) 재작도. 별건: PBE로 DOS/BAND SCF k-grid 수렴테스트(HSE k-scan은 취소됨, Γ-only 확정).
+
 ## 진행 상황 (2026-07-20 갱신)
 
 **1. 미수확 slabcc 잡 — 해소 완료.** 공란+submitted는 **V_Cl-Cl_As q+1(55381)·q+2(55382) 딱 2개**뿐이고 나머지는 전부 done. 두 slabcc.out 모두 `[critical] ... model charge is fairly delocalized!`로 자체 중단(큐 비었음=정상 실패). IPR 게이트상 delocalized라 **수확 대상 아님** → "correction N/A (delocalized)"로 확정. 더 볼 것 없음.
