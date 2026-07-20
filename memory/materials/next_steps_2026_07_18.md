@@ -31,6 +31,7 @@ metadata:
 ## k-point 수렴성 테스트 계획 (2번, fork 검증 반영)
 **필요함**(LDA bare-As_In 선례 전이 불가): bare→Cl passivation 밴드모서리 변화 / As_In(절연체 중성)→V_Cl-Cl_As q0(CB 부분점유=느린 수렴) / LDA→HSE(gap·m* 변화가 band-filling 크기·수렴속도 결정) / band-filling은 Γ-only에서 0.
 LDA 선례 수치: Γ 형성E ~80meV 과소, 2×2×1 ~15meV, 3×3×1 ~4meV 수렴(하한선).
+**Tier-1 셋업 완료(2026-07-20, 미제출)**: `calc/__k-point_test__/Vcl_neutral_PBEd/` (빌더 `scripts/build_kpt_conv_neutral.py`). 8 runs=Γ/2×2×1/3×3×1/4×4×1 × {V_Cl-Cl_As_q0, pure_q0}, 전부 Γ-centered·PBE-d·ISPIN=1·ISYM=0·single-shot·FFT고정. 제출: `bash scripts/run_joblist.sh calc/__k-point_test__/Vcl_neutral_PBEd/joblist.txt submit`. ⚠aspect-matched가 여기선 정사각인 이유=3×[1-10]12.94Å≈2×[001]12.20Å(실공간 근사 정사각, L_y/L_x=0.943).
 **조건**: 대상=**V_Cl-Cl_As q0 + pure(매 mesh 둘 다)**. **Single-shot on fixed Γ-relaxed geom**(재이완 X). **ISPIN=1**(둘 다 비자성). **Γ-centered 필수**(CBM@Γ, MP-miss-Γ 금지). **aspect-matched**(3×2 셀→3×방향 k 적게, 예 2×3×1/3×4×1), z×1. **ISYM=0**(단일전자 CB 점유 평균화 방지). 2단: Tier-1 PBE-d로 mesh만 특정(⚠PBE는 gap 붕괴→**총에너지 차이 plateau 위치만** 신뢰, band-filling 절대값은 금지), Tier-2 HSE06 Γ/2×2×1/수렴mesh로 확정. **수렴 목표량=보정후 E_f=E_f_raw−E_bf(k)**(각 조각보다 빨리 수렴). 4×4×1도 미수렴이면 근본해법=lateral 셀 확대(3×2→4×3).
 
 **2. 04-InCl3 spin screening 배치 복구** → 상세는 [[spin_screening_04_incl3]].
