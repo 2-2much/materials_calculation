@@ -13,6 +13,7 @@
 - [Vertical Scan slabcc≡SCPC](vertical_scan_slabcc_scpc.md) — Cl-As_In(+1) __vertical_scan__: slabcc≡SCPC corrected E 6meV 일치, 40→50Å 16-21meV 수렴(30Å 이탈, 최소진공40Å), 정렬 이중계산 금지, resonant donor(HSE 확정필요)
 - [Charged Defect VBM Reference](charged_defect_vbm_ref.md) — VBM ref=pure VBM(≠neutral defect HOMO). pure VBM+ΔV=far-field host VBM(δ_defect 배제). SCPC align은 정전퍼텐셜(charged→neutral-defect)이지 VBM 아님→pristine bridge 별도(slab는 vacuum정렬, IP검증). InAs 실험IP 정량대조 안함
 - [SCPC Vacuum Scan](scpc_vacuum_scan.md) — Cl-As_In SCPC 20/30/40Å 완료. SCPC formation E_f 수렴(In-rich 4.49→4.51eV); ⚠SCPC TOTEN은 이미 보정포함→E_corr 별도가산 금지. 큰 E_corr(~1.8eV)=표면 국소전하+작은 3×2 셀(버그 아님, lateral 키워야 줄어듦). 리포트 make_report.py로 재생성(ZLOW/ZHIG 버그 수정)
+- [기준상 세트 mu_H/mu_Cl](mu_reference_phases.md) — HSE06(AEXX=0.27,ENCUT300,30Å,**PRECFOCK=fast**) 확정: μ_H=−3.954737, **μ_Cl(Cl₂)=−2.697957**(상한), μ_Cl(HCl)=−3.687047(Δ−0.989). ΔE_f(HCl) 실험과 **2.6meV** 일치=세트 신뢰. ⚠PRECFOCK Normal 섞으면 33meV 어긋남. ⚠μ_Cl(InCl₃)는 **In_d In금속 부재**로 막힘. ⚠10-InCl3=고체 아닌 기체단분자. ⚠cascade엔 dftd4 빌드 없음
 - [Cl2 HSE06 Calc](cl2_hse06_calc.md) — Cl2 분자 HSE06 이완 (AEXX=0.27, LHFSKIP, VASP6.5.1), ENCUT300 완료(-5.3953 eV), ENCUT400 진행중(job 52424)
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — SLURM 잡 제출 시 jobname을 calc별로 구분되게 작성(예: cd-k2x2x1_G-qp1)
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — Cl-As_In CHG-DIFF k-point 수렴: k1x1x1 미수렴, k2x2x1_MP=k1_bald 수렴. vaspkit 314는 상대경로 필수
