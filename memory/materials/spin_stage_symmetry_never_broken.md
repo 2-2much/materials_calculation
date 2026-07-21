@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f4bfd3d3-c080-491a-b5ba-f0c4ca66ef42
-  modified: 2026-07-20T05:28:37.456Z
+  modified: 2026-07-21T05:58:37.369Z
 ---
 
 2026-07-20 확인. 02/04의 `INCAR_01.Spin-gam-relax`가 **`ISTART=1` + `ICHARG=1`** 이고
@@ -32,6 +32,15 @@ metadata:
 
 V_Cl-Cl_As·In_i_Td_In은 전자를 두 채널에 0.5씩 뭉갠 채 끝났다. **자성이 "소멸"한 게 아니라
 스핀 해를 못 찾은 것.** → 홀수 전자 + ISPIN=2 + EENTRO≠0 = 스핀 미수렴 플래그(무비용 자동화 가능).
+
+> ⚠️ **2026-07-21 이 절(증거 2)의 진단자는 과잉 검출 — [[spin_magnetism_ipr_predictor]]로 대체.**
+> EENTRO≠0은 *frontier 분수 점유*를 진단할 뿐 *놓친 자성해*가 아니다. 둘이 일치하는 건
+> **상태가 속박일 때뿐**이고, 비국소 상태에서는 0.5/0.5가 **물리적 정답**이다
+> (교환적분이 1/V로 소멸, [[shallow_donor_inas_supercell_limit]] a_B=349Å).
+> → 위 표의 **V_Cl-Cl_As "⚠미수렴"은 오탐**(IPR 1.00×, 진짜 비자성). 실제로 걸리는 건
+> **In_i_Td_In뿐**(IPR 1.41×, 분열 0.096eV≈σ, mag=0.5027). 홀수 전자 자체도 자성의 근거가 아니다.
+> 올바른 진단자 = **frontier IPR 비**(스핀 독립 → 순환논법 회피). 위험구간 = IPR 1.2~2×.
+> 단, 이 메모리의 **본론(ISTART=1이 MAGMOM을 무력화한다)은 그대로 유효**하다.
 
 ## ⚠ 기존 기록 무효화
 [[surface_defect_spin_screening_full]]의 *"단일점 스핀 스크리닝은 오판한다

@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 0b838ed2-3a0f-4b92-a22c-131ab8936454
-  modified: 2026-07-20T05:30:03.741Z
+  modified: 2026-07-21T05:58:18.440Z
 ---
 
 > ⚠️ **2026-07-20 부분 무효화 — [[spin_stage_symmetry_never_broken]] 먼저 읽을 것.**
@@ -16,6 +16,12 @@ metadata:
 > (3) L38의 홀수-전하 판정 절차(실제로는 MAGMOM이 안 먹었음).
 > 독립 진단자: 홀수 전자인데 ISPIN=2 결과의 **EENTRO≠0이면 스핀 미수렴** — V_Cl-Cl_As(0.0282)와
 > In_i_Td_In(0.0224)이 여기 걸린다. Cl-As_In·V_Cl-Cl_In은 0.0000이라 이 둘의 자성은 유효.
+>
+> ⚠️ **2026-07-21 위 EENTRO 진단자 정정 — [[spin_magnetism_ipr_predictor]] 참조.**
+> EENTRO≠0은 *분수 점유*를 진단할 뿐 *놓친 자성해*가 아니다(둘은 상태가 속박일 때만 일치).
+> **V_Cl-Cl_As는 오탐** — IPR 1.00×의 진짜 비자성체다. 실제로 걸리는 건 **In_i_Td_In뿐**
+> (IPR 1.41×, 분열 0.096eV≈σ, mag=0.5027 → 아래 표의 −7.0 meV는 신뢰 불가, NUPDOWN=1 재계산 필요).
+> 올바른 진단자 = **frontier IPR 비**(스핀 독립이라 순환논법 회피).
 > 아래 ΔE 표 자체는 양쪽 다 PRECFOCK=Normal·σ→0 기반이라 **수치는 유효**하다.
 > (별건 무효: "단일점 스크리닝은 오판한다"는 교훈은 PRECFOCK Fast↔Normal 혼용 비교였다.)
 
