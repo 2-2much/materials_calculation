@@ -57,7 +57,7 @@
 ## 참고 자료
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — slabcc optimize_tolerance는 목표 RMSE 임계값 아니라 BOBYQA 상대수렴 tolerance. 최종 RMSE>tol이어도 정상(local min). 남은 RMSE=등방 Gaussian 모델 한계, 줄이려면 charge_trivariate=yes/다중Gaussian
-- [IPR Gate Tool](ipr_gate_tool.md) — scripts/ipr_gate.py: 전 defect·전 charge 국소화 판정 자동화(00_Gam-relax PROCAR→IPR, pure 밴드모서리 2배 초과=bound). ⚠q>0은 LUMO를 봐야 함(HOMO는 host VBM이라 오판). slabcc 적용 여부 결정용
+- [IPR Gate Tool](ipr_gate_tool.md) — scripts/ipr_gate.py: 전 defect·전 charge 국소화 판정 자동화(00_Gam-relax PROCAR→IPR, pure 밴드모서리 2배 초과=bound). ⚠q>0은 LUMO를 봐야 함(HOMO는 host VBM이라 오판). slabcc 적용 여부 결정용. ⚠2026-07-21 버그2건 수정(스머링꼬리 frontier, 모서리를 점유수로 선택)→04 V_As·V_In이 bound→shallow로 뒤집힘, 02는 0건. 04 결과=In_As_2/In_As_1만 bound
 - [zeroband fatband tool](zeroband_fatband_tool.md) — zeroband.py — hybrid band(zero-weight kpt) projected fatband 플로터 위치/사용법
 - [zeroband spin parsing](zeroband_spin_parsing.md) — zeroband.py 밴드플롯 --spin 옵션 및 collinear ISPIN=2 PROCAR 파싱 수정
 

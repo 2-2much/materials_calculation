@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: c6f88bf4-31fa-4e2c-90db-76d7de8a9d21
+  modified: 2026-07-21T06:45:08.516Z
 ---
 
 `12-Surace-defect_calculation/02-Cl-passv_6L_3x2x1_HSE06/scripts/ipr_gate.py` (2026-07-17 신규).
@@ -28,3 +29,16 @@ metadata:
 - **축3 dispersion**(확인용): `--disp-stage 02_G221-DOS`로 multi-k PROCAR에서 frontier 밴드폭. <0.05 bound / >0.30 shallow. 없으면 n/a(방어적, 절대 안 깨짐).
 - **carrier 프레이밍**: donor(q>0→LUMO vs CBM) / acceptor(q≤0→HOMO vs VBM). 2축이 IPR과 어긋나면 `CONFLICT` 플래그(예: 경계 케이스 재검토용).
 전체 판정표(2026-07-20 재실행): Cl-As_In −1/0/+1/+2 전부 bound(IPR+relax 일치), V_Cl-Cl_As·As_In·In_As·In_i·V_Cl-V_* shallow, V_Cl-Cl_In q0 bound(8.35×). 짝 스크립트=[[shallow_limit_dfe_construction]]의 `plot_shallow_limit_DFE.py`.
+
+## ⚠2026-07-21 버그 2건 수정 — 04 판정 2건이 뒤집혔다 (02는 무사)
+
+04-InCl3에 처음 적용하다 발견. 둘 다 **bound로 오판하는** 방향이라 slabcc를 헛되이 적용할 뻔했다.
+
+1. **스머링 꼬리를 frontier로 집음.** `frontier()`가 `OCC>1e-3`인 최상단 밴드를 골랐다. SIGMA=0.1이면 E_F 위 0.1eV 준위가 occ~0.3을 받는데 전하는 없다. `V_As`가 전자 0.12개짜리 국소 꼬리(IPR 0.128)를 집어 **13.47× "bound"** → 실제 캐리어는 전자 0.88개의 비국소 상태(**1.07× shallow**). → `OCC_MIN=0.2` 신설.
+2. **비교 모서리를 점유수로 고름**(`vbm if occ>1.5 else cbm`). **반점유 가전자대 상태**(occ≈1.0)가 CBM과 비교된다. 이 셀 **VBM은 CBM보다 본래 1.7~1.8× 더 국소적**(As-p vs In-s)이라 비율이 그만큼 부풀려져 게이트 2.0을 넘긴다. `V_In` **2.07× "bound" → 1.19× shallow**. → **에너지(midgap 기준)로 선택**하도록 변경.
+
+에너지 선택은 정렬(alignment)에 의존하는 약점이 있어, **양쪽 비율(`ratio_vs_vbm`/`ratio_vs_cbm`)을 모두 CSV에 기록**하고 모서리 선택이 판정을 바꾸면 `EDGE-AMBIGUOUS` 플래그를 띄운다(=미결로 취급). 실제로 04 `V_In`이 여기 걸린다(1.19× vs 2.07×).
+
+**02는 재실행 결과 22행 중 판정 뒤집힘 0건**(비율만 변함: In_As q0 0.94→1.41, V_Cl-Cl_In q0 8.35→5.56). 02의 frontier들이 확실히 국소(4~8×)이거나 확실히 비국소(1.0~1.4×)라 게이트에서 멀었기 때문 — **기존 02 결론은 그대로 유효**. 구 판정표는 `IPR_gate_PRE-FIX_2026-07-21.csv`로 백업.
+
+**04-InCl3 q0 판정(2026-07-21, 수정판)**: bound=**In_As_2**(5.75×, 확실 — 빈 국소준위도 gap 내 존재) / **In_As_1**(2.03×, **경계라 dispersion 축 필요**). 나머지 8개(As_In·Cl-As_In·Cl_As_1·Cl_As_2·Cl_i-As·In_i_2·V_As) 전부 shallow(PHS). **V_In은 EDGE-AMBIGUOUS로 미결.** ⚠04는 `charge_states:[0]`뿐이라 LUMO probe(도너 판정)는 미행사. ⚠`V_As`는 점유 비국소 상태 **바로 위 0.098eV에 강한 국소 빈 준위**(1/IPR=7.8)가 있는 CB 공명 구조 → q+1에서 재확인 필요.
