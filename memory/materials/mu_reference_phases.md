@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 21ba4701-12fb-4582-8d69-24cecc9e027f
-  modified: 2026-07-21T06:58:00.994Z
+  modified: 2026-07-21T08:42:52.640Z
 ---
 
 ## 기준상(reference phase) 세트 — 2026-07-21 확정
@@ -45,3 +45,30 @@ ENCUT=300/PREC=N인데도 매우 좋음 → 이 세트는 신뢰 가능.
 - **바이너리**: g2 파티션은 `...dftd4...gam.x`, **cascade 노드엔 그 빌드가 없음** →
   `vasp.6.5.1.wan90.beef.plugin.lhfskip.gam.x` 사용. 08-HCl/10-InCl3의 run.sh를 cascade에
   그대로 복사하면 exit 127로 즉사.
+
+## ⏭ In metal 계산 예정 (2026-07-21, **다음 세션**에서 진행)
+
+사용자가 **bloch에서 Birch-Murnaghan fit + HSE06 AEXX=0.27로 구한 In metal 바닥상태 구조**를
+직접 제공하기로 함. 이게 μ_In → μ_Cl(InCl₃) 구속을 여는 열쇠다.
+
+**기존 계산 전수 감사 결과 — 셋 다 사용 불가** (`04-Chemical-reservoir/01-In-metal/`):
+
+| 경로 | POTCAR | ENCUT | AEXX | E(σ→0) |
+|---|---|---|---|---|
+| `01-Functional/PBE_HSE06` | `PAW_PBE In` (**d 없음**) | 400 | 0.25 | −2.85302 |
+| `01-Functional/LDA_hybrid` | `PAW In` (**d 없음**) | 400 | 0.30 | −3.18503 |
+| `.../LDA_hybrid/backup_volume_relax` | `PAW In` (**d 없음**) | 300 | 0.30 | −3.25525 |
+
+**새 계산이 맞춰야 할 조건**: `In_d` POTCAR(슬랩과 동일) + AEXX=0.27 + ENCUT=300
++ 위 "공통 footing"(30Å 아님 — 금속이므로 k-mesh 필요, 나머지 태그는 세트 준수).
+
+**⚠ 미결 결정 — PRECFOCK을 어디에 맞출 것인가.** 이 μ 세트는 전부 **fast**인데
+04-InCl3 결함 슬랩은 **Normal**이다. μ는 `E_f = (E_def − E_bulk) − Σ Δn·μ`에서 슬랩
+에너지와 직접 빼지므로 어느 쪽 기준으로 통일할지 정해야 한다. 혼용 시 ~33 meV.
+(참고: 33 meV는 [[energy_column_sigma0_vs_toten]]의 28 meV와 같은 규모 = 결론을 뒤집진
+않지만 CTL 미세 위치에는 보임)
+
+**왜 급한가**: 이 구속이 없어서 04의 DFE 서열이 현재 **무효**다. Δn_Cl=+1 결함이 음수
+형성에너지를 내고 있고, 구속을 넣으면 일괄 +1.86 eV 이동해 서열이 바뀐다 —
+`In_As_1`(Cl 무관, In-rich 0.715 eV)이 실질 최저 축으로 올라온다.
+상세: [[cl_as_negative_eform_reference_slab]], [[ipr_gate_tool]]
