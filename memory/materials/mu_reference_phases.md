@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 21ba4701-12fb-4582-8d69-24cecc9e027f
-  modified: 2026-07-21T08:42:52.640Z
+  modified: 2026-07-21T09:24:30.215Z
 ---
 
 ## 기준상(reference phase) 세트 — 2026-07-21 확정
@@ -46,10 +46,11 @@ ENCUT=300/PREC=N인데도 매우 좋음 → 이 세트는 신뢰 가능.
   `vasp.6.5.1.wan90.beef.plugin.lhfskip.gam.x` 사용. 08-HCl/10-InCl3의 run.sh를 cascade에
   그대로 복사하면 exit 127로 즉사.
 
-## ⏭ In metal 계산 예정 (2026-07-21, **다음 세션**에서 진행)
+## ⏭ In metal 계산 예정 (**2026-07-22 사용자가 결과 제공**)
 
-사용자가 **bloch에서 Birch-Murnaghan fit + HSE06 AEXX=0.27로 구한 In metal 바닥상태 구조**를
-직접 제공하기로 함. 이게 μ_In → μ_Cl(InCl₃) 구속을 여는 열쇠다.
+사용자가 **bloch 서버에서 Birch-Murnaghan fit + HSE06 AEXX=0.27로 구한 In metal 바닥상태 구조**를
+2026-07-22에 직접 제공하기로 함(2026-07-21 약속). 이게 μ_In → μ_Cl(InCl₃) 구속을 여는 열쇠다.
+⚠받는 즉시 확인할 것: POTCAR가 **In_d**인지, AEXX=0.27·ENCUT=300인지, PRECFOCK이 어느 쪽인지.
 
 **기존 계산 전수 감사 결과 — 셋 다 사용 불가** (`04-Chemical-reservoir/01-In-metal/`):
 

@@ -1,48 +1,40 @@
 ---
 name: cl2_hse06_calc
-description: "Cl2 분자 HSE06 이완 계산 (12-HSE06-Gamma), AEXX=0.27, LHFSKIP, VASP 6.5.1, 2026-06-26 submit"
+description: "Cl2 분자 HSE06(AEXX=0.27) 계산 이력 — 값은 재현·확정됨(→mu_reference_phases). LHFSKIP+ALGO=Normal 선택 근거 보존. ENCUT400은 미완/불필요 판정"
 metadata: 
   node_type: memory
   type: project
   originSessionId: 812cd4f3-de52-4c7a-9645-51849dcce7e5
+  modified: 2026-07-21T09:24:08.894Z
 ---
 
-## Cl2 분자 HSE06 이완 계산 (2026-06-26)
+## Cl₂ 분자 HSE06 계산 (2026-06-26 최초, 2026-07-21 정리)
 
-경로: `33-inAs/__Ligands_and_Chemicals__/05-Cl2-molecule/12-HSE06-Gamma/`
+경로: `33-inAs/__Ligands_and_Chemicals__/05-Cl2-molecule/12-HSE06-Gamma/ENCUT300/`
 
-### 구조
-```
-12-HSE06-Gamma/
-├── ENCUT300/   (job 52423, 완료)
-└── ENCUT400/   (job 52424, 제출됨)
-```
+**⚠ 확정값은 여기가 아니라 [[mu_reference_phases]]에 있음** (μ_Cl(Cl₂) = −2.697957 eV).
+이 메모리는 계산 이력과 설정 근거만 보존한다.
 
-PBE CONTCAR (`11-PBE-Gamma/ENCUT{300,400}/CONTCAR`) → POSCAR로 사용
+### 값 재현 확인 (2026-07-21)
+2026-06-26 기록 **−5.3953 eV**(job 52423) ↔ 2026-07-21 재계산 **−5.39591358 eV**.
+**0.6 meV 일치** → 원 값 유효, 재현성 확인. d(Cl–Cl) = 1.9647 Å (실험 1.9879).
 
-### INCAR 주요 설정
-| 항목 | 값 |
-|------|-----|
-| AEXX | 0.27 |
-| LHFCALC | .TRUE. |
-| HFSCREEN | 0.2 |
-| PRECFOCK | fast |
-| LHFSKIP | .T. |
-| ALGO | Normal |
-| NCORE | 6 |
-| NSW | 1000, IBRION=1, EDIFFG=-0.015 |
+### ENCUT400 — 미완, 그리고 불필요
+당시 job 52424로 제출했다고 기록돼 있으나 **결과가 트리에 없음**(다른 서버에 있거나 유실).
+**추적 불요**: ENCUT=300 세트는 ΔE_f(HCl)를 실험 대비 **2.6 meV**로 재현해 이미 검증
+통과했다([[mu_reference_phases]]). ENCUT 수렴을 ENCUT400으로 확인하려던 원래 계획은
+이 검증으로 대체됨.
 
-VASP 바이너리: `/TGM/Apps/VASP/VASP_BIN/6.5.1/vasp.6.5.1.dftd4.wan90.beef.plugin.lhfskip.gam.x`
+### INCAR 주요 설정 (기준상 세트 공통 footing)
+AEXX=0.27 / LHFCALC=.T. / HFSCREEN=0.2 / **PRECFOCK=fast** / LHFSKIP=.T. /
+ALGO=Normal / NSW=1000, IBRION=1, EDIFFG=−0.015. PBE CONTCAR를 POSCAR로 스테이징.
 
-### ENCUT300 결과 (job 52423)
-- 3 이온 스텝 만에 수렴 (PBE CONTCAR 출발점이라 이미 최적화 근접)
-- Step 1: NELM=100 도달 (SCF 미수렴), F=-5.3863 eV
-- Step 2: F=-5.3950 eV (dE=-8.69×10⁻³)
-- Step 3: F=-5.3953 eV (dE=-3.12×10⁻⁴) ← 수렴
-- **최종 에너지: -5.3953 eV**
+### LHFSKIP + ALGO=Normal 선택 이유 (유효)
+LHFSKIP은 이온 이동 시 HF 교환을 건너뛰고(PBE force로 이완) 마지막 step에만 HF를 포함한다.
+따라서 실질적 SCF가 PBE 수준에서 돌아 ALGO=Normal로도 안정 수렴한다.
+ALGO=All은 HSE 완전 이완(LHFSKIP 없을 때) 권장.
 
-### LHFSKIP + ALGO=Normal 선택 이유
-LHFSKIP은 이온 이동 시 HF 교환을 건너뛰고(PBE force로 이완) 마지막 step에만 HF 포함. 따라서 실질적 SCF는 PBE 수준에서 돌아 ALGO=Normal로도 안정 수렴. ALGO=All은 HSE 완전 이완(LHFSKIP 없을 때) 권장.
-
-**Why:** InAs 화학 포텐셜 계산에서 Cl₂ 분자의 HSE06 에너지가 필요 (AEXX=0.27은 InAs bulk 계산과 동일한 mixing parameter).
-**How to apply:** ENCUT400 완료 후 두 값 비교하여 ENCUT 수렴 확인 후 μ_Cl₂ 계산에 사용.
+### ⚠ 바이너리
+원 기록의 `vasp.6.5.1.**dftd4**.wan90.beef.plugin.lhfskip.gam.x`는 **g2 파티션 전용**이다.
+cascade 노드엔 그 빌드가 없어 그대로 쓰면 exit 127로 즉사 →
+`vasp.6.5.1.wan90.beef.plugin.lhfskip.gam.x` 사용.
