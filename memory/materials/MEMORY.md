@@ -18,8 +18,6 @@
 - [Cl2 HSE06 Calc](cl2_hse06_calc.md) — 계산 이력·설정 근거만 보존. **확정값은 [[mu_reference_phases]]**. 2026-06-26 −5.3953 ↔ 2026-07-21 재계산 −5.39591 **0.6meV 일치**(재현성 확인). ENCUT400은 결과 유실+**추적 불요**(HCl 2.6meV 검증으로 대체). LHFSKIP+ALGO=Normal 근거 유효. ⚠dftd4 빌드는 g2 전용
 - [cascade 병렬 설정](cascade_parallel_settings.md) — cascade 파티션(36코어/노드) 표준: VASP **NCORE=18, NSIM=36**, slabcc **OMP_NUM_THREADS=36**. NCORE 임의변경은 NBANDS 자동값까지 흔듦
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — SLURM 잡 제출 시 jobname을 calc별로 구분되게 작성(예: cd-k2x2x1_G-qp1)
-- [전하상태 선택 규칙](charge_state_selection_rule.md) — **q0 실측 캐리어 수 = gap 내 CTL 개수 상한**(전자수 나열은 ~29건→실제 필요는 소수). 04 확정표. ⚠정정: **Cl-As_In은 도너 아닌 얕은 억셉터**(VB 홀 1개, 02 관성으로 +1/+2 붙이면 부호 반대), V_In EDGE-AMBIGUOUS는 1.1935×1.7379=2.074로 인공물 확정→shallow. ⚠Cl_i-As 단일도너는 Γ-only 잠정(DOS 55606이 결정타). ✅Koopmans 대조 41–68meV 통과=총에너지↔전자구조 대응 실증
-- [stages.yaml DOS/BAND 오염](stages_yaml_dos_band_contamination.md) — **prepare 전에 stages.yaml부터 열어 필요한 스테이지만 살렸는지 확인**(사후삭제보다 안전, 사용자 합의). 02/03 켠 채 prepare하면 신규 case에 DOS+Band가 붙어 **3h→10h+**. prepare 모드 3종 차이. ⚠삭제 판단은 OUTCAR유무·현재 run_case.sh가 **아니라 제출시점**(SLURM은 제출순간 스풀) — 대기잡 폴더는 미사용 폴더와 구별 불가. ⚠joblist.txt는 실행중 case도 포함→중복제출. ⚠ls -A는 컬러 ANSI로 grep 깨짐→find -printf
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — Cl-As_In CHG-DIFF k-point 수렴: k1x1x1 미수렴, k2x2x1_MP=k1_bald 수렴. vaspkit 314는 상대경로 필수
 - [pydefect_2d Setup](pydefect_2d_setup.md) — 03-pydefect_2d/ NK 보정 셋업(Cl-As_In q+1). 유전율은 슬랩 셀-평균(이방성)이어야 함(벌크 직접입력 금지), effective-medium 근사 레시피, 면수직 plateau<벌크는 정상, LOCPOT 원소명 H. 파싱 함정
 - [Surface Defect 1shot Band Workflow](surface_defect_1shot_band_workflow.md) — 02-Cl-passv 3단계(spin-Gam-relax→G221-1shot tetrahedral DOS→hybrid Band). 전 defect ISPIN=2 계산 진행중(2026-07-01)
@@ -60,8 +58,9 @@
 - [Spin Magnetism ← IPR Predictor](spin_magnetism_ipr_predictor.md) — ⚠홀수전자 mag→0은 버그 아님. **frontier IPR 비가 자성을 예외없이 예측**(>6×→171~268meV 자성, <1.1×→1meV 비자성). EENTRO≠0 단독은 오탐(V_Cl-Cl_As 무죄). 진짜 재계산 대상=**In_i_Td_In**(IPR 1.41×, 분열≈σ, mag=0.5027). 위험구간 IPR 1.2~2×. 56meV 엔트로피는 스핀비교에선 5μeV로 상쇄
 - [Energy Column: σ→0 vs TOTEN](energy_column_sigma0_vs_toten.md) — ⚠plot_DFE가 `toten_eV`(자유에너지 F=E−TS) 읽음→smearing 가짜엔트로피가 **홀수전자 결함만 28~42meV 낮게** 만듦(pure는 짝수라 0). 지문=EENTRO/2=σ/(2√π)=0.0282(SIGMA=0.1). CTL 직접 이동(Cl-As_In +1/0: 0.591→0.620). 서열은 안 뒤집힘. 조치=`energy_sigma0_eV` 전환(재계산 0)
 - [Cl_As 음의 형성에너지: 원인 분리](cl_as_negative_eform_reference_slab.md) — **Δn_Cl로 갈린다**. 02 V_Cl-Cl_As(Δn_Cl=0, μ 무관, 양 극한 모두 음수)=**reference 슬랩이 바닥상태 아님**(Cl이 As자리 1.72eV 선호, 참이면 02 전체 +1.08eV 이동). 04 Cl_As/Cl_i(Δn_Cl=+1)=**μ_Cl에 InCl₃ 구속 없음**(Δμ_Cl=0인데 ≤−1.86 이어야, 1.6~1.9eV 위반)→구속 넣으면 04 음수 전부 해소. ⚠μ_Cl 출처계산 트리에 없음
-- [Band-filling 실측 (2x2x1 DOS)](bandfilling_measured_from_dos.md) — 기존 DOS에서 직접 측정: V_Cl-Cl_As **0.330 eV**(밴드370, 정확히 1전자), Cl-As_In 0.186, **Cl_i-As(04) 0.286**(2026-07-22). 전자1개 도너 3건이 0.19~0.33에 모임 → 주입값 **0.78 eV는 2.4~4.2배 과대, 사용금지** 확정. ⚠기준 다를 수 있음(자기 밴드최저점 vs pure CBM 정렬)
+- [Band-filling 실측 (2x2x1 DOS)](bandfilling_measured_from_dos.md) — 기존 DOS에서 직접 측정: V_Cl-Cl_As **0.330 eV**(밴드370, 정확히 1전자), Cl-As_In 0.186. 수동 주입된 **0.78 eV의 2.4배 차이** — 0.78은 출처 불명, 쓰기 전 대조 필수. ⚠기준 다를 수 있음(자기 밴드최저점 vs pure CBM 정렬)
 - [DOS 2x2x1 tetrahedron occ>1](dos_2x2x1_tetrahedron_occ_overshoot.md) — 2×2×1 DOS **계산 문제 없음**. Γ점 occ_up=1.206은 Blöchl tetrahedron 가중치 재분배 아티팩트, **총합은 정확히 1.0000 전자**(single donor 확정). 전하상태 판정엔 무해, E_F 미세판독만 주의. 전자수 목적이면 2×2×1 충분(4×4×1 승격 불필요). Γ-only의 occ=0.5와 혼동 말 것(다른 런, 둘 다 맞음)
+- [charge state selection rule](charge_state_selection_rule.md) — 전하상태 선택 규칙 — q0 실측 캐리어 수가 gap 내 CTL 개수의 상한. 04 defect별 확정표와 Cl-As_In 부호 정정
 
 ## 참고 자료
 - [g1 노드 VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1=Sandy Bridge(AVX만): **VASP 6.5.x/6.4.1 illegal instruction 즉사**, 6.4.3/6.4.2/6.3.2/5.4.4만 동작. slabcc는 로그인노드 금지(nproc=1)→SLURM OMP_NUM_THREADS=12+module load mkl. 대형 슬랩 relax는 LREAL=Auto/ALGO=Fast로 6.4배(statics는 엄격 유지)
@@ -77,3 +76,4 @@
 ## 작업 방식 / 피드백
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex durable memories should be mirrored to both memory/materials and memory/codex, with matching slugs and refreshed indexes
 - [conversation log](conversation_log.md) — Concise dated summaries of Codex conversations in this repo, mirrored with memory/codex/conversation_log.md
+- [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — stages.yaml의 02/03(DOS/Band) 주석을 푼 채 prepare하면 모든 신규 하전 case에 std 다중 k 단계가 딸려 들어가 잡이 3h→10h+ 로 불어난다

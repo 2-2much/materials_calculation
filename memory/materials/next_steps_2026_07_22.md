@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 640e3ab2-68c1-49e1-b49b-8fbed2a39915
-  modified: 2026-07-22T11:17:14.500Z
+  modified: 2026-07-22T08:24:08.392Z
 ---
 
 2026-07-22 세션 종료 시점. 세션 보고서 HTML:
@@ -43,31 +43,10 @@ metadata:
    (01-spin-gam 0.294991 / 00-gam-relax 0.375853, 둘 다 rmse_warning).
 5. **진공 스캔 Γ-only 반복** — 사용자 요청분, 미실행(k-mesh 의존성 확인용).
 
-## 실행 중인 잡 (2026-07-22 저녁 제출)
-
-**cascade2 — DOS/BAND (8노드, k 2×2×1, Y-Γ-X-S, 구간 6/4/6, ISPIN=1, KPAR=4)**
-- 55606 `Cl_i-As` q0(실행 8h+) / 55607 `Cl_As_1` q0 / 55608 `Cl_As_2` q0
-- 완주 후 band-filling 실측·zeroband fatband. **55606은 `Cl_i-As` 단일도너 잠정판정의
-  결정적 확인**이기도 함 → [[charge_state_selection_rule]]
-
-**cascade — Γ-only 하전 스윕 (4노드씩, 00→01→01_opt 3단계, NELM=150)**
-```
-In_As_2 : q0(55645) ─afterok→ q+1(55646) ─afterok→ q-1(55647)
-Cl_As_1 : q+1(55648) ─afterok→ q+2(55649)
-Cl_As_2 : q+1(55650) ─afterok→ q+2(55651)
-Cl_i-As : q+1(55652)
-```
-- 전하 세트 근거·정정은 [[charge_state_selection_rule]]. `In_As_2`만 필수(deep),
-  Cl 3종은 **shallow-limit 작도법 검증용**(사용자 요청).
-- `In_As_2` q±1만 **ISTART=0/ICHARG=2** — bound(5.75×/6.51×)+홀수 전자라 MAGMOM이 실제
-  주입돼야 자성해를 놓치지 않는다(171~268 meV 규모). Cl 3종은 PHS라 1/1 유지.
-  → [[spin_stage_symmetry_never_broken]] [[spin_magnetism_ipr_predictor]]
-- q+2의 afterok은 **하드 의존성이 아니라 기하 시딩용**(q+1 CONTCAR 재사용). q+1이 죽으면
-  의존성만 풀고 독립 재제출 가능. 반면 `In_As_2` q±1은 01_opt이 q0/01 CONTCAR을 참조하는
-  **진짜 의존성**이다.
-- ⚠제출 함정은 [[stages_yaml_dos_band_contamination]]에 별도 기록.
-
 ## 이전 세션에서 넘어온 미결 (계속 유효)
+
+- **Cl 3종 DOS/BAND** — 55606/55607/55608 cascade2에서 실행 중(k 2×2×1, Y-Γ-X-S, 구간 6/4/6).
+  완주 후 band-filling 실측·zeroband fatband.
 - **In metal → μ_Cl(InCl₃)** — 사용자 구조 제공 예정. → [[mu_reference_phases]]
   ⚠현재 04 DFE 서열은 무효(Δn_Cl=+1이 음수 형성E) → [[cl_as_negative_eform_reference_slab]]
 - **band-filling 파이프라인 부재** → [[bandfilling_measured_from_dos]] [[shallow_limit_dfe_construction]]
