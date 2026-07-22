@@ -19,7 +19,7 @@
 - [cascade 병렬 설정](cascade_parallel_settings.md) — cascade 파티션(36코어/노드) 표준: VASP **NCORE=18, NSIM=36**, slabcc **OMP_NUM_THREADS=36**. NCORE 임의변경은 NBANDS 자동값까지 흔듦
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — SLURM 잡 제출 시 jobname을 calc별로 구분되게 작성(예: cd-k2x2x1_G-qp1)
 - [전하상태 선택 규칙](charge_state_selection_rule.md) — **q0 실측 캐리어 수 = gap 내 CTL 개수 상한**(전자수 나열은 ~29건→실제 필요는 소수). 04 확정표. ⚠정정: **Cl-As_In은 도너 아닌 얕은 억셉터**(VB 홀 1개, 02 관성으로 +1/+2 붙이면 부호 반대), V_In EDGE-AMBIGUOUS는 1.1935×1.7379=2.074로 인공물 확정→shallow. ⚠Cl_i-As 단일도너는 Γ-only 잠정(DOS 55606이 결정타). ✅Koopmans 대조 41–68meV 통과=총에너지↔전자구조 대응 실증
-- [stages.yaml DOS/BAND 오염](stages_yaml_dos_band_contamination.md) — 02/03 주석 푼 채 prepare하면 신규 하전 case 전부에 DOS(4-k)+Band(20-k)가 붙어 **3h→10h+**. 제출 끝나면 즉시 재주석. prepare 모드 3종 차이(new-only=case통째skip, missing-stage=run_case.sh만 재생성·수동편집 보존, overwrite=INCAR까지 덮음). ⚠joblist.txt는 실행중 case도 포함→중복제출 주의
+- [stages.yaml DOS/BAND 오염](stages_yaml_dos_band_contamination.md) — **prepare 전에 stages.yaml부터 열어 필요한 스테이지만 살렸는지 확인**(사후삭제보다 안전, 사용자 합의). 02/03 켠 채 prepare하면 신규 case에 DOS+Band가 붙어 **3h→10h+**. prepare 모드 3종 차이. ⚠삭제 판단은 OUTCAR유무·현재 run_case.sh가 **아니라 제출시점**(SLURM은 제출순간 스풀) — 대기잡 폴더는 미사용 폴더와 구별 불가. ⚠joblist.txt는 실행중 case도 포함→중복제출. ⚠ls -A는 컬러 ANSI로 grep 깨짐→find -printf
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — Cl-As_In CHG-DIFF k-point 수렴: k1x1x1 미수렴, k2x2x1_MP=k1_bald 수렴. vaspkit 314는 상대경로 필수
 - [pydefect_2d Setup](pydefect_2d_setup.md) — 03-pydefect_2d/ NK 보정 셋업(Cl-As_In q+1). 유전율은 슬랩 셀-평균(이방성)이어야 함(벌크 직접입력 금지), effective-medium 근사 레시피, 면수직 plateau<벌크는 정상, LOCPOT 원소명 H. 파싱 함정
 - [Surface Defect 1shot Band Workflow](surface_defect_1shot_band_workflow.md) — 02-Cl-passv 3단계(spin-Gam-relax→G221-1shot tetrahedral DOS→hybrid Band). 전 defect ISPIN=2 계산 진행중(2026-07-01)

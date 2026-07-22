@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: a36501db-d568-4425-8924-3511e61d9a67
-  modified: 2026-07-22T11:16:57.833Z
+  modified: 2026-07-22T11:37:16.675Z
 ---
 
 `config/stages.yaml`의 `02_G221-DOS`·`03_Band` 블록을 **주석 해제한 상태로 `prepare_defect_workflow.py`
@@ -17,9 +17,32 @@ metadata:
 한 목적으로 켜두면 이후 다른 목적의 prepare가 전부 오염된다. 2026-07-22에 실제로 발생했고
 제출 직전 검증에서 잡았다.
 
-**How to apply:** DOS/BAND 제출이 끝나면 **즉시 02/03을 다시 주석 처리**한다. 다시 필요하면
-주석만 풀고 해당 case에 `--mode missing-stage`로 재prepare. 제출 전 항상
-`grep -oP 'run_stage "\K[^"]+' <case>/run_case.sh` 로 **스테이지 목록을 눈으로 확인**할 것.
+**How to apply (사전 예방이 원칙 — 2026-07-22 사용자 합의):**
+**`prepare_defect_workflow.py`를 돌리기 전에 항상 `config/stages.yaml`을 먼저 열어
+"지금 이 목적에 필요한 스테이지만 살아있는지" 확인하고 고친 뒤 prepare한다.**
+사후에 지우는 것보다 훨씬 안전하다(아래 삭제 함정 참조). DOS/BAND 제출이 끝나면
+**즉시 02/03을 다시 주석 처리**한다. 제출 전에는 항상
+`grep -oP 'run_stage "\K[^"]+' <case>/run_case.sh` 로 스테이지 목록을 눈으로 확인.
+
+## ⚠ 사후 삭제는 위험하다 — 판단 기준은 OUTCAR이 아니라 **제출 시점**
+
+SLURM은 **제출 순간 배치 스크립트를 스풀**한다. 따라서 나중에 `run_case.sh`를 재생성해도
+이미 큐에 있는 잡은 **옛 스크립트로 실행**된다. 결과적으로:
+
+- `run_case.sh`의 **현재 내용**으로 "이 스테이지는 안 쓰인다"고 판단하면 **틀린다.**
+- **"OUTCAR 없으면 안 쓰인 것"도 틀린다.** 아직 시작 안 한 대기 잡의 스테이지 폴더는
+  입력 4종(INCAR/INCAR.patch.json/KPOINTS/POTCAR)만 있어 **미사용 폴더와 완전히 구별 불가**다.
+
+2026-07-22 실제 사례: `Cl_As_2/q0`의 02/03이 신규 하전 case들과 파일 구성이 똑같았는데,
+**대기 중이던 job 55608이 이어서 실행할 예정**이었다. "OUTCAR 없으면 삭제" 규칙만 적용했으면
+그 잡을 망가뜨렸을 것이다. 올바른 절차:
+
+1. `squeue`로 해당 case를 쓰는 잡이 **큐에 있는지** 확인
+2. 그 잡의 **제출 시점이 stages.yaml 수정 이전인지 이후인지** 판정
+3. 이후 제출분만 삭제 대상. 삭제 전 `find <dir> -type f ! -name INCAR ! -name KPOINTS ...`로 출력물 0건 확인
+
+⚠ `ls -A`는 컬러 별칭 때문에 ANSI 이스케이프가 섞여 `grep` 패턴이 깨진다. 파일 목록 검사는
+`find -printf`를 쓸 것.
 
 ## 함께 쓰는 prepare 모드 선택
 
