@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 640e3ab2-68c1-49e1-b49b-8fbed2a39915
-  modified: 2026-07-22T06:02:51.824Z
+  modified: 2026-07-22T12:00:57.891Z
 ---
 
 ## 정체 (소스 확인 완료, `slabcc_model.cpp`)
@@ -24,6 +24,12 @@ metadata:
 
 ## 결과적 문제
 tolerance는 하드코딩 `1e-4`. q+1의 1.459e-4는 그 **1.46배**(전하의 0.015%)뿐인데 `exit(1)`. **격자로 절대 못 내리는 양을 격자로 내리라 요구하는 구조**라 무한 실패 = 위양성. 반면 q−1은 195배라 정당한 거부.
+
+## ⚠패치는 **서버마다 따로** 해야 한다 (2026-07-22 추가 확인)
+`~/bin`은 공유 마운트가 아니라 **서버 로컬**([[server_fs_git_sync_scope]]). 아래 패치를 한 서버에서 해도 다른 서버의 `~/bin/slabcc`는 **그대로 1e-4 하드코딩**이다.
+실제로 tgm-master에서는 소스에 `SLABCC_CHARGE_TOLERANCE`가 없었고(`grep`·`strings` 둘 다 0건), 바이너리도 2026-06-18자 구버전이었다 → **2026-07-22 tgm-master에서 재패치·재빌드**. 백업 `bin/slabcc.orig.bak`.
+회귀 검증: 저자 배포 NaCl case01을 재실행해 **E_corr = +0.557445 vs 참조 +0.5575** (5e-5 eV 일치) → 패치가 물리를 안 건드림 확인.
+새 서버에서 slabcc를 처음 쓸 때는 `strings ~/bin/slabcc/bin/slabcc | grep SLABCC_CHARGE_TOLERANCE` 로 패치 여부를 먼저 확인할 것.
 
 ## 조치 (2026-07-22)
 `~/bin/slabcc` 소스에 **`SLABCC_CHARGE_TOLERANCE` 환경변수 override** 추가 후 재빌드(`bin/build_local.sh`, icx/icpx MKL=1).

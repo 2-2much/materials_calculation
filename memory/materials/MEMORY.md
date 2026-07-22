@@ -38,6 +38,7 @@
 - [Shallow Donor InAs Supercell Limit](shallow_donor_inas_supercell_limit.md) — ⚠InAs 도너는 a_B=**349Å**(E_B 1.4meV)이라 12.8Å 셀에 **표현 불가** → "밴드구조에 도너준위 안 보임"은 정상이자 유일한 결과. 공명(=안 보이는 게 정상, As_In만 해당) vs 닫힌껍질 이온성 도너(V_Cl-Cl_As) 구분. PHS는 진공 무관(≤25meV, 진공선 자유전자질량으로 감쇠) — 상태 수렴(11Å)과 하전 정전기학(40~50Å)을 혼동 말 것
 
 ## 연구 / 프로젝트
+- [Si-DB KP 재현](si_db_kp_reproduction.md) — KP Fig.4(b) Si dangling bond(q=−1) 재현. 셀 기하 **N=4t+1** 직접 유도. **uncorrected 1.580 vs KP 1.49 일치**(=기하·μ_H·VBM정렬 검증됨)나 E_corr은 2배. 가설 3개 배제(ε/경계, Δρ vs |ψ_d|² σ 1%일치, 2D vs 3D). 국소성 경계 지도: 두꺼워지면 전자가 CBM 유출
 - [진공스캔 VBM 기준 함정](vacuum_scan_vbm_reference_trap.md) — ⚠진공 수렴 판정엔 **q·E_VBM(gauge, VBM=−5.4315+144.855/L)** + **pure↔defect ΔV 정렬** 둘 다 필수. defect셀 HOMO 프록시는 오차를 **절반 이하로 과소평가**(29 vs 64meV). ΔV는 **슬랩 내부 하단**에서(진공창 금지). 결과: E_f는 13.5Å에서 +64meV 벗어나지만 **분해하면 72meV가 host 슬랩 IP 수렴, 하전보정 기여는 −8meV** → **slabcc는 13.5Å에서 이미 수렴**. 조치=결함셀 유지·VBM만 두꺼운 pure에서. E_corr는 발산이 정상, σ 고정해야 수렴 보임
 - [In_As_1 deep level = q 의존](in_as_1_deep_level_q_dependent.md) — 04 In_As_1은 전하상태별로 성격이 갈림: **q+1만 deep**(빈 ↓준위 4.84×VBM, In 3배위 40.6%, 분열 0.382eV, mag 0.994, EENTRO≈0), q0의 2.03×는 pure 90퍼센타일=host 노이즈(근거로 쓰지 말 것), q−1은 1.02×CBM shallow. slabcc 둘 다 미산출이나 q+1은 이산화오차 1.5e-4로 재시도 여지
 - [Next Steps 2026-07-22](next_steps_2026_07_22.md) — ⏭내일: (1)Cl 3종 DOS/BAND **k설정 결정완료**(2×2×1 유지·경로 Y-Γ-X-S 유지·구간 6/6/6→**6/4/6**), 제출전 ICORELEVEL탭·gam→std ISTART=0·stages 주석해제 확인. (2)In metal→μ_Cl(사용자 제공). (3)In_As_1 체인 55603→55604→55605 수확(q±1 홀수+IPR 2.03× 경계=mag·EENTRO 병독). (4)band-filling. (5)미결 V_In·As_In·In_i_Td_In
@@ -63,6 +64,8 @@
 - [DOS 2x2x1 tetrahedron occ>1](dos_2x2x1_tetrahedron_occ_overshoot.md) — 2×2×1 DOS **계산 문제 없음**. Γ점 occ_up=1.206은 Blöchl tetrahedron 가중치 재분배 아티팩트, **총합은 정확히 1.0000 전자**(single donor 확정). 전하상태 판정엔 무해, E_F 미세판독만 주의. 전자수 목적이면 2×2×1 충분(4×4×1 승격 불필요). Γ-only의 occ=0.5와 혼동 말 것(다른 런, 둘 다 맞음)
 
 ## 참고 자료
+- [g1 노드 VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1=Sandy Bridge(AVX만): **VASP 6.5.x/6.4.1 illegal instruction 즉사**, 6.4.3/6.4.2/6.3.2/5.4.4만 동작. slabcc는 로그인노드 금지(nproc=1)→SLURM OMP_NUM_THREADS=12+module load mkl. 대형 슬랩 relax는 LREAL=Auto/ALGO=Fast로 6.4배(statics는 엄격 유지)
+- [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 완전 passivated 청정표면 이완기하는 **lateral 타일링으로 엄밀 전용**(buckling=0 + k-mesh 접힘 등가). 검증 RMS 0.003Å(이완진폭의 3%). 두께·진공 일치 필수, **결함 이완엔 적용 불가**(씨앗만). 540원자 pristine relax 20h→2h, node-h 98% 절약
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
 - [slabcc 전하절단 가드](slabcc_charge_truncation_guard.md) — slabcc "discretization error"=격자 아닌 **minimum-image 꼬리절단**(σ/L, erf곱으로 5자리 재현, ⚠bohr단위). 잘 국소화된 q+1(1.46e-4)도 1e-4 하드코딩 tolerance에 걸려 즉사=위양성 → **SLABCC_CHARGE_TOLERANCE 환경변수 추가·재빌드**(기본동작 불변, 회귀테스트 1e-7 일치). ⚠charge_trivariate는 해법 아님(σ 상한 pinned pancake)
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — slabcc optimize_tolerance는 목표 RMSE 임계값 아니라 BOBYQA 상대수렴 tolerance. 최종 RMSE>tol이어도 정상(local min). 남은 RMSE=등방 Gaussian 모델 한계, 줄이려면 charge_trivariate=yes/다중Gaussian

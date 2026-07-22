@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 5c11235d-04bd-4ac0-b00c-45768164ae48
+  modified: 2026-07-22T12:01:09.876Z
 ---
 
 02-Cl-passv_6L_3x2x1_HSE06에서 slabcc가 As_In·V_Cl-Cl_As에 실패하는 건 **버그가 아니라 물리**다 (2026-07-17, 3-에이전트 교차검증).
@@ -15,6 +16,8 @@ metadata:
 1. **IPR** — **자동화됨(2026-07-17)**: `scripts/ipr_gate.py` → `results/DFE_plots/IPR_gate.csv`. 전 defect·전 charge를 `00_Gam-relax`(Γ-only, ISPIN=1, 전 케이스 공통 단계)에서 PROCAR로 읽어 pure 밴드모서리 대비 비율로 판정. **핵심: q>0은 LUMO(전자를 빼앗긴 준위)를 봐야 함** — HOMO는 host VBM이라 무의미(초판에서 Cl-As_In q+1을 shallow로 오판했다가 수정). 게이트=pure edge의 2× 초과면 bound. 상세 표는 [[defect_states_02_clpassv]], [[vclclas_cohp_donor_evidence]]의 COHP·LPARD가 독립 확인(pure CBM IPR=defect IPR=0.0128).
 2. **E_relax** — 0.28~0.37eV(국소) vs 0.01~0.05eV(밴드류), 10배 이산 갭.
 3. **slabcc 자체 abort** — `optimize_charge_position=yes`로 돌리면 σ가 하드코딩 상한 7Å(src/slabcc_model.cpp:264)을 때리고 exit(1). 프로덕션의 `=no`는 전하를 결함 위치에 묶어 실패를 단순 RMSE 경고로 **강등시켜 숨김** → 별도 게이트 런으로 병행 권장.
+
+**외부 벤치마크에서 독립 재확인 (2026-07-22)**: KP 논문의 Si dangling bond 재현([[si_db_kp_reproduction]])에서 같은 경계가 그대로 나타났다. 슬랩을 두껍게 하면(2/1/1→2/2/2) confinement가 풀려 pure gap이 1.49→1.12eV로 줄고 DB acceptor 준위가 **PBE CBM 위로 밀려나** 추가 전자가 전도대에 부분점유(occ 0~0.83, 분산 0.94eV)로 유출됐고, slabcc 5변형 중 4개가 *"Most probably the model charge is fairly delocalized!"* 로 스스로 abort했다. **고유값 진단과 slabcc abort가 독립적으로 일치** → 이 방침이 InAs 고유 사정이 아니라 method의 일반 한계임을 확인. 또한 **PBE gap 과소평가가 이 경계를 인위적으로 앞당긴다**는 점을 기록해둘 것(두꺼운 슬랩일수록 위험).
 
 **케이스별 결론**: Cl-As_In q+1만 신뢰(E_corr=0.109eV; position 풀어도 0.086 생존 → 23meV를 불확실도로 인용). Cl-As_In q+2=혼합(E_corr 0.376 < q²스케일 0.436 → 2번째 정공은 host VBM), q-1=미확정(trivariate 재시도 가치: z/면내 RMSE 비 ~3배가 전 케이스 일관=실재 이방성). As_In·V_Cl-Cl_As=폐기 후 shallow 재분류.
 
