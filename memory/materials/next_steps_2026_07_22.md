@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: d576a7a9-cf3d-4e2f-9807-95093dc06f3d
-  modified: 2026-07-21T09:31:08.554Z
+  modified: 2026-07-22T02:25:17.252Z
 ---
 
 2026-07-21 세션 종료. 오늘 확정한 것과 내일 집을 것을 분리한다.
@@ -19,7 +19,16 @@ metadata:
 - **Cl 3종 스핀 확정 비자성** — `Cl_i-As`(+0.5meV, mag 0.0010) `Cl_As_1`(+0.2) `Cl_As_2`(+0.5).
   **→ DOS/BAND는 ISPIN=1로 돌리면 된다.**
 
-## ⏭ 1. Cl 3종(`Cl_As_1`·`Cl_i-As`·`Cl_As_2`) DOS/BAND — **k 설정 결정 완료, 바로 제출 가능**
+## ✅ 1. Cl 3종(`Cl_As_1`·`Cl_i-As`·`Cl_As_2`) DOS/BAND — **제출 완료(2026-07-22)**
+
+**제출됨**: JOBID 55606(Cl_i-As, RUNNING)·55607(Cl_As_1)·55608(Cl_As_2), 각 독립 8노드 cascade2.
+config 확정값: k-mesh 2×2×1, 경로 Y-Γ-X-S, Band 구간 **6/4/6**(Γ-X 4점, 총 20-k).
+병렬=cascade2/nodes8/**ntasks32**(=256 rank)/**KPAR4**·NCORE16·NSIM32(ISYM=0라 4-k idle 없음, 256=4×4×16).
+stages.yaml 02/03 주석해제+`spin_mode: nonmagnetic`(ISPIN=1). 02_DOS ISTART=0/ICHARG=1/ISMEAR=-5,
+03_Band ISTART=1/ICHARG=1/ISMEAR=0. 01_opt(q0)은 relax LOCPOT/CHGCAR symlink 재사용(HSE 안 돎).
+→ 완주 후 band-filling(4번) 실측·zeroband fatband. 아래 원논의 보존:
+
+
 
 **μ_Cl을 기다릴 필요 없다**(2번과 직교). μ는 형성에너지에만 들어가고 DOS/BAND는 조성 고정 셀의
 전자구조라 μ가 1.86 eV 움직여도 한 점도 안 변한다. **오히려 DOS가 band-filling(4번)을 낳으므로
