@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 640e3ab2-68c1-49e1-b49b-8fbed2a39915
-  modified: 2026-07-22T05:32:29.257Z
+  modified: 2026-07-22T05:53:47.294Z
 ---
 
 `04-InCl3-passv_6L_4x2x1_HSE06/calc/In_As_1` (2026-07-22 분석). **하나의 결함이 아니라 전하상태별로 성격이 다르다.**
@@ -25,8 +25,13 @@ frontier b512 IPR 2.03×는 **pure 슬랩 자체 점유밴드의 90퍼센타일(
 ## q-1 = shallow (deep 아님)
 b513 ↑↓ E=0.319 occ≈0.50/0.50, 1/IPR=103 → **1.02× CBM**. mag=0.0010, EENTRO=−0.0564(=2×0.0282, 양채널 반점유 지문), E_relax=0.024. 추가전자는 host CB로 들어감 → **q−1에 model-charge 보정은 category error, shallow-limit 작도로.** [[slabcc_delocalized_defect_policy]]
 
-## slabcc (job 55611/55612) — 둘 다 E_corr 미산출, 원인 다름
-둘 다 `[critical] model charge fairly delocalized`로 중단. q+1: σ_opt=3.03Å, RMSE 0.0848, **이산화오차 1.46e-4**(수치 바닥에 붙어 "안 줄어든다" 판정이 오작동 → 재시도 여지 있음). q−1: σ_opt=4.90Å, RMSE 0.111, **이산화오차 1.95e-2**(133배, 진짜 비국소 → 재시도 무의미).
+## slabcc — q+1 **해결 완료**(2026-07-22), q−1은 정당한 거부
+최초 55611/55612 둘 다 `[critical] model charge fairly delocalized`로 중단했으나 원인이 달랐다. 진단·조치는 [[slabcc_charge_truncation_guard]].
+- **q+1 = 위양성이었음.** SLABCC_CHARGE_TOLERANCE=1e-3로 재실행(job 55622, `retry_qp1_tol/`) → 완주.
+  **E_corr = +0.057932 eV** (dV=−0.040742, E_per=0.310607, E_iso=0.327797, σ_opt=3.034 bohr=1.61Å, RMSE 0.0843 V, 선형피팅오차 0.0025). ⚠보정은 정렬항 −q·dV(+0.041)가 지배, 이미지항은 0.017뿐.
+  ⚠모델전하의 13.6%가 슬랩 밖(진공)에 있음(전하가 상부 계면 z=0.617 근처라 자연스러우나 기록해둘 것). 전위오차 이방성 5.25(z축 RMSE 최대).
+- **q−1 = 진짜 비국소**, 재시도 무의미. 누락 1.95e-2(2%)=q+1의 134배. shallow-limit 작도로.
+- `slab_corrections.csv` 갱신 완료(q+1=done+E_corr, q−1=rejected-delocalized).
 
 ## 참고
 보정·ΔV정렬 없는 날것 ε(+1/0) ≈ VBM+0.17 eV (E(0)−E(+1)=−0.9963, pure VBM=−1.1612). KS 준위 VBM+0.40과 자릿수는 맞으나 **E_corr·정렬 빠져 인용 금지**. 관련: [[ipr_gate_tool]], [[bandfilling_measured_from_dos]], [[next_steps_2026_07_22]]
