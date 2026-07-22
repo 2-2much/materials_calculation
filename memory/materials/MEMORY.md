@@ -36,6 +36,7 @@
 - [Shallow Donor InAs Supercell Limit](shallow_donor_inas_supercell_limit.md) — ⚠InAs 도너는 a_B=**349Å**(E_B 1.4meV)이라 12.8Å 셀에 **표현 불가** → "밴드구조에 도너준위 안 보임"은 정상이자 유일한 결과. 공명(=안 보이는 게 정상, As_In만 해당) vs 닫힌껍질 이온성 도너(V_Cl-Cl_As) 구분. PHS는 진공 무관(≤25meV, 진공선 자유전자질량으로 감쇠) — 상태 수렴(11Å)과 하전 정전기학(40~50Å)을 혼동 말 것
 
 ## 연구 / 프로젝트
+- [진공스캔 VBM 기준 함정](vacuum_scan_vbm_reference_trap.md) — ⚠진공 수렴 판정엔 **q·E_VBM(gauge, VBM=−5.4315+144.855/L)** + **pure↔defect ΔV 정렬** 둘 다 필수. defect셀 HOMO 프록시는 오차를 **절반 이하로 과소평가**(29 vs 64meV). ΔV는 **슬랩 내부 하단**에서(진공창 금지). 결과: In_As_1 q+1 **13.5Å은 +64meV 미수렴**. E_corr는 발산이 정상, σ 고정해야 수렴 보임
 - [In_As_1 deep level = q 의존](in_as_1_deep_level_q_dependent.md) — 04 In_As_1은 전하상태별로 성격이 갈림: **q+1만 deep**(빈 ↓준위 4.84×VBM, In 3배위 40.6%, 분열 0.382eV, mag 0.994, EENTRO≈0), q0의 2.03×는 pure 90퍼센타일=host 노이즈(근거로 쓰지 말 것), q−1은 1.02×CBM shallow. slabcc 둘 다 미산출이나 q+1은 이산화오차 1.5e-4로 재시도 여지
 - [Next Steps 2026-07-22](next_steps_2026_07_22.md) — ⏭내일: (1)Cl 3종 DOS/BAND **k설정 결정완료**(2×2×1 유지·경로 Y-Γ-X-S 유지·구간 6/6/6→**6/4/6**), 제출전 ICORELEVEL탭·gam→std ISTART=0·stages 주석해제 확인. (2)In metal→μ_Cl(사용자 제공). (3)In_As_1 체인 55603→55604→55605 수확(q±1 홀수+IPR 2.03× 경계=mag·EENTRO 병독). (4)band-filling. (5)미결 V_In·As_In·In_i_Td_In
 - [Next Steps 2026-07-18](next_steps_2026_07_18.md) — ⏭내일 이어서: (1)미수확 slabcc 잡 55361~55382 확인·수확(bound인 것만), (2)04-InCl3 spin 배치 복구(8개 POSCAR 누락·Cl-As_In walltime), (3)adiabatic DFE 플랜 4개 결정. 오늘 완료분 재작업 금지
