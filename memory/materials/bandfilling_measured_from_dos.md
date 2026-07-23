@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f4bfd3d3-c080-491a-b5ba-f0c4ca66ef42
-  modified: 2026-07-23T06:45:02.188Z
+  modified: 2026-07-23T06:57:34.260Z
 ---
 
 2026-07-20. 02-Cl-passv의 **기존 `02_G221-DOS`(2×2×1, ISPIN=2, ISMEAR=−5)** EIGENVAL에서
@@ -42,9 +42,11 @@ Moss–Burstein 항이 없다. Γ-only가 놓치는 건 같은 LZ 스킴의 **�
 (CBM 아래로 끌려간 host 유래 상태를 CBM으로 되돌리는 항, 부호 **반대**: E_tot을 **올린다**).
 앞으로 "Γ-only = band-filling 누락"이 아니라 **"CBM 기준 PHS shift 누락"**으로 쓸 것.
 
-**mesh ≡ correction 등가 실증**(04 Cl_As_1 q0): 2×2×1로 올리면 E(q0)가 +0.98 eV(2×0.489), 거기서
-Moss–Burstein −0.31이 빠져 순 **+0.67** = Γ-only에 PHS(+0.335×2e) 준 값과 동일.
-**보정이 레버이지 k-mesh가 레버가 아니다.**
+**mesh ≡ correction 등가**: 대수적으로만 성립. 두 보정 모두 도너 전자를 CBM에 놓는 처방이라
+Γ-only+PHS = mesh+MB = N·E_CBM (**출발점만 다르고 도착점 동일**). ⚠**총에너지로는 검증 안 된다**:
+고유값합 ≠ 총에너지. 04 Cl_As_1 q0 동일기하·ISPIN=1·HSE 실측 Γ(00_Gam-relax −562.94316) →
+2×2×1(02_G221-DOS −562.99529) = **−0.052 eV**(도너밴드 고유값합 추정 +0.98과 무관, 부호도 반대).
+다른 밴드 재적분이 압도. **"+0.98 eV"를 총에너지 변화로 인용하지 말 것.**
 
 ## Γ-only는 band-filling을 구조적으로 0으로 오판(⚠위에서 정정됨)
 k-분해 가중 적분이라 k점 1개면 정의상 0. **DFE 에너지가 전부 `00_Gam-relax`(Γ-only)에서 나오므로
