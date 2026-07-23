@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 640e3ab2-68c1-49e1-b49b-8fbed2a39915
-  modified: 2026-07-22T12:00:57.891Z
+  modified: 2026-07-23T06:15:05.617Z
 ---
 
 ## 정체 (소스 확인 완료, `slabcc_model.cpp`)
@@ -37,6 +37,15 @@ tolerance는 하드코딩 `1e-4`. q+1의 1.459e-4는 그 **1.46배**(전하의 0
 사용법: `SLABCC_CHARGE_TOLERANCE=1e-3 slabcc`
 **왜 1e-3**: q+1(1.459e-4)의 6.9배 위 ↔ q−1(1.954e-2)의 20배 아래 = 두 케이스 사이 빈 구간. 3e-4~5e-3 어디를 골라도 판정 동일하므로 **값에 민감하지 않음**.
 구 바이너리 백업 `bin/slabcc.orig_1e-4.bak`.
+
+## 파이프라인 배선 완료 (2026-07-23)
+손으로 잡 스크립트를 고치던 것을 **config 키로 승격**: `config/slab_correction.yaml`의 **`slabcc_charge_tolerance`** (null=slabcc 기본 1e-4 유지). CLI 오버라이드 `run_slab_corrections.py --charge-tolerance 1e-3`.
+- slurm 스크립트와 local 실행 **양쪽** 모두 env 주입.
+- **미지원 바이너리 가드**: 값이 설정됐는데 바이너리에 `SLABCC_CHARGE_TOLERANCE` 심볼이 없으면 실행 전 에러(서버별 패치 누락이 "설정이 무시됨"으로 조용히 나타나는 걸 막음 — 위 서버별 주의사항 참조).
+- 사용된 값은 `slab_corrections.csv`의 **`charge_tolerance` 열**에 기록.
+- 02/04 계산폴더 + `__Defect_Package_Reference__`(scripts+example config+README) 모두 반영. **아직 커밋/푸시 안 함.**
+
+04 프로덕션 실행(1e-3, 2026-07-23): In_As_1 q+1 **E_corr=+0.057932 재현**(retry 폴더 값과 일치). **Cl_As_1 q+1 누락 1.60e-2 / q+2 8.28e-2 = 진짜 비국소** → tolerance 무관, shallow-limit 작도 대상.
 
 ## 회귀테스트 (재빌드 검증용, 재사용 가능)
 `tests/`에 개발자 제공 참조출력(`output/gas/`, `output/gaussian/` 각 30파일)이 있고 `tests/makefile`이 numdiff로 대조하는 구조(평균화 .dat+slabcc.out은 rel 1e-3/abs 1e-5, 원시 LOCPOT/CHGCAR은 abs 1e-4).
