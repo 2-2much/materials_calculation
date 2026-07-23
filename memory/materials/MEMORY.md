@@ -63,7 +63,7 @@
 - [charge state selection rule](charge_state_selection_rule.md) — 전하상태 선택 규칙 — q0 실측 캐리어 수가 gap 내 CTL 개수의 상한. 04 defect별 확정표와 Cl-As_In 부호 정정
 
 ## 참고 자료
-- [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — **g1·g2 전부** Sandy Bridge E5-2630(avx만, avx2/512 없음): **VASP 6.5.x/6.4.1 illegal instruction 즉사**, 6.4.3/6.4.2/6.3.2/5.4.4만 동작. slabcc는 로그인노드 금지(nproc=1)→SLURM OMP_NUM_THREADS=12+module load mkl. 대형 슬랩 relax는 LREAL=Auto/ALGO=Fast로 6.4배(statics는 엄격 유지)
+- [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1·g2 전부 Sandy Bridge(avx만). ⚠**버전이 아니라 빌드 변형이 문제**: `*.mpi.x` 계열만 illegal instruction, **프로젝트 표준 6.5.1 lhfskip 빌드·6.6.0은 정상**. 폴더 단위로 일반화 말고 바이너리 단위로 30초 테스트. slabcc는 로그인노드 금지→SLURM OMP12+module load mkl
 - [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 완전 passivated 청정표면 이완기하는 **lateral 타일링으로 엄밀 전용**(buckling=0 + k-mesh 접힘 등가). 검증 RMS 0.003Å(이완진폭의 3%). 두께·진공 일치 필수, **결함 이완엔 적용 불가**(씨앗만). 540원자 pristine relax 20h→2h, node-h 98% 절약
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
 - [slabcc 전하절단 가드](slabcc_charge_truncation_guard.md) — slabcc "discretization error"=격자 아닌 **minimum-image 꼬리절단**(σ/L, erf곱으로 5자리 재현, ⚠bohr단위). 잘 국소화된 q+1(1.46e-4)도 1e-4 하드코딩 tolerance에 걸려 즉사=위양성 → **SLABCC_CHARGE_TOLERANCE 환경변수 추가·재빌드**(기본동작 불변, 회귀테스트 1e-7 일치). ⚠charge_trivariate는 해법 아님(σ 상한 pinned pancake)
