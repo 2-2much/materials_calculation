@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f4bfd3d3-c080-491a-b5ba-f0c4ca66ef42
-  modified: 2026-07-20T05:28:59.895Z
+  modified: 2026-07-23T06:45:02.188Z
 ---
 
 2026-07-20. 02-Cl-passv의 **기존 `02_G221-DOS`(2×2×1, ISPIN=2, ISMEAR=−5)** EIGENVAL에서
@@ -32,7 +32,21 @@ shallow-limit anchor를 −1.078 → −1.858로 **780 meV** 움직이는 항이
 정식 Lany–Zunger는 **pure CBM** 기준이라 셀 간 정렬(core-level)이 필요하다.
 그래도 규모 차이가 커서 0.78을 그대로 쓰기 전에 대조 필수.
 
-## Γ-only는 band-filling을 구조적으로 0으로 오판
+## ✅기준 문제 해결 + 용어 정정 (2026-07-23, 교차검증 2인)
+위 ⚠는 **맞았다**. 0.330/0.186은 **결함 밴드 자기 최저점** 기준이라 Lany–Zunger 항이 아니다.
+**pure CBM 기준으로 환산하면 V_Cl-Cl_As = +0.219 eV**(pure 2×2×1 CBM=+0.4397 Γ 기준). 0.330을 LZ
+band-filling으로 쓰면 **~50% 과보정**.
+
+⚠**"Γ-only가 band-filling을 0으로 오판"은 틀린 표현**이다. Γ-only의 0은 **옳다** — 밴드 바닥엔
+Moss–Burstein 항이 없다. Γ-only가 놓치는 건 같은 LZ 스킴의 **다른 가지, PHS pull-down**
+(CBM 아래로 끌려간 host 유래 상태를 CBM으로 되돌리는 항, 부호 **반대**: E_tot을 **올린다**).
+앞으로 "Γ-only = band-filling 누락"이 아니라 **"CBM 기준 PHS shift 누락"**으로 쓸 것.
+
+**mesh ≡ correction 등가 실증**(04 Cl_As_1 q0): 2×2×1로 올리면 E(q0)가 +0.98 eV(2×0.489), 거기서
+Moss–Burstein −0.31이 빠져 순 **+0.67** = Γ-only에 PHS(+0.335×2e) 준 값과 동일.
+**보정이 레버이지 k-mesh가 레버가 아니다.**
+
+## Γ-only는 band-filling을 구조적으로 0으로 오판(⚠위에서 정정됨)
 k-분해 가중 적분이라 k점 1개면 정의상 0. **DFE 에너지가 전부 `00_Gam-relax`(Γ-only)에서 나오므로
 파이프라인에 band-filling이 반영될 자리가 없다.** 4 k점(2×2×1)도 성긴 적분이라 위 0.33은
 추정치로 취급할 것.
