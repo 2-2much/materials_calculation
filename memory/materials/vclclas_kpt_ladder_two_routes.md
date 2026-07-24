@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: ad99f4fe-653c-4334-94a6-19f7a46a69b2
-  modified: 2026-07-23T11:11:20.418Z
+  modified: 2026-07-24T08:04:22.136Z
 ---
 
 2026-07-23. `02-Cl-passv/calc/__k-point_test__/Vcl_neutral_PBEd/` 에 **q+1과 k2x2x1_MP를 추가**해
@@ -28,7 +28,16 @@ ISPIN=1, ISMEAR=0 σ=0.05, ENCUT300, PREC=N, 격자 pinned, NBANDS=440.
 ## 잔차 0.12 eV = 하전 셀 유한크기 (k도 functional도 아님)
 - PBE-d **−0.121** ↔ HSE(Γ+PHS, 1.136 vs gap 1.2505) **−0.115**. **갭이 3배 다른데 11 meV 일치**
   → 갭 의존 아님 = 정전기적 유한크기 지문. 진공 14.6 Å(하한 40~50), slabcc는 이 결함 거부.
-- 고칠 방법은 lateral 셀 확대·진공 확대이지 mesh·functional 아님.
+
+## ⚠raw ε는 진공-미수렴 = 총에너지 CTL 자체가 관측량 아님 (2026-07-24 사용자 지적, 확정)
+`ε=E(q0)−E(q+1)−E_VBM`에서 **E(q+1)만** jellium 배경을 가짐(q0·pure는 중성) → **상쇄 없음**.
+하전 슬랩 총에너지는 jellium 자기에너지 `∝q²·L_z/A`로 **진공에 선형 발산**(Komsa-Pasquarello).
+**진공 늘리면 ε는 수렴이 아니라 더 틀려진다.** 이 발산 항이 곧 미보정 image-charge/slabcc 항
+(=잔차 0.12 eV의 일부). 고칠 방법이 "진공 확대"라는 이전 서술은 **틀림**(오히려 악화).
+- **전하 바뀌는 차분만 발산.** 같은 전하끼리는 monopole 상쇄=진공 안전:
+  E_rel(+1,Rq0−Rq+1) 무관([[scpc_erel_vacuum_convergence]]), **band-filling도 q0 전용이라 무관**.
+- → shallow-limit이 옳은 **세 번째 독립 논거**(E(q+1) 미사용). 앞 둘: a_B=349Å 미표현·IPR≡pure CBM.
+- 실증 TODO: E(q+1) 진공스캔(같은 기하 15/25/35/45Å)으로 선형증가 보이기(PBE 저렴).
 
 ## ⚠ raw k-refinement은 답을 **악화**시킨다
 raw ε: 0.211(Γ) → 0.601 → 0.730 → 0.723, gap 0.425 → **CBM을 0.30 eV 넘어섬**.
