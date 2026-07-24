@@ -63,6 +63,7 @@
 - [Cl_As shallow-donor kink 진단](cl_as_shallow_donor_kink_diagnosis.md) — 04 Cl_As DFE 갭내 kink는 **k-point 문제 아님**. 정체=PHS pull-down 0.335 eV(고유값·총에너지 두 경로 2 meV 일치). 보정 3항(image-charge·alignment·MB)은 전부 반대부호/0 → 보정으로 못 고침. a_B=348Å로 어떤 mesh도 무효. PHS 넣으면 ε(+1/0) 0.919→1.295≈CBM(ε(+2/+1)은 미해결). k는 **deep 결함**(Γ가 0.19~0.59 eV 낮게 편향)에만 필요. ⚠진공 18.5Å≪40~50Å 하한
 - [DOS 2x2x1 tetrahedron occ>1](dos_2x2x1_tetrahedron_occ_overshoot.md) — 2×2×1 DOS **계산 문제 없음**. Γ점 occ_up=1.206은 Blöchl tetrahedron 가중치 재분배 아티팩트, **총합은 정확히 1.0000 전자**(single donor 확정). 전하상태 판정엔 무해, E_F 미세판독만 주의. 전자수 목적이면 2×2×1 충분(4×4×1 승격 불필요). Γ-only의 occ=0.5와 혼동 말 것(다른 런, 둘 다 맞음)
 - [charge state selection rule](charge_state_selection_rule.md) — 전하상태 선택 규칙 — q0 실측 캐리어 수가 gap 내 CTL 개수의 상한. 04 defect별 확정표와 Cl-As_In 부호 정정
+- [Cl shallow donor: gap엔 defect state 없음](cl_shallow_donor_no_gap_state.md) — Cl_As·Cl_i-As의 defect state는 gap이 아니라 ⑴-6eV 깊은 결합공명(Cl 3p, passivation Cl과 구별불가=비특이적; Cl_i-As만 Cl-As σ 고유)+⑵host CB로 기증된 delocalized 전자. **gap내 defect무게=정확히 0**. IPR 검증(도너밴드 0.018–0.042≈host VBM, N_eff 24–55, 분산 0.83–1.05eV; 국소밴드 0.66–0.99 대비 15–40×↓). Cl_As=이중·Cl_i-As=단일도너. n형=gap준위 아닌 전자수. defect원자: 02 atom95/04 Cl_As atom116/Cl_i-As atom129+As85(기하확정, defects.yaml인덱스≠03_Band)
 
 ## 참고 자료
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1·g2 전부 Sandy Bridge(avx만). ⚠**버전이 아니라 빌드 변형이 문제**: `*.mpi.x` 계열만 illegal instruction, **프로젝트 표준 6.5.1 lhfskip 빌드·6.6.0은 정상**. 폴더 단위로 일반화 말고 바이너리 단위로 30초 테스트. slabcc는 로그인노드 금지→SLURM OMP12+module load mkl
