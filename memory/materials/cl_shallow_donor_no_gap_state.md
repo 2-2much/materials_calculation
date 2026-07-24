@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: a36501db-d568-4425-8924-3511e61d9a67
-  modified: 2026-07-24T06:04:17.201Z
+  modified: 2026-07-24T06:48:06.399Z
 ---
 
 2026-07-24. 02 `V_Cl-Cl_As`(Cl_As antisite)·04 `Cl_As_1/Cl_As_2`(Cl_As antisite)·`Cl_i-As`(Cl 흡착)
@@ -31,6 +31,17 @@ defect 원자에 projection한 fatband(`zeroband.py`) + 03_Band PROCAR 밴드별
    IPR: Cl_As 0.041–0.042, Cl_i-As 0.018–0.022 (host VBM 0.025 수준, N_eff 24–55원자).
    진짜 localized 밴드 IPR 0.66–0.99 대비 **15–40× 낮음**. 분산폭 0.83–1.05 eV.
    defect-Cl 성분 3–4× bg(Cl_As, >96% host) / 1.7× bg(Cl_i-As, ~99% host).
+
+## 전자 수 세기 (2026-07-24 검증)
+Cl_As는 **새 밴드(상태)를 만들지 않는다**: As(s+p)↔Cl(s+p) 교환이라 궤도·상태 총수 보존
+(pure NBANDS=Cl_As NBANDS=544, 원자수 128 동일). 늘어난 건 **전자 2개뿐**
+(pure NELECT=1016→508밴드 채움 VBM=508; Cl_As_1 NELECT=1018). 그 2전자가 **최저 전도대
+band 509를 채운다**(밴드≤508 occ=2 전부, 밴드≥509 적분=정확히 2.0e). VBM은 pure·doped 모두 508.
+"defect band를 weight 작아 못 잡는다"는 오해 — band 509를 이미 정확히 포착했고, weight 작음(≈host)이
+물리적 진실. band 509=약한 antisite Cl(최대 6.4×bg, IPR 3.7×균일)+최대분산(0.83eV)=host CBM에
+혼성된 resonant/shallow 도너 지문(순수 host와 국소준위의 중간), 그래도 localized 준위 아님.
+유효질량: E_B=1.36meV, a_B=348.6Å(셀 27배). 셀↑→pull-down 0.33eV→1.4meV로 줄어 band 509가
+CBM에 merge(gap에 준위 나타나는 게 아니라 사라짐)+파동함수 349Å로 퍼져 Cl성분→0. 작은 셀이 과장.
 
 ## 결론
 gap엔 아무 준위도 없다. **n형은 gap 도너준위가 아니라 순전히 전자수**(Cl 여분 전자가
