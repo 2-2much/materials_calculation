@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 60429d6d-24fe-4d48-bad7-63259cb37cb9
-  modified: 2026-07-27T01:17:18.312Z
+  modified: 2026-07-27T03:06:21.530Z
 ---
 
 2026-07-27. (110) 결함 계산을 (100) 으로 확장하기 위해 아래 pseudo-H 패시베이션 /
@@ -36,23 +36,39 @@ MIC 로 세면 모든 배위수가 정확히 절반(4→2, 2→1)으로 나와 �
 검산기는 면내 이미지 (−1..1)² 를 전부 순회해야 한다. 또 pseudo-H 끼리는 결합이 아니므로
 H–H cutoff 를 0 으로 둬야 한다(안 그러면 이미지 H 를 결합으로 오인).
 
-## Cl / acetate 피복률 = **0.75 ML** (electron counting 으로 확정)
+## 리간드 피복률 = **In-다이머당 1개** (다이머 분지가 이긴다)
 
-표면 In 1개당 Cl 몇 개를 붙일지는 임의 선택이 아니다.
-In–Cl 2전자 결합에서 In 이 3/4 e → Cl 이 5/4 e 를 내야 하고, Cl 에 7 − 5/4 = 5.75 e 만
-남는데 lone pair 는 6 e 여야 한다 → **Cl 하나당 0.25 e 부족**.
-반대로 안 채운 In dangling bond 는 3/4 e 를 갖고 있어 **0.75 e 과잉**.
+⚠ **2026-07-27 정정.** 처음 electron counting 으로 "표면 In 당 1.5개(=dangling bond 의 3/4)"
+를 냈는데, 그것은 **비재구성 표면 분지**였다. 실제 표면은 (2×1) In-다이머를 이루고
+그러면 답이 3배 낮아진다. 두 분지 모두 실재하며 다이머 쪽이 안정하다.
 
-| 피복률 | 1×1 당 수지 | |
-|---|---|---|
-| 2 Cl/In (1.0 ML) | −0.50 e | metallic |
-| 1 Cl/In (0.5 ML) | +0.50 e | metallic |
-| **3 Cl / 2 In (0.75 ML)** | 3(−0.25) + 1(+0.75) = **0** | **autocompensated** |
+**출전**: `~/papers/QDs_from_QnMSG/2017_ChemComm_Atomic models for anionic ligand passivation.PDF`
+(Ko, Yoo, Kim — KAIST, 같은 연구실). InAs(100) 을 직접 다룬다. 본문 그대로:
+> "It is not trivial to passivate the **1.5 DBs** of InAs(100) with typical monovalent anionic
+> ligands. For this purpose, the surface **first needs a (2×1) reconstruction through the
+> formation of In–In dimerization**. Then, as the In–In metal-bond will consume two electrons
+> among 3 DBs, **one additional anion can passivate the remaining 1 DB** in the In–In dimer."
 
-→ **1×1 에 Cl 을 꽉 채우면 반드시 금속이 나온다.** (2×1) 이상이 필수.
-monodentate acetate 도 X-type 1전자 공여체라 counting 동일(bidentate bridging 은 다름).
-이 제약이 결함 supercell 크기를 사실상 결정한다: (110) 3×2(13.13×12.38 Å) 대응은
-(100) 3×3(13.13×13.13 Å) 인데 짝수 방향이 필요하므로 **4×2 또는 4×4** 검토.
+다이머 1개(표면 In 2개) + 리간드 1개 수지: 채울 상태 = 다이머결합 1 + In–Cl 1 + Cl lone pair 3
+= 5개 = **10 e**. 쓸 전자 = In 2개가 벌크결합에 3/4씩 내주고 남긴 **3 e** + Cl **7 e** = **10 e**. 정확히 맞음.
+
+**논문 정량값 (PBE, meV/Å²)** — 표면 안정화에너지 / bare 표면에너지:
+
+| 계 | 값 |
+|---|---|
+| bare b(110) / b(100) / b(111) | 28 / 78 / 55 |
+| **lp(100) (2×1) acetate (다이머 + 50%)** | **44** |
+| cp(100) (2×1) amine–halide | 102 |
+| **비다이머 150% coverage** (= 내 최초 계산 분지) | **24** ← steric hindrance 로 짐 |
+
+⚠ 논문의 (100) 할라이드 계는 **amine–halide 공동 패시베이션**이다. **Cl 단독 (100) 은 논문에 없다.**
+전자수지상 "perfectly passivated by single anions" 라 성립해야 하지만, Cl monodentate 는
+다이머당 **빈 In dangling bond 를 1개 남기므로**(acetate 는 bidentate 로 두 자리를 다 채움)
+갭 준위 생성 위험이 실재한다 → 직접 gap 을 확인해야 한다.
+
+**논문 SI 계산조건이 우리 셋업과 일치**: PBE+PAW, In 4d¹⁰5s²5p¹(=In_d), 진공 ~15 Å,
+"polar surface slabs 는 cation-rich 앞면 + pseudohydrogen 패시베이션한 anion-rich 뒷면의
+**비대칭 슬랩**", 힘 0.020 eV/Å, ENCUT 400.
 
 ## 그 외 미리 잡아둔 것
 
