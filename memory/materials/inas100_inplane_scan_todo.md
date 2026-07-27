@@ -82,7 +82,13 @@ p4×4/p4×5 는 run script 의 `setmag` 훅이 각 단계 POSCAR 에서 매번 �
 PENDING 잡에 반영 안 됨. 반드시 scancel → 수정 → 재제출. (INCAR/KPOINTS/POSCAR 는
 런타임에 읽으므로 그냥 고치면 됨.)
 
-**p4×3 재이완 판정 = `p4x3/00b_magmom-probe`**: 기본 MAGMOM 이완이 `mag≈0.70 μB` 로
+**게이트 3겹(2026-07-27 밤)**: ⓐ p4×3 1shot/band = `01_1shot` 디렉토리를
+`01_1shot.__on-hold__` 로 옮겨 53506 이 relax 직후 exit 1, ⓑ p4×4(53509)·ⓒ p4×5(53510)
+= `scontrol hold`. 순서는 relax 수렴 → 프로브 → MAGMOM 결정 → p4×3 1shot/band → release.
+진행 상태는 폴더의 **STATUS.md** 에 유지한다.
+
+**p4×3 재이완 판정 = `p4x3/00b_magmom-probe`** (변형은 **m2 = 클러스터 2 μB 하나만**;
+기준선은 이완 최종 SCF 자체가 같은 기하·Γ·같은 EDIFF 의 기본-MAGMOM 단일점이라 별도 런 불요): 기본 MAGMOM 이완이 `mag≈0.70 μB` 로
 앉았는데, 같은 기하·같은 k(Γ)·같은 EDIFF 로 **MAGMOM 만 targeted 로 바꾼 단일점**을 돌려
 이완 최종 E0 와 직접 비교한다. MAGMOM 은 초기 추측일 뿐이고 01_1shot 은 ISTART=0 이라
 스핀을 재수렴하므로, 이완의 스핀해는 **기하를 통해서만** 하류에 영향을 준다.
