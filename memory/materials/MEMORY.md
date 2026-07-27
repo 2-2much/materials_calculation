@@ -81,3 +81,4 @@
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex durable memories should be mirrored to both memory/materials and memory/codex, with matching slugs and refreshed indexes
 - [conversation log](conversation_log.md) — Concise dated summaries of Codex conversations in this repo, mirrored with memory/codex/conversation_log.md
 - [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — stages.yaml의 02/03(DOS/Band) 주석을 푼 채 prepare하면 모든 신규 하전 case에 std 다중 k 단계가 딸려 들어가 잡이 3h→10h+ 로 불어난다
+- [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 04-InCl3 Cl수 보존 complex 6잡(HSE neutral) 확정. 목적은 μ_Cl 회피가 아니라 참조슬랩 바닥상태 검증(E_f<0이면 표면모델이 틀림). ⚠type=antisite로 slabcc 중심 지정(vacancy면 이웃평균이 1.3~3.9Å 이탈)
