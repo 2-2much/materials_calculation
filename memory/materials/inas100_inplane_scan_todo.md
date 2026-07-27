@@ -48,7 +48,19 @@ As_In 은 아래 As 2 + dimer 파트너 In 1 + 새 Cl 1 = 4배위, Cl–Cl 최�
 
 ## 제출 상태 (2026-07-27)
 
-53502 p4×3 → (afterok) 53504 p4×4 / 53505 p4×5, 53503 pure_p4×3. 전부 g2 12노드.
+**현재: 53506 p4×3 → (afterok) 53507 p4×4 / 53508 p4×5, 53503 pure_p4×3.** 전부 g2 12노드.
+
+⚠ **이완 설정 번복**: 처음 EDIFF=1E-4 + IBRION=1(속도용)로 갔더니 **131 이온 스텝에서
+dE 가 ±5e-5 eV 로 부호 진동**하며 수렴 실패 — 힘 노이즈가 EDIFFG 0.015 와 같은 자릿수.
+`INCAR0` 주석이 경고하던 그 현상. → **EDIFF=1E-6 + IBRION=2** 로 전환(ISIF=0 유지).
+STOPCAR(LSTOP=.TRUE.)로 정지 → CONTCAR 이어받아 재시작(53502 폐기, run1 은
+`p4x3/00_Gam-relax/__run1_EDIFF1e-4_IBRION1/` 에 보존).
+⚠⚠ **이완 단계에 LWAVE/LCHARG=.FALSE. 를 두면 STOPCAR 재시작 때 WAVECAR/CHGCAR 가
+0바이트라 못 물려받는다** — 지금은 둘 다 .TRUE.. run_*.sh 는 재개 가능(STOPCAR 삭제 →
+CONTCAR→POSCAR → WAVECAR 유효시 ISTART=1/ICHARG=0).
+⚠ 의존 잡 재연결 순서: **먼저 p4×4/p4×5 를 scancel** 하고 p4×3 을 멈춰야 레이스가 없다.
+run1 성과: As_In–Cl **2.374 → 2.205 Å 로 결합**(AsCl₃ 2.16 Å 정합), 아래 As 2.682 → 2.517 Å.
+**(110) 에서 겪은 Cl 탈착은 (100) 에선 안 일어났다.** mag = 0.70 μB (자성해 확인).
 p4×4/p4×5 는 잡 시작 시 `expand_from_p4x3.py --install N` 이 **이완된 p4×3 를 통째로
 유지하고 pristine b-row 를 끝단에 삽입**해 POSCAR 를 만든다(=(110) a-스캔의 strip
 insertion. 이상 위치 재구성은 Cl 탈착을 부른다). registry 는 b-주기-1 덕에 엄밀.
