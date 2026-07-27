@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 57d09abc-dc4b-4d3d-8be0-c86f99fef821
-  modified: 2026-07-27T08:06:42.377Z
+  modified: 2026-07-27T08:08:53.368Z
 ---
 
 Defect 계산 패키지의 정본 git repo: `/mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/`
@@ -14,9 +14,11 @@ Defect 계산 패키지의 정본 git repo: `/mnt/hohenberg/byuid/jaegwan97/scri
 ## ⚠️ push용 작업 clone (2026-07-27 확인): `__Defect_Package_Reference__`
 - 패키지 커밋/푸시는 **`12-Surace-defect_calculation/__Defect_Package_Reference__/`** 에서 한다(사용자 지정).
   origin=`2-2much/Defect_Package`, 브랜치 `master`, 이 clone이 origin과 동기 상태.
-- 로컬 사본 3개의 서열(2026-07-27): `__Defect_Package_Reference__` = origin/master(최신) >
-  `/mnt/hohenberg/.../Defect_Package`(ff92ac5, 1커밋 뒤) > `~/bin/playground/Defect_Package`(e1dc832, 많이 뒤).
-  → **"정본=hohenberg"는 더 이상 최신 보장 아님**. 패키지 파일 최신본을 찾을 땐 origin/이 clone 기준.
+- 2026-07-27 정리 후: `__Defect_Package_Reference__` = `/mnt/hohenberg/.../Defect_Package` = origin/master
+  (모두 e70df10, ff-only pull로 정렬). 하지만 **hohenberg가 자동으로 최신인 건 아님** — push는
+  Reference clone에서 하므로 hohenberg는 그때그때 `git -C … pull` 필요. 최신 기준은 origin.
+- ⚠️`~/bin/playground/Defect_Package`는 **사용자의 개인 테스트장(sandbox)** — 뒤처져 있어도 정상이고,
+  동기화·비교 대상에서 **제외**할 것.
 - 계산폴더(`02-Cl-passv…`, `04-InCl3-passv…`)의 `scripts/`는 패키지 사본 + 계산 전용 스크립트가 섞여 있고,
   두 계산폴더끼리는 대체로 동일(md5 일치). 패키지에 올릴 땐 하드코딩 경로 유무만 grep으로 확인 후 복사.
 - 2026-07-27: `scripts/ipr_gate.py`를 이 clone에서 커밋·push(e70df10). 계산폴더 두 곳 사본은 byte-identical이었음.
