@@ -5,10 +5,21 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 57d09abc-dc4b-4d3d-8be0-c86f99fef821
+  modified: 2026-07-27T08:06:42.377Z
 ---
 
 Defect 계산 패키지의 정본 git repo: `/mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/`
 (심링크 해석 시 `/mnt/hohenberg/byname/정재관/scripts/Defect_Package`). tgm-master에서 마운트로 직접 쓰기 가능.
+
+## ⚠️ push용 작업 clone (2026-07-27 확인): `__Defect_Package_Reference__`
+- 패키지 커밋/푸시는 **`12-Surace-defect_calculation/__Defect_Package_Reference__/`** 에서 한다(사용자 지정).
+  origin=`2-2much/Defect_Package`, 브랜치 `master`, 이 clone이 origin과 동기 상태.
+- 로컬 사본 3개의 서열(2026-07-27): `__Defect_Package_Reference__` = origin/master(최신) >
+  `/mnt/hohenberg/.../Defect_Package`(ff92ac5, 1커밋 뒤) > `~/bin/playground/Defect_Package`(e1dc832, 많이 뒤).
+  → **"정본=hohenberg"는 더 이상 최신 보장 아님**. 패키지 파일 최신본을 찾을 땐 origin/이 clone 기준.
+- 계산폴더(`02-Cl-passv…`, `04-InCl3-passv…`)의 `scripts/`는 패키지 사본 + 계산 전용 스크립트가 섞여 있고,
+  두 계산폴더끼리는 대체로 동일(md5 일치). 패키지에 올릴 땐 하드코딩 경로 유무만 grep으로 확인 후 복사.
+- 2026-07-27: `scripts/ipr_gate.py`를 이 clone에서 커밋·push(e70df10). 계산폴더 두 곳 사본은 byte-identical이었음.
 
 ## ⚠️ 최신 상태 (2026-07-16): GitHub 배포 + 패키지 재구성 (이 아래 옛 "원격 없음" 전제 supersede)
 - **GitHub 원격 생성**: `https://github.com/2-2much/Defect_Package` (**private**, org=2-2much, materials와 동일). 정본에 `origin` 연결·push 완료. 이제 다른 서버/계산노드에서 `git clone`/`git pull`로 배포. (이전 "로컬 only 원격 없음" 무효.)
