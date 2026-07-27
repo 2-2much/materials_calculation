@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 0d9c4228-ecec-42a3-8616-10c187b341a1
-  modified: 2026-07-27T06:33:43.863Z
+  modified: 2026-07-27T06:49:06.581Z
 ---
 
 2026-07-27, `12-Surace-defect_calculation/04-InCl3-passv_6L_4x2x1_HSE06`.
@@ -44,6 +44,14 @@ V_Cl은 보상자이므로 물리적으로도 antisite가 전하중심). `refere
 ⚠ 남은 구멍: **V_Cl_br/V_Cl_te는 여전히 vacancy 평균이라 1.27/2.32Å 어긋남**.
 q0에선 무해하나 하전 가면 손봐야 함(center_from_structure가 defect_center_frac을
 문자 그대로 쓰도록 패치하는 게 최소 수정).
+
+**MAGMOM 씨앗 규칙**(build_magmom_string): `reference_neighbors`는 **무조건** 씨앗을 받는다
+— `neighbor_rcut_ang`가 거르지 않는다. rcut은 "중심 주변 원자 추가 수집" **별도 루프**에만
+적용되고 그 루프는 antisite/interstitial에서만 돈다. type=antisite로 두면 그 루프 중심이
+antisite라 Cl_As 주변 3.0Å은 자동 수집. **단 3.0Å 밖은 누락** → Cl_As_2의 In036/In040은
+**3.26Å이라 rcut 밖**이므로 부모 Cl_As_2가 그랬듯 명시 나열 필수(complex에도 반영 완료).
+complex는 bare Cl_As가 shallow여도 deep state 가능성이 있어 **두 중심 모두 씨앗** 필요.
+type=antisite에서 reference_neighbors는 MAGMOM 전용(중심은 defect_atom_index)이라 확장 무해.
 
 ⚠ `type: complex`는 존재하지 않는 enum — get_defect_center_frac에서 ValueError 즉사.
 ⚠ 6개 전부 홀수전자(Cl −7e, Cl_As +2e) → 01_Spin-gam-relax 필수, mag→0은 정상
