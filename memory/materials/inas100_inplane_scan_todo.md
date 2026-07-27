@@ -1,59 +1,67 @@
 ---
 name: inas100_inplane_scan_todo
-description: "다음 과제(별도 세션): InAs(100) Cl-passv 8ML 에서 As_In+Cl 결함의 in-plane 셀 수렴(p4x3/p4x4/p4x5). LDA+hybrid 선례가 b축 부족→밴드 분산을 보여줌"
+description: InAs(100) As_In+Cl in-plane(b축) 분산 스캔 — 2026-07-27 착수·제출 완료. mono-alt는 b홀수 불가라 mono-A로 전환한 것이 핵심 결정
 metadata: 
   node_type: memory
   type: project
-  originSessionId: 60429d6d-24fe-4d48-bad7-63259cb37cb9
-  modified: 2026-07-27T08:28:52.261Z
+  originSessionId: bc80c5b5-7478-4d31-a59b-c06425588c04
+  modified: 2026-07-27T09:12:05.948Z
 ---
 
-2026-07-27 개시 예정. 두께(out-of-plane)는 8 ML 로 끝났고([[inas100_8ml_thickness_verdict]]),
-다음은 **in-plane 셀 크기**다. 사용자가 "이전은 out-of-plane, 이번은 in-plane 이므로
-**별도 세션**에서 하자"고 명시했다.
+2026-07-27 **착수·제출 완료**. 두께 8 ML 확정([[inas100_8ml_thickness_verdict]]) 다음 단계.
+위치: `10-Primitive-slab/00-Convergence_test_unitcell/04-inplane_100_As_In-Cl/`
+(README.md 에 전모, 스크립트 6개 자립)
 
-## 과제
+## ⚠ 최대 발견: mono-alt 로는 p4×3 / p4×5 를 만들 수 없다
 
-PBE-d(In 4d 포함)로 **p4×3 / p4×4 / p4×5** 에 대해 **As_In + Cl 결함의 밴드 분산 수렴성**을
-확인한다. 8 ML, Cl-passv(mono-alt), tetragonal 유지(**slabcc 때문에 직교 필수**).
+`make_100slab.py` L151-160 의 `cl_mode` 규칙상 **mono-alt 는 Cl 소속 In 이 `iy % 2`
+함수** = **b축 주기 정확히 2** (p(2×2)). b 를 홀수배 하면 주기경계에 **antiphase
+domain wall** 이 생겨 배치가 깨진다.
+⚠⚠ **스크립트는 a축(dimer축) 홀수만 `raise` 하고 b축 홀수는 조용히 통과시킨다** —
+경고를 기대하지 말 것. `verify()` 도 배위수만 보므로 못 잡는다.
 
-## 왜 — LDA+hybrid 선례가 문제를 보여준다
+| cl_mode | a 배수 | b 배수 | p4×3 | p4×4 | p4×5 |
+|---|---|---|---|---|---|
+| mono-alt p(2×2) | 짝수 | **짝수** | ✗ | ✓ | ✗ |
+| **mono-A p(2×1)** | 짝수 | 제한 없음 | ✓ | ✓ | ✓ |
 
-위치: `33-inAs/02-LDA/defective_slab/` (nonmagnetic LDA relax + HSE band, 절대값 정확도는
-낮지만 **밴드 분산 수렴성**을 보기엔 충분)
+**결정 = mono-A 로 전환**(사용자 승인). 근거: ⑴ 비용이 **8.3 meV / 2×2 셀**(4.2 meV/Cl)
+뿐이고 갭도 열린다, ⑵ **b축 주기가 1이라 표면 자체가 b\* zone-folding 을 안 만든다**
+→ 결함 밴드의 b-분산을 깨끗하게 읽는 데 오히려 유리, ⑶ LDA 선례(acetate 전면 균일)와
+같은 성격. 이완된 mono-A 2×2 의 b-주기-1 은 실측 **0.000018 Å** 로 엄밀 → 타일링 정당.
 
-- `100AA_p4x3.vasp` — pristine, 갭 깨끗 (17.137 × 12.852 × 31.661 Å, 직교)
-- `100AA_p4x3_As_In_surface.vasp` — 표면 As_In: **VBM 근방 bonding state 에 전자가 차고,
-  CB 근처에 antibonding state** 발생
-- `100AA_p4x3_As_In_surf_AA-passv.vasp` — 그 As_In 에 **X-type 리간드(acetate)가 달라붙자
-  antibonding state 에 전자가 차면서 밴드가 갭 안으로 내려옴** ← n형 기원 후보
-  ⚠ 단 이 폴더는 NELECT 홀수 + ISPIN 미지정 이력이 있으니 수치 인용 시 확인할 것
-- **문제**: p4×3 tetragonal 에서 그 갭내 밴드가 **flat 하지 않다** — b축(12.85 Å)이
-  전자를 담기에 부족해서 결함–결함 주기 상호작용이 분산으로 나타난다
-- `100AA_parallel4x3_As_In_AA-passv.vasp` — 셀을 **평행사변형**(a=(17.137,0), b=(8.568,12.852))
-  으로 바꾸니 CBM 근처에서 나름 flat 해짐
-- 파동함수 등가면이 **(110) 방향으로 계속 이어진다** → 결함 상태가 **이방적**이고 표면
-  [110] 사슬 방향으로 뻗는다. 평행사변형이 통했던 이유이자, 직교 셀에서는 **짧은 축(b)을
-  키워야** 하는 이유.
+## 결함 정의 (확정)
 
-⚠ 우리는 slabcc 를 써야 하므로 **평행사변형 해법을 쓸 수 없다** → b 를 3→4→5 로 키워
-직교 셀에서 수렴시키는 것이 이번 스캔의 목적.
+표면 In-dimer 의 **맨(Cl 없는) In → As**, 그 위에 Cl 1개 추가(파트너 Cl 의 거울상).
+Δn_Cl=+1. As_In 이 +2e, Cl 이 −1e → **NELECT 홀수 = 홑전자 1개** → **ISPIN=2 필수**.
+LDA 선례의 "antibonding 에 전자가 차서 갭 안으로 내려온다" 와 정확히 일치.
+As_In 은 아래 As 2 + dimer 파트너 In 1 + 새 Cl 1 = 4배위, Cl–Cl 최소 3.09 Å.
 
-- `00-100AA_As_In_AA-passv_Cellsize_ConvgTest/` 폴더가 이미 있으나 **POSCARs/ 가 비어 있다**
-  (사용자가 LDA 단계에서 시작만 해두고 안 돌린 것). k 파일은 있음:
-  `KPATH.in_100`(Y-Γ-X-S), `KPOINTS_SCF`(Γ 2×2×1), `KPOINTS_GAM`
+| cell | b (Å) | 원자수 | NELECT | As_In idx | NBANDS |
+|---|---|---|---|---|---|
+| p4×3 | 13.131 | 127 | 923 | 80 | 552 |
+| p4×4 | 17.508 | 169 | 1231 | 104 | 708 |
+| p4×5 | 21.884 | 211 | 1539 | 136 | 864 |
+| pure p4×3 | 13.131 | 126 | 924 | — | 552 |
 
-## 착수 전 확인할 것
+(a 는 17.508 Å 고정 — LDA 선례에서 Γ→X 는 이미 평탄. 휘는 건 Γ→Y·X→S 뿐)
 
-- **"As_In + Cl" 의 의미** = As_In antisite 에 **추가 Cl** 을 붙인 것(위 AA-passv 대응)이
-  맞는지 확정. 이전 플랜에는 "결함 셀의 Cl 개수를 pristine 과 동일 유지"(Δn_Cl=0 으로
-  μ_Cl 소거 + 도너 미보상)로 적혀 있어 **의도가 갈린다**. 선례상 갭내 상태를 만드는 것은
-  리간드가 붙은 쪽이므로 둘 다 필요할 수 있다.
-- k-density 를 셀마다 일정하게 (p4×3 의 2×2×1 이면 p4×5 는 2×2×1 유지 여부 판단)
-- 각 셀마다 **pristine 짝 동반**(형성에너지·밴드모서리 기준)
-- ⚠ InAs 도너 a_B = 349 Å 이라 **어떤 셀에도 안 담긴다** — "도너 준위가 밴드구조에 안 보인다"
-  는 미수렴이 아니라 정상 ([[shallow_donor_inas_supercell_limit]])
-- `ipr_gate.py` 는 사용자가 kohn 에서 수정 → GitHub push 후 clone 예정 (대기 중)
+## 제출 상태 (2026-07-27)
 
-관련: [[cqd_ntype_origin_goal]] [[inas100_slab_generation]] [[slabcc_delocalized_defect_policy]]
-[[passivated_surface_tiling_shortcut]]
+53502 p4×3 → (afterok) 53504 p4×4 / 53505 p4×5, 53503 pure_p4×3. 전부 g2 12노드.
+p4×4/p4×5 는 잡 시작 시 `expand_from_p4x3.py --install N` 이 **이완된 p4×3 를 통째로
+유지하고 pristine b-row 를 끝단에 삽입**해 POSCAR 를 만든다(=(110) a-스캔의 strip
+insertion. 이상 위치 재구성은 Cl 탈착을 부른다). registry 는 b-주기-1 덕에 엄밀.
+
+⏭ 수확: `analyze_band.py` (PROCAR 투영으로 결함 밴드 식별 — 밴드 인덱스로 세지 말 것.
+⚠ VASP 가 CONTCAR 타이틀을 잘라서 결함 인덱스를 못 물려주므로 **기하로 재탐색**한다).
+읽을 값 = bDisp(E_Y−E_Γ), aDisp(E_X−E_Γ, 대조군), X→S. 목표는 bDisp 가 충분히
+작아지는 b 를 고르는 것.
+
+⚠ 결론은 **HSE06 + spin** 에서 재확인해야 한다. PBE-d 는 추세 스캔용.
+⚠ 정량값(CTL/형성E)은 분산이 아니라 total energy + 유한크기 보정 경로로 낸다.
+⚠ InAs 도너 a_B=349 Å — 얕은 도너가 밴드에 안 보이는 건 정상([[shallow_donor_inas_supercell_limit]]).
+   여기서 보는 건 국소 As_In–Cl antibonding 이지 hydrogenic 도너가 아니다.
+
+관련: [[inas100_pseudoh_lasph_footing]] [[cqd_ntype_origin_goal]] [[inas100_slab_generation]]
+[[passivated_surface_tiling_shortcut]] [[slabcc_delocalized_defect_policy]]

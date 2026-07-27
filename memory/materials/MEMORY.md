@@ -65,7 +65,8 @@
 - [charge state selection rule](charge_state_selection_rule.md) — 전하상태 선택 규칙 — q0 실측 캐리어 수가 gap 내 CTL 개수의 상한. 04 defect별 확정표와 Cl-As_In 부호 정정
 - [Cl shallow donor: gap엔 defect state 없음](cl_shallow_donor_no_gap_state.md) — Cl_As·Cl_i-As의 defect state는 gap이 아니라 ⑴-6eV 깊은 결합공명(Cl 3p, passivation Cl과 구별불가=비특이적; Cl_i-As만 Cl-As σ 고유)+⑵host CB로 기증된 delocalized 전자. **gap내 defect무게=정확히 0**. IPR 검증(도너밴드 0.018–0.042≈host VBM, N_eff 24–55, 분산 0.83–1.05eV; 국소밴드 0.66–0.99 대비 15–40×↓). Cl_As=이중·Cl_i-As=단일도너. n형=gap준위 아닌 전자수. defect원자: 02 atom95/04 Cl_As atom116/Cl_i-As atom129+As85(기하확정, defects.yaml인덱스≠03_Band)
 - [InAs100 8ML 두께 확정](inas100_8ml_thickness_verdict.md) — (100) Cl-passv 두께=**8 ML 채택**(6 ML은 미교란 내부 1.69Å로 탈락, 4 ML +26meV). Cl 배치=**mono-alt p(2×2)**, 둘 다 gap 열림(Cl 단독 (100) 작동 확인). ⚠이월 3규칙: μ_InAs=**−7.6767**(벌크값 −7.7176 금지)·**DIPOL 좌표 명시 필수**(없으면 −145eV 발산)·NGZF 고정. 내부 기울기 기준은 12 ML도 실패→두께 못 가름
-- [InAs100 in-plane 스캔 TODO](inas100_inplane_scan_todo.md) — ⏭별도 세션: 8 ML에서 **As_In+Cl** 결함 밴드분산 수렴(p4×3/4×4/4×5, PBE-d, 직교 유지). LDA 선례=As_In에 X-리간드 붙으면 antibonding이 갭 내로 내려옴(n형 후보)인데 **b축 12.85Å 부족→분산**. 파동함수가 (110) 방향 이방적. 평행사변형 해법은 slabcc 때문에 불가
+- [InAs100 in-plane b축 스캔](inas100_inplane_scan_todo.md) — 2026-07-27 제출완료. ⚠**mono-alt는 b축 주기2라 p4×3/p4×5 불가**(스크립트가 b홀수를 조용히 통과시킴) →**mono-A 전환**(+8.3meV, b-folding 없어 오히려 유리, 타일링 엄밀 1.8e-5Å). 결함=맨 In→As_In+Cl캡, NELECT **홀수**=홑전자→ISPIN=2 필수. a는 17.5Å 고정(Γ→X 이미 평탄)
+- [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — (100) 트리 2대 함정: pseudo-H가 As–H **1.520 Å 씨앗값에 고정된 채 한 번도 이완 안 됨**(풀면 1.559). (100) 트리 전체가 **LASPH 없이** 돌았음((110) 프로덕션은 켜짐) → −74.8meV에 두 몫이 섞임. 단 기하는 0.28meV로 사실상 동일 → 기하 재사용 OK, **에너지는 섞지 말 것**
 - [inas100 slab generation](inas100_slab_generation.md) — InAs(100) 슬랩 세트 생성(02-100slab) — 극성면이라 dangling bond 2개/원자, (110) 6L↔8ML 대응, Cl 피복률 0.75ML가 electron counting으로 확정
 
 ## 참고 자료
