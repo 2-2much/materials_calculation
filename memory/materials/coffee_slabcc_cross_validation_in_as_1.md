@@ -1,0 +1,33 @@
+---
+name: coffee_slabcc_cross_validation_in_as_1
+description: In_As_1(+1) 진공스캔에서 CoFFEE와 slabcc가 E_corr 15meV 안에서 일치하고 둘 다 수렴 — 그리고 유전슬랩 배치가 정렬항의 사활을 가른다는 발견
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: b7156945-528e-49f3-88ff-00d1d5ec26f1
+  modified: 2026-07-28T12:07:42.155Z
+---
+
+**결론 (2026-07-28)**: 04-InCl3 `In_As_1` q+1, PBE-d 진공스캔(13.5/20/30/40/50 Å)에서 **slabcc와 CoFFEE 둘 다 진공 두께에 수렴**했고 서로 일치한다. 작업 트리 `.../04-InCl3-passv_6L_4x2x1_HSE06/__coffee_In_As_1__/`.
+
+| series | spread_all | spread₃(30~50Å) | drift/10Å | 판정 |
+|---|---|---|---|---|
+| uncorrected | 952 meV | 583 | **+302** | 미수렴(선형 발산=정상) |
+| slabcc σ고정 | 33.7 | 6.2 | −2.3 | 수렴 |
+| **CoFFEE(통일 프로파일)** | **5.3** | **2.7** | **−1.1** | 수렴 |
+
+E_corr 일치 **−15~+15 meV**(데이터점 기준). ⚠외삽 극한은 0.2136(slabcc) vs 0.2554(CoFFEE)로 **42 meV 벌어지는데**, 이는 외삽이 기울기 차를 증폭한 것이지 불일치가 아니다 — 실측점 비교를 인용할 것.
+
+**★ 핵심 발견 — 유전 슬랩 배치가 정렬항의 사활을 가른다.** 유전 슬랩을 기하로 잡으면(전 원자 중심, Width 14.20 Å) 모델−DFT 잔차가 진공을 가로지르는 **직선 램프**가 되어 ΔV가 창 위치에 45~105 meV 의존 → "가우시안 모델이 표면 결함에 부적합"으로 **오판하기 쉽다**. 실제로는 슬랩 중심에서 **−0.994 Å 내리고 Width 14.335 Å**(slabcc가 vac50에서 최적화한 값)로 바꾸면 램프의 93~99%가 사라지고 창 spread가 **0.5~20 meV**로 붕괴, E_f spread도 34→**5.3 meV**. 가우시안(위치·σ)은 한 글자도 안 건드렸다. 남는 25~41 meV는 **z 무관 상수**이고 그게 정렬항이 원래 할 일.
+- 진단자: 잔차가 **기울어져 있으면** 프로파일 오배치, **평평하면** 정상. "결함 근처 국소 dip + 먼 곳 평평"이 FNV가 요구하는 모양.
+- 프로파일은 케이스마다 최적화하지 말고 **하나로 통일**할 것(슬랩 원자는 5셀에서 동일 → 흔들림은 피팅 잡음). 통일이 E_lat=E_iso−E_per의 두 항 일관성도 보장하고 α 시리즈를 5벌→1벌로 줄인다.
+
+**설정**: q=+1, σ=2.6205 bohr(slabcc에서 이식, 규약 동일), ε=12.3 등방, Ecut=20 Ha, Smoothness=0.37807 bohr. E_iso=**0.4339 eV**(α=1~8 균일스케일링, 2차·α≥4 외삽, 피팅폭 ±21 meV). E_per=0.3566/0.4925/0.7486/1.0368/1.3443.
+
+**⚠ ΔV 부호 규약이 두 코드에서 반대**: CoFFEE는 `V_diff = −(V_q−V_0)^LOCPOT`(자체 예제 `PA_q0/plot_DVq0.py`가 그렇게 함), slabcc는 `dV_slabcc = −ΔV_{q−0/m}`(`slabcc_model.cpp:695`). 그런데 **둘 다 `E_corr = E_lat − q·dV`로 쓴다** → 정렬항이 E_corr을 서로 반대로 민다. 두 dV를 대입·병렬비교 금지.
+
+**오차 예산 2갈래(성격이 다름)**: 정렬창 폭(케이스별 0.5~20 meV, **평평함을 망칠 수 있음**) vs E_iso 외삽 ±21 meV(**전 케이스 공통 → 곡선 통째 평행이동, 수렴 판정에 무영향**). 그림에서 전자는 밴드, 후자는 우측 계통오차 막대로 분리.
+
+**부차 확인**: TSV의 slabcc 계열은 **σ 자유**라 vac50에서 σ가 4.21→3.31 bohr로 튀어 −14.6 meV/10Å 가짜 표류를 만든다 → 비교엔 **σ 고정(`03_slabcc_sigfix`)**을 쓸 것. IP 분해 재현: IP(L)=−5.6017+2.102/c, raw VBM은 −2693 meV 움직이나 IP는 −39 meV(**98.6%가 gauge**), 13.5Å→∞에서 IP +72.4/E_f +64.0/보정성분 −8.4 meV.
+
+산출물: `plot_Ef_comparison.py`+`Ef_comparison_In_As_1_p1.png`, `alignment.py [geom|slabccprof|uni]`, **`coffee_corrections_uni.json`이 최종본**(무접미사 `coffee_corrections.json`은 폐기된 기하 프로파일 — 스키마가 같아 에러 없이 틀린 그림이 나온다). 관련: [[coffee_setup_and_arange_bug]], [[coffee_vs_slabcc_eiso_target]], [[vacuum_scan_vbm_reference_trap]], [[dfe_p1_vacuum_asrich_fixed]]
