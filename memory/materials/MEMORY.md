@@ -69,9 +69,6 @@
 - [PBE→HSE06 2단 전략](pbe_then_hse_workflow_plan.md) — 셀 확정 → **PBE로 여러 결함 스크리닝** → **HSE06으로 이어서 relax·자성 재판정**. ②를 최종으로 쓰지 말 것. 근거 정량화: PBE는 무자성 확고(`NUPDOWN=1` doublet 강제가 **+183 meV**)이지만 **183 meV는 혼성범함수가 일상적으로 뒤집는 크기** → "국소해 없음"이 아니라 "HSE가 넘을 문턱". ⚠기하 고정값이라 polaron 이완분 미측정
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — (100) 트리 2대 함정: pseudo-H가 As–H **1.520 Å 씨앗값에 고정된 채 한 번도 이완 안 됨**(풀면 1.559). (100) 트리 전체가 **LASPH 없이** 돌았음((110) 프로덕션은 켜짐) → −74.8meV에 두 몫이 섞임. 단 기하는 0.28meV로 사실상 동일 → 기하 재사용 OK, **에너지는 섞지 말 것**
 - [inas100 slab generation](inas100_slab_generation.md) — InAs(100) 슬랩 세트 생성(02-100slab) — 극성면이라 dangling bond 2개/원자, (110) 6L↔8ML 대응, Cl 피복률 0.75ML가 electron counting으로 확정
-- [inas100 8ml thickness verdict](inas100_8ml_thickness_verdict.md) — InAs(100) Cl-passv 두께(out-of-plane) 확정: 8 ML 채택, 6 ML 탈락. 프로덕션 이월 규칙 3개(μ_InAs=−7.6767, DIPOL 필수 지정, NGZF 고정)
-- [inas100 inplane scan todo](inas100_inplane_scan_todo.md) — InAs(100) As_In+Cl in-plane(b축) 분산 스캔 — 2026-07-27 착수·제출 완료. mono-alt는 b홀수 불가라 mono-A로 전환한 것이 핵심 결정
-- [inas100 pseudoh lasph footing](inas100_pseudoh_lasph_footing.md) — (100) 슬랩 2대 함정: pseudo-H가 한 번도 이완된 적 없이 As-H=1.52 Å 씨앗값에 고정돼 있었고, (100) 트리 전체가 LASPH 없이 돌았다
 
 ## 참고 자료
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1·g2 전부 Sandy Bridge(avx만). ⚠**버전이 아니라 빌드 변형이 문제**: `*.mpi.x` 계열만 illegal instruction, **프로젝트 표준 6.5.1 lhfskip 빌드·6.6.0은 정상**. 폴더 단위로 일반화 말고 바이너리 단위로 30초 테스트. slabcc는 로그인노드 금지→SLURM OMP12+module load mkl

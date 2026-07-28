@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 0d9c4228-ecec-42a3-8616-10c187b341a1
-  modified: 2026-07-28T01:36:09.212Z
+  modified: 2026-07-27T06:49:06.581Z
 ---
 
 2026-07-27, `12-Surace-defect_calculation/04-InCl3-passv_6L_4x2x1_HSE06`.
@@ -57,16 +57,6 @@ type=antisite에서 reference_neighbors는 MAGMOM 전용(중심은 defect_atom_i
 ⚠ 6개 전부 홀수전자(Cl −7e, Cl_As +2e) → 01_Spin-gam-relax 필수, mag→0은 정상
 ([[spin_magnetism_ipr_predictor]]). E_f(0)엔 band-filling 선행
 ([[bandfilling_measured_from_dos]]), DFE는 [[shallow_limit_dfe_construction]].
-
-**⚠ EDIFF=1E-4는 이 셀(127원자 HSE)의 이완에 너무 헐겁다**(2026-07-28). 힘 잡음이
-~0.1 eV/Å로 EDIFFG=-0.015와 같은 크기 → RMM-DIIS(IBRION=1)가 잡음을 쫓아 **진동**.
-지문 = dE 부호가 1e-3 eV대에서 교대 + maxF가 **감소하다 다시 증가**(V_Cl_br 0.109→0.329,
-V_Cl-Cl_As_2_br-near 0.15→0.34, 후자는 이온스텝 에너지도 상승). 이완 폭이 작은 3개
-(24~29스텝)는 안 걸렸다. 처방 = **EDIFF=1E-6 + IBRION=2(CG)**, 기존 CONTCAR에서 재시작.
-⚠ 중도 kill 시 **CHGCAR=0바이트, WAVECAR는 잘림**(레코드 단위로 검증: 파일크기 ==
-recl×(2+nspin·nk·(1+nbands))) → 전자구조 상속 불가, ISTART=0/ICHARG=2로 갈 것.
-⚠ 재시작 시 `run_case.sh`의 **resolve_initial_poscar()가 POSCAR를 pristine으로 덮어쓴다**
-(00 미완이면 무조건 실행) → 별도 restart 스크립트로 우회 후 run_case.sh에 handoff.
 
 도구: `test/make_V_Cl.py` (index 기반 순수 vacancy, F F F 원자 제거 거부 가드 포함).
 pure의 Cl orbit은 spglib(Pm) 확인 결과 **정확히 2개** — bridging 117–124, terminal 125–128.
