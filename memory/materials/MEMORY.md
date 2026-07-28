@@ -72,20 +72,20 @@
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 셀 확정 단계에선 **판정을 바꾸는 계산만** 돌리고 곁가지 진단(민감도·재현성·이중확인)은 붙이지 말 것. caveat 나열 대신 **권고+근거 한 줄**. 정밀도는 HSE06 단계 몫 (2026-07-28 지시)
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — (100) 트리 2대 함정: pseudo-H가 As–H **1.520 Å 씨앗값에 고정된 채 한 번도 이완 안 됨**(풀면 1.559). (100) 트리 전체가 **LASPH 없이** 돌았음((110) 프로덕션은 켜짐) → −74.8meV에 두 몫이 섞임. 단 기하는 0.28meV로 사실상 동일 → 기하 재사용 OK, **에너지는 섞지 말 것**
 - [inas100 slab generation](inas100_slab_generation.md) — InAs(100) 슬랩 세트 생성(02-100slab) — 극성면이라 dangling bond 2개/원자, (110) 6L↔8ML 대응, Cl 피복률 0.75ML가 electron counting으로 확정
+- [coffee slabcc cross validation in as 1](coffee_slabcc_cross_validation_in_as_1.md) — In_As_1(+1) 진공스캔에서 CoFFEE와 slabcc가 E_corr 15meV 안에서 일치하고 둘 다 수렴 — 그리고 유전슬랩 배치가 정렬항의 사활을 가른다는 발견
+- [coffee vs slabcc eiso target](coffee_vs_slabcc_eiso_target.md) — slabcc와 CoFFEE의 E_isolated는 표적 환경이 다르다 — slabcc는 슬랩 두께를 함께 키워 isolated surface, CoFFEE는 두께 고정으로 isolated slab
 
 ## 참고 자료
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1·g2 전부 Sandy Bridge(avx만). ⚠**버전이 아니라 빌드 변형이 문제**: `*.mpi.x` 계열만 illegal instruction, **프로젝트 표준 6.5.1 lhfskip 빌드·6.6.0은 정상**. 폴더 단위로 일반화 말고 바이너리 단위로 30초 테스트. slabcc는 로그인노드 금지→SLURM OMP12+module load mkl
 - [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 완전 passivated 청정표면 이완기하는 **lateral 타일링으로 엄밀 전용**(buckling=0 + k-mesh 접힘 등가). 검증 RMS 0.003Å(이완진폭의 3%). 두께·진공 일치 필수, **결함 이완엔 적용 불가**(씨앗만). 540원자 pristine relax 20h→2h, node-h 98% 절약
-- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). **2026-07-28 정정: kohn ≡ tgm-master 같은 기계**(143.248.13.145), 별도 서버는 sham·bloch뿐. 파티션=cascade(36코어)/cascade2(32코어·191GB·18노드). **fermi=192.168.100.201 내부망**, kohn에서 ssh 가능하나 키 미설정(ssh-copy-id 필요). /mnt/hohenberg/byuid/jaegwan97만 공유NFS
-- [CoFFEE↔slabcc 교차검증: In_As_1](coffee_slabcc_cross_validation_in_as_1.md) — 진공스캔서 **둘 다 수렴**(spread_all slabcc 33.7 / CoFFEE **5.3** meV, uncorrected 952 발산), E_corr **±15meV 일치**. ★핵심=**유전슬랩을 기하로 잡으면 정렬 잔차가 램프**가 되어 '가우시안 부적합'으로 오판→슬랩중심 **−0.994Å**로 내리면 93~99% 소멸. 진단자=잔차 기울면 오배치·평평하면 정상. 프로파일은 케이스별 말고 통일. ⚠외삽극한 42meV 차는 기울기 증폭이니 실측점 인용
-- [CoFFEE 설치 + np.arange 상류버그](coffee_setup_and_arange_bug.md) — ~/bin/CoFFEE, MoS₂ 예제로 검증됨. ⚠**`np.arange(0,1,1/N)`이 격자 5.6%에서 길이 N+1** → ε(z) 푸리에 인덱싱이 밀려 **조용히 틀림**(vac50 0.55eV, α=2 0.25eV). 지문=Ecut 사다리에서 한 점만 튐(수렴 오진 주의). linspace로 3곳 수정, 재설치 시 날아감. Ecut≠ENCUT
-- [CoFFEE vs slabcc: E_iso 표적 다름](coffee_vs_slabcc_eiso_target.md) — 모델전하 규약은 동일(σ 이식 가능)하나 **slabcc는 외삽 때 슬랩 두께를 함께 키움=isolated surface**, CoFFEE는 두께 고정=**isolated slab**. 비대칭 슬랩인 우리 계의 표적은 isolated slab. slabcc E_iso가 케이스마다 22meV 흐른 게 그 정황
+- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — ⚠git 자동동기화는 memory/.claude만 옮기고 계산폴더는 안 옮김(.gitignore=*). /home·/TGM 로컬, /mnt/hohenberg/byuid/jaegwan97만 공유NFS. 서버간 계산이동=공유마운트/수동복사. tgm-master=SLURM(g1/g2), kohn 등은 별도서버
 - [slabcc 전하절단 가드](slabcc_charge_truncation_guard.md) — slabcc "discretization error"=격자 아닌 **minimum-image 꼬리절단**(σ/L, erf곱으로 5자리 재현, ⚠bohr단위). 잘 국소화된 q+1(1.46e-4)도 1e-4 하드코딩 tolerance에 걸려 즉사=위양성 → **SLABCC_CHARGE_TOLERANCE 환경변수 추가·재빌드**(기본동작 불변, 회귀테스트 1e-7 일치). ⚠charge_trivariate는 해법 아님(σ 상한 pinned pancake)
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — slabcc optimize_tolerance는 목표 RMSE 임계값 아니라 BOBYQA 상대수렴 tolerance. 최종 RMSE>tol이어도 정상(local min). 남은 RMSE=등방 Gaussian 모델 한계, 줄이려면 charge_trivariate=yes/다중Gaussian
 - [IPR Gate probe = 점유차분](ipr_gate_occdiff_probe.md) — ⚠2026-07-22 probe 규칙 교체: HOMO/LUMO → **|occ(q)−occ(q0)| 최대 밴드**, |q|>1은 **가장 약한 carrier**로 판정. In_As_1 q+1 shallow→**bound**(버그였음), Cl-As_In q+2 bound→**미결**(E_corr 이미 적용됨, 재검토). relax축 기본경로 오류도 수정→하전 9행 중 8행 두 축 일치
 - [IPR Gate Tool](ipr_gate_tool.md) — scripts/ipr_gate.py: 전 defect·전 charge 국소화 판정 자동화(00_Gam-relax PROCAR→IPR, pure 밴드모서리 2배 초과=bound). ⚠q>0은 LUMO를 봐야 함(HOMO는 host VBM이라 오판). slabcc 적용 여부 결정용. ⚠2026-07-21 버그2건 수정(스머링꼬리 frontier, 모서리를 점유수로 선택)→04 V_As·V_In이 bound→shallow로 뒤집힘, 02는 0건. 04 결과=In_As_2/In_As_1만 bound
 - [zeroband fatband tool](zeroband_fatband_tool.md) — zeroband.py — hybrid band(zero-weight kpt) projected fatband 플로터 위치/사용법
 - [zeroband spin parsing](zeroband_spin_parsing.md) — zeroband.py 밴드플롯 --spin 옵션 및 collinear ISPIN=2 PROCAR 파싱 수정
+- [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — CoFFEE 설치 위치·현대 파이썬 대응 패치 4건, 그리고 격자 5.6%를 조용히 망치는 np.arange 상류 버그
 
 ## 작업 방식 / 피드백
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex durable memories should be mirrored to both memory/materials and memory/codex, with matching slugs and refreshed indexes
