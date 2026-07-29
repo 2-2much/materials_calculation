@@ -75,6 +75,7 @@
 - [coffee slabcc cross validation in as 1](coffee_slabcc_cross_validation_in_as_1.md) — In_As_1(+1) 진공스캔에서 CoFFEE와 slabcc가 E_corr 15meV 안에서 일치하고 둘 다 수렴 — 그리고 유전슬랩 배치가 정렬항의 사활을 가른다는 발견
 - [coffee vs slabcc eiso target](coffee_vs_slabcc_eiso_target.md) — slabcc와 CoFFEE의 E_isolated는 표적 환경이 다르다 — slabcc는 슬랩 두께를 함께 키워 isolated surface, CoFFEE는 두께 고정으로 isolated slab
 - [hse slab scf settings](hse_slab_scf_settings.md) — HSE06 SCF가 (100) 슬랩 결함 셀에서 정체·발산하는 원인과 처방 — insulator mixing은 금속성 결함에서 실패, ALGO=Damped가 정답
+- [HSE 이완 vs single-point](hse_relax_vs_singlepoint.md) — HSE 이완 이득은 **00단계 4~41meV / 01스핀단계 0~2.7meV**, pure 대비 합계 **~40meV** → 중성 스크리닝은 `NSW=0` 충분. ⚠(100)은 (110)의 3~9배(pure 36.3meV). ⚠**스핀 안정화(최대 −268meV)는 별개**로 크고 순수 전자적 → DFE는 반드시 `01_Spin`(ISPIN=2 단일점)에서 읽을 것, polaron 이완은 없음. ⚠**균일 배율변환은 z를 0.2%로 맞추나 HSE셀에서 PBE이완하면 Poisson으로 +1.6%(9배) 오차** → 배율 단계 빼면 안 됨. 하전은 E_rel 101~113meV라 이완 필수
 
 ## 참고 자료
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1·g2 전부 Sandy Bridge(avx만). ⚠**버전이 아니라 빌드 변형이 문제**: `*.mpi.x` 계열만 illegal instruction, **프로젝트 표준 6.5.1 lhfskip 빌드·6.6.0은 정상**. 폴더 단위로 일반화 말고 바이너리 단위로 30초 테스트. slabcc는 로그인노드 금지→SLURM OMP12+module load mkl
