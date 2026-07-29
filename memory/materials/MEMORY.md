@@ -74,6 +74,7 @@
 - [inas100 slab generation](inas100_slab_generation.md) — InAs(100) 슬랩 세트 생성(02-100slab) — 극성면이라 dangling bond 2개/원자, (110) 6L↔8ML 대응, Cl 피복률 0.75ML가 electron counting으로 확정
 - [coffee slabcc cross validation in as 1](coffee_slabcc_cross_validation_in_as_1.md) — In_As_1(+1) 진공스캔에서 CoFFEE와 slabcc가 E_corr 15meV 안에서 일치하고 둘 다 수렴 — 그리고 유전슬랩 배치가 정렬항의 사활을 가른다는 발견
 - [coffee vs slabcc eiso target](coffee_vs_slabcc_eiso_target.md) — slabcc와 CoFFEE의 E_isolated는 표적 환경이 다르다 — slabcc는 슬랩 두께를 함께 키워 isolated surface, CoFFEE는 두께 고정으로 isolated slab
+- [hse slab scf settings](hse_slab_scf_settings.md) — HSE06 SCF가 (100) 슬랩 결함 셀에서 정체·발산하는 원인과 처방 — insulator mixing은 금속성 결함에서 실패, ALGO=Damped가 정답
 
 ## 참고 자료
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — g1·g2 전부 Sandy Bridge(avx만). ⚠**버전이 아니라 빌드 변형이 문제**: `*.mpi.x` 계열만 illegal instruction, **프로젝트 표준 6.5.1 lhfskip 빌드·6.6.0은 정상**. 폴더 단위로 일반화 말고 바이너리 단위로 30초 테스트. slabcc는 로그인노드 금지→SLURM OMP12+module load mkl
