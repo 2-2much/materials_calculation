@@ -19,3 +19,9 @@ metadata:
 **tgm-master = SLURM 컨트롤러**(hostname tgm-master.hpc). 파티션 g1/g2(노드 n001~n064, 12코어/노드). kohn(143.248.13.145)은 이 SLURM에 없는 **별도 서버** → 자체 실행모델(자체 SLURM 또는 직접 mpirun). "자리 꽉차면 kohn/다른 서버로" 이동하는 이유.
 
 계산폴더 이동 시 POTCAR을 폴더에 번들해두면 /TGM 의존 제거되어 편함. 관련: [[kp_slabcc_nacl_reproduction]], Defect_Package 위치는 [[defect_package_repo]].
+
+⚠**2026-07-30 정정**: "tgm-master=SLURM(g1/g2), kohn 등은 별도서버" 는 (100) 트리에는
+맞지 않는다. kohn 에서 같은 컨트롤러(SlurmctldHost=tgm-master, ClusterName=tgmv2)의
+`cascade`/`cascade2` 파티션으로 직접 제출된다. 서버 4대가 SLURM 을 공유한다.
+그리고 **hostname 으로는 4대를 구분할 수 없다**(전부 `tgm-master.hpc`) — `hostname -A`
+의 KAIST FQDN 만 실제 서버명을 담는다. 상세: [[inas100_worktree_on_kohn]]
