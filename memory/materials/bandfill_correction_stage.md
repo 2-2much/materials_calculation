@@ -62,3 +62,14 @@ CSV에 `E_bf_unaligned_eV`/`E_bf_aligned_eV` 병기, 50 meV 초과는 `ALIGN-SEN
 
 관련: [[shallow_limit_dfe_construction]], [[bandfilling_measured_from_dos]],
 [[vclclas_kpt_ladder_two_routes]], [[slabcc_delocalized_defect_policy]], [[ipr_gate_tool]]
+
+## ⏭pydefect 대조 (2026-08-03, 착수 전)
+노트=`02-Cl-passv.../PYDEFECT_COMPARISON.md`. 로컬 미설치(vise 0.9.5만), GitHub master 직독.
+**pydefect는 band-filling을 아예 안 한다** — PHS는 검출해서 다이어그램에서 **뺀다**
+(`allow_shallow=False`). 즉 우리 E_bf 숫자를 검증해 주지 않음. 빌려올 건 **판정기**다:
+결함 셀 안에서 host VBM/CBM을 **원소투영 궤도 지문**으로 찾고(`orbital_diff < 0.2`,
+에너지창 0.5eV) PHS는 **그 모서리의 점유수 > 0.20**으로만 판정 → `midgap` 하드스위치·하전셀
+오분류·**정렬 딜레마가 통째로 사라짐**(두 셀 고유값을 안 뺌). 선행작업=`read_procar`가 지금
+`tot` 컬럼만 읽으므로 궤도별 컬럼 파싱 확장 필요.
+⚠pydefect PR(지정 원자군 weight 분율)은 우리 IPR과 **다른 양**(대체재 아닌 보완재).
+⚠eFNV는 3D 가정이라 슬랩 하전보정·결함 쌍극자는 여전히 미해결.
