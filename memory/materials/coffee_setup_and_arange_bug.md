@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: b7156945-528e-49f3-88ff-00d1d5ec26f1
-  modified: 2026-07-28T09:12:15.323Z
+  modified: 2026-08-02T20:11:29.132Z
 ---
 
 **설치**: `~/bin/CoFFEE` (github.com/qtm-iisc/CoFFEE). 검증 = MoS₂ Model_Scaling α=4/5/6/8/10이 배포판 README와 전부 일치(0.421/0.463/0.489/0.516/0.530 eV). `Ecut`은 **DFT ENCUT과 무관** — 단위 Hartree이고 모델 푸아송 G-격자 해상도만 정함(가우시안 σ와 erf 프로파일만 담으면 됨). slabcc가 VASP FFT 격자에 묶이는 것과 달리 자기 격자를 씀.
@@ -21,5 +21,14 @@ metadata:
 1. 동봉 `.c`가 옛 Cython 산출물 → `longintrepr.h` 없음. `.pyx`부터 `cython -3`로 재생성 후 `python3 setup.py build_ext -b PoissonSolver/`.
 2. `bicgstab(A,b,x0,tol,maxiter)` 위치인자 거부 → `rtol=`/`maxiter=` 키워드.
 3. scipy ≥1.12 bicgstab이 고-G 라인에서 breakdown(info=−10) → 원본은 해를 **버려서** 배열이 ragged가 되며 죽음. 대각(Jacobi) 전처리 추가 + RHS가 수치적 0이면 V(G)=0 + 실패 시 조밀 LU(i=j=0은 랭크 1 부족이라 `lstsq`). ⚠ **잔차 검증은 버그 진단엔 무력했다** — bicgstab은 전 라인 info=0에 참잔차도 작았고, 오류는 ε(z) 쪽이었음.
+
+**성능 패치 (2026-08-03, 로컬) — `classes.py` 두 함수 벡터화**
+`construct_rho`와 `ComputeEnergy`가 격자 전체를 도는 **순수 파이썬 삼중루프**였다(각각 2.0·1.4 µs/point, rank0 전용 = MPI 병렬 영역 밖). Gaussian이 분리가능(x,y는 a1·a2에만, z는 a3에만)이라 (L,M) 블록과 (N,) 벡터의 외적으로 대체, 에너지는 `0.5*np.sum(V_r*rho_r)*dV` 한 줄.
+- 검증: MoS₂ 사다리 8개(α=4~40) **0.0 meV**, rho 배열 원소별 **상대오차 2e-16**, 경계 wrap 3분기·전단(비직교) 셀 모두 통과.
+- 효과: Amdahl 직렬항 **34.5초 → 3.5초**(α=20 기준, 병렬항 250초는 불변). 36랭크 41.4→10.5초.
+- ⚠**결론이 바뀐 지점**: 벡터화 전엔 36랭크에서 직렬이 83%라 노드 증설이 무의미했으나, 지금은 34%로 떨어져 **2노드 72랭크가 1.47배 유효**하다. "노드 늘려도 소용없다"는 옛 판단은 폐기.
+- ⚠재설치 시 이 패치도 [[coffee_setup_and_arange_bug]]의 arange 패치와 함께 날아간다. `~/bin/CoFFEE`와 11-Surface-defect_TOY-model/CoFFEE 두 곳에 반영돼 있음.
+- 남은 병목(미해결): ①라인별 `bicgstab`을 파이썬에서 32,761번 호출(전체 작업의 96%, 단 MPI로 이미 분산됨) ②FFT/IFFT가 단일스레드(numpy pocketfft → `scipy.fft(workers=-1)`로 교체 가능) ③매 실행 `np.save`로 rho_r·V_r GB급 쓰기.
+- ⚠**CoFFEE엔 OpenMP가 없다**(`#pragma omp` 0건, .so에 libgomp/libiomp 링크 0건) → `OMP_NUM_THREADS`는 무의미. slabcc는 반대로 OMP 코드(`slabcc_math.cpp:266`). 실행 지침은 [[no_compute_on_login_node]].
 
 **환경**: mpi4py는 pip로 설치(Intel MPI ABI 호환). MPI 병렬화는 **면내 i 인덱스 한 방향뿐**(`Irange[rank::size]`)이라 랭크 상한 = Nx, rank0가 V_G·rho_G 전체와 최종 IFFT를 혼자 처리(α=8에 ~11 GB). 관련: [[coffee_vs_slabcc_eiso_target]], [[server_fs_git_sync_scope]]
