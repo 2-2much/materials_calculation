@@ -73,3 +73,16 @@ CSV에 `E_bf_unaligned_eV`/`E_bf_aligned_eV` 병기, 50 meV 초과는 `ALIGN-SEN
 `tot` 컬럼만 읽으므로 궤도별 컬럼 파싱 확장 필요.
 ⚠pydefect PR(지정 원자군 weight 분율)은 우리 IPR과 **다른 양**(대체재 아닌 보완재).
 ⚠eFNV는 3D 가정이라 슬랩 하전보정·결함 쌍극자는 여전히 미해결.
+
+## ⏭pydefect_2d 대조 (2026-08-03, 소스 직독)
+**q=0을 아예 건너뛴다** (`if defect_entry.charge == 0: return`). 보정식도 `-q·alignment`라
+중성에서 0, `eigenvalue_shift`도 q 비례. → **pydefect·pydefect_2d 둘 다 중성 결함의 슬랩
+쌍극자를 다루지 않는다** = 우리 미해결 항은 상류에서도 미해결(우리 실수 아님).
+얻은 것: 저들의 1D FP 퍼텐셜 `-(V_def_xyavg − V_perf_xyavg)`가 **우리 z-ramp와 같은 양**.
+차이는 상수로 줄이지 않고 ε(z)+가우시안 전하로 **모델링**하고 잔차만 정렬로 쓴다는 것.
+⚠정렬 지점 = `z_defect − L/2` **단일 격자점**(층평균·진공plateau 아님). 자유부유 2D엔 맞지만
+우리 03-pydefect_2d 셋업(L=26.26, 결함 z_frac 0.74~0.81)에선 z≈6.3~8.1Å = 원자span 6.22~20.99의
+**pseudo-H 아랫면**에 떨어짐(진공 아님, 가파른 구간) → 그 런의 E_corr=−0.038 vs SCPC~1.8 불일치와
+연관 가능성. **재확인 필요, 단정 아님**.
+쓸모: `extrapolation_models.py` Komsa 외삽 `c0+c1x+c2x²`(1/mul), `cli/special_vacuum/`(진공 스캔).
+제약: tetragonal·VASP 전용.
