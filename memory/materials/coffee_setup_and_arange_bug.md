@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: b7156945-528e-49f3-88ff-00d1d5ec26f1
-  modified: 2026-08-02T21:06:19.082Z
+  modified: 2026-08-02T22:12:42.099Z
 ---
 
 **설치**: `~/bin/CoFFEE` (github.com/qtm-iisc/CoFFEE). 검증 = MoS₂ Model_Scaling α=4/5/6/8/10이 배포판 README와 전부 일치(0.421/0.463/0.489/0.516/0.530 eV). `Ecut`은 **DFT ENCUT과 무관** — 단위 Hartree이고 모델 푸아송 G-격자 해상도만 정함(가우시안 σ와 erf 프로파일만 담으면 됨). slabcc가 VASP FFT 격자에 묶이는 것과 달리 자기 격자를 씀.
@@ -33,6 +33,7 @@ metadata:
   - ⚠**(0,0) 라인 게이지**: c=0이면 A가 특이(Gz=0 행·열이 0). 그 성분은 자유롭지만 **V(G=0)은 게이지가 아니라 에너지를 q·상수만큼 바꾼다** → 반드시 `Soln[kmax]=0`으로 못박을 것. 값 일치가 이걸 검증함.
   - ⚠**면내 등방 가정**: 새 제약 아님. `matvec2D.pyx`(실제로 도는 경로)가 이미 `epsGz_a1`을 Gx²·Gy² 둘 다에 쓰고 `epsGz_a2`는 **읽지도 않는다**. `classes.py`의 파이썬 참조 구현만 이방인 척함.
   - 부수효과: scipy 1.12 bicgstab breakdown 방어 패치(Jacobi 전처리+조밀 LU 폴백)가 **불필요해짐**.
+  - ✅**In_As_1 프로덕션 재현 확인**(2026-08-03): 프로덕션 `in` 파일 그대로(Ecut=20, σ=2.6205, unified 프로파일) 13개 케이스(E_per_uni 5 + E_iso_uni 8) **전부 4자리 일치**. α=1과 vac_current가 같은 셀→같은 값(0.3566)도 통과. E_iso=0.4339 동일 → **기존 결과·플롯·slabcc 교차검증 재계산 불요**. 속도는 α=8이 **1307초→54초(24배)**, 13개 전체 90초(원래 35분+). 결과는 `__coffee_In_As_1__/__eigen_check__/`(프로덕션 폴더 무수정).
 - **Ecut은 크게 과잉이었다**(2026-08-03, MoS₂ α=20): 예제 기본 15 Ha 대비 **8 Ha가 0.6 meV·2배 빠름, 6 Ha가 0.8 meV·3.8배, 4 Ha가 1.1 meV·12.9배**. 작업량 ∝ Ecut^1.5. Ecut을 요구하는 건 가우시안이 아니라 **유전 계면**(σ=1.89 bohr 가우시안은 Ecut 15에서 exp(-G²σ²/2)=5e-24로 이미 무의미, Smoothness=0.378 bohr erf는 0.34로 살아있음). ⚠단 E_per 한 점이 아니라 **E_iso 외삽이 안 흔들리는지**를 확인해야 채택 가능.
 - ⚠**로그인 노드에서 `source .../vars.sh` 가 셸 스냅샷의 `cd` 재정의 때문에 깨진다** → mpi4py가 libmpi.so를 못 찾음. 수동 설정: `I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.9.0`, `LD_LIBRARY_PATH=$I_MPI_ROOT/lib/release:$I_MPI_ROOT/lib:$I_MPI_ROOT/libfabric/lib`. SLURM 배치 셸에서는 정상.
 - **진행률 출력 추가**: stock CoFFEE는 헤더 후 완전 침묵 + 파이썬 버퍼링으로 `out`이 0바이트 → 도는 잡과 멈춘 잡 구분 불가였다. 단계 표시(모델전하→FFT→분배→풀이→취합→IFFT→적분)와 rank0 진척률/ETA를 flush 출력. `PYTHONUNBUFFERED=1` 필수(run 스크립트에 포함), `COFFEE_PROGRESS=0`으로 끔.
