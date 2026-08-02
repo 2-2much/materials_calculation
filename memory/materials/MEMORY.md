@@ -93,6 +93,7 @@
 - [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — 설치·패치 4건 + 격자 5.6%를 조용히 망치는 np.arange 버그
 
 ## 작업 방식 / 피드백
+- ["사다리" 대신 "수렴 스캔"](feedback_convergence_scan_wording.md) — 파라미터 계열 계산의 호칭. 옛 메모리·스크립트의 "사다리"는 같은 뜻
 - [로그인 노드에서 계산 금지](no_compute_on_login_node.md) — kohn=tgm-master=로그인 노드. 랭크·분·GB급이면 sbatch. 제출 스크립트·마운트 범위·$BASH_SOURCE 함정
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex 메모리는 memory/materials·memory/codex 양쪽에 미러
 - [conversation log](conversation_log.md) — Codex 대화 요약 로그
