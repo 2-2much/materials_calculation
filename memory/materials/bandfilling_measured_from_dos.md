@@ -55,3 +55,9 @@ k-분해 가중 적분이라 k점 1개면 정의상 0. **DFE 에너지가 전부
 
 관련: [[shallow_limit_dfe_construction]], [[defect_states_02_clpassv]],
 [[dos_2x2x1_tetrahedron_occ_overshoot]]
+
+## ✅종결 (2026-08-02) → [[bandfill_correction_stage]]
+출처불명 0.78 eV는 **폐기**. DFE가 실제로 읽는 `01_Spin-gam-relax`(Γ, ISPIN=2)에서 계산한
+값은 **−0.125 eV**(PHS 가지, E_f를 **올림**). 여기 적힌 0.330(자기 밴드최저점)·0.219(pure CBM
+환산)는 **2×2×1 DOS**에서 잰 것이라 DFE 에너지와 다른 계산 → 앵커에 쓰면 안 됨.
+Γ에서 PHS만 나오고 mesh에서 MB로 부호가 뒤집히는 것은 k-사다리로 실증됨.

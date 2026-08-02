@@ -25,7 +25,11 @@ E_f 기울기는 항상 q. shallow 한계에서 (+1/0)을 CBM에 못박아 절�
 2. **E_f(0)에 band-filling(Moss-Burstein) 보정이 선행돼야 함**(아래). 앵커를 q0에 두는 순간 q0가 오차를 짊어진 상태가 되고, 그 오차가 +1 선 전체로 전파됨.
 3. **V_Cl-Cl_As에 +2 선을 그리지 말 것** — single donor다(ε(+2/+1)=−0.28eV로 VBM 아래 = gap 안에 존재 안 함). 상세 [[defect_states_02_clpassv]].
 
-## band-filling 보정 — 지금 파이프라인에 **없다**(진짜 구멍)
+## ✅band-filling 보정 — **2026-08-02 구현 완료** → [[bandfill_correction_stage]]
+아래 "구멍"·"0.78 eV" 서술은 **폐기**. 계산값은 V_Cl-Cl_As q0 = **−0.125 eV**(부호 반대,
+앵커를 올림). 이하 원문은 당시 진단 기록으로만 보존.
+
+## (폐기) band-filling 보정 — 지금 파이프라인에 **없다**(진짜 구멍)
 `grep -riE "band.?fill|moss|burstein" scripts/` → **0건**. 표준 처방은 Lany & Zunger, PRB 78, 235104 (2008).
 - 크기: V_Cl-Cl_As q0에서 **~0.78eV**(셀-내부 기준). 형성에너지 자체와 맞먹음. **V_Cl-Cl_As 선이 틀린 규모는 E_corr의 ~0.1eV가 아니라 band-filling의 ~1eV 쪽.**
 - 정체: 전자 1개/157.78Å² = 6.3e13 cm⁻²(≈5.8e20 cm⁻³)라는 인공 고농도 → **supercell artifact**(희박극한선 CBM에 앉음). E_tot(q0)가 그만큼 부풀려져 있음.
@@ -41,6 +45,8 @@ plot_DFE 본체(1120줄) 건드리지 않고 그 출력 `DFE_at_EF0_summary.csv`
 - shallow **donor**: `E_f(+1,E_F)=anchor+(E_F−E_g)` (CBM에서 anchor와 만남, 점선 dashed)
 - shallow **acceptor**: `E_f(−1,E_F)=anchor−E_F` (VBM에서 anchor와 만남, 점선 dotted). 채택 사유=donor의 부호대칭(VBM 앵커, 기울기 −1).
 - **band-filling 부호**: `anchor=E_f(0)−E_bf` (E_bf≥0 **차감**, Lany-Zunger는 밴드모서리서 밀려난 캐리어 초과에너지 제거 → E_f 더 음수로). V_Cl-Cl_As In-rich raw −1.078 → 0.78 차감 → −1.858. **`+E_bf`는 부호오류**(초판 버그, 수정됨).
+- ⚠**2026-08-02 갱신**: `--bandfill-csv`로 계산값을 소비하고 donor/acceptor는 q0 캐리어 수로
+  자동 판정(gate 기반 추론은 `--infer gate`로 남김). `--mode all`로 raw/corrected 통합 그림.
 - 미입력 시 `PRELIMINARY` 태그(raw 앵커, Moss-Burstein 안 걷힘). CTL 미작도. shallow 집합은 IPR_gate.csv 자동추론(`--donor/--acceptor` override).
 - ⚠**auto-inference는 +1·−1 둘 다 delocalized면(예 As_In) 양쪽 라벨=모호** → 자동에서 제외+경고, 명시 지정 요구(전하부호는 이상격자 대비 전자수가 정함, "이 전하가 delocalized"만으론 결정 못 함).
 - ⚠CSV 컬럼: `Ef0_raw_eV, bandfill_eV, anchor_eV, Ef_at_VBM_eV, Ef_at_CBM_eV`. 초판서 VBM/CBM 스왑 버그 있었음(수정됨, PNG는 원래 정상).
