@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 128f0b2e-1225-49fa-96e0-d9a67bd6705e
+  modified: 2026-08-03T04:15:07.946Z
 ---
 
 12-Surace-defect_calculation/03-InCl3-passv_6L_4x2x1_PBE-d, defect **In_i_2/q0** (Gam-relax, 힘 수렴 EDIFFG -0.01).
@@ -20,3 +21,19 @@ metadata:
 3. In이 실제 3-fold hollow/bridge에 앉아 In–As(~2.7)/In–Cl(~2.5) 결합 만드는 배치에서 재이완 → 더 낮은 min 탐색
 
 관련: [[cqd_ntype_origin_goal]] μ-diagram에 이 fragile 값 올리기 전 검증 필요. [[incl3_cl_as_in_unbound]]와 유사 패턴(ideal 배치→표면종 이탈).
+
+---
+## ⚠ 2026-08-03 정정 2건 (kohn 실측)
+
+1. **이 계산의 자리는 In2+As1이 아니라 In 3개 hollow였다.** 초기 최근접 = In35 2.56 /
+   In37 2.56 / In45 2.74 (As 없음). 새 정의의 In_i_2 = In37/In45/As85 hollow는 **다른 자리**다.
+   → 이 폴더는 `03-.../__legacy_calc_2026-07__/In_i_3In-site/`로 격리 보존. 새 계산과 혼동 금지.
+   자리 정의·좌표는 [[in_i_surface_sites_01_03]].
+
+2. **adatom 배출은 InCl3 표면 고유 현상이 아니다.** 01-Cl-passv의 2026-06-15 `In_i`
+   (Cl 사이 배치)도 **똑같이** 배출됐다: z 19.17→22.13 Å(+2.95), 최종 최근접 Cl 2.96~3.12 Å
+   = 전부 무결합. 즉 "passivation 층 아래엔 In이 앉을 자리가 없다"는 게 두 표면 공통.
+   같은 폴더의 `In_i2`는 초기 구조가 Cl과 **1.32 Å**로 겹쳐 Cl이 슬랩 밖으로 탈출한
+   무의미한 계산 → `__legacy_calc_2026-06__/In_i2_BROKEN-1.32A-start/`로 격리.
+
+TODO 1(ISPIN)은 새 셋업에서 해결됨: 00_Gam-relax부터 ISPIN=2 seed로 돌린다.

@@ -2,7 +2,8 @@
 - [CQD n-type Origin Goal](cqd_ntype_origin_goal.md) — 최상위 목표: InAs CQD n형 기원을 표면 point defect로 규명. 판정=CTL+μ-diagram
 - [Read Papers Memory](read_papers_memory.md) — 문헌 근거 필요 시 ~/papers/memory/paper_notes/README.md 인덱스 먼저
 - [InCl3 Cl-As_In Unbound](incl3_cl_as_in_unbound.md) — 03 Cl-As_In q0: Cl이 표면 In에 붙음, bound complex 아님
-- [In_i_2 Adatom Ejection](in_i_2_adatom_ejection.md) — 03 In_i_2/q0: In이 Cl층 위 adatom으로 배출, 음의 E_form은 금속기준 회귀 신호
+- [In_i_2 Adatom Ejection](in_i_2_adatom_ejection.md) — In이 Cl층 위 adatom으로 배출(01·03 공통). ⚠2026-08-03 정정: 그 자리는 In3 hollow였음
+- [표면 In_i 자리 정의 01/03](in_i_surface_sites_01_03.md) — In_i_1/In_i_2 hollow 좌표 확정 + In_i는 5s² 유지 단일도너 → Cl 1개로 상쇄
 - [scaLAPACK mlx OFI Hang](scalapack_mlx_ofi_hang.md) — VASP hang 원인=scaLAPACK BLACS Bcast. fix=LSCALAPACK=.FALSE.
 - [Defect Package Repo](defect_package_repo.md) — 정본 위치·GitHub 배포 구성·POTCAR 스크럽·사용 모델
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
