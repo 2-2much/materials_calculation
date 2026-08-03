@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: d0d8276b-ba73-4bec-9a16-ab74deaab2ba
+  modified: 2026-08-03T04:24:25.445Z
 ---
 
 ## 작업 내용
@@ -31,3 +32,14 @@ metadata:
 - `00_Gam-relax/` — -0.01 결과 (현재 사용)
 - `01_1shot/` — -0.01 CONTCAR 기반 1shot (2×2×1)
 - `01_1shot_F002/` — -0.02 CONTCAR 기반 1shot (비교용)
+
+---
+## 2026-08-03: In_i 계열은 EDIFFG=**-0.015** 로 실행 (사용자 지정)
+01/03 의 `In_i_1/In_i_2/±Cl` 8케이스 + pure 는 02/04(HSE) 프로젝트와 값을 맞춰 -0.015 사용.
+위 -0.01 결과들과는 **다른 힘 기준**이므로 에너지 직접 비교 시 주의.
+
+⚠**이 메모리가 그대로 경고가 된다**: 같은 01 셀에서 `V_Cl-V_As` 는 -0.02→-0.01 로 조이자
+max disp **1.53 Å** / ΔE **-172 meV** 의 진짜 구조 재배열이 뒤늦게 나타났다. In_i 는 In 이
+3~4 Å 튕겨나가는(=[[in_i_2_adatom_ejection]]) 계열이라 같은 위험이 있다. -0.015 에서 멈춘 뒤
+**변위/에너지가 여전히 흐르고 있으면 -0.01 로 이어받아 한 번 더** 돌릴 것(continuation 이라 저렴).
+셋업 상세는 [[in_i_surface_sites_01_03]].
