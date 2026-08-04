@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 1d14f4a1-4e13-4ddd-a483-26f07c486890
-  modified: 2026-07-29T11:49:48.818Z
+  modified: 2026-08-04T04:29:19.964Z
 ---
 
 2026-07-29, 02·04 (110) 프로덕션 트리와 06 (100) 트리에서 실측.
@@ -50,5 +50,13 @@ As 층간격  3.0463 → 3.0418 Å  (−0.15 %)
 
 - 중성 스크리닝: PBE-d 이완 → 균일 배율 → **HSE single-point (`NSW=0`)**, `01_Spin` 포함
 - 하전(CTL): **이완 필수**. E_rel = E(+1,R_q0) − E(+1,R_q+1) = 101~113 meV로 중성보다 크고, CTL을 직접 이동시켜 상쇄되지 않는다. 대상이 소수(4~12)면 PBE 사전이완 없이 **HSE 직접 이완**이 낫다(씨앗 = q0 HSE 기하)
+
+### 2026-08-04 세분화 (δ 실측 2점으로 확정) → [[pbe_geometry_hse_1shot_delta]]
+위 "하전은 이완 필수"를 **국소화 여부로 쪼갤 수 있다**:
+- **얕은/비국소 하전** (E_relax 11~60 meV): **1shot 가능**. R_q0 기하 그대로 쓰면 오차 ~20 meV이고,
+  PBE 하전 이완을 따로 돌려도 1.6 meV 밖에 못 벌어 **생략이 맞다**(In_i_1 q+1 실측, 회수율 8%).
+- **깊은/bound 하전** (E_relax 132~366 meV): **HSE 직접 이완 확정.** PBE 기하+1shot 은 회수율 70%로
+  꽤 잡아내지만 **잔차 97 meV**가 남는다(Cl-As_In q+1 실측). 회수율이 아니라 잔차 절대크기로 판정할 것.
+- 분기 판별자 = IPR 게이트(≥6×uniform=bound), 1shot 전자구조에서 공짜.
 
 관련: [[hse_slab_scf_settings]], [[pbe_then_hse_workflow_plan]], [[bandfilling_measured_from_dos]]
