@@ -6,6 +6,7 @@
 - [표면 In_i 자리 정의 01/03](in_i_surface_sites_01_03.md) — In_i_1/In_i_2 hollow 좌표 확정 + In_i는 5s² 유지 단일도너 → Cl 1개로 상쇄
 - [In_i 얕은도너 + Cl 비활성화 확정](in_i_shallow_donor_cl_deactivation.md) — gap 준위 없음(IPR 1.6~3.2×), Cl 1개로 E_F가 CB→VBM 복귀. ⚠03 In_i_2-Cl만 gap내 점유준위
 - [In_i HSE 이관 02/04](in_i_hse_port_02_04.md) — 배율 0.9852099996 정의·04 이름충돌 사고·q+1은 afterok 필수·cascade 전환
+- [PBE기하+HSE 1shot 오차 δ](pbe_geometry_hse_1shot_delta.md) — 얕은결함 18meV(회수 8%) vs 깊은결함 97meV(회수 70%). 분기=IPR 게이트. ⚠Damped는 cold-start 발산
 - [PRECFOCK=Fast 방침](precfock_fast_policy.md) — 2배 빠르나 오차가 종별로 달라 상쇄 안 됨. Δn=0은 안전, Δn≠0은 기준상까지 같은 footing 필요
 - [scaLAPACK mlx OFI Hang](scalapack_mlx_ofi_hang.md) — VASP hang 원인=scaLAPACK BLACS Bcast. fix=LSCALAPACK=.FALSE.
 - [Defect Package Repo](defect_package_repo.md) — 정본 위치·GitHub 배포 구성·POTCAR 스크럽·사용 모델
