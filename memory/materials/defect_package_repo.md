@@ -1,6 +1,6 @@
 ---
 name: defect_package_repo
-description: "Defect_Package 정본 위치 + GitHub 배포(2-2much/Defect_Package, private) + scripts/·example/ 2폴더 구조"
+description: "Defect_Package 기준은 GitHub origin 하나(2-2much/Defect_Package); 커밋은 __Defect_Package_Reference__ 클론에서. /mnt/hohenberg 사본은 2026-08-04 폐기"
 metadata: 
   node_type: memory
   type: reference
@@ -8,8 +8,19 @@ metadata:
   modified: 2026-07-27T08:08:53.368Z
 ---
 
-Defect 계산 패키지의 정본 git repo: `/mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/`
-(심링크 해석 시 `/mnt/hohenberg/byname/정재관/scripts/Defect_Package`). tgm-master에서 마운트로 직접 쓰기 가능.
+## ⚠️2026-08-04 확정: 기준은 **GitHub origin 하나뿐**. hohenberg 사본은 **더 이상 갱신하지 않는다**
+사용자 결정 — 작업본이 둘이라 관리가 어려움. 앞으로:
+- **기준(source of truth)** = `github.com/2-2much/Defect_Package` (private, branch `master`)
+- **커밋/푸시 위치** = `12-Surace-defect_calculation/__Defect_Package_Reference__/` (origin 클론)
+- `/mnt/hohenberg/…/Defect_Package` = **폐기(읽기 전용 유물)**. pull/copy/commit **하지 말 것**.
+  버릴 당시 상태: origin/master(64a5f72)와 정확히 일치, 로컬 변경 0건·미푸시 커밋 0건 → 잃은 것 없음.
+- ⚠**hohenberg 작업본에 파일을 복사하지 말 것.** git 작업본이라 로컬 수정으로 잡혀 pull이 거부된다
+  (2026-08-04 실제 발생). 애초에 건드릴 일이 없다.
+
+(아래 옛 기록의 "정본=/mnt/hohenberg" 서술은 이 결정으로 **전부 무효**)
+
+옛 경로 기록: `/mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/`
+(심링크 해석 시 `/mnt/hohenberg/byname/정재관/scripts/Defect_Package`).
 
 ## ⚠️ push용 작업 clone (2026-07-27 확인): `__Defect_Package_Reference__`
 - 패키지 커밋/푸시는 **`12-Surace-defect_calculation/__Defect_Package_Reference__/`** 에서 한다(사용자 지정).
@@ -61,3 +72,12 @@ Defect 계산 패키지의 정본 git repo: `/mnt/hohenberg/byuid/jaegwan97/scri
 - **진짜 원인(확정)**: 계산폴더 `scripts`가 **심링크** → `/mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/scripts` (Jul 14 14:44 생성, 운용모델 "A안 symlink"). `/home`은 로컬 `/dev/sda`, `/mnt/hohenberg`은 NFS. **로그인 노드(tgm-master)**는 NFS 마운트되어 심링크 정상(그래서 로그인에서 `--help` 테스트는 통과) 하지만 **compute 노드(n033-036,060-064)는 /mnt/hohenberg 미가시** → `scripts` 심링크 dangling → 파일 못 찾음. `calc`는 실제 디렉토리(/home)라 std.out은 정상 기록됨(그래서 "FS 가시성 아님"으로 오판했던 것). ⚠앞서 "동기화 지연/파일 부재"로 적었던 진단은 틀림.
 - **교훈**: SLURM이 실행하는 경로(scripts 포함)는 **compute 노드가 볼 수 있어야 함 = /home 로컬 실제파일**. 정본 repo(/mnt/hohenberg)로의 **symlink(A안)는 SLURM에서 금지**. 반드시 **실복사(B안)**: `rm scripts && cp -r /mnt/hohenberg/byuid/jaegwan97/scripts/Defect_Package/scripts scripts`. cf. [[server_fs_git_sync_scope]](/home·/TGM 로컬, /mnt/hohenberg만 NFS).
 - **복구 절차**: (1) scripts 심링크→실복사, (2) 막힌/실패 잡 scancel, (3) `bash scripts/run_joblist.sh calc/joblist.txt submit-defect-chains` 재제출. run_case.sh는 멱등(stage_finished=OUTCAR "General timing and accounting")이라 완료된 q0/Cl-As_In q+1은 수초 스킵. **2026-07-15 밤 미적용, 사용자 "내일" 처리 예정.**
+
+## 2026-08-02~04 커밋 (shallow-limit / band-filling 일습) → [[bandfill_correction_stage]]
+`__Defect_Package_Reference__`에서 커밋·푸시. 추가된 것:
+- `scripts/run_bandfill_corrections.py`, `scripts/plot_DFE.py` (신규)
+- `scripts/ipr_gate.py` — `--stage` 플래그화(폴더별 하드코딩 포크 제거), relax-CSV stage 불일치 경고
+- `example/plot_DFE.sh`, `example/bandfill_correct.sh`
+커밋: b24e53a → 4b67883 → a129187 → 64a5f72.
+⚠`ipr_gate.py`는 이제 전 계산폴더(02·04·05·06) 동일 파일 + `--stage`로 분기.
+05(100Cl PBE-d)는 스핀 단계가 없어 `--stage 00_Gam-relax`로 불러야 함.
