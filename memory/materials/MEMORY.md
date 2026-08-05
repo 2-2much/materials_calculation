@@ -51,7 +51,7 @@
 - [incl3 passv 4x2 thickness](incl3_passv_4x2_thickness.md) — 03 슬랩 셀 구성과 두께 6L→5L 검토
 - [slabcc correction](slabcc_correction.md) — Cl-As_In slabcc 초기 시도와 셀 크기 문제
 - [slabcc Delocalized Defect Policy](slabcc_delocalized_defect_policy.md) — ⚠delocalized 실패는 물리. 게이트=scripts/ipr_gate.py
-- [PHS/BF correction 단계](bandfill_correction_stage.md) — band-filling을 정식 correction 단계로. 계산값 −0.125eV, 함정 5종
+- [PHS/BF correction 단계](bandfill_correction_stage.md) — PHS/band-filling을 slabcc와 동급 correction 단계로 구현(bandfill_correct.sh→CSV→plot_DFE.sh). **주입값 0.78eV 폐기, 계산값 V_Cl-Cl_As=−0.125eV(부호 반대)**. k-사다리로 4자리 검증. 함정 5종(EIGENVAL occ×2, OUTCAR 값 붙음, IPR은 k점별, 하전셀 불가, pure PROCAR 없으면 필터 무력화). 정렬 z-ramp=결함 쌍극자(미해결). ⚠2026-08-05 plot_DFE 버그 2건 수정: **charged 작도에서 BF가 no-op**이었음, **shallow-limit 기울기가 +1 고정**이었음(이중도너는 +2)
 - [Shallow-limit DFE Construction](shallow_limit_dfe_construction.md) — E_f(+1,E_F)=E_f(0)+(E_F−E_g) 작도법과 적용 조건 3개
 - [Slab Correction Workflow](slab_correction_workflow.md) — slabcc optical/adiabatic 스킴 CLI와 prepare 동작
 - [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — 보정후 0.379~0.384eV 수렴(vac≥40 신뢰)

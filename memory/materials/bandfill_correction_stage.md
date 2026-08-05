@@ -86,3 +86,35 @@ CSV에 `E_bf_unaligned_eV`/`E_bf_aligned_eV` 병기, 50 meV 초과는 `ALIGN-SEN
 연관 가능성. **재확인 필요, 단정 아님**.
 쓸모: `extrapolation_models.py` Komsa 외삽 `c0+c1x+c2x²`(1/mul), `cli/special_vacuum/`(진공 스캔).
 제약: tetragonal·VASP 전용.
+
+## ⚠2026-08-05 plot_DFE.py 버그 2건 (사용자 발견, 둘 다 수정·푸시)
+
+**① band-filling이 `--shallow-limit no`에서 완전한 no-op이었다** (커밋 72facf3).
+`curves_for_defect`가 E_bf를 **shallow-limit 가지에서만** 썼고 charged 가지는 원본 절편을
+그대로 그림 → 제목만 "band-filling on"으로 바뀌고 곡선은 한 줄도 안 움직임. 04에서
+Cl_As_1/Cl_As_2가 E_bf −0.54/−0.31인데 그림이 동일해서 발각됨.
+**E_bf는 중성 셀 총에너지를 고치는 항이므로 작도 방식과 무관하게 q=0 절편에 붙는다** —
+이제 절편 생성 지점에서 한 번만 적용하고 두 방식이 같은 보정본을 소비.
+CTL도 같은 split-brain이었음(공유 플로터가 밴드필링 CSV를 읽기 전에 계산) → 보정 절편에서
+`base.compute_all_ctls`로 재계산. ⚠`compute_envelope_ctl`은 **(조건,defect) 한 조**만 받는다
+(전체를 넘기면 조용히 0개 반환 — 실제로 당함). 밴드필링 OFF면 공유 플로터 출력과 동일(회귀 확인).
+효과: 02에서 In_As(+1/0)는 갭 밖으로 나가고, In_i_1·In_i_2는 E_bf가 **양수(MB)**라 q0가 내려가며
+1.16 eV에 갭 내 전이가 새로 생김. Cl-As_In(bound, E_bf=0)은 불변.
+
+**② shallow-limit 기울기가 +1로 하드코딩돼 있었다** (커밋 997b4bb).
+완전이온화 전하는 **q0의 캐리어 수**다: `E_f(+N)=E_f(0)+N(E_F−E_g)` / `E_f(−N)=E_f(0)−N·E_F`.
+N은 이미 `band_edge_states.csv`의 `N_e_CB`/`N_h_VB`에 있었는데 플롯이 무시했음.
+이중도너의 VBM 형성E를 **정확히 E_g만큼** 과소평가: Cl_As_1 In-rich −1.42→**−2.67**,
+02 In_As −0.59→**−1.84**. 중간 전하상태는 안 그림(shallow 극한에선 모든 전이가 같은 모서리라
++1 선이 +2 선 위에 놓여 포락선에 기여 안 함). `q_ionized` 컬럼 추가.
+
+## Cl_As_1 E_bf=−0.54 는 맞다 (2026-08-05 재검증)
+이중도너 2.000전자 × **−0.2715/개**. pure CBM +0.0949 vs 도너밴드 −0.1767(band 509, 양 스핀).
+2026-07-23 검증 에이전트 2인의 두 경로 교차검증값(전자당 0.335, 정렬 후 총 0.670)과
+**aligned 0.6413 → 29 meV 일치**. 기본값 unaligned는 0.5430.
+⚠단 `IPR-GRAY-ZONE(1.36×)` + `ALIGN-SENSITIVE(−0.098eV)` 플래그 동반 → 인용 시 불확실도 병기.
+
+## ⚠파일명이 설정을 담는다 — stale 파일 착각 주의
+tag = `{shallow-limit|charged}_{ic|noic}_{bf|nobf}[_부분집합]`. 스위치를 바꾸면 **다른 파일**로
+나가므로 옛 파일이 그대로 남는다. 두 번 착각함(2026-08-03 나, 08-05 사용자). 판별은 **그림 제목**
+(`DFE (charged construction, image-charge on, band-filling off)`)으로.
