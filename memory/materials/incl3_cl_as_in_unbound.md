@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: be2e35fe-68fd-4740-909f-1cf615f9ce7d
-  modified: 2026-08-04T08:48:26.967Z
+  modified: 2026-08-05T03:24:22.163Z
 ---
 
 **03-InCl3-passv_6L_4x2x1_PBE-d의 Cl-As_In q0 결과 해석 (2026-07-08)**
@@ -39,6 +39,27 @@ metadata:
 T1r은 ISPIN=2 / 594 / −0.015 / cascade의 `wan90` 바이너리다. 그런데 결과는
 **구조 max|Δr| = 0.028 Å, E(σ→0) 차이 0.04 meV**로 사실상 동일.
 → 이 계에서는 옛 ISPIN=1 값을 새 값과 **그대로 섞어 써도 된다**.
+
+### 2×2×1 DOS/Band (02_G221-DOS, 03_Band) — **T1r과 T2는 물리적으로 다른 결함이다**
+Γ-only에서는 둘 다 "b508 반점유"로 똑같아 보였는데, 2×2×1로 가면 갈린다.
+(pure gap = 0.372 eV, PBE-d. 지표는 전부 정렬 불필요한 것들 — BZ적분 점유수·분산폭·IPR)
+
+| | BZ적분 점유수 | 분산폭 | 1/IPR (pure VBM=68.7) | w[As_In48]+w[Cl129] |
+|---|---|---|---|---|
+| pure b508(VBM) | 2.000 | 0.391 eV | 68.7 | — |
+| **T1r** b507 / b508 | 1.894 / **1.109** (홀 1개를 두 밴드가 나눠 가짐) | 0.158 / 0.293 eV | 54.4 / 45.2 (**1.3× / 1.5×**) | 5% / 5% |
+| **T2** b508 | **정확히 1.000** | **0.116 eV (평탄)** | **21.4 (3.2×)** | **21%** |
+
+- **T2 = 속박된 홀.** 평탄·국소·정수점유 세 축이 모두 일치하고, DOS에서 VB 상단과 분리된
+  **고립 피크가 E_F에 서 있다**(그림 `results/ClAsIn_T1r_T2/dos_ClAsIn.png`). As_In–Cl 결합에 실린 진짜 gap 준위.
+  → **(0/−1) CTL이 실재. 하전계산 의미 있고 slabcc 보정도 적용 가능.**
+- **T1r = PHS 얕은 억셉터.** 고립 피크 없음, 무게가 VB 매니폴드 전체에 분산, E_F가 VB 가장자리.
+  → shallow-limit 작도 `E_f(−1,E_F)=E_f(0)−E_F` 대상. 하전계산은 Koopmans 대조용.
+- ⚠**셀 간 절대 준위 위치는 주장하지 말 것.** core-potential 정렬(defect−pure)이 T1r +0.143±0.048,
+  T2 +0.065±0.035 eV로 나오는데, **어느 부호로 넣어도 세 셀의 CB 가장자리가 안 맞는다**(0.13~0.19 eV 어긋남).
+  dipole correction을 전부 끈 상태([[surface_defect_dipole_correction]])라 Cl 표면쌍극자가 셀마다 다른 게
+  유력한 원인. 준위의 **성격**은 확정이지만 **위치**는 q−1 총에너지 CTL로 정하는 게 정공법
+  ([[charged_defect_vbm_ref]]).
 
 ### ⚠ 03에서는 Cl-As_In q0가 **비자성**이다 (02와 다름)
 NELECT=1015(홀수)인데 ISPIN=2 + MAGMOM 시드로 출발해도 **mag = 0.0000으로 수렴**,
