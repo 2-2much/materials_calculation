@@ -103,6 +103,8 @@
 - [hse slab scf settings](hse_slab_scf_settings.md) — HSE SCF 정체 처방: ALGO=Damped
 - [HSE 이완 vs single-point](hse_relax_vs_singlepoint.md) — 중성 스크리닝은 NSW=0 충분, 하전은 이완 필수
 - [HSE 1shot 조용한 실패 3종 + (100) q0 결과](hse_1shot_pitfalls_and_q0_results.md) — rms 하강으로 판정·collect_energies 편향·NELM 소진
+- [In_i = 양쪽 termination 모두 shallow donor](in_i_shallow_donor_both_terminations.md) — 01/In_i≡03/In_i_2(같은 adatom 구조), 전자 1개→host CBM. ⚠Γ-only DOS의 E_F 위 갭은 fundamental gap 아님. adatom이 Td보다 1.5~1.9eV 안정. 02-HSE에 adatom 자리 없음
+- [kohn In_i 후속 3건](next_steps_in_i_kohn.md) — InCl_i 가설검증 / In_i q+1 CTL / 02-HSE adatom 자리 추가
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
