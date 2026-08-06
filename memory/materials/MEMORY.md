@@ -91,7 +91,8 @@
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — 문제는 버전 아닌 빌드 변형. 바이너리 단위로 30초 테스트
 - [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 청정표면 이완기하는 타일링으로 전용 가능(결함엔 불가)
 - [(100) 작업트리는 kohn 로컬](inas100_worktree_on_kohn.md) — 05·06 트리는 kohn:/home 에만. 서버 판별법·파티션 정보
-- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — git 동기화는 memory/.claude만. 공유NFS 범위 ↔ [[no_compute_on_login_node]]
+- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — git 동기화는 memory/.claude만. ⚠2026-08-07 재정정: SLURM 4대 공유 아님(kohn=cascade / sham=g1·g2), hohenberg NFS는 sham에 미마운트
+- [서버간 SSH 접근](ssh_access_between_servers.md) — kohn→sham/bloch 원격실행 셋업. 키 등록은 원격 안에서. ⚠bloch는 fail2ban 차단 해제 대기
 - [slabcc 전하절단 가드](slabcc_charge_truncation_guard.md) — discretization error=꼬리절단. SLABCC_CHARGE_TOLERANCE 추가
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — 목표 RMSE가 아니라 BOBYQA 상대수렴 tolerance
 - [IPR Gate probe = 점유차분](ipr_gate_occdiff_probe.md) — probe=|occ(q)−occ(q0)| 최대 밴드. In_As_1 q+1은 bound
