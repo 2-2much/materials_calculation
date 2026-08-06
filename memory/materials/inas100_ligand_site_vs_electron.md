@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 6bd9a490-f3df-4628-92f5-b8648d42fb89
-  modified: 2026-08-06T01:15:05.899Z
+  modified: 2026-08-06T01:33:06.348Z
 ---
 
 2026-08-06. ChemComm 2017(Ko·Yoo·Kim, 같은 연구실) 본문+SI Fig.S3 원본 확대 + 내
@@ -73,6 +73,42 @@ n형 기원이 **X-type 리간드 결손 하나**로 좁혀진다. Cl-only보다
 
 ⇒ 둘 중 택일이 아니라 **μ_MA(또는 θ_MA) 축을 하나 더** — 2021 Nat.Comm. Fig.4b(γ vs μ_Cl)의
 2D 확장. "아민 활성도가 떨어지면 cp→lp, 빈 자리 생김, 도너 싸짐"이 논문의 그림.
+
+## ★ 실험적 대응상 — Cl-only 모델 = Song 2018 (아민 없음, 확인 완료)
+
+2026-08-06 확인. **Song et al., Nat.Commun. 9, 4267 (2018)의 InAs–Cl에는 아민이 없다.**
+- 합성 때 dioctylamine(DOAm)을 쓰지만 **리간드가 아니라 As 전구체 반응성 조절용**(SI Fig.1).
+- **Step 1 NOBF₄**가 native oleate + 산화물을 통째로 제거(FTIR로 oleate 피크 완전 소멸).
+  BF₄⁻는 약한 nucleophile이라 결합 안 함 → "naked" CQD(ζ 양수).
+- **Step 2 IL = NH₄Cl / NH₄Br / NH₄I** (MeOH). **NH₄⁺는 L-type이 될 수 없다** — 양전하라
+  In^δ+와 반발 + N lone pair를 네 번째 H⁺에 이미 소비. NH₄⁺⇄NH₃↑+H⁺로 세척·진공건조 때 이탈
+  (NaI/KI 대신 암모늄염을 쓰는 이유가 정확히 "짝이온을 안 남기려고").
+- ⚠ **단 "0"이 측정된 건 아니다**: Supplementary Table 1 XPS 정량표에 In/As/B/F/Cl/Br/I/S만
+  있고 **N 항목이 없다.** 확정하려면 N 1s 필요. (2026-07-27 렉쳐노트에 이미 정리)
+
+**Supplementary Table 1 (As=1 정규화, ⚠캡션은 "according to In"이라 표와 불일치)**:
+InAs–oleate In 1.73 / naked 1.65(+F 0.14) / **InAs–Cl In 1.50, Cl 0.12** / Br 0.17 / I 0.22
+/ MPA S 0.26 / EDT S 0.41. → **할라이드 피복이 X-type 전하균형 요구량보다 한 자릿수 부족**.
+(⚠XPS는 표면가중이라 In/As 절대값은 과대. ICP 값[Yoon2023 1.13, Asor 1.13]과 섞지 말 것.)
+
+⇒ **두 극한이 논문으로 갈린다**:
+| 극한 | 실험 | 결과 |
+|---|---|---|
+| **cp** (X+L 둘 다) | as-synthesized, oleylamine+halide (2016 Angew InP / 2024 JACS InAs) | 정사면체, (111) 지배 |
+| **lp = 내 모델** (X만) | **NOBF₄ 스트립 + NH₄X (Song 2018)**, HCl 처리(Oh 2024) | 소자 필름, **리간드 무관 n형** |
+
+⇒ Cl-only 모델은 소자 상태의 정확한 대응상이다. MA 계산은 **cp 대조군**으로 하는 것이지
+"옳은 모델로 교체"가 아니다.
+
+## ⚠ 자기검증 — 기각된 "under-compensation → 축퇴 n형"을 되살리지 말 것
+
+2026-07-17에 기각됨(`~/papers/memory/paper_notes/n-type_InAs_QDs.md`): 균일한 리간드 부족이면
+QD당 ≥1 e → 10¹⁹⁻²⁰ cm⁻³ 인데 관측은 10¹⁵–10¹⁸(=QD당 10⁻⁴–10⁻¹). 3자릿수 불일치.
+
+**내 계산이 그 기각을 독립적으로 지지한다**: **맨 In은 빈 궤도라 도너가 아니다.**
+pure 슬랩(0.5 ML Cl)은 부분점유 0, 깨끗한 갭. 피복이 아무리 부족해도 dimer가 짝지어
+전자를 다 먹으면 전자를 안 내놓는다. **도너는 V_Cl(Cl 0개 dimer)과 In_i — 희박 점결함**이고,
+희박 점결함이라야 10⁻⁴–10⁻¹/QD 자릿수가 맞는다. 기각된 건 "균일 부족"이지 "점결함"이 아니다.
 
 ## ⚠ 논문 수치 인용 시 함정
 
