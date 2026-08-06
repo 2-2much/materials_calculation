@@ -11,7 +11,35 @@
       "Bash(squeue -u jaegwan97)",
       "Bash(python3)",
       "Bash(python3 *.py)",
-      "WebSearch"
+      "WebSearch",
+
+      "Bash(ssh bloch hostname:*)",
+      "Bash(ssh bloch squeue:*)",
+      "Bash(ssh bloch sinfo:*)",
+      "Bash(ssh bloch scontrol show:*)",
+      "Bash(ssh bloch sacct:*)",
+      "Bash(ssh bloch ls:*)",
+      "Bash(ssh bloch cat:*)",
+      "Bash(ssh bloch head:*)",
+      "Bash(ssh bloch tail:*)",
+      "Bash(ssh bloch grep:*)",
+      "Bash(ssh bloch df:*)",
+      "Bash(ssh bloch du:*)",
+      "Bash(ssh bloch module avail:*)",
+
+      "Bash(ssh sham hostname:*)",
+      "Bash(ssh sham squeue:*)",
+      "Bash(ssh sham sinfo:*)",
+      "Bash(ssh sham scontrol show:*)",
+      "Bash(ssh sham sacct:*)",
+      "Bash(ssh sham ls:*)",
+      "Bash(ssh sham cat:*)",
+      "Bash(ssh sham head:*)",
+      "Bash(ssh sham tail:*)",
+      "Bash(ssh sham grep:*)",
+      "Bash(ssh sham df:*)",
+      "Bash(ssh sham du:*)",
+      "Bash(ssh sham module avail:*)"
     ]
   },
   "hooks": {
