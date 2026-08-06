@@ -22,6 +22,7 @@
 - [기준상 세트 mu_H/mu_Cl](mu_reference_phases.md) — 확정 μ_H/μ_Cl 값·InCl₃ pinning·Δμ_Cl 밴드. PRECFOCK=Normal 통일
 - [Cl2 HSE06 Calc](cl2_hse06_calc.md) — 계산 이력만. 확정값은 [[mu_reference_phases]]. 재현성 0.6meV
 - [cascade 병렬 설정](cascade_parallel_settings.md) — cascade 36코어: VASP NCORE=18/NSIM=36, slabcc OMP=36
+- [작은 셀 NCORE=18 → ACE ZPOTRF 실패](ncore_ace_zpotrf_small_cell.md) — ⚠plane wave 수백 개면 NCORE=1 + KPAR. scaLAPACK 문제 아님
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — 잡 이름을 calc별로 구분되게
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — k1x1x1 미수렴, k2x2x1_MP 수렴. vaspkit 314는 상대경로
 - [pydefect_2d Setup](pydefect_2d_setup.md) — NK 보정 셋업. 유전율은 슬랩 셀-평균이어야 함
