@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 21521b3d-9090-4351-9826-e8574651dc0d
-  modified: 2026-08-10T01:53:45.184Z
+  modified: 2026-08-10T01:55:37.364Z
 ---
 
 2026-08-10. `12-Surace-defect_calculation/07-100Cl_8L_par4x3_PBE-d`에
@@ -43,6 +43,11 @@ NELECT (pure=924): 짝수 As_In 916 / Cl_In 918 / Cl_As 926 / In_As 932,
 전부 H를 `F F F`로 고정**했다. 이제 셀당 `F F F` 48개 = pseudo-H 24 + bottom In 12 +
 bottom As 12로 05와 같은 규약이고 H 기하가 E_f에서 정확히 상쇄된다.
 ([[inas100_pseudoh_lasph_footing]])
+
+⚠ 그 과정에서 **selective-dynamics 플래그가 줄당 5개(`F F F   T   T`)가 된 파일이 27개**
+있었다(사용자가 발견). 원인은 `line.index('T')`가 항상 **첫 번째** T를 찾아 꼬리를 잘못
+자른 것. **플래그를 문자열 인덱스로 부분치환하지 말고 줄 전체를 좌표+플래그+라벨로
+재조립할 것.** 검증은 매 원자줄에서 `len([t for t in tokens if t in 'TF'])==3`.
 
 ## ⚠ species 라벨 함정
 07 POSCAR 6행은 `In`인데 POTCAR TITEL은 `In_d`. 그대로 두면 `check_species_order()`가
