@@ -91,6 +91,7 @@
 - [hse slab scf settings](hse_slab_scf_settings.md) — HSE SCF 정체 처방: ALGO=Damped
 - [HSE 이완 vs single-point](hse_relax_vs_singlepoint.md) — 중성 스크리닝은 NSW=0 충분, 하전은 이완 필수
 - [HSE 1shot 조용한 실패 3종 + (100) q0 결과](hse_1shot_pitfalls_and_q0_results.md) — rms 하강으로 판정·collect_energies 편향·NELM 소진
+- [inas100 par4x3 q0 results](inas100_par4x3_q0_results.md) — 07 par4x3 q0 14셀 결과 확정 — 자성은 V_Cl·In_i_sub 둘뿐, 깊은준위 5종, ★E_F를 CB로 미는 건 V_Cl-Cl_As·In_i_surf·Cl-As_In. 여기서 하전 14케이스 도출
 
 ## 참고 자료
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — 문제는 버전 아닌 빌드 변형. 바이너리 단위로 30초 테스트
@@ -115,3 +116,4 @@
 - [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 주석 풀고 prepare하면 잡이 3h→10h+
 - [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 참조슬랩 바닥상태 검증용 6잡. ⚠type=antisite로 중심 지정
 - [InAs100 셀 수렴 지표](inas100_cell_convergence_metric.md) — 판정은 E_b만(다른 두 지표는 반대 결론). ✅p4×4 확정, 외삽극한 철회
+- [gamma relax adequacy par4x3](gamma_relax_adequacy_par4x3.md) — ✅Γ-only 이완은 par4x3(면내 17.5×15.8Å)에서 충분 — 최악 케이스 56meV/RMS 0.1Å. ⚠단 시험을 seed에서 출발시키면 다른 극소점에 빠져 k효과를 못 잰다
