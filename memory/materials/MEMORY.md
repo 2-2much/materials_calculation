@@ -43,6 +43,8 @@
 - [216셀 V_As의 T_d = ISYM 아티팩트](bulk_vas_jt_isym_artifact.md) — PBE/ISYM=0은 C_3v JT(퍼짐 0.79Å), LDA/ISYM=2만 완전 T_d. ⚠PBE bulk InAs gap=0.0000 실측 → gap 준위 판정 불가
 - [InAs CNL / branch point](inas_cnl_branch_point.md) — CNL=VBM+0.50eV는 견고, CNL−CBM 부호는 우리 HSE로 증명 금지. Tersoff 지름길이 0.50 정확 재현=공짜 함수검증. ★양자구속이 CNL 논리를 깨는 것이 프로젝트 정당화
 - [par4x3 결함세트 07](inas100_par4x3_defect_set_07.md) — 결함 13종. 05 p4x4와 절대 registry 일치(0.0004Å) → 자리 대응표. pseudo-H 전 셀 고정·species alias In→In_d
+- [par4x3 q0 결과 확정](inas100_par4x3_q0_results.md) — 자성=V_Cl·In_i_sub 둘뿐. ★E_F를 CB로 미는 3종(V_Cl-Cl_As·In_i_surf·Cl-As_In). ⚠IPR게이트는 빈 깊은준위를 못 본다(Cl_In)
+- [Γ-only 이완 충분성](gamma_relax_adequacy_par4x3.md) — par4x3에서 56meV/RMS 0.1Å. ⚠시험은 반드시 R_Γ에서 출발할 것(seed 출발은 다른 극소점)
 - [MA co-passivation 08](inas100_MA_copassiv_tree_08.md) — Cl/MA 탐침 2셀. ⚠표준 N/C가 ENMAX=400 → ENCUT=400, 07(300)과 에너지 혼용 금지. 기준셀=MA_i-In
 
 ## 연구 / 프로젝트
@@ -91,7 +93,6 @@
 - [hse slab scf settings](hse_slab_scf_settings.md) — HSE SCF 정체 처방: ALGO=Damped
 - [HSE 이완 vs single-point](hse_relax_vs_singlepoint.md) — 중성 스크리닝은 NSW=0 충분, 하전은 이완 필수
 - [HSE 1shot 조용한 실패 3종 + (100) q0 결과](hse_1shot_pitfalls_and_q0_results.md) — rms 하강으로 판정·collect_energies 편향·NELM 소진
-- [inas100 par4x3 q0 results](inas100_par4x3_q0_results.md) — 07 par4x3 q0 14셀 결과 확정 — 자성은 V_Cl·In_i_sub 둘뿐, 깊은준위 5종, ★E_F를 CB로 미는 건 V_Cl-Cl_As·In_i_surf·Cl-As_In. 여기서 하전 14케이스 도출
 
 ## 참고 자료
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — 문제는 버전 아닌 빌드 변형. 바이너리 단위로 30초 테스트
@@ -116,4 +117,3 @@
 - [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 주석 풀고 prepare하면 잡이 3h→10h+
 - [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 참조슬랩 바닥상태 검증용 6잡. ⚠type=antisite로 중심 지정
 - [InAs100 셀 수렴 지표](inas100_cell_convergence_metric.md) — 판정은 E_b만(다른 두 지표는 반대 결론). ✅p4×4 확정, 외삽극한 철회
-- [gamma relax adequacy par4x3](gamma_relax_adequacy_par4x3.md) — ✅Γ-only 이완은 par4x3(면내 17.5×15.8Å)에서 충분 — 최악 케이스 56meV/RMS 0.1Å. ⚠단 시험을 seed에서 출발시키면 다른 극소점에 빠져 k효과를 못 잰다
