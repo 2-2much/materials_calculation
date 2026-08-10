@@ -41,7 +41,7 @@
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02 defect state 정리 + 2026-07-17 정정 3건. ⚠도구 인덱싱 규약
 - [Shallow Donor InAs Supercell Limit](shallow_donor_inas_supercell_limit.md) — ⚠a_B=349Å이라 도너준위가 안 보이는 게 정상. 공명 vs 이온성 도너 구분
 - [InAs CNL / branch point](inas_cnl_branch_point.md) — CNL=VBM+0.50eV는 견고, CNL−CBM 부호는 우리 HSE로 증명 금지. Tersoff 지름길이 0.50 정확 재현=공짜 함수검증. ★양자구속이 CNL 논리를 깨는 것이 프로젝트 정당화
-- [par4x3 결함세트 07](inas100_par4x3_defect_set_07.md) — 05 p4x4와 절대 registry 일치(0.0004Å) → 자리 대응표. ⚠pseudo-H가 07은 자유·species alias In→In_d
+- [par4x3 결함세트 07](inas100_par4x3_defect_set_07.md) — 결함 13종. 05 p4x4와 절대 registry 일치(0.0004Å) → 자리 대응표. pseudo-H 전 셀 고정·species alias In→In_d
 
 ## 연구 / 프로젝트
 - [Si-DB KP 재현](si_db_kp_reproduction.md) — uncorrected는 KP와 일치하나 E_corr은 2배. 가설 3개 배제
