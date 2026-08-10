@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: ef8eb03e-6497-4f2e-8956-00a63aaeb749
-  modified: 2026-08-06T20:34:16.779Z
+  modified: 2026-08-10T11:22:44.568Z
 ---
 
 2026-08-07 셋업. kohn 세션에서 다른 서버 명령을 직접 실행할 수 있다.
@@ -39,8 +39,14 @@ chmod 600 ~/.ssh/authorized_keys
 ## 상태 (2026-08-07)
 
 - **sham**: 접속 OK.
-- **bloch**: 키는 등록됐으나(`grep -c claude-code` = 1) **kohn IP(143.248.13.145)가 차단**되어
-  포트 22가 Connection refused. sshd는 정상 LISTEN. `fail2ban-client set sshd unbanip`
-  으로 해제 필요. 재발 방지로 `addignoreip` 권장.
+- **bloch**: 2026-08-07엔 **kohn IP(143.248.13.145)가 차단**되어 포트 22 Connection refused
+  (sshd는 정상 LISTEN).
+  ✅**2026-08-10 확인: 접속 복구됨** — 관리자 조치 없이 fail2ban bantime 만료로 자동 해제된 것으로
+  보인다. 키는 그대로(`grep -c claude-code@kohn` = 1). fail2ban은 여전히 active이고 jail 설정은
+  sudo 없이 못 본다 → **비밀번호 실패가 몇 번 쌓이면 또 차단된다.** 재발 방지엔 관리자에게
+  `ignoreip`에 교내 서버 IP 등록을 요청해야 한다(kohn 143.248.13.145 / sham 143.248.247.45 /
+  bloch 143.248.247.246). 키 인증만 쓰면 실패가 안 쌓이므로 평소엔 안전.
+- **NFS**: bloch에는 `/mnt/hohenberg/byname`이 정상 마운트되어 있다(kohn과 동일).
+  sham만 미마운트 — [[server_fs_git_sync_scope]] 참고.
 
 서버 판별·파일시스템은 [[server_fs_git_sync_scope]], hostname 함정은 [[inas100_worktree_on_kohn]].
