@@ -40,6 +40,7 @@
 - [V_Cl-Cl_As COHP Donor Evidence](vclclas_cohp_donor_evidence.md) — n형 미시기원 증거 4종. ⚠LPARD+HSE는 ICHARG=0
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02 defect state 정리 + 2026-07-17 정정 3건. ⚠도구 인덱싱 규약
 - [Shallow Donor InAs Supercell Limit](shallow_donor_inas_supercell_limit.md) — ⚠a_B=349Å이라 도너준위가 안 보이는 게 정상. 공명 vs 이온성 도너 구분
+- [216셀 V_As의 T_d = ISYM 아티팩트](bulk_vas_jt_isym_artifact.md) — PBE/ISYM=0은 C_3v JT(퍼짐 0.79Å), LDA/ISYM=2만 완전 T_d. ⚠PBE bulk InAs gap=0.0000 실측 → gap 준위 판정 불가
 - [InAs CNL / branch point](inas_cnl_branch_point.md) — CNL=VBM+0.50eV는 견고, CNL−CBM 부호는 우리 HSE로 증명 금지. Tersoff 지름길이 0.50 정확 재현=공짜 함수검증. ★양자구속이 CNL 논리를 깨는 것이 프로젝트 정당화
 - [par4x3 결함세트 07](inas100_par4x3_defect_set_07.md) — 결함 13종. 05 p4x4와 절대 registry 일치(0.0004Å) → 자리 대응표. pseudo-H 전 셀 고정·species alias In→In_d
 - [MA co-passivation 08](inas100_MA_copassiv_tree_08.md) — Cl/MA 탐침 2셀. ⚠표준 N/C가 ENMAX=400 → ENCUT=400, 07(300)과 에너지 혼용 금지. 기준셀=MA_i-In
@@ -95,7 +96,7 @@
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — 문제는 버전 아닌 빌드 변형. 바이너리 단위로 30초 테스트
 - [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 청정표면 이완기하는 타일링으로 전용 가능(결함엔 불가)
 - [(100) 작업트리는 kohn 로컬](inas100_worktree_on_kohn.md) — 05·06 트리는 kohn:/home 에만. 서버 판별법·파티션 정보
-- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — git 동기화는 memory/.claude만. ⚠2026-08-07 재정정: SLURM 4대 공유 아님(kohn=cascade / sham=g1·g2), hohenberg NFS는 sham에 미마운트
+- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — git 동기화는 memory/.claude만. ⚠2026-08-07 재정정: SLURM 4대 공유 아님(kohn=cascade / sham·bloch=g1·g2), hohenberg NFS는 sham에 미마운트
 - [서버간 SSH 접근](ssh_access_between_servers.md) — kohn→sham/bloch 원격실행 셋업. 키 등록은 원격 안에서. ⚠bloch는 fail2ban 차단 해제 대기
 - [slabcc 전하절단 가드](slabcc_charge_truncation_guard.md) — discretization error=꼬리절단. SLABCC_CHARGE_TOLERANCE 추가
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — 목표 RMSE가 아니라 BOBYQA 상대수렴 tolerance
