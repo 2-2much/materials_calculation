@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 21521b3d-9090-4351-9826-e8574651dc0d
-  modified: 2026-08-10T01:55:37.364Z
+  modified: 2026-08-10T02:39:07.425Z
 ---
 
 2026-08-10. `12-Surace-defect_calculation/07-100Cl_8L_par4x3_PBE-d`에
@@ -54,10 +54,31 @@ bottom As 12로 05와 같은 규약이고 H 기하가 E_f에서 정확히 상쇄
 전 케이스를 거부한다 → `config/runtime.yaml`에 `species_aliases: {In: In_d}` 추가함
 ([[species_aliases_mechanism]]).
 
-## ⚠ 셀 선택 재론
-[[inas100_cell_convergence_metric]]은 2026-07-29에 **p4×4 채택**으로 확정했다.
-par4×3은 중성 E_b 수렴이 제일 좋지만 **면적이 p4×3와 같아 2D Madelung 자체이미지가
-네 셀 중 최악이고 slabcc가 전단 셀을 못 다룬다.** 07은 중성 스크리닝·밴드·자성용으로 읽을 것.
+## 하전 보정 경로 — ✅ CoFFEE로 해결 (2026-08-10)
+par4×3은 **면적이 p4×3와 같아 2D Madelung 자체이미지가 네 셀 중 최악**(p4×4 대비 +256 meV)
+이고 **slabcc는 전단 셀을 못 다룬다**. 오래 열려 있던 미해결 항목이었는데 —
+**CoFFEE는 사교(parallel) in-plane 셀을 받는다. 사용자가 MoS2 parallel 셀 예제로 이미 성공.**
+⇒ 07에서 하전까지 가도 된다. slabcc↔CoFFEE는 In_As_1에서 15 meV 일치 확인됨
+([[coffee_slabcc_cross_validation_in_as_1]], ⚠E_iso 표적 차이는 [[coffee_vs_slabcc_eiso_target]]).
+⚠ CTL은 같은 셀에서 E(q)−E(0)을 빼야 하므로 05(p4×4)와 07을 섞을 수 없다.
+
+## 프로덕션 제출 (2026-08-10)
+neutral 14케이스(pure + 13결함) 전부 제출. 잡 55957~55970.
+- 4 stage: `00_Gam-relax`(ISPIN=1) → `01_Spin-gam-relax`(magnetic_seed) →
+  `02_G221-DOS` → `03_Band`. **02/03도 magnetic_seed로 전환** — PBE-d는 싸니 중성은
+  전부 스핀으로 돌려 (defect×charge)별 ISPIN 분기 문제를 없앴다(`spin_mode`는 stage 단위라
+  case별 분기를 config로 못 쓴다).
+- **00을 남긴 이유**: `ΔE = E₀(01) − E₀(00) ≤ 0`이 변분적으로 강제되므로 **공짜 정합성 검사**다
+  (PRECFOCK=Fast 아티팩트를 이 부호 위반 +43 meV로 잡았던 전례).
+- 자원: cascade 4노드×36 = 144랭크, `NCORE=18 / NSIM=32`, 02/03은 `KPAR=4`.
+  ⚠ cascade=36코어(NCORE 18), cascade2=32코어(NCORE 16) — 파티션 바꾸면 둘 다 같이 고칠 것.
+- `INCAR_03.Band`: `ISTART=0` + `ICHARG=11` (line-mode k집합이 02의 메시와 달라 WAVECAR 무용).
+- `preferred_geometry_stages: [03_Band, 02_G221-DOS, 01_Spin-gam-relax, 00_Gam-relax]`.
+  이 키는 **첫 stage의 POSCAR와 `collect_contcars` 수확처**에만 쓰이고, 실행 중 01/02/03은
+  `stages.yaml`의 `poscar_from: previous_CONTCAR`가 지배한다. 02/03은 NSW=0이라 CONTCAR이
+  01의 이완 기하와 동일 → 순서 무해. **02/03을 NSW>0으로 바꾸면 재검토할 것.**
+- 판정 순서: `collect_energies`(σ→0) → `ipr_gate.py` → DOS/Band gap 준위 → 하전 후보.
+  ⚠ DOS/PROCAR 후처리는 `--spin` 필수.
 
 관련: [[inas100_par4x3_sheared_cell]] [[inas100_dimer_row_chain]]
 [[inas100_ligand_site_vs_electron]] [[charge_state_selection_rule]]
