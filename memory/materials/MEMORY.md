@@ -46,6 +46,7 @@
 - [par4x3 q0 결과 확정](inas100_par4x3_q0_results.md) — 자성=V_Cl·In_i_sub 둘뿐. ★E_F를 CB로 미는 3종(V_Cl-Cl_As·In_i_surf·Cl-As_In). ⚠IPR게이트는 빈 깊은준위를 못 본다(Cl_In)
 - [Γ-only 이완 충분성](gamma_relax_adequacy_par4x3.md) — par4x3에서 56meV/RMS 0.1Å. ⚠시험은 반드시 R_Γ에서 출발할 것(seed 출발은 다른 극소점)
 - [MA co-passivation 08](inas100_MA_copassiv_tree_08.md) — Cl/MA 탐침 2셀. ⚠표준 N/C가 ENMAX=400 → ENCUT=400, 07(300)과 에너지 혼용 금지. 기준셀=MA_i-In
+- [아세테이트 트리 09](inas100_acetate_tree_09.md) — ★AA는 dimer 위가 아니라 trench를 가로지르는 bidentate → 표면 In 12개 전부 배위. pure E=−690.3931. CB 부분격자 비대칭 소멸(1.6~2.1→0.98)이나 총 무게는 안 줄어듦. ⚠ENCUT=400·μ_AA 없음
 
 ## 연구 / 프로젝트
 - [Si-DB KP 재현](si_db_kp_reproduction.md) — uncorrected는 KP와 일치하나 E_corr은 2배. 가설 3개 배제
