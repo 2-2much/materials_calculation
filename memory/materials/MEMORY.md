@@ -116,6 +116,6 @@
 - [로그인 노드에서 계산 금지](no_compute_on_login_node.md) — kohn=tgm-master=로그인 노드. 랭크·분·GB급이면 sbatch. 제출 스크립트·마운트 범위·$BASH_SOURCE 함정
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex 메모리는 memory/materials·memory/codex 양쪽에 미러
 - [conversation log](conversation_log.md) — Codex 대화 요약 로그
-- [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 주석 풀고 prepare하면 잡이 3h→10h+
+- [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 켜두면 전 case에 딸려 들어감. ⚠2026-08-11 정정: 3h→10h+는 **HSE에서만**, PBE는 켜둬도 됨
 - [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 참조슬랩 바닥상태 검증용 6잡. ⚠type=antisite로 중심 지정
 - [InAs100 셀 수렴 지표](inas100_cell_convergence_metric.md) — 판정은 E_b만(다른 두 지표는 반대 결론). ✅p4×4 확정, 외삽극한 철회
