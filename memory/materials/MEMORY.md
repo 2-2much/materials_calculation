@@ -99,6 +99,7 @@
 - [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 청정표면 이완기하는 타일링으로 전용 가능(결함엔 불가)
 - [(100) 작업트리는 kohn 로컬](inas100_worktree_on_kohn.md) — 05·06 트리는 kohn:/home 에만. 서버 판별법·파티션 정보
 - [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — git 동기화는 memory/.claude만. ⚠2026-08-07 재정정: SLURM 4대 공유 아님(kohn=cascade / sham·bloch=g1·g2), hohenberg NFS는 sham에 미마운트
+- [fermi 서버 셋업](fermi_node_setup.md) — SLURM 없음(mpirun 직접)·kohn 홈이 /mnt/home으로 공유·⚠ulimit -s 8MB가 SIGSEGV 원인·32코어 NCORE=16
 - [서버간 SSH 접근](ssh_access_between_servers.md) — kohn→sham/bloch 원격실행 셋업. 키 등록은 원격 안에서. ⚠bloch는 fail2ban 차단 해제 대기
 - [slabcc 전하절단 가드](slabcc_charge_truncation_guard.md) — discretization error=꼬리절단. SLABCC_CHARGE_TOLERANCE 추가
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — 목표 RMSE가 아니라 BOBYQA 상대수렴 tolerance
