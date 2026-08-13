@@ -42,6 +42,27 @@ In-As 사슬을 타고 가므로 이쪽이 실효 거리. (100) par4x3 와 같�
 결합 상대로 H1.25/H.75 분리), Selective dynamics 없음. 그리고 b 가 (5.28, 11.20)
 으로 x·y 혼합 → **격자만 회전**(분수좌표 유지 = 강체회전)해 b∥y 로. 면적 162.5531 불변.
 
+## ★ 배포되는 pure/POSCAR 는 **미재구성(ideal bulk termination)**
+
+2026-08-13 사용자 요청: 일부 결함은 **이완 안 된 표면에서 출발해야** 더 안정한 구조로
+간다(pristine 버클링이 seed 를 pristine basin 쪽으로 편향시킴). 그래서 자유 In-As 층을
+전부 이상적 PBE-d bulk 격자로 되돌림 → 6개 층 전부 dz(As−In)=0.
+`01-build_p1x1/make_unreconstructed.py`. 기준 부격자는 가정하지 않고 **고정된 바닥
+2층에서 읽어옴**(짝수 n=L1 패턴 / 홀수 n=L2 패턴, z=z1+n·d, d=2.18844 Å).
+
+되돌린 변위(층별, bulk 로 감쇠): L6 0.308~0.672 / L5 0.054~0.095 / L4 0.027~0.050 /
+L3 0.008~0.022 Å. 검증: In-As 결합 132개 **전부 정확히 2.6803 Å**(=a0√3/4),
+pseudo-H 1.7757/1.5622 유지, 36 고정/48 자유, NELECT 660.
+
+⚠ **출발 구조일 뿐**이다. pure 도 `00_Gam-relax` 를 거치므로 기준 에너지는 영향 없음
+— 다시 버클링(ω=30.1°)으로 돌아간다. 바뀌는 건 generate_surface_defect.py 가 각 결함에
+넘기는 seed 기하.
+
+| 파일 | 표면 |
+|---|---|
+| `Initial_POSCARs/pure/POSCAR` | 미재구성, ideal bulk termination |
+| `Initial_POSCARs/pure/POSCAR_relaxed` | p1x1 이완, ω=30.1°, dz=0.753 Å |
+
 ## 왜 p1x1 을 먼저 이완했나
 
 자유원자 8개 vs 48개 → k 수렴 스캔이 공짜. 결과 (PBE-d, 01/03 production footing,
