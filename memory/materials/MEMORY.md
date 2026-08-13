@@ -90,7 +90,7 @@
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 판정 바꾸는 계산만. caveat 나열 대신 권고+근거 한 줄
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — 기하 재사용 OK, 에너지는 섞지 말 것
 - [inas100 slab generation](inas100_slab_generation.md) — (100) 슬랩 생성, Cl 피복률 0.75ML
-- [InAs(111)A 슬랩 생성](inas111_slab_generation.md) — 03-111slab 생성기·ABC offset 규약·LDA 선례 0.0000Å 재현. ⚠비직교(slabcc 불가)·bare p2x2는 NELECT 홀수 → (2×2) In-vacancy 재구성 필요
+- [InAs(111)A 슬랩 생성](inas111_slab_generation.md) — 03-111slab 생성기·ABC offset 규약·LDA 선례 0.0000Å 재현. ★As–H=1.5626Å(1.52 아님)·4BL은 아래 1BL만 고정. ⚠비직교(slabcc 불가)·bare p2x2는 NELECT 홀수 → (2×2) In-vacancy 재구성 필요
 - [coffee slabcc cross validation in as 1](coffee_slabcc_cross_validation_in_as_1.md) — 두 코드 15meV 일치. ★유전슬랩 배치가 정렬항의 사활
 - [coffee vs slabcc eiso target](coffee_vs_slabcc_eiso_target.md) — E_iso 표적이 다름: slabcc=isolated surface, CoFFEE=isolated slab
 - [hse slab scf settings](hse_slab_scf_settings.md) — HSE SCF 정체 처방: ALGO=Damped
