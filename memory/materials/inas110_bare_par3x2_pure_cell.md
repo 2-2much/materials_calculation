@@ -91,6 +91,45 @@ H_1·H 가 2k·G/|G|²= **1.083 / 1.076** 로 **BZ 밖 8%** 로 튀어나간다.
 
 자세한 표·유도는 `config/KPOINTS/KPATH_NOTES.md`.
 
+## 결함 12종 (02-build_defects/make_defects.py)
+
+`Initial_POSCARs/<case>/POSCAR` (07 규약). 자리: **A33 = 표면 In(사슬1, y=7.737)**,
+**A71 = 표면 As(사슬2, y=12.380)** — 두 사슬은 (110) trench 를 사이에 두고 y 로 4.643 Å.
+
+| case | N | NELECT | 홀짝 | 결함 index |
+|---|---|---|---|---|
+| pure | 84 | 660 | 짝 | — |
+| As_In / Cl_In / V_In | 84/84/83 | 652/654/**647** | 짝/짝/**홀** | A36 / A84 / — |
+| In_As / Cl_As / V_As | 84/84/83 | 668/662/**655** | 짝/짝/**홀** | A1 / A84 / — |
+| In_i1 / In_i2 | 85 | **673** | **홀** | A37 |
+| Cl-In_i1 / Cl-In_i2 | 86 | 680 | 짝 | A37(In), A86(Cl) |
+| Cl_i1 / Cl_i2 | 85 | **667** | **홀** | A85 |
+
+⚠ **치환 원자는 새 종 블록의 맨 앞**에 놓인다(As_In→A36, In_As→A1) → 뒤 인덱스 전부 밀림.
+격자간/흡착은 블록 맨 뒤. ⚠ **홀수 NELECT 6종은 ISPIN=2 필수**.
+
+★ 격자간 배치: 세 원자 무게중심의 면내 위치 + **h=0**(최상층 높이). 자유파라미터 없음 —
+h=0 에서 최단 접촉이 두 hollow 모두 정확히 **2.680 Å**(이상 벌크 결합).
+- **In_i2 = 좋은 자리**: As 3개가 2.680 (A71,A72,A64).
+- ⚠ **In_i1 = 양이온 과다**: 최근접 3개가 전부 **In** 2.680 (In 금속 3.25 대비 18% 압축).
+  01/03 의 "2 In + 1 As" hollow 대응 → adatom 배출 예상([[in_i_2_adatom_ejection]]).
+
+Cl 배치: 격자간 위 Cl 은 In-Cl 2.45 Å, 진공 반구에서 **host 기준** clearance 최대
+(⚠ In_i 자신을 목적함수에 넣으면 최소값이 2.45 로 고정돼 방향이 안 정해진다 — 실제로 처음에
+그 버그로 Cl 이 A36 에 2.58 Å 로 붙었었다). 표면원자 위 Cl 은 **dangling bond 방향**
+(=−normalize(Σ 결합이웃 단위벡터)): Cl_i1/A33 (0,+0.577,+0.816) In-Cl 2.45,
+Cl_i2/A71 (0,−0.577,+0.816) As-Cl 2.20 (AsCl₃ 2.16).
+
+## ⚠ POTCAR 가 prepare 를 막는다
+
+`check_species_order` 는 POSCAR 종순서 == POTCAR 종순서를 **완전일치**로 요구하는데
+`runtime.yaml` 의 `paths.potcar` 는 전역 하나뿐이다. 이 프로젝트는 표면이 bare 라
+**Cl 이 절반에만** 있다: 4종(In_d/As/H1.25/H.75) 7셀 vs 5종(+Cl) 6셀.
+01/03/07 은 Cl 이 패시베이션이라 모든 셀에 있어서 이 문제가 없었다.
+프로젝트 루트에 `POTCAR`(4종)·`POTCAR_with_Cl`(5종) 둘 다 만들어 둠. 해결책 2:
+(1) 패키지에 `potcar_mode: build` 추가(권장, `__Defect_Package_Reference__` 에서 커밋),
+(2) defects.yaml 을 종세트로 쪼개 prepare 2회.
+
 ## 왜 p1x1 을 먼저 이완했나
 
 자유원자 8개 vs 48개 → k 수렴 스캔이 공짜. 결과 (PBE-d, 01/03 production footing,
