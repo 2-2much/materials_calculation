@@ -120,15 +120,11 @@ Cl 배치: 격자간 위 Cl 은 In-Cl 2.45 Å, 진공 반구에서 **host 기준
 (=−normalize(Σ 결합이웃 단위벡터)): Cl_i1/A33 (0,+0.577,+0.816) In-Cl 2.45,
 Cl_i2/A71 (0,−0.577,+0.816) As-Cl 2.20 (AsCl₃ 2.16).
 
-## ⚠ POTCAR 가 prepare 를 막는다
+## POTCAR = 5종 하나로 통일 (개수 0 블록)
 
-`check_species_order` 는 POSCAR 종순서 == POTCAR 종순서를 **완전일치**로 요구하는데
-`runtime.yaml` 의 `paths.potcar` 는 전역 하나뿐이다. 이 프로젝트는 표면이 bare 라
-**Cl 이 절반에만** 있다: 4종(In_d/As/H1.25/H.75) 7셀 vs 5종(+Cl) 6셀.
-01/03/07 은 Cl 이 패시베이션이라 모든 셀에 있어서 이 문제가 없었다.
-프로젝트 루트에 `POTCAR`(4종)·`POTCAR_with_Cl`(5종) 둘 다 만들어 둠. 해결책 2:
-(1) 패키지에 `potcar_mode: build` 추가(권장, `__Defect_Package_Reference__` 에서 커밋),
-(2) defects.yaml 을 종세트로 쪼개 prepare 2회.
+13셀 전부 `In_d/As/H1.25/H.75/Cl` 5종 블록을 갖고, 없는 종은 **개수 0**.
+⚠ **ISYM=0 에서만 안전**하다 — 기본 ISYM=2 면 대칭성 setup 에서 segfault.
+자세한 대조는 [[vasp_zero_count_species]]. config/INCAR 5개 전부 ISYM=0 확인됨.
 
 ## 왜 p1x1 을 먼저 이완했나
 

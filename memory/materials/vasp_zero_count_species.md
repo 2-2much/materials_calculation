@@ -1,46 +1,41 @@
 ---
 name: vasp_zero_count_species
-description: "POSCAR에 개수 0인 종 블록을 두면 VASP 6.5.1이 segfault. 단일 POTCAR 공유 편법은 불가"
+description: "POSCAR 개수 0 종 블록은 ISYM=0이면 정상 동작. 기본 ISYM=2면 대칭성 setup에서 segfault"
 metadata:
   type: reference
 ---
 
-2026-08-13, 실측. 결함 셋에서 **Cl 이 일부 셀에만** 있을 때 POTCAR 를 하나로 통일하려고
-"5종 POTCAR + POSCAR 에 `Cl 0`" 을 시도했다.
+2026-08-13, 실측 3종 대조. 결함 셋에서 **Cl 이 일부 셀에만** 있을 때 POTCAR 를 하나로
+통일하려고 "5종 POTCAR + POSCAR 에 `Cl 0`" 을 시도한 건. 트리:
+`11-110bare_6L_par3x2_PBE-d/02-build_defects/__potcar_test__/`
 
-## ❌ 안 된다 — VASP 6.5.1 segfault
+## ✅ 된다 — 단 **ISYM=0** 이어야 한다
 
-```
-   In_d      As        H1.25     H.75      Cl
-   36        36        6         6         0
-```
-→
-```
-POSCAR found type information on POSCAR InAsH1H.Cl
-POSCAR found :  5 types and      84 ions
-...
-Caught signal 11 (Segmentation fault)
-```
-파싱은 하고 배열 설정 전에 죽는다.
+동일 POTCAR(5종)·ENCUT300·PREC N·LREAL A·NELM1·NSW0·Γ·NCORE8·**std 바이너리**,
+차이는 Cl 개수와 ISYM 뿐:
 
-## 대조군으로 원인 확정 (POTCAR 아님, 개수 0이 원인)
+| | Cl 개수 | ISYM | 결과 |
+|---|---|---|---|
+| A | **0** | 기본(2) | "5 types and 84 ions" 읽고 `POSCAR, INCAR and KPOINTS ok, starting setup` 에서 **segfault** |
+| B | 1 | 기본(2) | 정상, NIONS 85, NELECT 667.0000 |
+| C | **0** | **0** | **정상**, NIONS 84, NELECT 660.0000 |
 
-`11-110bare_6L_par3x2_PBE-d/02-build_defects/__potcar_test__/` — **동일한 5종 POTCAR·
-INCAR(NELM=1,NSW=0)·KPOINTS(Γ)**, Cl 개수만 다름:
+★ 크래시는 **대칭성 setup** 안이다(이온 0개인 type 을 못 넘김). zero count 자체는 무죄.
 
-| | POSCAR 개수 | 결과 |
-|---|---|---|
-| `A_Cl0` | ... / **Cl 0** | "5 types and 84 ions" 읽고 **segfault** |
-| `B_Cl1_control` | Cl_i1 셀 / **Cl 1** | 정상종료, NIONS 85, NELECT 667.0000 |
+⚠ **나의 첫 진단("VASP 가 zero count 를 못 받는다")은 틀렸다.** 사용자가
+`08-100Cl-MA_8L_par4x3_PBE-d` 를 지목해서 잡혔다 — 거기 pure 셀은 7종 POTCAR 에
+`N 0 / C 0 / H 0` 으로 **처음부터 이 방식으로 돌고 있었고**, 4개 stage(gam·std 양쪽)
+전부 정상종료다. 이유는 그 프로젝트 INCAR 가 ISYM=0 이기 때문.
 
-⚠ 사용자가 "5종 POTCAR 로 바꿨으니 다시 해봐" 라고 할 수 있는데, **첫 테스트도 이미
-5종 POTCAR 를 썼다**. POTCAR 를 바꿔도 결과는 같다.
+## 적용
 
-## 그래서 남는 선택지
+11 프로젝트 13셀 전부 5종 블록(없으면 0)으로 통일 → 단일 `POTCAR` 로 prepare 통과.
+패키지 자체 함수(`read_potcar_species_and_zval` + `check_species_order` +
+`compute_neutral_nelect`)로 13셀 전수 검증 완료, NELECT 표와 일치.
+`config/INCAR/` 5개 전부 ISYM=0 확인.
 
-Defect Package 의 `check_species_order` 는 POSCAR 종순서 == POTCAR 종순서 완전일치를
-요구하고 `runtime.yaml paths.potcar` 는 전역 하나뿐이다. 따라서
-(1) 패키지에 케이스별 POTCAR 조립(`potcar_mode: build`) 추가, 또는
-(2) defects.yaml 을 종세트별로 쪼개 prepare 2회.
+⚠ 나중에 **대칭성 켠 채로** 이 POSCAR 를 읽는 것(ISYM 안 준 일회성 VASP 실행, 외부 툴)이
+있으면 0 블록을 지운 사본을 줘야 한다.
 
-관련: [[inas110_bare_par3x2_pure_cell]] [[species_aliases_mechanism]]
+관련: [[inas110_bare_par3x2_pure_cell]] [[inas100_MA_copassiv_tree_08]]
+[[species_aliases_mechanism]]

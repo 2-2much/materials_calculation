@@ -84,7 +84,7 @@
 - [(100) 리간드 = 전자1/자리2 규칙](inas100_ligand_site_vs_electron.md) — ★Cl 단독은 배위자리를 하나 비운다. dimer당 Cl 0/1/2 = 도너/절연/억셉터(EIGENVAL 확인). co-passiv는 자리 채우는 결함만 막고 V_Cl은 못 막음
 - [μ_Cl 규약 = ½Cl₂ (확정)](inas100_mu_cl_convention_cl2.md) — 재론 금지. E_f는 경계값으로 읽기. InCl₃-pinned 대조표 보존
 - [As_In(As-rich) 음수 = 종단상 경쟁](inas100_as_in_termination_competition.md) — ⚠μ_Cl 무관 −0.40 eV. In-종단 (100):Cl은 As-rich에서 기준면 아님
-- [110bare par3x2 pristine 셀](inas110_bare_par3x2_pure_cell.md) — p1x1 이완(ω=30.1°/dz=0.753Å)→a-전단 par3x2. 결함 12종 생성(★In_i1은 양이온과다 자리·치환원자는 블록 맨앞). ⚠Cl이 절반에만 있어 POTCAR 단일화 불가. 사교 k-path η=7/18·ν=11/36(★Γ-X=사슬축, Γ-H=[001]). ⚠07 경로는 BZ 밖. ★배포 pure/POSCAR는 **미재구성**(POSCAR_relaxed에 버클링판 보존). 전단 이득은 최근접이 아니라 **사슬축 image 26.26Å**. ⚠Cl 기하는 버클링 부호가 반대·강체회전 금지 / 비직교라 slabcc 불가
+- [110bare par3x2 pristine 셀](inas110_bare_par3x2_pure_cell.md) — p1x1 이완(ω=30.1°/dz=0.753Å)→a-전단 par3x2. 결함 12종 생성(★In_i1은 양이온과다 자리·치환원자는 블록 맨앞). POTCAR는 5종 하나(개수 0 블록, ISYM=0 필수). 사교 k-path η=7/18·ν=11/36(★Γ-X=사슬축, Γ-H=[001]). ⚠07 경로는 BZ 밖. ★배포 pure/POSCAR는 **미재구성**(POSCAR_relaxed에 버클링판 보존). 전단 이득은 최근접이 아니라 **사슬축 image 26.26Å**. ⚠Cl 기하는 버클링 부호가 반대·강체회전 금지 / 비직교라 slabcc 불가
 - [par4×3 전단 셀 + 사교 k-path](inas100_par4x3_sheared_cell.md) — 127원자로 211원자보다 잘 수렴. 사교 k-path 좌표
 - [PBE→HSE06 2단 전략](pbe_then_hse_workflow_plan.md) — PBE 스크리닝→HSE 재판정. PBE 무자성은 HSE가 뒤집을 크기
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 판정 바꾸는 계산만. caveat 나열 대신 권고+근거 한 줄
@@ -98,7 +98,7 @@
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
-- [POSCAR 개수 0 종 블록 = VASP segfault](vasp_zero_count_species.md) — 단일 POTCAR 공유 편법 불가. 실측 확인
+- [POSCAR 개수 0 종 블록](vasp_zero_count_species.md) — ★ISYM=0이면 정상, 기본 ISYM=2면 대칭성 setup에서 segfault. 단일 POTCAR 공유 가능(08이 이미 그렇게 씀)
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — 문제는 버전 아닌 빌드 변형. 바이너리 단위로 30초 테스트
 - [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 청정표면 이완기하는 타일링으로 전용 가능(결함엔 불가)
 - [(100) 작업트리는 kohn 로컬](inas100_worktree_on_kohn.md) — 05·06 트리는 kohn:/home 에만. 서버 판별법·파티션 정보
