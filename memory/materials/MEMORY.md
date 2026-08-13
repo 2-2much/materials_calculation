@@ -109,6 +109,7 @@
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — 목표 RMSE가 아니라 BOBYQA 상대수렴 tolerance
 - [IPR Gate probe = 점유차분](ipr_gate_occdiff_probe.md) — probe=|occ(q)−occ(q0)| 최대 밴드. In_As_1 q+1은 bound
 - [IPR Gate Tool](ipr_gate_tool.md) — scripts/ipr_gate.py 사용법과 버그 수정 이력
+- [bandos 밴드 플로터](bandos_tool.md) — Line-Mode KPOINTS 전용(zeroband는 zero-weight만). ⚠ion 인덱스 0-based
 - [zeroband fatband tool](zeroband_fatband_tool.md) — hybrid band projected fatband 플로터
 - [zeroband spin parsing](zeroband_spin_parsing.md) — --spin 옵션, ISPIN=2 PROCAR 파싱
 - [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — 설치·패치 4건 + 격자 5.6%를 조용히 망치는 np.arange 버그
