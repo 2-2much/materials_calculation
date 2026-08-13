@@ -21,8 +21,20 @@ POSCAR found :  5 types and      84 ions
 ...
 Caught signal 11 (Segmentation fault)
 ```
-파싱은 하고 배열 설정 전에 죽는다. NELM=1/NSW=0/Γ-only 라 다른 원인은 없다.
-테스트 트리: `11-110bare_6L_par3x2_PBE-d/02-build_defects/__zerocount_test__/`
+파싱은 하고 배열 설정 전에 죽는다.
+
+## 대조군으로 원인 확정 (POTCAR 아님, 개수 0이 원인)
+
+`11-110bare_6L_par3x2_PBE-d/02-build_defects/__potcar_test__/` — **동일한 5종 POTCAR·
+INCAR(NELM=1,NSW=0)·KPOINTS(Γ)**, Cl 개수만 다름:
+
+| | POSCAR 개수 | 결과 |
+|---|---|---|
+| `A_Cl0` | ... / **Cl 0** | "5 types and 84 ions" 읽고 **segfault** |
+| `B_Cl1_control` | Cl_i1 셀 / **Cl 1** | 정상종료, NIONS 85, NELECT 667.0000 |
+
+⚠ 사용자가 "5종 POTCAR 로 바꿨으니 다시 해봐" 라고 할 수 있는데, **첫 테스트도 이미
+5종 POTCAR 를 썼다**. POTCAR 를 바꿔도 결과는 같다.
 
 ## 그래서 남는 선택지
 
