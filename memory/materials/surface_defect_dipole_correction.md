@@ -39,3 +39,26 @@ Cl-passivation이 슬랩 한쪽에만 있는 비대칭 구조라 주기적 슬�
 - 현재 config 오버라이드 소스는 spin_mode(nonmag/magnetic)와 runtime incar_overrides(전역)뿐 — charge-conditional hook은 없음
 - **✅ 완료(2026-07-01)**: `prepare_defect_workflow.py` line 96 부근(overrides 적용 후, apply_incar_patch 직전)에 `if q != 0: for tag in (LDIPOL,IDIPOL,DIPOL): set_tags.pop; delete_tags.append` 삽입함. py_compile 통과. 이제 재생성해도 하전셀 dipole OFF 유지. relax(00/01)는 dipole 라인이 없어 무해
 - **참고**: run_case.sh는 실행 시 INCAR를 재생성하지 않고 기존 파일 그대로 사용 → 이미 손편집한 pending 잡 INCAR들은 그대로 적용됨. 재생성은 prepare_defect_workflow.py 재실행 시에만 발생
+
+
+## 2026-08-14 정량화 — 진공 기울기에서 가짜 쌍극자 에너지를 역산할 수 있다
+
+21-111Cl-MA 트리(dipole OFF, 극성 (111)A 슬랩)에서 LOCPOT 면내평균의 진공 구간이
+**깨끗한 직선**이었다(6 Å 에 0.36~0.52 eV 강하, 선형 잔차 4~6 meV). 진공 부족이 아니라
+보정 안 된 슬랩 쌍극자다. 기울기 → p_z → 주기 이미지 상호작용 에너지:
+
+    p_z = |dV/dz| · V_cell / (4π · 14.39965),   E_spurious = 2π p_z² / V_cell · 14.39965  [eV, Å, e]
+
+| cell | \|dV/dz\| | p_z | E_spurious | pure 대비 |
+|---|---|---|---|---|
+| pure | 90.94 meV/Å | 3.228 e·Å | 0.147 eV | — |
+| V_As_1 | 63.33 | 2.248 | 0.071 | −0.076 eV |
+| MA_i | 68.80 | 2.442 | 0.084 | −0.063 eV |
+
+**★ 중성 DFE 에는 진공준위가 아예 안 들어간다** (E_f(q0) = ΔE_tot − Σnμ, 정렬항 없음).
+영향은 이 **간접 경로 하나뿐**이고 셀 간 차이 ~0.06~0.08 eV → **DFE 차이가 0.1 eV 보다 크면 순서는 안전**.
+0.1 eV 이내로 붙은 쌍이 생기면 그때만 문제.
+
+⚠ 반대로 **E_F / CTL / 밴드 정렬은 진공준위를 직접 쓴다** → 기울어진 진공에서 ±0.1~0.3 eV 흔들리고,
+하전 상태는 그 오차가 **q배**가 된다(q=+3 이면 0.9 eV). 하전으로 가기 전에 반드시 해결할 것.
+추정 말고 직접 재려면 pure 를 IDIPOL=3 + LDIPOL=.T. 로 NSW=0 한 번 돌려 E_tot 차이를 보면 된다.
