@@ -1,6 +1,6 @@
 ---
 name: inas_surface_ip_ea_plan
-description: "InAs (100)/(110)/(111) 표면의 IP/EA(진공준위 기준 VBM·CBM) 계산 설계 — 어셉터 DFE의 표면 방향성을 밴드정렬로 설명하려는 시도. 2026-08-18 설계 대화"
+description: "InAs (100)/(110)/(111) IP/EA — 2026-08-18 착수 확정: bare 셀은 (110)에만 있었고, primitive 생성기가 bloch에 다 있어 sham에 전용 트리를 새로 팠다. PLAN.md 위치·확정 파라미터·bare 셀 재고"
 metadata:
   type: project
 ---
@@ -63,7 +63,46 @@ E_f^acc 가 (100)에서 낮은 게 밴드정렬 탓이라면, 어셉터(q=−1)�
 이면서 **차이의 크기까지** E_f 차이와 맞아야 한다.
 안 맞으면 원인은 정렬이 아니라 **국소 화학**(결함 자리 배위 환경). 어느 쪽이든 결론이 난다.
 
-## 다음 대화에서 받을 답 2개 (미해결)
-1. (100)에서 낮았던 **어셉터의 정체**(V_In? Cl_In?)와, (110) 쪽 어느 값과 대비한 것인지.
-   참고 (110): V_In E_f 1.759 @VBM, CTL 양방향 0.337/0.404.
-2. bare 우선 vs 리간드 우선 (권고: bare 먼저).
+## ★2026-08-18 착수 — 위 설계의 4·5번이 실제 재고로 갈렸다
+
+### 미해결 2개 해소
+1. **어셉터 = V_In 과 Cl_In 둘 다.** V_In 이 (100)에서 (110)/(111)보다 **약 1 eV 낮다**.
+   Cl_In 은 V_In 보다 훨씬 더 낮지만 **μ_Cl 범위를 고려하면 순서가 뒤집힐 수 있다.**
+   IP/EA 비교는 **결함 없는 깨끗한 표면 기준**으로 계산한다.
+2. 순서 = 사용자 지정 사다리로 확정: 전 표면 **아래면 pseudo-H 고정**,
+   **① top bare** ((100)은 unreconstructed/reconstructed 2종) → **② top pseudo-H** ((100) 2종)
+   → **③ 리간드**(Cl / Cl-MA / AA).
+
+### ⚠ bare 셀 재고 (실측) — 설계 4번의 "bare 먼저" 권고를 뒤집었다
+결함 트리 4개 중 **bare 는 `11-110bare` 하나뿐**. `05/06/07`(100)은 Cl 0.75 ML,
+`21`(111)A는 Cl9+MA2. 반대로 Cl 세트는 3개 중 2개 보유. 그리고 (111)A bare 는
+NELECT 홀수라 (2×2) In-vacancy 재구성부터 필요 → bare 신규 제작이 오히려 비싸다.
+(07 CONTCAR 실측으로 (100) 표면이 **(2×1) In-dimer** 확인: In–In 2.896~2.898 Å,
+표면 In 12 = dimer 6, Cl 6 = dimer당 1개.)
+
+### ★ 그런데 결함 트리는 애초에 IP/EA용이 아니다 — primitive 생성기가 bloch에 다 있다
+`bloch:~/materials/33-inAs/__Functional_Validation__/10-Primitive-slab/01-Slab_generation_PBE-d/01-PBE-d-lat/`
+(564 KB, kohn엔 없음). `make_100slab.py`(`--reconstruct none|dimer --ligand none|Cl
+--cl-mode mono-A|mono-alt|bridge --termination In|As --supercell --vacuum`),
+`make_111slab.py`, (110) 노트북 + 완성 POSCAR 세트((100) 4~16 ML, (110) 4~40 L, (111) 2~8 BL).
+★ **(110) 생성기가 내놓는 슬랩은 양면 대칭 = 순 쌍극자 0** → 파이프라인 검증셀이 공짜.
+🔧 없는 것 3개: (100)/(111) **top pseudo-H 옵션**, (111) **In-vacancy 재구성**, (110) **비대칭판**.
+
+### 작업 트리 (신규)
+`sham:~/materials/33-inAs/__Functional_Validation__/10-Primitive-slab/04-Facet_IP-EA/`
+→ **상세 플랜은 그 안의 `PLAN.md`.** kohn·bloch가 계산자원 포화라 sham 선택
+(g1 62노드×8코어, 488/496 idle). 생성기는 kohn 경유로 이관 완료(sham→bloch SSH는 막혀 있음).
+
+확정 파라미터: **a0 = 6.189842 (PBE-d)**, **ENCUT = 400**, 진공 20 Å, `LVHAR=.TRUE.`,
+`IDIPOL=3 + LDIPOL + DIPOL 고정값`, ISYM=0, k는 그리드가 아니라 **밀도**(n·|a| ≥ 50 Å) 정합,
+VASP = **6.3.2/vasp.6.3.2.std.x** ([[g1_node_vasp_binary_limit]] 2026-08-18 정정 참조).
+⚠ 기존 05·07·11(ENCUT 300)과 **절대에너지 혼용 금지** — 자립 눈금이다.
+
+⚠ pseudo-H 결합길이 `In–H 1.70 / As–H 1.52` 는 (110) 노트북 v2.6 물림값이고 (111)에서
+1.5626으로 갈렸다([[inas111_slab_generation]]). **top In–H 는 아예 처음 쓰는 값** →
+1×1이라 공짜이니 표면·자리별 재최적화를 Step 1로 먼저 한다.
+
+### 아직 못 찾은 것
+`slabthicknessLJH_2025.12.16.xlsx` 와 옛 IE/EA 런 디렉토리가 **kohn·sham·bloch 어디에도 없다**
+(`/mnt/hohenberg` 도 비어 있음). bloch `10-Primitive-slab` 의 67 GB 선행계산은 **(110) 전용
+두께 스캔**이지 3-facet 스캔이 아니다.
