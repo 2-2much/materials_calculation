@@ -124,6 +124,7 @@
 - ["사다리" 대신 "수렴 스캔"](feedback_convergence_scan_wording.md) — 파라미터 계열 계산의 호칭. 옛 메모리·스크립트의 "사다리"는 같은 뜻
 - [Initial_POSCARs 덮어쓰기 주의](initial_poscars_overwrite_guard.md) — .gitignore가 `*`라 git 복구 불가. 폴더 이름 말고 조성으로 정체 확인
 - [로그인 노드에서 계산 금지](no_compute_on_login_node.md) — kohn=tgm-master=로그인 노드. 랭크·분·GB급이면 sbatch. 제출 스크립트·마운트 범위·$BASH_SOURCE 함정
+- [계산 디렉토리 삭제 금지 → __attemptN__](feedback_never_delete_use_attempts.md) — 실패 런은 진단 증거. 재계산은 직전 CONTCAR 시드. ⚠CONTCAR 종이름 잘림·감시엔 maxdepth 3
 - [실행 중인 계산 건드리지 말 것](feedback_never_touch_running_calc.md) — ⚠prepare는 --only + --mode missing-stage, md5 전후 검증. SLURM은 스크립트를 복사하므로 위험한 건 stage 안 입력파일
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex 메모리는 memory/materials·memory/codex 양쪽에 미러
 - [conversation log](conversation_log.md) — Codex 대화 요약 로그
