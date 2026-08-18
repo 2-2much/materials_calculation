@@ -94,6 +94,7 @@
 - [inas100 slab generation](inas100_slab_generation.md) — (100) 슬랩 생성, Cl 피복률 0.75ML
 - [InAs(111)A 슬랩 생성](inas111_slab_generation.md) — 03-111slab 생성기·ABC offset 규약·LDA 선례 0.0000Å 재현. ★As–H=1.5626Å(1.52 아님)·4BL은 아래 1BL만 고정. ⚠비직교(slabcc 불가)·bare p2x2는 NELECT 홀수 → (2×2) In-vacancy 재구성 필요
 - [InAs(111)A Cl/MA p4x3 트리](inas111_cl_ma_p4x3_tree.md) — ★전자수지 excess와 E_F 이동이 8종 전부 일치. n형 후보=V_As_1(노출 In 옆, 열역학도 0.9eV 유리). As_In은 (111)A에서 도너 아님. ⚠Γ-only 에너지 금지(0.8eV)·PBE 스핀 전멸·μ 전부 ENCUT300
+- [InAs 표면 IP/EA 설계](inas_surface_ip_ea_plan.md) — ★진공준위 기준 (100)/(110)/(111) 밴드정렬로 어셉터 DFE 방향성 검증. ⚠110의 −4.92는 H면 기준이라 IP 아님 · pure만 LDIPOL 재실행 · 정렬 PBE/엣지 bulk-HSE · bare 3종 먼저 · 트리는 kohn
 - [host gap을 국소준위로 오인하는 함정](host_gap_localized_state_trap.md) — ⚠'최저 비점유'=CBM 아님. pure의 비국소 상태로만 정의. PROCAR 단일원자 무게>5%로 걸러라(0.03→0.83eV)
 - [coffee slabcc cross validation in as 1](coffee_slabcc_cross_validation_in_as_1.md) — 두 코드 15meV 일치. ★유전슬랩 배치가 정렬항의 사활
 - [coffee vs slabcc eiso target](coffee_vs_slabcc_eiso_target.md) — E_iso 표적이 다름: slabcc=isolated surface, CoFFEE=isolated slab
