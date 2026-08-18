@@ -84,7 +84,9 @@
 - [(100) 리간드 = 전자1/자리2 규칙](inas100_ligand_site_vs_electron.md) — ★Cl 단독은 배위자리를 하나 비운다. dimer당 Cl 0/1/2 = 도너/절연/억셉터(EIGENVAL 확인). co-passiv는 자리 채우는 결함만 막고 V_Cl은 못 막음
 - [μ_Cl 규약 = ½Cl₂ (확정)](inas100_mu_cl_convention_cl2.md) — 재론 금지. E_f는 경계값으로 읽기. InCl₃-pinned 대조표 보존
 - [As_In(As-rich) 음수 = 종단상 경쟁](inas100_as_in_termination_competition.md) — ⚠μ_Cl 무관 −0.40 eV. In-종단 (100):Cl은 As-rich에서 기준면 아님
-- [110bare par3x2 pristine 셀](inas110_bare_par3x2_pure_cell.md) — p1x1 이완(ω=30.1°/dz=0.753Å)→a-전단 par3x2. q0 밴드 7종(★V_In=억셉터 반점유·Cl_In=빈 깊은준위·In_i1은 adatom 배출). ⚠03_Band의 E_F는 무의미. POTCAR는 5종 하나(개수 0 블록, ISYM=0 필수). 사교 k-path η=7/18·ν=11/36(★Γ-X=사슬축, Γ-H=[001]). ⚠07 경로는 BZ 밖. ★배포 pure/POSCAR는 **미재구성**(POSCAR_relaxed에 버클링판 보존). 전단 이득은 최근접이 아니라 **사슬축 image 26.26Å**. ⚠Cl 기하는 버클링 부호가 반대·강체회전 금지 / 비직교라 slabcc 불가
+- [110bare par3x2 셀 구축](inas110_bare_par3x2_pure_cell.md) — p1x1 이완(ω=30.1°/dz=0.753Å)→a-전단 par3x2(★이득은 사슬축 image 26.26Å). 배포 pure는 미재구성. POTCAR 5종 하나(개수0 블록+ISYM=0). 사교 k-path η=7/18·ν=11/36. ⚠Cl 기하는 버클링 부호 반대·강체회전 금지 / 비직교라 slabcc 불가
+- [★110bare의 '갭'은 표면상태다](inas110_bare_surface_state_gap.md) — VBM=표면 As DB(5.7×), CBM이라 부르던 것=표면 In DB(9.5×). bare 표면엔 host 갭이 없음 → band-filling은 범주오류
+- [110bare 하전 14잡 + DFE/CTL](inas110_bare_q0_charged_dfe.md) — ★V_In 양방향 CTL 0.337/0.404(0.067 간격). ⚠image-charge 미적용·μ_Cl은 하한. 04-summary 그림 파이프라인(★진공은 H면 고정·점유는 02에서)
 - [par4×3 전단 셀 + 사교 k-path](inas100_par4x3_sheared_cell.md) — 127원자로 211원자보다 잘 수렴. 사교 k-path 좌표
 - [PBE→HSE06 2단 전략](pbe_then_hse_workflow_plan.md) — PBE 스크리닝→HSE 재판정. PBE 무자성은 HSE가 뒤집을 크기
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 판정 바꾸는 계산만. caveat 나열 대신 권고+근거 한 줄
