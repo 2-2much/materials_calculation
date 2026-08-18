@@ -30,7 +30,7 @@
 - [Surface Defect Spin Test](surface_defect_spin_test.md) — 초기 스핀 테스트(→[[surface_defect_spin_screening_full]]로 확장)
 - [a-Dispersion Scan PBE-d](adispersion_scan_pbed.md) — a축 dispersion 스캔. ⚠큰셀 결함은 strip-insertion으로
 - [Surface Defect Gam-relax Spin Comparison](surface_defect_gam_relax_spin_comparison.md) — Cl-As_In/q0 ΔE=−171meV open-shell
-- [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — ⚠번복: dipole ON시 HSE 미수렴 → 전체 OFF
+- [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — ⚠번복: dipole ON시 HSE 미수렴 → 전체 OFF. ★2026-08-14: 진공 기울기→가짜 쌍극자 에너지 역산식. **중성 DFE엔 진공준위가 안 들어감**(셀차 0.06~0.08eV뿐), E_F/CTL은 q배로 흔들림
 - [Surface Defect Spin Screening Full](surface_defect_spin_screening_full.md) — 전 defect 스핀 스크리닝, ISPIN 분기 방침
 - [Surface Defect ICORELEVEL Bug](surface_defect_icorelevel_bug.md) — INCAR 탭 문자가 IERR=5로 즉사. 수정 완료
 - [Surface Defect OSZICAR Buffering](surface_defect_oszicar_buffering.md) — HSE 중 OSZICAR 안 갱신 → std.log 모니터, NELM 120~150
@@ -121,6 +121,7 @@
 - ["사다리" 대신 "수렴 스캔"](feedback_convergence_scan_wording.md) — 파라미터 계열 계산의 호칭. 옛 메모리·스크립트의 "사다리"는 같은 뜻
 - [Initial_POSCARs 덮어쓰기 주의](initial_poscars_overwrite_guard.md) — .gitignore가 `*`라 git 복구 불가. 폴더 이름 말고 조성으로 정체 확인
 - [로그인 노드에서 계산 금지](no_compute_on_login_node.md) — kohn=tgm-master=로그인 노드. 랭크·분·GB급이면 sbatch. 제출 스크립트·마운트 범위·$BASH_SOURCE 함정
+- [실행 중인 계산 건드리지 말 것](feedback_never_touch_running_calc.md) — ⚠prepare는 --only + --mode missing-stage, md5 전후 검증. SLURM은 스크립트를 복사하므로 위험한 건 stage 안 입력파일
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex 메모리는 memory/materials·memory/codex 양쪽에 미러
 - [conversation log](conversation_log.md) — Codex 대화 요약 로그
 - [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 켜두면 전 case에 딸려 들어감. ⚠2026-08-11 정정: 3h→10h+는 **HSE에서만**, PBE는 켜둬도 됨
