@@ -15,14 +15,13 @@
 - [SCPC Reference](scpc_reference.md) — SCPC README 참조, INVCOR/REFCHG 그리드 호환
 - [Surface Defect Gam Tight](surface_defect_gam_tight.md) — 00_Gam-relax EDIFFG −0.02→−0.01
 - [Bloch Workspace Setup](bloch_workspace_setup.md) — bloch VS Code workspace 설정 진행중
-- [Vertical Scan slabcc≡SCPC](vertical_scan_slabcc_scpc.md) — 두 코드 6meV 일치, 정렬 이중계산 금지. ⚠2026-08-19 **'최소 진공 40Å' 폐기**(15Å도 수렴)
+- [Vertical Scan slabcc≡SCPC](vertical_scan_slabcc_scpc.md) — 두 코드 6meV 일치, 최소 진공 40Å, 정렬 이중계산 금지
 - [Charged Defect VBM Reference](charged_defect_vbm_ref.md) — VBM ref=pure VBM(≠neutral HOMO). SCPC align은 VBM 아님
 - [SCPC Vacuum Scan](scpc_vacuum_scan.md) — ⚠SCPC TOTEN은 보정 포함→E_corr 별도가산 금지. 큰 E_corr은 셀 크기 탓
 - [Cl binding energy = unbound](cl_binding_energy_unbound.md) — Cl 결합 안 함. Cl₂가 μ_Cl 상한이라 부호 확정. ⚠Γ-only 값 인용 금지
 - [기준상 세트 mu_H/mu_Cl](mu_reference_phases.md) — 확정 μ_H/μ_Cl 값·InCl₃ pinning·Δμ_Cl 밴드. PRECFOCK=Normal 통일
 - [Cl2 HSE06 Calc](cl2_hse06_calc.md) — 계산 이력만. 확정값은 [[mu_reference_phases]]. 재현성 0.6meV
 - [cascade 병렬 설정](cascade_parallel_settings.md) — cascade 36코어: VASP NCORE=18/NSIM=36, slabcc OMP=36
-- [작은 셀 NCORE=18 → ACE ZPOTRF 실패](ncore_ace_zpotrf_small_cell.md) — ⚠plane wave 수백 개면 NCORE=1 + KPAR. scaLAPACK 문제 아님
 - [SLURM Jobname Distinct](slurm_jobname_distinct.md) — 잡 이름을 calc별로 구분되게
 - [CHG-DIFF kpt Scan](chgdiff_kpt_scan.md) — k1x1x1 미수렴, k2x2x1_MP 수렴. vaspkit 314는 상대경로
 - [pydefect_2d Setup](pydefect_2d_setup.md) — NK 보정 셋업. 유전율은 슬랩 셀-평균이어야 함
@@ -30,7 +29,7 @@
 - [Surface Defect Spin Test](surface_defect_spin_test.md) — 초기 스핀 테스트(→[[surface_defect_spin_screening_full]]로 확장)
 - [a-Dispersion Scan PBE-d](adispersion_scan_pbed.md) — a축 dispersion 스캔. ⚠큰셀 결함은 strip-insertion으로
 - [Surface Defect Gam-relax Spin Comparison](surface_defect_gam_relax_spin_comparison.md) — Cl-As_In/q0 ΔE=−171meV open-shell
-- [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — ⚠번복: dipole ON시 HSE 미수렴 → 전체 OFF. ★2026-08-14: 진공 기울기→가짜 쌍극자 에너지 역산식. **중성 DFE엔 진공준위가 안 들어감**(셀차 0.06~0.08eV뿐), E_F/CTL은 q배로 흔들림
+- [Surface Defect Dipole Correction](surface_defect_dipole_correction.md) — ⚠번복: dipole ON시 HSE 미수렴 → 전체 OFF
 - [Surface Defect Spin Screening Full](surface_defect_spin_screening_full.md) — 전 defect 스핀 스크리닝, ISPIN 분기 방침
 - [Surface Defect ICORELEVEL Bug](surface_defect_icorelevel_bug.md) — INCAR 탭 문자가 IERR=5로 즉사. 수정 완료
 - [Surface Defect OSZICAR Buffering](surface_defect_oszicar_buffering.md) — HSE 중 OSZICAR 안 갱신 → std.log 모니터, NELM 120~150
@@ -40,18 +39,10 @@
 - [V_Cl-Cl_As COHP Donor Evidence](vclclas_cohp_donor_evidence.md) — n형 미시기원 증거 4종. ⚠LPARD+HSE는 ICHARG=0
 - [Defect States 02-Cl-passv](defect_states_02_clpassv.md) — 02 defect state 정리 + 2026-07-17 정정 3건. ⚠도구 인덱싱 규약
 - [Shallow Donor InAs Supercell Limit](shallow_donor_inas_supercell_limit.md) — ⚠a_B=349Å이라 도너준위가 안 보이는 게 정상. 공명 vs 이온성 도너 구분
-- [216셀 V_As의 T_d = ISYM 아티팩트](bulk_vas_jt_isym_artifact.md) — PBE/ISYM=0은 C_3v JT(퍼짐 0.79Å), LDA/ISYM=2만 완전 T_d. ⚠PBE bulk InAs gap=0.0000 실측 → gap 준위 판정 불가
-- [InAs CNL / branch point](inas_cnl_branch_point.md) — CNL=VBM+0.50eV는 견고, CNL−CBM 부호는 우리 HSE로 증명 금지. Tersoff 지름길이 0.50 정확 재현=공짜 함수검증. ★양자구속이 CNL 논리를 깨는 것이 프로젝트 정당화
-- [par4x3 결함세트 07](inas100_par4x3_defect_set_07.md) — 결함 13종. 05 p4x4와 절대 registry 일치(0.0004Å) → 자리 대응표. pseudo-H 전 셀 고정·species alias In→In_d
-- [par4x3 q0 결과 확정](inas100_par4x3_q0_results.md) — 자성=V_Cl·In_i_sub 둘뿐. ★E_F를 CB로 미는 3종(V_Cl-Cl_As·In_i_surf·Cl-As_In). ⚠IPR게이트는 빈 깊은준위를 못 본다(Cl_In)
-- [Γ-only 이완 충분성](gamma_relax_adequacy_par4x3.md) — par4x3에서 56meV/RMS 0.1Å. ⚠시험은 반드시 R_Γ에서 출발할 것(seed 출발은 다른 극소점)
-- [MA co-passivation 08](inas100_MA_copassiv_tree_08.md) — Cl/MA 탐침 2셀. ⚠표준 N/C가 ENMAX=400 → ENCUT=400, 07(300)과 에너지 혼용 금지. 기준셀=MA_i-In
-- [아세테이트 트리 09](inas100_acetate_tree_09.md) — ★AA는 dimer 위가 아니라 trench를 가로지르는 bidentate → 표면 In 12개 전부 배위. pure E=−690.3931. CB 부분격자 비대칭 소멸(1.6~2.1→0.98)이나 총 무게는 안 줄어듦. ⚠ENCUT=400·μ_AA 없음
-- [cp(100) 완전 co-passiv 트리 33](inas100_cp_MACl_tree_33.md) — ★MA는 **서 있는 배향**(메틸 +x)이 누운 것보다 52~71meV 낮다(논문 그림과 반대). p(2x1) 시드→par4x3 타일링. ⚠타일링 때 shift 되돌려야 registry 보존
 
 ## 연구 / 프로젝트
 - [Si-DB KP 재현](si_db_kp_reproduction.md) — uncorrected는 KP와 일치하나 E_corr은 2배. 가설 3개 배제
-- [진공스캔 VBM 기준 함정](vacuum_scan_vbm_reference_trap.md) — ★**진공 수렴 기준 문서**. 보정은 13.5Å에서 이미 수렴, 미수렴은 gauge. 15Å도 OK. ⚠q·E_VBM + ΔV 정렬 둘 다 필수, ΔV는 슬랩 내부 하단 창
+- [진공스캔 VBM 기준 함정](vacuum_scan_vbm_reference_trap.md) — ⚠수렴 판정엔 q·E_VBM gauge + ΔV 정렬 둘 다 필수. slabcc는 13.5Å에서 이미 수렴
 - [In_As_1 deep level = q 의존](in_as_1_deep_level_q_dependent.md) — q+1만 deep, q0의 2.03×는 host 노이즈
 - [Next Steps 2026-07-22](next_steps_2026_07_22.md) — (경과) 그날의 TODO 5건
 - [Next Steps 2026-07-18](next_steps_2026_07_18.md) — (경과) 그날의 TODO 3건
@@ -63,7 +54,7 @@
 - [PHS/BF correction 단계](bandfill_correction_stage.md) — PHS/band-filling을 slabcc와 동급 correction 단계로 구현(bandfill_correct.sh→CSV→plot_DFE.sh). **주입값 0.78eV 폐기, 계산값 V_Cl-Cl_As=−0.125eV(부호 반대)**. k-사다리로 4자리 검증. 함정 5종(EIGENVAL occ×2, OUTCAR 값 붙음, IPR은 k점별, 하전셀 불가, pure PROCAR 없으면 필터 무력화). 정렬 z-ramp=결함 쌍극자(미해결). ⚠2026-08-05 plot_DFE 버그 2건 수정: **charged 작도에서 BF가 no-op**이었음, **shallow-limit 기울기가 +1 고정**이었음(이중도너는 +2)
 - [Shallow-limit DFE Construction](shallow_limit_dfe_construction.md) — E_f(+1,E_F)=E_f(0)+(E_F−E_g) 작도법과 적용 조건 3개
 - [Slab Correction Workflow](slab_correction_workflow.md) — slabcc optical/adiabatic 스킴 CLI와 prepare 동작
-- [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — 보정후 0.379~0.384eV 수렴. ⚠2026-08-19 **'vac≥40 신뢰' 폐기**
+- [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — 보정후 0.379~0.384eV 수렴(vac≥40 신뢰)
 - [KP slabcc NaCl Reproduction](kp_slabcc_nacl_reproduction.md) — NaCl Cl-vac(q+1) 재현 toy, 입력 완비
 - [vclclas atom95 fatband](vclclas_atom95_fatband.md) — ⚠정정: atom 95는 passv Cl 아니라 Cl_As antisite
 - [Spin Screening 04-InCl3](spin_screening_04_incl3.md) — ⚠배치 대부분 실패, 재제출 필요
@@ -86,19 +77,11 @@
 - [(100) 리간드 = 전자1/자리2 규칙](inas100_ligand_site_vs_electron.md) — ★Cl 단독은 배위자리를 하나 비운다. dimer당 Cl 0/1/2 = 도너/절연/억셉터(EIGENVAL 확인). co-passiv는 자리 채우는 결함만 막고 V_Cl은 못 막음
 - [μ_Cl 규약 = ½Cl₂ (확정)](inas100_mu_cl_convention_cl2.md) — 재론 금지. E_f는 경계값으로 읽기. InCl₃-pinned 대조표 보존
 - [As_In(As-rich) 음수 = 종단상 경쟁](inas100_as_in_termination_competition.md) — ⚠μ_Cl 무관 −0.40 eV. In-종단 (100):Cl은 As-rich에서 기준면 아님
-- [110bare par3x2 셀 구축](inas110_bare_par3x2_pure_cell.md) — p1x1 이완(ω=30.1°/dz=0.753Å)→a-전단 par3x2(★이득은 사슬축 image 26.26Å). 배포 pure는 미재구성. POTCAR 5종 하나(개수0 블록+ISYM=0). 사교 k-path η=7/18·ν=11/36. ⚠Cl 기하는 버클링 부호 반대·강체회전 금지 / 비직교라 slabcc 불가
-- [★110bare의 '갭'은 표면상태다](inas110_bare_surface_state_gap.md) — VBM=표면 As DB(5.7×), CBM이라 부르던 것=표면 In DB(9.5×). bare 표면엔 host 갭이 없음 → band-filling은 범주오류
-- [110bare 하전 14잡 + DFE/CTL](inas110_bare_q0_charged_dfe.md) — ★V_In 양방향 CTL 0.337/0.404(0.067 간격). ⚠image-charge 미적용·μ_Cl은 하한. 04-summary 그림 파이프라인(★진공은 H면 고정·점유는 02에서)
 - [par4×3 전단 셀 + 사교 k-path](inas100_par4x3_sheared_cell.md) — 127원자로 211원자보다 잘 수렴. 사교 k-path 좌표
 - [PBE→HSE06 2단 전략](pbe_then_hse_workflow_plan.md) — PBE 스크리닝→HSE 재판정. PBE 무자성은 HSE가 뒤집을 크기
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 판정 바꾸는 계산만. caveat 나열 대신 권고+근거 한 줄
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — 기하 재사용 OK, 에너지는 섞지 말 것
 - [inas100 slab generation](inas100_slab_generation.md) — (100) 슬랩 생성, Cl 피복률 0.75ML
-- [InAs(111)A 슬랩 생성](inas111_slab_generation.md) — 03-111slab 생성기·ABC offset 규약·LDA 선례 0.0000Å 재현. ★As–H=1.5626Å(1.52 아님)·4BL은 아래 1BL만 고정. ⚠비직교(slabcc 불가)·bare p2x2는 NELECT 홀수 → (2×2) In-vacancy 재구성 필요
-- [InAs(111)A Cl/MA p4x3 트리](inas111_cl_ma_p4x3_tree.md) — ★전자수지 excess와 E_F 이동 순서가 맞음(단 **정황 증거**; 캐리어 직접 확인은 pure/V_In/As_In 셋뿐). V_In=−3 확정(홀 3.00개). n형 후보=V_As_1(노출 In 옆, 열역학도 0.9eV 유리). As_In은 (111)A에서 도너 아님. ⚠Γ-only 에너지 금지(0.8eV)·PBE 스핀 전멸·μ 전부 ENCUT300
-- [★PBE 벌크 InAs 밴드순서 역전](inas_pbe_band_inversion_bulk.md) — Γ1c가 Γ15v보다 0.55eV 아래. VBM은 점유도 아닌 Γ 3중축퇴로. ΔV_bulk=3.8258. 슬랩 금속화는 정상·EA는 HSE 필요
-- [InAs 표면 IP/EA](inas_surface_ip_ea_plan.md) — ★진공준위 기준 (100)/(110)/(111) 밴드정렬로 어셉터 DFE 방향성 검증. ⚠110의 −4.92는 H면 기준이라 IP 아님. **2026-08-18 착수**: bare 셀은 (110)뿐 · primitive 생성기는 bloch · 작업트리=**sham `10-Primitive-slab/04-Facet_IP-EA/PLAN.md`** · a0 6.189842/ENCUT 400 · 어셉터=V_In+Cl_In
-- [host gap을 국소준위로 오인하는 함정](host_gap_localized_state_trap.md) — ⚠'최저 비점유'=CBM 아님. pure의 비국소 상태로만 정의. PROCAR 단일원자 무게>5%로 걸러라(0.03→0.83eV)
 - [coffee slabcc cross validation in as 1](coffee_slabcc_cross_validation_in_as_1.md) — 두 코드 15meV 일치. ★유전슬랩 배치가 정렬항의 사활
 - [coffee vs slabcc eiso target](coffee_vs_slabcc_eiso_target.md) — E_iso 표적이 다름: slabcc=isolated surface, CoFFEE=isolated slab
 - [hse slab scf settings](hse_slab_scf_settings.md) — HSE SCF 정체 처방: ALGO=Damped
@@ -106,33 +89,50 @@
 - [HSE 1shot 조용한 실패 3종 + (100) q0 결과](hse_1shot_pitfalls_and_q0_results.md) — rms 하강으로 판정·collect_energies 편향·NELM 소진
 - [In_i = 양쪽 termination 모두 shallow donor](in_i_shallow_donor_both_terminations.md) — 01/In_i≡03/In_i_2(같은 adatom 구조), 전자 1개→host CBM. ⚠Γ-only DOS의 E_F 위 갭은 fundamental gap 아님. adatom이 Td보다 1.5~1.9eV 안정. 02-HSE에 adatom 자리 없음
 - [kohn In_i 후속 3건](next_steps_in_i_kohn.md) — InCl_i 가설검증 / In_i q+1 CTL / 02-HSE adatom 자리 추가
+- [bulk vas jt isym artifact](bulk_vas_jt_isym_artifact.md) — 216셀 V_As의 T_d는 ISYM 아티팩트 — PBE/ISYM=0은 C_3v JT(In-In 퍼짐 0.79Å). 세 트리 비교표 + PBE bulk InAs gap=0.0000 실측
+- [inas100 ma copassiv tree 08](inas100_MA_copassiv_tree_08.md) — 08-100Cl-MA_8L_par4x3_PBE-d — Cl/MA co-passivation 탐침 2셀. ⚠표준 N/C PAW가 ENMAX=400이라 ENCUT=400 필수 → 07(300)과 총에너지 비교 불가. 기준셀은 MA_i-In
+- [inas100 acetate tree 09](inas100_acetate_tree_09.md) — 09-100AA 트리 — 아세테이트는 dimer가 아니라 trench를 가로지르는 bidentate. pure 이완 결과와 CB 대칭화
+- [inas100 cp MACl tree 33](inas100_cp_MACl_tree_33.md) — 33-100MACl (sham) — 완전 co-passivated cp(100) 기준셀 구축. p(2x1) 시드이완 → par4x3 타일링. ★MA는 서 있는 배향(메틸 +x)이 최저, 누운 배향보다 52~71meV 낮다
+- [inas100 par4x3 defect set 07](inas100_par4x3_defect_set_07.md) — 07-100Cl_8L_par4x3 결함 13종 생성(2026-08-10). ★05 p4x4와 절대 registry가 0.0004Å 일치 → 자리 대응 In23/As7/Cl3 = 05의 In47/As23/Cl6. pseudo-H는 전 셀 고정 완료
+- [inas100 par4x3 q0 results](inas100_par4x3_q0_results.md) — 07 par4x3 q0 14셀 결과 확정 — 자성은 V_Cl·In_i_sub 둘뿐, 깊은준위 5종, ★E_F를 CB로 미는 건 V_Cl-Cl_As·In_i_surf·Cl-As_In. 여기서 하전 14케이스 도출
+- [inas110 bare par3x2 pure cell](inas110_bare_par3x2_pure_cell.md) — 11-110bare 프로젝트 pristine 셀 확정 — p1x1 이완 후 전단 par3x2로 타일링. ω=30.1°/dz=0.753Å, slabcc 불가
+- [inas110 bare q0 charged dfe](inas110_bare_q0_charged_dfe.md) — 11-110bare 하전 14잡 + DFE/CTL 결과, 그리고 09/plot10 형식 요약그림 파이프라인(04-summary). ⚠기준 '갭'이 표면상태라 band-filling·얕은/깊은 분류 재검토 필요
+- [inas110 bare surface state gap](inas110_bare_surface_state_gap.md) — ⚠bare (110)의 0.450 eV '갭'은 host 갭이 아니라 표면 As DB → 표면 In DB. frontier 양쪽 다 표면 상태 → band-filling 보정이 범주오류
+- [inas111 cl ma p4x3 tree](inas111_cl_ma_p4x3_tree.md) — 21-111Cl-MA_4BL_p4x3_ 트리 — 셀 구성·결함 8종·q0 결과. 전자수지 excess와 E_F 이동이 완전 일치, n형 후보는 V_As_1
+- [inas111 slab generation](inas111_slab_generation.md) — InAs(111)A 슬랩 생성기(03-111slab) 기하 규약 + bare p2x2는 NELECT 홀수라 (2x2) In-vacancy 재구성이 필요하다는 판정
+- [inas cnl branch point](inas_cnl_branch_point.md) — InAs CNL(branch point) = VBM+0.50 eV는 견고, CNL−CBM=+0.05~0.19는 불확실 → 우리 HSE로 부호 증명 금지. Tersoff 지름길이 0.50 정확 재현(공짜 함수검증). 양자구속이 CNL 논리를 깨는 것이 우리 프로젝트의 정당화
+- [inas pbe band inversion bulk](inas_pbe_band_inversion_bulk.md) — PBE-d 벌크 InAs 는 갭이 0 이 아니라 **역전**돼 있다 — Γ1c(3.2754)가 Γ15v(3.8258)보다 0.55 eV 아래. 정렬 기준 VBM 은 점유도가 아니라 Γ 3중축퇴로 잡아야 한다
+- [inas surface ip ea plan](inas_surface_ip_ea_plan.md) — InAs (100)/(110)/(111) IP/EA — 2026-08-18 착수 확정: bare 셀은 (110)에만 있었고, primitive 생성기가 bloch에 다 있어 sham에 전용 트리를 새로 팠다. PLAN.md 위치·확정 파라미터·bare 셀 재고
+- [ncore ace zpotrf small cell](ncore_ace_zpotrf_small_cell.md) — 작은 셀(plane wave 수백 개)에서 NCORE=18을 쓰면 hybrid ACE의 FOCK_ACE_CONSTRUCT ZPOTRF가 깨진다 — 병렬은 KPAR로
 
 ## 참고 자료
-- [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
-- [POSCAR 개수 0 종 블록](vasp_zero_count_species.md) — ★ISYM=0이면 정상, 기본 ISYM=2면 대칭성 setup에서 segfault. 단일 POTCAR 공유 가능(08이 이미 그렇게 씀)
 - [tgm-master VASP 바이너리 제약](g1_node_vasp_binary_limit.md) — 문제는 버전 아닌 빌드 변형. 바이너리 단위로 30초 테스트
 - [패시베이션 표면 타일링 단축](passivated_surface_tiling_shortcut.md) — 청정표면 이완기하는 타일링으로 전용 가능(결함엔 불가)
 - [(100) 작업트리는 kohn 로컬](inas100_worktree_on_kohn.md) — 05·06 트리는 kohn:/home 에만. 서버 판별법·파티션 정보
-- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — git 동기화는 memory/.claude만. ⚠2026-08-07 재정정: SLURM 4대 공유 아님(kohn=cascade / sham·bloch=g1·g2), hohenberg NFS는 sham에 미마운트
-- [fermi 서버 셋업](fermi_node_setup.md) — SLURM 없음(mpirun 직접)·kohn 홈이 /mnt/home으로 공유·⚠ulimit -s 8MB가 SIGSEGV 원인·32코어 NCORE=16
+- [Server FS & Git Sync Scope](server_fs_git_sync_scope.md) — git 동기화는 memory/.claude만. ⚠2026-08-07 재정정: SLURM 4대 공유 아님(kohn=cascade / sham=g1·g2), hohenberg NFS는 sham에 미마운트
 - [서버간 SSH 접근](ssh_access_between_servers.md) — kohn→sham/bloch 원격실행 셋업. 키 등록은 원격 안에서. ⚠bloch는 fail2ban 차단 해제 대기
 - [slabcc 전하절단 가드](slabcc_charge_truncation_guard.md) — discretization error=꼬리절단. SLABCC_CHARGE_TOLERANCE 추가
 - [slabcc optimize_tolerance](slabcc_optimize_tolerance.md) — 목표 RMSE가 아니라 BOBYQA 상대수렴 tolerance
 - [IPR Gate probe = 점유차분](ipr_gate_occdiff_probe.md) — probe=|occ(q)−occ(q0)| 최대 밴드. In_As_1 q+1은 bound
 - [IPR Gate Tool](ipr_gate_tool.md) — scripts/ipr_gate.py 사용법과 버그 수정 이력
-- [bandos 밴드 플로터](bandos_tool.md) — Line-Mode KPOINTS 전용(zeroband는 zero-weight만). ⚠ion 인덱스 0-based
 - [zeroband fatband tool](zeroband_fatband_tool.md) — hybrid band projected fatband 플로터
 - [zeroband spin parsing](zeroband_spin_parsing.md) — --spin 옵션, ISPIN=2 PROCAR 파싱
 - [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — 설치·패치 4건 + 격자 5.6%를 조용히 망치는 np.arange 버그
+- [bandos tool](bandos_tool.md) — ~/bin/bandos — Line-Mode KPOINTS 밴드 플로터. ⚠ion 인덱스가 0-based(VASP 번호 −1). zeroband는 zero-weight 전용이라 line-mode 불가
+- [fermi node setup](fermi_node_setup.md) — fermi 서버에서 VASP 돌리는 법 — SLURM 없음, kohn 홈이 /mnt/home으로 보임, ulimit -s 8MB가 SIGSEGV 원인
+- [vasp zero count species](vasp_zero_count_species.md) — POSCAR 개수 0 종 블록은 ISYM=0이면 정상 동작. 기본 ISYM=2면 대칭성 setup에서 segfault
+- [vesta bond table inas](vesta_bond_table_inas.md) — VESTA가 InAs 결합을 안 그리는 이유 = style.ini SBOND의 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정으로 영구 해결
 
 ## 작업 방식 / 피드백
 - ["사다리" 대신 "수렴 스캔"](feedback_convergence_scan_wording.md) — 파라미터 계열 계산의 호칭. 옛 메모리·스크립트의 "사다리"는 같은 뜻
-- [Initial_POSCARs 덮어쓰기 주의](initial_poscars_overwrite_guard.md) — .gitignore가 `*`라 git 복구 불가. 폴더 이름 말고 조성으로 정체 확인
 - [로그인 노드에서 계산 금지](no_compute_on_login_node.md) — kohn=tgm-master=로그인 노드. 랭크·분·GB급이면 sbatch. 제출 스크립트·마운트 범위·$BASH_SOURCE 함정
-- [계산 디렉토리 삭제 금지 → __attemptN__](feedback_never_delete_use_attempts.md) — 실패 런은 진단 증거. 재계산은 직전 CONTCAR 시드. ⚠CONTCAR 종이름 잘림·감시엔 maxdepth 3
-- [실행 중인 계산 건드리지 말 것](feedback_never_touch_running_calc.md) — ⚠prepare는 --only + --mode missing-stage, md5 전후 검증. SLURM은 스크립트를 복사하므로 위험한 건 stage 안 입력파일
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex 메모리는 memory/materials·memory/codex 양쪽에 미러
 - [conversation log](conversation_log.md) — Codex 대화 요약 로그
-- [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 켜두면 전 case에 딸려 들어감. ⚠2026-08-11 정정: 3h→10h+는 **HSE에서만**, PBE는 켜둬도 됨
+- [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 주석 풀고 prepare하면 잡이 3h→10h+
 - [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 참조슬랩 바닥상태 검증용 6잡. ⚠type=antisite로 중심 지정
 - [InAs100 셀 수렴 지표](inas100_cell_convergence_metric.md) — 판정은 E_b만(다른 두 지표는 반대 결론). ✅p4×4 확정, 외삽극한 철회
+- [never delete use attempts](feedback_never_delete_use_attempts.md) — 계산 디렉토리를 절대 지우지 말 것 — 실패한 시도는 __attemptN__ 으로 보존하고, 재계산은 직전 attempt 의 CONTCAR 를 POSCAR 로 이어받는다
+- [feedback never touch running calc](feedback_never_touch_running_calc.md) — 작업 방식: 실행 중인 계산 디렉토리는 절대 건드리지 말 것. prepare 재실행 시 --only + --mode missing-stage + md5 전후 검증
+- [gamma relax adequacy par4x3](gamma_relax_adequacy_par4x3.md) — ✅Γ-only 이완은 par4x3(면내 17.5×15.8Å)에서 충분 — 최악 케이스 56meV/RMS 0.1Å. ⚠단 시험을 seed에서 출발시키면 다른 극소점에 빠져 k효과를 못 잰다
+- [host gap localized state trap](host_gap_localized_state_trap.md) — 슬랩 host gap 을 '최저 비점유'로 잡으면 안 된다 — 표면 국소 준위를 CBM 으로 오인한다. PROCAR 단일원자 무게로 걸러낼 것
+- [initial poscars overwrite guard](initial_poscars_overwrite_guard.md) — ⚠Initial_POSCARs 생성 전 기존 폴더 내용을 먼저 확인·백업할 것. materials의 .gitignore는 `*`라 덮어쓰면 git 복구 불가 (2026-08-10 사고)

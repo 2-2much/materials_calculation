@@ -1,27 +1,16 @@
 ---
 name: stages_yaml_dos_band_contamination
-description: stages.yaml의 02/03(DOS/Band) 주석을 푼 채 prepare하면 모든 신규 case에 std 다중 k 단계가 딸려 들어간다 (비용 폭증은 HSE에서만, PBE는 싸다). 사후 삭제 함정과 prepare 모드 선택 포함
+description: stages.yaml의 02/03(DOS/Band) 주석을 푼 채 prepare하면 모든 신규 하전 case에 std 다중 k 단계가 딸려 들어가 잡이 3h→10h+ 로 불어난다
 metadata: 
   node_type: memory
   type: feedback
   originSessionId: a36501db-d568-4425-8924-3511e61d9a67
-  modified: 2026-08-11T06:12:28.011Z
+  modified: 2026-07-22T11:37:16.675Z
 ---
 
 `config/stages.yaml`의 `02_G221-DOS`·`03_Band` 블록을 **주석 해제한 상태로 `prepare_defect_workflow.py`
-를 돌리면, 그때 만들어지는 모든 case에 DOS(4-k)+Band(20-k) 단계가 자동으로 붙는다.**
-
-## ⚠⚠ 2026-08-11 정정 — 비용 폭증은 **HSE에서만**이다
-
-원래 이 메모리는 "잡 하나가 ~3시간 → 10시간+"라고 적었는데, **그 수치는 HSE06 트리(02/04)에서
-나온 것**이다. 사용자 지적: **PBE 계산에서는 해당 없다.** hybrid는 exact exchange 비용이
-k점 수에 (사실상) 제곱으로 붙지만, PBE의 다중 k점 SCF는 k점 수에 선형이고 그마저 싸다.
-
-- **HSE 트리** — 02/03을 켠 채 prepare하면 Γ-only 하전 스윕 잡이 3h → 10h+. 켜지 말 것.
-- **PBE-d 트리** — DOS/Band를 상시 켜두어도 된다. 09-100AA(162원자)는 4단계를 다 켠 채 제출했다.
-
-즉 **"02/03은 항상 꺼라"가 아니라 "hybrid일 때 꺼라"**가 맞는 규칙이다.
-아래 오염/삭제 함정은 functional과 무관하게 그대로 유효하다.
+를 돌리면, 그때 만들어지는 모든 case에 DOS(4-k)+Band(20-k) HSE 단계가 자동으로 붙는다.**
+Γ-only 하전 스윕(00/01/01_opt만 원하는 경우) 잡 하나가 **~3시간 → 10시간+** 로 불어난다.
 
 **Why:** prepare는 stages.yaml에 살아있는 모든 스테이지를 case마다 생성하고 `run_case.sh`를
 그대로 재생성한다. DOS/Band는 특정 defect의 q0에만 필요한데 stages.yaml은 **전역**이라,

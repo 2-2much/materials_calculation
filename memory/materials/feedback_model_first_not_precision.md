@@ -26,9 +26,4 @@ metadata:
   뒤집힐 실질 위험이 있을 때만 제안한다.
 - 정밀도 논의는 [[pbe_then_hse_workflow_plan]] 의 ③ HSE 단계로 미룬다.
 
-2026-08-13 같은 취지의 재확인: 4 BL 두께 진단이 기준(BL2 변위 < 0.02 Å)을 넘겼을 때
-**"두께진단 경고는 기록만 해두라. 지금은 빠르게 PBE 스크리닝 중이니깐 crude 계산이 목적이다."**
-→ 스크리닝 단계에서 발견한 caveat 은 **막지 말고 기록**한다. README/메모리에 근거와 함께 남기고
-계산은 그대로 진행한다. 재판정이 필요해지는 시점(HSE, 절대량)에 그 기록을 꺼내 쓴다.
-
-관련: [[inas100_inplane_scan_todo]] [[pbe_then_hse_workflow_plan]] [[inas111_cl_ma_p4x3_tree]]
+관련: [[inas100_inplane_scan_todo]] [[pbe_then_hse_workflow_plan]]
