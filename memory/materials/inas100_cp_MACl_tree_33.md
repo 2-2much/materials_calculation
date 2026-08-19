@@ -50,12 +50,41 @@ registry 가 1.2~2.3 Å 어긋나 07 의 자리 대응표([[inas100_par4x3_defec
 In–As 2.668~2.710. (2x1) 주기성 0.00000 Å. 진공 12.45 Å.
 종 이름은 08/09 규약대로 **In_d, H.75** 를 그대로 씀 (07 은 In/H.75).
 
-## 다음
-config/ 구성(07·08 복사 + ENCUT 400 7종 POTCAR) → pure 를 par4x3 에서 재이완(Γ-only, family
-설정 LREAL=A) → 결함 세트. 결함 정의는 **V_MA / V_Cl / V_In–V_MA / V_In@ligated** 네 개가 핵심.
-가설 판정값은 `E_f(V_In–V_MA) − E_f(V_MA)` (μ_MA 가 정확히 상쇄되어 07 의 0.5 eV, 11/21 의
-~2 eV 와 직접 비교 가능).
-⚠ **μ_Cl 이 ENCUT=400 footing 으로 없다** — ½Cl₂ 한 번 돌리면 07/08/09/21/33 이 전부 풀린다.
+## 결함 10종 + config (2026-08-19 완료, **미제출**)
+`Initial_POSCARs/`: V_Cl(Cl121) · V_Cl-V_In(Cl121+In25) · V_MA(N127,C133,H139/145/151/157/163) ·
+V_MA-V_In(위+In19) · V_In_sub(In13) · Cl_i1(In25에 5번째 리간드) · Cl_i2(In19, MA와 공존) ·
+In_i_trench(In21·22·25·30 centroid) · In_i_trench-Cl · Cl_As(As67→Cl).
+전부 In19–In25 dimer 와 그 옆 trench 에 몰아 놓아 상호 비교 가능.
+NELECT 홀: V_Cl 1001·V_MA-V_In 981·V_In_sub 995·Cl_i 1015·In_i 1021 / 짝: V_Cl-V_In 988·
+**V_MA 994**(L-type이라 수지 불변)·In_i-Cl 1028·Cl_As 1010.
+
+### ★ 가설 판정 = 차분이지 raw E_f 가 아니다
+`E_f^(B)(V_In) = E_f(V_MA-V_In) − E_f(V_MA)` — μ_MA 가 정확히 상쇄. 이 값만이 07 의 0.5 eV,
+11/21 의 ~2 eV 와 같은 자격. **세 트리의 V_In 은 이미 공정한 비교였다**(전부 리간드 없는
+3배위 In: (110)[67,63,68] As3 · (111)In46 As3 · (100)In23 In1+As2). cp 셀엔 bare In 이 없어
+리간드를 먼저 떼야만 같은 결함이 정의되는 것이 (B) 의 정체.
+
+### ⚠ 사양에서 고친 것
+사용자 목록에 **MA 의 H157 이 빠져 있었다**(메틸아민 H 는 5개). / 두 번째 "V_MA" → `V_MA-V_In`. /
+`V_Cl-V_In` 은 Cl121+In25 **둘 다** 삭제(In 만 지우면 Cl 이 무주공산).
+
+### 생성기 — 패키지 스크립트 못 씀
+`scripts/generate_surface_defect.py` 는 **라벨 열로 타깃을 찾고**(이 POSCAR 엔 라벨 열 없음),
+vacancy 에 리간드를 강제로 채우며, 분자 단위 삭제 불가 → 트리 로컬
+`00-p2x1_seed_relax/build/{make_defects,run_defects,place2,verify_defects}.py`.
+흡착 자리(Cl_i1/Cl_i2/In_i-Cl)는 **4000점 구면 스캔으로 min(d/(r_i+r_j)) 최대화** —
+이미 4배위인 In 에는 "이웃 합의 반대" 방식이 기존 Cl 위에 겹쳐 놓는다(1.23 Å).
+⚠ **In_i_trench centroid 는 home image 로 평균내야 한다** — In21 기준 minimum image 를 쓰면
+In25 가 +a 로 감겨 As 바로 위의 엉뚱한 자리가 나온다.
+
+## config/ (08 복사 + sham 조정) — 제출 전 확인 4가지
+NCORE 18→**8**, NSIM 32→8 (g1 8코어/노드), KPAR×NCORE=32=4노드×8. partition g1, nodes 4.
+`initial_poscar_dirs: [Initial_POSCARs]`. POTCAR 는 08 과 **md5 동일**.
+1. ⚠ **`vasp.6.3.2.gam.x` 는 g1 미검증** (`.std.x` 만 검증됨) → 30초 Si 테스트 필수.
+2. stages 00~03 전부 활성 — 첫 스윕은 00/01 만 원하면 주석 처리.
+3. ⚠ **μ_Cl 이 ENCUT=400 footing 으로 없다**(μ_Ma = −35.660148 은 있음). ½Cl₂ 한 번이면
+   07/08/09/21/33 전부 풀린다.
+4. 하전은 전부 [0] — 전단 셀이라 slabcc 불가·CoFFEE 가능.
 
 관련: [[inas100_MA_copassiv_tree_08]] [[inas100_ligand_site_vs_electron]]
 [[inas100_par4x3_defect_set_07]] [[inas100_par4x3_sheared_cell]] [[g1_node_vasp_binary_limit]]
