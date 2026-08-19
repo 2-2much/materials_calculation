@@ -93,7 +93,7 @@
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — 기하 재사용 OK, 에너지는 섞지 말 것
 - [inas100 slab generation](inas100_slab_generation.md) — (100) 슬랩 생성, Cl 피복률 0.75ML
 - [InAs(111)A 슬랩 생성](inas111_slab_generation.md) — 03-111slab 생성기·ABC offset 규약·LDA 선례 0.0000Å 재현. ★As–H=1.5626Å(1.52 아님)·4BL은 아래 1BL만 고정. ⚠비직교(slabcc 불가)·bare p2x2는 NELECT 홀수 → (2×2) In-vacancy 재구성 필요
-- [InAs(111)A Cl/MA p4x3 트리](inas111_cl_ma_p4x3_tree.md) — ★전자수지 excess와 E_F 이동이 8종 전부 일치. n형 후보=V_As_1(노출 In 옆, 열역학도 0.9eV 유리). As_In은 (111)A에서 도너 아님. ⚠Γ-only 에너지 금지(0.8eV)·PBE 스핀 전멸·μ 전부 ENCUT300
+- [InAs(111)A Cl/MA p4x3 트리](inas111_cl_ma_p4x3_tree.md) — ★전자수지 excess와 E_F 이동 순서가 맞음(단 **정황 증거**; 캐리어 직접 확인은 pure/V_In/As_In 셋뿐). V_In=−3 확정(홀 3.00개). n형 후보=V_As_1(노출 In 옆, 열역학도 0.9eV 유리). As_In은 (111)A에서 도너 아님. ⚠Γ-only 에너지 금지(0.8eV)·PBE 스핀 전멸·μ 전부 ENCUT300
 - [★PBE 벌크 InAs 밴드순서 역전](inas_pbe_band_inversion_bulk.md) — Γ1c가 Γ15v보다 0.55eV 아래. VBM은 점유도 아닌 Γ 3중축퇴로. ΔV_bulk=3.8258. 슬랩 금속화는 정상·EA는 HSE 필요
 - [InAs 표면 IP/EA](inas_surface_ip_ea_plan.md) — ★진공준위 기준 (100)/(110)/(111) 밴드정렬로 어셉터 DFE 방향성 검증. ⚠110의 −4.92는 H면 기준이라 IP 아님. **2026-08-18 착수**: bare 셀은 (110)뿐 · primitive 생성기는 bloch · 작업트리=**sham `10-Primitive-slab/04-Facet_IP-EA/PLAN.md`** · a0 6.189842/ENCUT 400 · 어셉터=V_In+Cl_In
 - [host gap을 국소준위로 오인하는 함정](host_gap_localized_state_trap.md) — ⚠'최저 비점유'=CBM 아님. pure의 비국소 상태로만 정의. PROCAR 단일원자 무게>5%로 걸러라(0.03→0.83eV)
