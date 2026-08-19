@@ -15,7 +15,7 @@
 - [SCPC Reference](scpc_reference.md) — SCPC README 참조, INVCOR/REFCHG 그리드 호환
 - [Surface Defect Gam Tight](surface_defect_gam_tight.md) — 00_Gam-relax EDIFFG −0.02→−0.01
 - [Bloch Workspace Setup](bloch_workspace_setup.md) — bloch VS Code workspace 설정 진행중
-- [Vertical Scan slabcc≡SCPC](vertical_scan_slabcc_scpc.md) — 두 코드 6meV 일치, 최소 진공 40Å, 정렬 이중계산 금지
+- [Vertical Scan slabcc≡SCPC](vertical_scan_slabcc_scpc.md) — 두 코드 6meV 일치, 정렬 이중계산 금지. ⚠2026-08-19 **'최소 진공 40Å' 폐기**(15Å도 수렴)
 - [Charged Defect VBM Reference](charged_defect_vbm_ref.md) — VBM ref=pure VBM(≠neutral HOMO). SCPC align은 VBM 아님
 - [SCPC Vacuum Scan](scpc_vacuum_scan.md) — ⚠SCPC TOTEN은 보정 포함→E_corr 별도가산 금지. 큰 E_corr은 셀 크기 탓
 - [Cl binding energy = unbound](cl_binding_energy_unbound.md) — Cl 결합 안 함. Cl₂가 μ_Cl 상한이라 부호 확정. ⚠Γ-only 값 인용 금지
@@ -50,7 +50,7 @@
 
 ## 연구 / 프로젝트
 - [Si-DB KP 재현](si_db_kp_reproduction.md) — uncorrected는 KP와 일치하나 E_corr은 2배. 가설 3개 배제
-- [진공스캔 VBM 기준 함정](vacuum_scan_vbm_reference_trap.md) — ⚠수렴 판정엔 q·E_VBM gauge + ΔV 정렬 둘 다 필수. slabcc는 13.5Å에서 이미 수렴
+- [진공스캔 VBM 기준 함정](vacuum_scan_vbm_reference_trap.md) — ★**진공 수렴 기준 문서**. 보정은 13.5Å에서 이미 수렴, 미수렴은 gauge. 15Å도 OK. ⚠q·E_VBM + ΔV 정렬 둘 다 필수, ΔV는 슬랩 내부 하단 창
 - [In_As_1 deep level = q 의존](in_as_1_deep_level_q_dependent.md) — q+1만 deep, q0의 2.03×는 host 노이즈
 - [Next Steps 2026-07-22](next_steps_2026_07_22.md) — (경과) 그날의 TODO 5건
 - [Next Steps 2026-07-18](next_steps_2026_07_18.md) — (경과) 그날의 TODO 3건
@@ -62,7 +62,7 @@
 - [PHS/BF correction 단계](bandfill_correction_stage.md) — PHS/band-filling을 slabcc와 동급 correction 단계로 구현(bandfill_correct.sh→CSV→plot_DFE.sh). **주입값 0.78eV 폐기, 계산값 V_Cl-Cl_As=−0.125eV(부호 반대)**. k-사다리로 4자리 검증. 함정 5종(EIGENVAL occ×2, OUTCAR 값 붙음, IPR은 k점별, 하전셀 불가, pure PROCAR 없으면 필터 무력화). 정렬 z-ramp=결함 쌍극자(미해결). ⚠2026-08-05 plot_DFE 버그 2건 수정: **charged 작도에서 BF가 no-op**이었음, **shallow-limit 기울기가 +1 고정**이었음(이중도너는 +2)
 - [Shallow-limit DFE Construction](shallow_limit_dfe_construction.md) — E_f(+1,E_F)=E_f(0)+(E_F−E_g) 작도법과 적용 조건 3개
 - [Slab Correction Workflow](slab_correction_workflow.md) — slabcc optical/adiabatic 스킴 CLI와 prepare 동작
-- [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — 보정후 0.379~0.384eV 수렴(vac≥40 신뢰)
+- [DFE +1 Vacuum As-rich (fixed)](dfe_p1_vacuum_asrich_fixed.md) — 보정후 0.379~0.384eV 수렴. ⚠2026-08-19 **'vac≥40 신뢰' 폐기**
 - [KP slabcc NaCl Reproduction](kp_slabcc_nacl_reproduction.md) — NaCl Cl-vac(q+1) 재현 toy, 입력 완비
 - [vclclas atom95 fatband](vclclas_atom95_fatband.md) — ⚠정정: atom 95는 passv Cl 아니라 Cl_As antisite
 - [Spin Screening 04-InCl3](spin_screening_04_incl3.md) — ⚠배치 대부분 실패, 재제출 필요
