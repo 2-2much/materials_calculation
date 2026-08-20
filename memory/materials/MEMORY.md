@@ -80,8 +80,6 @@
 - [charge state selection rule](charge_state_selection_rule.md) — q0 캐리어 수가 gap 내 CTL 개수의 상한
 - [Cl shallow donor: gap엔 defect state 없음](cl_shallow_donor_no_gap_state.md) — gap내 defect 무게=0. n형은 준위 아닌 전자수
 - [InAs100 8ML 두께 확정](inas100_8ml_thickness_verdict.md) — 8 ML 채택. ⚠μ_InAs=−7.6767·DIPOL 명시 필수·NGZF 고정
-- [JH 두께스캔 IE = pseudo-H 아티팩트](jh_thickness_ie_pseudoh_artifact.md) — ★(100) 5.30eV는 H 미이완 탓. 검증: H이완 +0.77, 역테스트 −0.52. 111 bandOffset.txt는 파싱버그로 깨져있었음
-- [면별 IP = top 면 pseudo-H 규칙](facet_ip_pseudoh_top_face_rule.md) — ★(110)이 낮은 건 H1.25·H0.75가 같은 면에서 상쇄되기 때문. ⚠bare 서열은 정반대((110)4.78>(100)4.42>(111)3.7): In 종단 자체는 IP를 낮춘다
 - [InAs100 in-plane b축 스캔](inas100_inplane_scan_todo.md) — mono-A 전환 이유. ⚠a축 유한크기 오차 미측정
 - [InAs100 dimer-row 사슬](inas100_dimer_row_chain.md) — ⚠CBM은 In-dimer row 1D 사슬 밴드. As_In이 사슬을 끊음
 - [(100) 리간드 = 전자1/자리2 규칙](inas100_ligand_site_vs_electron.md) — ★Cl 단독은 배위자리를 하나 비운다. dimer당 Cl 0/1/2 = 도너/절연/억셉터(EIGENVAL 확인). co-passiv는 자리 채우는 결함만 막고 V_Cl은 못 막음
@@ -108,7 +106,9 @@
 - [hse slab scf settings](hse_slab_scf_settings.md) — HSE SCF 정체 처방: ALGO=Damped
 - [HSE 이완 vs single-point](hse_relax_vs_singlepoint.md) — 중성 스크리닝은 NSW=0 충분, 하전은 이완 필수
 - [HSE 1shot 조용한 실패 3종 + (100) q0 결과](hse_1shot_pitfalls_and_q0_results.md) — rms 하강으로 판정·collect_energies 편향·NELM 소진
+- [facet ip pseudoh top face rule](facet_ip_pseudoh_top_face_rule.md) — 면별 IP 비교의 함정 — IP는 top 면만 읽으므로 그 면의 pseudo-H 조성이 값을 지배. (110)만 H1.25/H0.75가 상쇄되어 낮게 나옴
 - [in i shallow donor both terminations](in_i_shallow_donor_both_terminations.md) — In_i는 Cl-passv(01)·InCl3-passv(03) 양쪽 모두 shallow donor(전자 1개→host CBM). 03에서 E_F가 VB에 걸린 듯 보인 건 Γ-only 아티팩트. 가설 \"In_i+Cl→도너 상실\"은 아직 미검증
+- [jh thickness ie pseudoh artifact](jh_thickness_ie_pseudoh_artifact.md) — JH 두께스캔 (100)/(110)/(111) IE 0.5eV 차이는 물리가 아니라 (100)의 pseudo-H 미이완 아티팩트. 검증계산으로 확정
 - [next steps in i kohn](next_steps_in_i_kohn.md) — kohn에서 돌릴 In_i 후속 계산 3건 — (1)InCl_i 복합결함으로 \"In_i+Cl→도너 상실\" 가설 검증 (2)In_i adatom q+1로 CTL (3)02-HSE에 adatom 자리 추가
 
 ## 참고 자료
