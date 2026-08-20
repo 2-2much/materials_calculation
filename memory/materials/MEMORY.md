@@ -107,7 +107,6 @@
 - [HSE 이완 vs single-point](hse_relax_vs_singlepoint.md) — 중성 스크리닝은 NSW=0 충분, 하전은 이완 필수
 - [HSE 1shot 조용한 실패 3종 + (100) q0 결과](hse_1shot_pitfalls_and_q0_results.md) — rms 하강으로 판정·collect_energies 편향·NELM 소진
 - [in i shallow donor both terminations](in_i_shallow_donor_both_terminations.md) — In_i는 Cl-passv(01)·InCl3-passv(03) 양쪽 모두 shallow donor(전자 1개→host CBM). 03에서 E_F가 VB에 걸린 듯 보인 건 Γ-only 아티팩트. 가설 \"In_i+Cl→도너 상실\"은 아직 미검증
-- [jh thickness ie pseudoh artifact](jh_thickness_ie_pseudoh_artifact.md) — JH 두께스캔 (100)/(110)/(111) IE 0.5eV 차이는 물리가 아니라 (100)의 pseudo-H 미이완 아티팩트. 검증계산으로 확정
 - [next steps in i kohn](next_steps_in_i_kohn.md) — kohn에서 돌릴 In_i 후속 계산 3건 — (1)InCl_i 복합결함으로 \"In_i+Cl→도너 상실\" 가설 검증 (2)In_i adatom q+1로 CTL (3)02-HSE에 adatom 자리 추가
 
 ## 참고 자료
