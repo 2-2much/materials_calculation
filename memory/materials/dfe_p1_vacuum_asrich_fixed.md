@@ -39,3 +39,19 @@ metadata:
 E_relax(+1)=+88meV 만큼 낮아져 **≈0.29 eV**. VBM 순수비교는 위 표, 열역학 최종 DFE는 −88meV.
 
 관련: [[vertical_scan_slabcc_scpc]] [[slab_correction_workflow]] [[scpc_vacuum_scan]] [[slabcc_optimize_tolerance]] [[cqd_ntype_origin_goal]].
+
+---
+## ⚠⚠ 2026-08-19 폐기 — "최소 진공 40 Å" 은 틀린 결론이었다
+
+사용자 확인: **하전 결함은 진공 15 Å 에서도 진공길이에 대해 올바르게 수렴한다.**
+[[vacuum_scan_vbm_reference_trap]] (2026-07-22, 더 나중·더 정밀) 이 원인을 분리해 놓았다:
+
+- **보정(slabcc/SCPC) 자체는 13.5 Å 에서 이미 수렴**한다.
+- 얇은 진공에서 "발산"처럼 보였던 것은 **기준 레벨(gauge)** 이다. VASP 고유값은 셀-평균
+  정전퍼텐셜 기준이라 진공을 늘리면 전 고유값이 통째로 이동한다(원시 VBM 2693 meV 이동,
+  진공준위 기준 VBM 은 39 meV 만 이동 = **98.5 % 가 gauge**).
+- 따라서 **`q·E_VBM` gauge 항과 pure↔defect `ΔV` 정렬을 제대로 넣으면** 얇은 진공에서도 맞는다.
+  이 두 항을 빼먹으면 수렴한 보정이 1 eV/step 실패처럼 보인다.
+
+즉 이 문서의 "권장 최소진공 40 Å" 은 **그 두 항을 분리하기 전의 판단**이고 폐기한다.
+진공을 늘려야 하는 진짜 이유가 있다면 그것은 보정 수렴이 아니라 다른 것(예: 리간드 머리 공간)이다.

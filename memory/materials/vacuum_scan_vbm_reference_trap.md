@@ -61,3 +61,14 @@ VASP는 고유값을 **셀-평균 정전퍼텐셜** 기준으로 준다 → 진�
 - jellium 기울기 공식은 **π q²/(6A)** (=0.0358eV/Å). `2π/(3A)`는 4배 틀림.
 
 관련: [[slabcc_charge_truncation_guard]], [[charged_defect_vbm_ref]], [[in_as_1_deep_level_q_dependent]], [[cascade_parallel_settings]]
+
+---
+## 2026-08-19 — 이 문서가 진공 수렴에 관한 **기준 문서**다
+
+사용자 재확인: 하전 결함은 **진공 15 Å 에서도 올바르게 수렴**한다. 위 §"보정은 13.5Å에서 이미
+수렴, 미수렴은 기준 레벨이다" 가 그 근거다. 더 이른 시기의 [[vertical_scan_slabcc_scpc]]·
+[[dfe_p1_vacuum_asrich_fixed]] 가 적어 둔 **"최소 진공 40 Å" 은 폐기**했다(그 두 문서에 표기함).
+
+**How to apply**: 하전 셀을 진공 때문에 다시 만들지 말 것. 대신 **q·E_VBM gauge 항과
+ΔV 정렬(슬랩 내부 하단 창, 결함 반대편)** 을 반드시 넣는다. ⚠ 진공 창으로 ΔV 를 재지 말 것
+(비대칭 슬랩 + dipole OFF 라 ill-defined).

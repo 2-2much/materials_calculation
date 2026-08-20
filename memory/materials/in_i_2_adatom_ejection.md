@@ -5,11 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 128f0b2e-1225-49fa-96e0-d9a67bd6705e
-<<<<<<< HEAD
   modified: 2026-08-03T04:15:07.946Z
-=======
-  modified: 2026-08-03T02:45:56.498Z
->>>>>>> 906cdaf (Auto-sync: Claude Code session (bloch))
 ---
 
 12-Surace-defect_calculation/03-InCl3-passv_6L_4x2x1_PBE-d, defect **In_i_2/q0** (Gam-relax, 힘 수렴 EDIFFG -0.01).
@@ -19,12 +15,10 @@ metadata:
 **형성에너지**: In-rich **−0.20 eV(음수)**, As-rich +0.29 eV (results/DFE_plots/DFE_at_EF0_summary.csv). 
 ⚠️해석: 음의 E_form = "In interstitial이 안정" 이 아니라, **In이 결함 대신 거의 금속 In 기준상태(μ_In metal)로 회귀** → 결함형성 비용 소멸의 신호. 이 표면에서 In_i는 존재 못하고 adatom으로 배출된다는 뜻. −0.20 eV 값 자체는 약결합 adatom이라 fragile(진공두께/lateral셀/PBE-d dispersion/초기배치에 민감).
 
-**✅2026-08-03 해소**: 전자구조 판정 완료 — 이 adatom은 **shallow donor**(전자 1개가 host CBM). 그리고 01-Cl-passv/In_i도 z=22.13 Å에 Cl 2.96–3.12 Å로 **동일한 adatom 구조**이며 같은 결론. 즉 adatom 배출은 termination 무관한 재현 현상이고, "배출됐으니 결함이 아니다"와 별개로 **도너로는 멀쩡히 작동**한다. 자리 안정성도 역전 없음 — adatom이 Td보다 1.5–1.9 eV 안정(=바닥상태). 상세·근거 → [[in_i_shallow_donor_both_terminations]]
-
-**남은 TODO**:
-1. ISPIN/magmom 확인 — In⁰ adatom open-shell 가능(In_i 자성 애매 이력, cf [[surface_defect_spin_screening_full]]). 단 frontier가 완전 delocalized CBM(IPR 0.0095)이라 스핀분극은 거의 0일 것으로 예상
+**내일 TODO (맑은 정신)**:
+1. ISPIN/magmom 확인 — In⁰ adatom open-shell 가능(In_i 자성 애매 이력, cf [[surface_defect_spin_screening_full]])
 2. 이 adatom이 saddle인지 진짜 local min인지 판정
-3. ~~In이 3-fold hollow/bridge에서 결합 만드는 배치 재탐색~~ → 01 트리에서 아표면 자리(In_i2)·Td 두 자리 모두 확인했고 전부 adatom보다 높음. 대신 **Cl 캡을 씌운 InCl_i**를 볼 것 → [[next_steps_in_i_kohn]]
+3. In이 실제 3-fold hollow/bridge에 앉아 In–As(~2.7)/In–Cl(~2.5) 결합 만드는 배치에서 재이완 → 더 낮은 min 탐색
 
 관련: [[cqd_ntype_origin_goal]] μ-diagram에 이 fragile 값 올리기 전 검증 필요. [[incl3_cl_as_in_unbound]]와 유사 패턴(ideal 배치→표면종 이탈).
 
