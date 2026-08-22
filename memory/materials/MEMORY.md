@@ -128,7 +128,7 @@
 - [bandos 밴드 플로터](bandos_tool.md) — Line-Mode KPOINTS 전용(zeroband는 zero-weight만). ⚠ion 인덱스 0-based
 - [zeroband fatband tool](zeroband_fatband_tool.md) — hybrid band projected fatband 플로터
 - [zeroband spin parsing](zeroband_spin_parsing.md) — --spin 옵션, ISPIN=2 PROCAR 파싱
-- [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — 설치·패치 4건 + 격자 5.6%를 조용히 망치는 np.arange 버그
+- [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — ★CoFFEE 정본 문서. np.arange 격자 버그 + 로컬 패치 8건(고유분해 솔버로 bicgstab 대체 → **α=8이 1307→54초**, In_As_1 13케이스 4자리 재현). Ecut 20→8 2단계 검증 통과. 스위치·실행법은 `CoFFEE/LOCAL_PATCHES.md`
 
 ## 작업 방식 / 피드백
 - ["사다리" 대신 "수렴 스캔"](feedback_convergence_scan_wording.md) — 파라미터 계열 계산의 호칭. 옛 메모리·스크립트의 "사다리"는 같은 뜻

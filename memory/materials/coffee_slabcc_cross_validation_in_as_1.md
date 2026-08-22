@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: b7156945-528e-49f3-88ff-00d1d5ec26f1
-  modified: 2026-07-28T12:07:42.155Z
+  modified: 2026-08-22T07:06:05.279Z
 ---
 
 **결론 (2026-07-28)**: 04-InCl3 `In_As_1` q+1, PBE-d 진공스캔(13.5/20/30/40/50 Å)에서 **slabcc와 CoFFEE 둘 다 진공 두께에 수렴**했고 서로 일치한다. 작업 트리 `.../04-InCl3-passv_6L_4x2x1_HSE06/__coffee_In_As_1__/`.
@@ -29,5 +29,10 @@ E_corr 일치 **−15~+15 meV**(데이터점 기준). ⚠외삽 극한은 0.2136
 **오차 예산 2갈래(성격이 다름)**: 정렬창 폭(케이스별 0.5~20 meV, **평평함을 망칠 수 있음**) vs E_iso 외삽 ±21 meV(**전 케이스 공통 → 곡선 통째 평행이동, 수렴 판정에 무영향**). 그림에서 전자는 밴드, 후자는 우측 계통오차 막대로 분리.
 
 **부차 확인**: TSV의 slabcc 계열은 **σ 자유**라 vac50에서 σ가 4.21→3.31 bohr로 튀어 −14.6 meV/10Å 가짜 표류를 만든다 → 비교엔 **σ 고정(`03_slabcc_sigfix`)**을 쓸 것. IP 분해 재현: IP(L)=−5.6017+2.102/c, raw VBM은 −2693 meV 움직이나 IP는 −39 meV(**98.6%가 gauge**), 13.5Å→∞에서 IP +72.4/E_f +64.0/보정성분 −8.4 meV.
+
+**★σ는 생각보다 훨씬 덜 중요하다** (2026-08-03 실측, MoS₂ 2D 슬랩): σ를 1.46→2.62 bohr(**1.8배**)로 흔들면 `E_per`은 **294 meV** 요동하지만 **`E_lat = E_iso − E_per`은 28 meV**만 움직인다(1/10로 억제). 이유는 σ 의존 항이 곧 가우시안 자체에너지 `~q²/(σ√(2π)ε)`이고, 그게 E_iso·E_per에 똑같이 들어가 **차이에서 상쇄**되기 때문. 남는 이미지 상호작용은 먼 곳 장만 보는데 거기선 어떤 σ든 점전하로 보인다(`exp(−G²σ²/2)`가 작은 G에서 1). 사용자 지적대로 **논문도 "전하밀도 모양보다 먼 곳 퍼텐셜 재현이 중요"**라 하고, 벌크는 ε가 균일해 상쇄가 더 깨끗하다.
+- 따라서 σ 결정에 과한 정밀도 불필요. **비직교(전단) 셀에서 slabcc를 못 쓸 때 `GaussianFit/g_fit.py`로 σ를 잡아도 된다.**
+- ⚠단 `GaussianFit`의 피팅 자체는 나쁘다: 배포판 예제(=다이아몬드 C공공, MoS₂ 아님)에서 **R²=0.30, 정점 5배 과소, σ=1.46 vs 예제 입력 2.614(1.8배 차)**. 결함 상태가 등방 가우시안 모양이 아니라서다. 그래도 위 둔감성 때문에 실용상 충분 — **낮은 R²를 보정값 오류로 오해하지 말 것**.
+- slabcc가 여전히 조금 나은 건 "먼 곳 퍼텐셜 일치"를 **직접 목적함수로** 최적화하기 때문(GaussianFit은 전하밀도 모양이라는 간접 경로). 이득은 수십 meV 규모.
 
 산출물: `plot_Ef_comparison.py`+`Ef_comparison_In_As_1_p1.png`, `alignment.py [geom|slabccprof|uni]`, **`coffee_corrections_uni.json`이 최종본**(무접미사 `coffee_corrections.json`은 폐기된 기하 프로파일 — 스키마가 같아 에러 없이 틀린 그림이 나온다). 관련: [[coffee_setup_and_arange_bug]], [[coffee_vs_slabcc_eiso_target]], [[vacuum_scan_vbm_reference_trap]], [[dfe_p1_vacuum_asrich_fixed]]
