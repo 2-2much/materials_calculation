@@ -49,6 +49,39 @@ repo `.gitignore`가 allowlist(`/*` → `!scripts/ !example/ !README.md ...`)라
 ⚠ prepare 스크립트는 SLURM **job-name 접두어를 지원하지 않음**(`{case}_{q}` 하드코딩) → 생성 후 sed로 붙였고
 `--mode overwrite` 재prepare 시 되돌아간다.
 
+## ★ 결과 (2026-08-25, q0 완주)
+```
+surface                                    dE_slab   E_f(In-rich)   비고
+InAs(100) 미재구성  : AA 1.5 ML  (10)       2.911      0.349 eV     ⚠01 Fmax=0.024 미수렴
+InAs(100) 재구성    : AA 0.5 ML  (09)       3.503      0.941 eV     수렴
+InAs(111)A          : AA 0.75 ML (23)       4.727      2.164 eV     01 Fmax=0.011 수렴
+```
+**폭 1.8 eV.** (111)A 표면 In은 As 3배위, (100)은 2배위 → 끊을 결합 수 차이와 부호가 맞음.
+
+## ★ AA 리간드는 탈착하지 않는다 — 옆 In으로 옮겨 붙는다
+두 표면 모두 **탈착 0개**(In이 3.0Å 내 없는 분자 없음), 분자 온전성 18/18·9/9, 리간드층은 오히려 **아래로**
+(−0.05 / −0.20 Å). 고아가 된 카복실 팔이 denticity 0→1로 이웃 In에 재결합한다.
+- ★**이완에너지가 그 증거**: V_In E_relax = **−4.33 eV (100) vs −2.30 eV (111)**, 비 = 1.88 ≈ 2
+  = 제거한 In이 잡고 있던 **아세테이트 팔 개수**(100은 2개, 111은 1개). pure는 −0.045/−0.048 eV뿐.
+- ★그리고 리간드가 **빈 In 자리로 내려앉는다**: 공공까지 거리 (100) 1.13 Å / (111) 1.47 Å,
+  나머지 아세테이트는 4.1~7.4 Å. "AA를 미리 공공에 넣었어야 하나" 걱정은 불필요 — 스스로 간다.
+- ⚠(100)에서 최상단 리간드 원자가 +1.12 Å 오르는 건 **메틸 H가 위로 기운 것**, O4/O8은 In23에 2.205 Å로 견고.
+
+## ⚠ 함정: 미수렴이 조용히 통과된다
+`completion_check: outcar_finished`는 "General timing and accounting"만 본다 → **NSW 소진도 성공으로 친다.**
+실제로 10_V_In(00:400 + 01:200)·23_V_In(00:400) 셋 다 NSW 소진. 23은 01이 7스텝에 마무리했지만
+10은 **01에서도 Fmax 0.023~0.024에 붙박여** 미수렴 상태로 02가 돌았다(잔여 ~50~90 meV 추정,
+E가 스텝당 −0.23 meV로 **선형** 감소 = 물렁한 리간드 모드). **에너지를 쓰기 전 `reached required accuracy`를 직접 확인할 것.**
+
+## V_In q0은 두 표면 모두 비자성
+NELECT 홀수(1283 / 1067)인데 mag ≈ 0. 01은 ISTART=0/ICHARG=2 + MAGMOM 시딩이라 대칭이 깨질 기회를 준 조건.
+홀전자가 국소준위가 아닌 분산 표면밴드에 들어간다는 뜻 → 09의 V_In "shallow acceptor" 판정과 일치.
+(cf. [[spin_stage_symmetry_never_broken]], 09 V_As의 미해결 사례와는 조건이 다름)
+
+## Γ-only 총에너지 오차 실측
+pure에서 Γ-only → Γ2×2×1 shift = **(100) −1.11 eV / (111) −1.85 eV**. 메모리의 "(111) 0.8 eV"보다 크다.
+차분에서 상당 부분 상쇄되나 정확히는 아니므로 **pure·defect 둘 다 02 값**을 써야 한다.
+
 관련: [[inas100_par4x3_sheared_cell]] [[inas111_cl_ma_p4x3_tree]] [[inas100_acetate_tree_09]]
 [[defect_package_repo]] [[cascade_parallel_settings]] [[slurm_jobname_distinct]] [[precfock_fast_policy]]
 [[inas_facet_ipea_workflow]]
