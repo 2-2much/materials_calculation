@@ -110,6 +110,8 @@
 - [in i shallow donor both terminations](in_i_shallow_donor_both_terminations.md) — In_i는 Cl-passv(01)·InCl3-passv(03) 양쪽 모두 shallow donor(전자 1개→host CBM). 03에서 E_F가 VB에 걸린 듯 보인 건 Γ-only 아티팩트. 가설 \"In_i+Cl→도너 상실\"은 아직 미검증
 - [jh thickness ie pseudoh artifact](jh_thickness_ie_pseudoh_artifact.md) — JH 두께스캔 (100)/(110)/(111) IE 0.5eV 차이는 물리가 아니라 (100)의 pseudo-H 미이완 아티팩트. 검증계산으로 확정
 - [next steps in i kohn](next_steps_in_i_kohn.md) — kohn에서 돌릴 In_i 후속 계산 3건 — (1)InCl_i 복합결함으로 \"In_i+Cl→도너 상실\" 가설 검증 (2)In_i adatom q+1로 CTL (3)02-HSE에 adatom 자리 추가
+- [PREC=Normal 검증](inas_prec_normal_validation.md) — HSE 대비. LOOP **1.71배** 가속·물리 불변(트랙B 0.1meV). ⚠트랙A는 25meV 이동, **벌크 맞춰도 상쇄 안 됨**. σ게이트 재보정 필요
+- [C4/C8 아세테이트 셀 이식](inas_acetate_C4_C8_cells.md) — (100)비재구성 1.5ML·(111)A 0.75ML. ★분수좌표+정수 격자대응, **자유회전 금지**(주기이미지 깨짐)·In층 동반 이식
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
