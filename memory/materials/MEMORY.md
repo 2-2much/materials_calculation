@@ -114,6 +114,7 @@
 - [PREC=Normal 검증](inas_prec_normal_validation.md) — HSE 대비. LOOP **1.71배** 가속·물리 불변(트랙B 0.1meV). ⚠트랙A는 25meV 이동, **벌크 맞춰도 상쇄 안 됨**. σ게이트 재보정 필요
 - [C4/C8 아세테이트 셀 이식](inas_acetate_C4_C8_cells.md) — (100)비재구성 1.5ML·(111)A 0.75ML. ★분수좌표+정수 격자대응, **자유회전 금지**(주기이미지 깨짐)·In층 동반 이식
 - [★04 HSE 1shot 셋업](inas_facet_hse_1shot_setup.md) — a0=6.0982965656·스케일 규약. ★**09 트리는 LVHAR 없어 벌크 재실행 필요**·LHFSKIP은 sham에 없음·HSE 첫 4스텝 −1.3e4는 정상
+- [★HSE 슬랩 쌍극자 미수렴 함정](hse_slab_dipole_convergence_trap.md) — 총에너지 수렴해도 **쌍극자가 덜 수렴**→진공 잔류장→IP 118meV 오차. 게이트=vac_slope<1meV/Å. 처방=PBE시드+Damped(5.4배 싸다)
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
