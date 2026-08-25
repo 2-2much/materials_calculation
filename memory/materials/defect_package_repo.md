@@ -1,12 +1,53 @@
 ---
 name: defect_package_repo
-description: "Defect_Package 기준은 GitHub origin 하나(2-2much/Defect_Package); 커밋은 __Defect_Package_Reference__ 클론에서. /mnt/hohenberg 사본은 2026-08-04 폐기"
+description: "Defect_Package 기준=GitHub origin(2-2much/Defect_Package). 커밋은 __Defect_Package_Reference__에서. hohenberg 사본 폐기. ⚠2026-08-25 bloch·kohn의 03 계산폴더를 GitHub 클론으로 in-place 전환(절차·되돌리기 포함)"
 metadata: 
   node_type: memory
   type: reference
   originSessionId: 57d09abc-dc4b-4d3d-8be0-c86f99fef821
   modified: 2026-07-27T08:08:53.368Z
 ---
+
+## ⚠️2026-08-25: 계산폴더 03(bloch·kohn)을 **GitHub origin 클론으로 in-place 전환** 완료
+
+`12-Surace-defect_calculation/03-InCl3-passv_6L_4x2x1_PBE-d`가 **두 서버 모두** 은퇴한
+`/mnt/hohenberg/.../Defect_Package/`를 origin으로 추적하고 있었다. 사용자 지시로 GitHub origin
+클론으로 전환. **두 서버의 03은 서로 다른 계산 세트**다(→ [[server_fs_git_sync_scope]], /home은 서버별 로컬):
+- **bloch 03** = 12개 결함 PBE 서베이(As_In, Cl-As_In, Cl_As_1/2, Cl_i-As, In_As_1/2, In_i_2, V_As, V_In, pure), 12 GB
+- **kohn 03** = 8월 In_i·Cl-As_In_T1r/T2 재시도 작업
+
+### 왜 위험했나
+낡은 `.git`이 **살아있는 `config/`와 `scripts/`를 추적**하고 있었다. HEAD는 `163012d`(bloch는 `5a10665`)로
+**POTCAR 스크럽 이전 히스토리**라 GitHub에 그 SHA가 아예 없다(`cat-file -t` 실패). 그래서 이 폴더에서
+`git checkout`/`restore`/`pull`을 하면 **계산용 config가 bulk 템플릿(`01_Mid-point_relax`)으로 조용히
+되돌아간다** — 2026-08-05에 실제로 `git checkout -- config/stages.yaml` 한 번으로 작업본을 날렸다.
+
+### 전환 절차 (in-place, 데이터 이동 0)
+```bash
+P=<03 폴더>
+tar czf $P/__pre-github-migration_2026-08-25.tar.gz -C $P scripts config README.md .gitignore *.sh
+mv $P/.git $P/.git.retired-hohenberg-2026-08-25          # 삭제 아님 = 되돌리기 가능
+git clone --no-checkout https://github.com/2-2much/Defect_Package.git /tmp/dp && mv /tmp/dp/.git $P/.git
+git -C $P reset --mixed HEAD    # --no-checkout 클론은 인덱스가 비어 있다. 이 단계 필수
+git -C $P checkout -- .         # example/ LICENSE requirements.txt 생성, README/.gitignore 교체
+```
+결과: 양 서버 `status` **0건 clean**, HEAD=`2467ecc`, origin=GitHub. 12 GB 데이터 그대로.
+패키지 allowlist `.gitignore`(`/*` 후 scripts/·example/·README·.gitignore·requirements·LICENSE만 재포함)가
+`config/ calc/ results/ inputs/ POTCAR results_In_i/ __legacy_calc_2026-07__/`를 전부 무시하므로 손 안 탄다.
+
+### 사전 확인이 핵심이었다
+- **scripts 대조**: bloch 15개·kohn 11개 전부 패키지 최신(2467ecc)과 **바이트 동일** → 덮어써도 손실 0.
+  kohn은 `ipr_gate.py`·`plot_DFE.py`·`run_bandfill_corrections.py`·`run_slab_corrections.py` 4개가
+  없었는데 전환으로 **자동 획득**(순수 업그레이드).
+- 교체되는 root `README.md`/`.gitignore`는 `07-Bulk-defect_calculation` 시절 잔재라 교체가 개선.
+
+### bloch GitHub 인증
+bloch에 `gh`는 이미 로그인돼 있었으나(account 2-2much, scope `repo`) **git에 연결이 안 돼 있어**
+`git ls-remote`가 `could not read Username`으로 실패했다. **`gh auth setup-git` 한 줄로 해결**
+(credential.https://github.com.helper → gh). 토큰 복사 불필요.
+
+### 되돌리기
+`.git.retired-hohenberg-2026-08-25/`와 `__pre-github-migration_2026-08-25.tar.gz`가 양 서버 03 안에 남아 있다.
 
 ## ⚠️2026-08-04 확정: 기준은 **GitHub origin 하나뿐**. hohenberg 사본은 **더 이상 갱신하지 않는다**
 사용자 결정 — 작업본이 둘이라 관리가 어려움. 앞으로:

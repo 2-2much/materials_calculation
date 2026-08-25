@@ -9,7 +9,7 @@
 - [PBE기하+HSE 1shot 오차 δ](pbe_geometry_hse_1shot_delta.md) — 얕은결함 18meV(회수 8%) vs 깊은결함 97meV(회수 70%). 분기=IPR 게이트. ⚠Damped는 cold-start 발산
 - [PRECFOCK=Fast 방침](precfock_fast_policy.md) — 2배 빠르나 오차가 종별로 달라 상쇄 안 됨. Δn=0은 안전, Δn≠0은 기준상까지 같은 footing 필요
 - [scaLAPACK mlx OFI Hang](scalapack_mlx_ofi_hang.md) — VASP hang 원인=scaLAPACK BLACS Bcast. fix=LSCALAPACK=.FALSE.
-- [Defect Package Repo](defect_package_repo.md) — ⚠2026-08-04 **기준=GitHub origin 하나뿐**(2-2much/Defect_Package, private/master). 커밋·푸시는 `__Defect_Package_Reference__` 클론에서. **/mnt/hohenberg 사본은 폐기, pull/copy/commit 금지**(파일 복사하면 pull이 거부됨). GitHub 배포 구성·POTCAR 스크럽·사용 모델도 여기
+- [Defect Package Repo](defect_package_repo.md) — ⚠2026-08-04 **기준=GitHub origin 하나뿐**(2-2much/Defect_Package, private/master). 커밋·푸시는 `__Defect_Package_Reference__` 클론에서. **/mnt/hohenberg 사본은 폐기, pull/copy/commit 금지**(파일 복사하면 pull이 거부됨). GitHub 배포 구성·POTCAR 스크럽·사용 모델도 여기 ⚠2026-08-25 bloch·kohn의 03 계산폴더를 GitHub 클론으로 **in-place 전환**(낡은 hohenberg remote가 계산 config를 되돌리던 문제 해소, 절차·되돌리기 포함)
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
 - [SCPC Debug](scpc_debug.md) — SCPC 함정: CKT 비호환, getgrid 버그, 권장 설정
 - [SCPC Reference](scpc_reference.md) — SCPC README 참조, INVCOR/REFCHG 그리드 호환
