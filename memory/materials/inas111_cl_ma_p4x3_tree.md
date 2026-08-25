@@ -8,8 +8,14 @@ metadata:
   modified: 2026-08-14T02:01:38.965Z
 ---
 
-2026-08-13~14, kohn `12-Surace-defect_calculation/21-111Cl-MA_4BL_p4x3_/`
-(⚠ **폴더명 끝에 밑줄**. 사용자가 GitHub 에서 Defect_Package 를 따로 받아 배포한 트리다.)
+2026-08-13~25, kohn `12-Surace-defect_calculation/**21-111Cl-MA_4BL_p4x3_exposed_In**/`
+(사용자가 GitHub 에서 Defect_Package 를 따로 받아 배포한 트리다.)
+
+⚠ **2026-08-25 폴더명 변경**: `21-111Cl-MA_4BL_p4x3_` (끝에 밑줄) → `..._exposed_In`.
+이유는 이 트리의 **reference cell(pure) 이 MA 하나가 빠져 노출 In 을 가진 셀**이기 때문이다.
+즉 여기서 말하는 "pure" 는 완전 co-passivation 이 아니다 — 그 상태는 `MA_i` 셀이다.
+변경 시 `run_case.sh`/`metadata.json`/`initial_poscar_selection*.json` 92개 파일에 박힌
+**절대경로 602곳을 함께 치환**해야 한다(안 하면 재실행이 깨진다).
 
 ## 셀
 4×3 of 60° 육방 1×1 → 17.5075 × 13.1306 Å, c = 32.2699 (진공 15 Å), **4 BL**, 131 원자.
