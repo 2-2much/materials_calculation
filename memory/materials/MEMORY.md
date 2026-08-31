@@ -101,6 +101,7 @@
 - [★facet × 리간드 IP 결과 (Fig.2)](inas_facet_ipea_results.md) — 전체 폭 **3.07 eV**. Cl 최고(110 6.85) / CH₃ 노출 최저(100 acetate 3.78). ⚠같은 Cl/MA가 facet 따라 1.9eV — **피복률이 지배**. (111)은 두께 미수렴
 - [★04-Facet_IP-EA 워크플로](inas_facet_ipea_workflow.md) — sham 트리·4스텝·도구 12종·트랙 A/B·함정 8개. **새 셀 추가 전 필독**
 - [★PBE 벌크 InAs 밴드순서 역전](inas_pbe_band_inversion_bulk.md) — Γ1c가 Γ15v보다 0.55eV 아래. VBM은 점유도 아닌 Γ 3중축퇴로. ΔV_bulk=3.8258. 슬랩 금속화는 정상·EA는 HSE 필요
+- [★HSE06 AEXX=0.27 μ 세트 확정](mu_window_hse_aexx27_21.md) — ENCUT400/PRECFOCK=Fast. ΔH_f(InAs)=−0.7596 실측→Δμ_Cl 밴드폭 0.16→0.253 eV. ⚠In metal POSCAR_BM_a0.vasp는 부피 3배 불량
 - [★μ_Cl 창: ½Cl₂는 금지 영역](mu_window_pbe_20.md) — InCl₃(s) 상한 −1.52(PBE)/−1.86(실험) eV. PBE는 층상 InCl₃ c축을 +10% 부풀림. In(OAc)₃ tris-bidentate 최저, 단 기체단량체라 Δμ_AA는 헐거움
 - [InAs 표면 IP/EA](inas_surface_ip_ea_plan.md) — ★진공준위 기준 (100)/(110)/(111) 밴드정렬로 어셉터 DFE 방향성 검증. ⚠110의 −4.92는 H면 기준이라 IP 아님. **2026-08-18 착수**: bare 셀은 (110)뿐 · primitive 생성기는 bloch · 작업트리=**sham `10-Primitive-slab/04-Facet_IP-EA/PLAN.md`** · a0 6.189842/ENCUT 400 · 어셉터=V_In+Cl_In
 - [host gap을 국소준위로 오인하는 함정](host_gap_localized_state_trap.md) — ⚠'최저 비점유'=CBM 아님. pure의 비국소 상태로만 정의. PROCAR 단일원자 무게>5%로 걸러라(0.03→0.83eV)
