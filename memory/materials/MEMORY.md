@@ -150,5 +150,6 @@
 - [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 참조슬랩 바닥상태 검증용 6잡. ⚠type=antisite로 중심 지정
 - [InAs100 셀 수렴 지표](inas100_cell_convergence_metric.md) — 판정은 E_b만(다른 두 지표는 반대 결론). ✅p4×4 확정, 외삽극한 철회
 - [★35 트리 HSE06 1shot (111)](inas111_hse_tree_35.md) — 22번 5셀의 HSE. 배율 s=0.9852104464가 34트리와 16자리 동일·2x2x1이라 HSE−PBE 직접비교 가능. ⚠00단계도 ISPIN=2여야 01의 ISPIN=2가 의미있다
+- [23-AA (111) HSE06 1shot](inas111_aa_hse_1shot_23.md) — kohn 아세테이트 pure/V_In. ★진공은 **HSE 격자에서** 맞춰야 35트리와 같은 footing(14.7693=22×s)·pure/V_In은 c 하나 공유
 - [★10 트리 HSE06 1shot + 진공 맞추기 규약](inas100_hse_1shot_tree_10.md) — 진공은 c 복사가 아니라 **pure 기준 간극**·cartesian z 보존. PBE-pre→HSE 2단이라 PBE→HSE 차이가 순수 함수 차이
 - [⚠run_joblist.sh 기본모드 함정](run_joblist_default_sequential_trap.md) — 기본 sequential = 로그인노드에서 VASP 실행. `submit` 명시 필수·정리는 mpiexec.hydra에 kill -9
