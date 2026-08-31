@@ -150,7 +150,7 @@
 - [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 켜두면 전 case에 딸려 들어감. ⚠2026-08-11 정정: 3h→10h+는 **HSE에서만**, PBE는 켜둬도 됨
 - [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 참조슬랩 바닥상태 검증용 6잡. ⚠type=antisite로 중심 지정
 - [InAs100 셀 수렴 지표](inas100_cell_convergence_metric.md) — 판정은 E_b만(다른 두 지표는 반대 결론). ✅p4×4 확정, 외삽극한 철회
-- [★35 트리 HSE06 1shot (111)](inas111_hse_tree_35.md) — 22번 5셀의 HSE. 배율 s=0.9852104464가 34트리와 16자리 동일. **Γ-only·ISPIN=1·28노드**. ★HSE−PBE 비교는 반드시 이 트리 00단계(같은 Γ)로 — 22번 2x2x1과 섞으면 0.5~0.8eV 오차
+- [★35 트리 HSE06 1shot (111)](inas111_hse_tree_35.md) — 22번 5셀 HSE 완주. ★HSE가 **Cl_As 준위만 +0.68eV** 올림(나머지 0.06 이내)·pure갭 0.24→1.02. ★V_In_1이 V_In_2보다 78meV 안정(μ불필요·Γ오차 33meV). ⚠Cl_As는 Γ-only로 결론금지(ΔE 0.95eV·준위 0.62eV 어긋남)
 - [★24 트리 AA (111) HSE06 1shot](inas111_aa_hse_tree_24.md) — **bloch g2**, 23의 pure/V_In. ★진공은 **HSE 격자에서** 맞춰야 35트리와 같은 footing(14.7693=22×s)·pure/V_In은 c 하나 공유·⚠g2는 LSCALAPACK=.FALSE. 필수
 - [★10-01 HSE-d 트리(bloch g2) + 진공 맞추기 규약](inas100_hse_1shot_tree_10.md) — 진공은 c 복사가 아니라 **pure 기준 간극**·cartesian z 보존. PBE-pre→HSE 2단. ⚠09-01과 k/스핀 발판 다름·g2는 LSCALAPACK=.FALSE. 필수
 - [⚠run_joblist.sh 기본모드 함정](run_joblist_default_sequential_trap.md) — 기본 sequential = 로그인노드에서 VASP 실행. `submit` 명시 필수·정리는 mpiexec.hydra에 kill -9
