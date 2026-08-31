@@ -117,6 +117,7 @@
 - [C4/C8 아세테이트 셀 이식](inas_acetate_C4_C8_cells.md) — (100)비재구성 1.5ML·(111)A 0.75ML. ★분수좌표+정수 격자대응, **자유회전 금지**(주기이미지 깨짐)·In층 동반 이식
 - [★04 HSE 1shot 셋업](inas_facet_hse_1shot_setup.md) — a0=6.0982965656·스케일 규약. ★**09 트리는 LVHAR 없어 벌크 재실행 필요**·LHFSKIP은 sham에 없음·HSE 첫 4스텝 −1.3e4는 정상
 - [★HSE 슬랩 쌍극자 미수렴 함정](hse_slab_dipole_convergence_trap.md) — 총에너지 수렴해도 **쌍극자가 덜 수렴**→진공 잔류장→IP 118meV 오차. 게이트=vac_slope<1meV/Å. 처방=PBE시드+Damped(5.4배 싸다)
+- [inas111 aa hse 1shot 23](inas111_aa_hse_1shot_23.md) — kohn 23-111AA/__HSE06_1shot__ — 아세테이트 (111)A pure/V_In HSE06 1shot. 진공을 22트리 것으로 줄일 때 'HSE 격자에서' 맞춰야 35트리와 같은 footing
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
@@ -150,6 +151,6 @@
 - [Δn_Cl=0 V_Cl-Cl_As 세트](dncl_zero_vcl_clas_set.md) — 참조슬랩 바닥상태 검증용 6잡. ⚠type=antisite로 중심 지정
 - [InAs100 셀 수렴 지표](inas100_cell_convergence_metric.md) — 판정은 E_b만(다른 두 지표는 반대 결론). ✅p4×4 확정, 외삽극한 철회
 - [★35 트리 HSE06 1shot (111)](inas111_hse_tree_35.md) — 22번 5셀의 HSE. 배율 s=0.9852104464가 34트리와 16자리 동일. **Γ-only·ISPIN=1·28노드**. ★HSE−PBE 비교는 반드시 이 트리 00단계(같은 Γ)로 — 22번 2x2x1과 섞으면 0.5~0.8eV 오차
-- [23-AA (111) HSE06 1shot](inas111_aa_hse_1shot_23.md) — kohn 아세테이트 pure/V_In. ★진공은 **HSE 격자에서** 맞춰야 35트리와 같은 footing(14.7693=22×s)·pure/V_In은 c 하나 공유
+- [★24 트리 AA (111) HSE06 1shot](inas111_aa_hse_tree_24.md) — **bloch g2**, 23의 pure/V_In. ★진공은 **HSE 격자에서** 맞춰야 35트리와 같은 footing(14.7693=22×s)·pure/V_In은 c 하나 공유·⚠g2는 LSCALAPACK=.FALSE. 필수
 - [★10-01 HSE-d 트리(bloch g2) + 진공 맞추기 규약](inas100_hse_1shot_tree_10.md) — 진공은 c 복사가 아니라 **pure 기준 간극**·cartesian z 보존. PBE-pre→HSE 2단. ⚠09-01과 k/스핀 발판 다름·g2는 LSCALAPACK=.FALSE. 필수
 - [⚠run_joblist.sh 기본모드 함정](run_joblist_default_sequential_trap.md) — 기본 sequential = 로그인노드에서 VASP 실행. `submit` 명시 필수·정리는 mpiexec.hydra에 kill -9
