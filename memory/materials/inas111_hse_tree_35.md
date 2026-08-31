@@ -19,26 +19,38 @@ metadata:
 ⚠ VASP CONTCAR 는 `In_d`→`In`, `H.75`→`H.` 로 잘라 쓰므로 **종 이름 복원 후** 배율 조정
   (`fixspec.py`). runtime.yaml 의 species_aliases 만 믿지 말 것.
 
-## 계산 설정 (사용자 지정)
-2 스테이지: `00_PBE-pre-G221` → `01_HSE-1shot-G221`, 둘 다 NSW=0, **std** 바이너리 6.3.2.
-- **k-mesh = Gamma-centered 2×2×1** (Γ-only 아님). ISYM=0 이라 k점 4개.
-  ⚠ **두 스테이지의 KPOINTS 가 반드시 같아야 한다** — WAVECAR 는 동일 k-set 에만 재시작 가능.
+## 계산 설정 (확정, 2026-08-31)
+2 스테이지: `00_PBE-pre-gam` → `01_HSE-gam-1shot`, 둘 다 NSW=0, **gam** 바이너리 6.3.2.
+- **k-mesh = Γ-only.** ⚠ **두 스테이지의 KPOINTS 가 반드시 같아야 한다** —
+  WAVECAR 는 동일 k-set 에만 재시작 가능.
 - HSE: AEXX 0.27 / HFSCREEN 0.2 / **PRECFOCK=Fast** / **ALGO=Normal** / EDIFF 1E-4 / ENCUT 400
-- **ISPIN=2**. ⚠ 사용자는 "HSE 1shot만 ISPIN=2" 라 했으나 **00 도 ISPIN=2 로 뒀다**:
-  ISPIN=1 WAVECAR 를 ISPIN=2 런이 읽으면 두 채널이 복제되고 ICHARG=0 이라 MAGMOM 도
-  무시되어 그 대칭해가 SCF 고정점이 된다 → 01 의 ISPIN=2 가 무의미해진다
-  ([[spin_stage_symmetry_never_broken]]). PBE 단계는 싸므로 여기서 대칭을 깬다.
+- **ISPIN=1 (두 스테이지 모두).** 5종 전부 비자성이 확인되어 있다: 22 트리 PBE 에서
+  mag 0.000~0.001, 이 트리 `__attempt2_G221-ISPIN2__` 의 PBE 단계에서도 0.0000~0.0001.
   ⚠ ISPIN 을 실제로 정하는 것은 INCAR 템플릿이 아니라 **stages.yaml 의 `spin_mode`**
-    (dynamic_incar 가 SPIN_MODE 를 실어 나른다). 둘 다 `magnetic_seed`.
-- SLURM: g1 **12 노드 × 8 = 96 랭크/case**, **KPAR 4 × NCORE 8** (k점 4개에 정확히 대응).
-  5 × 12 = 60 ≤ 61 이라 **다섯 개가 동시에** 돈다 — E_f 가 이들의 차이라 같은 머신 상태 필요.
-- 잡 이름 `HSE111-<case>_q0`.
+    (dynamic_incar 가 SPIN_MODE 를 실어 나른다). 둘 다 `nonmagnetic`.
+  ⚠ 만약 ISPIN=2 가 필요해지면 **00 도 반드시 ISPIN=2 로** 해야 한다. ISPIN=1 WAVECAR 를
+    ISPIN=2 런이 읽으면 두 채널이 복제되고 ICHARG=0 이라 MAGMOM 도 무시되어 그 대칭해가
+    SCF 고정점이 된다 → 01 의 ISPIN=2 가 무의미해진다 ([[spin_stage_symmetry_never_broken]]).
+- SLURM: g1 **28 노드 × 8 = 224 랭크/case**, Γ-only 이므로 **KPAR 1 × NCORE 8** = 28 밴드그룹.
+  ⚠ 5 × 28 = 140 > 61 이라 **동시에 두 개까지만** 돈다. 34 트리 주석의 "전부 동시 실행"
+    조건은 여기서 못 지킨다. NSW=0 단일점이라 재현성 문제는 없지만 **큐가 다 빌 때까지
+    config/ 를 건드리지 말 것** (케이스마다 footing 이 갈린다).
+- 잡 이름 `HSE111g-<case>_q0`. 잡 13612~13616.
+
+## 시도 이력 (전부 `calc/<case>/q0/__attempt2_G221-ISPIN2__/` 에 보존)
+1. G221 + ISPIN=2 + 12노드 → 사용자가 "너무 비싸다" 로 취소. PBE 단계 mag 0.0000~0.0001 기록.
+   (그 안의 `__loginnode_killed__00_PBE-pre-G221` 은 [[run_joblist_default_sequential_trap]] 사고분.)
+2. **현행**: Γ-only + ISPIN=1 + 28노드.
 
 ## 전자수 / PBE 참조
 pure 978(짝) · Cl_As 980(짝) · Cl_MA 971(홀) · V_In_1 965(홀) · V_In_2 965(홀).
 22 트리 PBE(같은 2×2×1) E_F−VBM: Cl_As **+0.894**(도너 1위) · pure 0 · V_In_1 −0.056 ·
 V_In_2 −0.085 · Cl_MA −0.109. PBE mag 은 5종 전부 0.000~0.001.
-★ PBE 도 2×2×1 이라 **이번엔 HSE−PBE 직접 비교가 정당**하다(34 트리는 Γ-only라 불가했다).
+⚠⚠ 위 PBE 값은 **2×2×1** 이고 이 트리는 **Γ-only** 다 — 그대로 비교하면 안 된다.
+21 트리에서 같은 기하로 k 만 2×2×1↔Γ 로 바꿨을 때 ΔE(결함−pure) 가 종별로 **0.5~0.83 eV**
+움직였고 상쇄되지 않았다 ([[inas111_cl_ma_p4x3_tree]] 함정 1).
+★ HSE−PBE 비교에는 **이 트리의 `00_PBE-pre-gam`** 을 쓸 것 — 같은 Γ, 같은 HSE 격자라
+  k-set 과 격자가 동시에 통제된 유일한 PBE 기준값이다. 이게 00 단계의 두 번째 용도다.
 
 ## ⚠ footing 경고
 - PRECFOCK=Fast 잔차는 E(defect)−E(pure) 에서는 상쇄되지만 **Σn_i μ_i 에서는 안 된다**
