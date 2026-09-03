@@ -53,12 +53,23 @@ CHGCAR 차분 평면평균 (시트 ±4 Å 기준):
 - 나는 작은 Lz에서 양자구속으로 margin이 커진다(450 meV)고 예측했으나 **정반대**.
   그 상태는 진공 상자 상태가 아니라 **시트에 묶인 interlayer 상태**라 Lz와 거의 무관하게 +38 meV로 포화하고,
   작은 Lz에서는 주기 이미지끼리 결합해 오히려 π* 아래로 내려간다.
-- 젤리움이 NFE를 내리는 양은 Lz=12에서도 128 meV > margin 38 meV → **전 Lz에서 w(qm1)=0.015~0.022(진공)**
+- ⚠**젤리움 이동은 ∝Lz 가 아니다**(내 초기 어림 정정). 실측 shift = 370/370/370/377/373/360/321/291 meV
+  (Lz=12…36) 로 **거의 평평**하다 — interlayer 상태는 셀 전체가 아니라 시트 근처만 샘플링하기 때문.
+  어느 Lz에서도 shift(≥290) ≫ margin(≤38) → **전 Lz에서 w(qm1)=0.015~0.022(진공)**
 - 따라서 논문과의 억셉터 불일치는 진공 두께 탓이 아니다. 논문이 −0.943을 얻으려면
   그들의 π*/NFE 간격이 **300 meV 이상** 커야 한다. 남은 후보 = NC 의사퍼텐셜의 확산 interlayer 상태 기술.
 - 우리 EA=1.17 eV, IP=5.83 eV (전 Lz에서 일정, 진공 평탄도 <0.15 meV)
 
 트리: `~/materials/__JCC_Reproduction__/` 00-lattice_a(a0=2.5148) 01-dE0(Lz30) 02-Lz_scan 03-LREAL_test
 도구: `jcc_tools.py` — CBM은 원자투영≥0.15 게이트, 전하 밴드는 |Δocc| 최대로 식별, LOCPOT 평탄도 검사
+      (`analyse(read_locpot=False)` 로 LOCPOT 274MB 읽기 생략 가능 — 안 그러면 8점 스캔이 2분 넘게 걸린다)
+그림: `plot_Lz_scan.py` → `fig_JCC_Lz_scan.png/.pdf` (3패널, 발표용)
+
+## ★실전 결론 — 억셉터 δE0 는 계산하지 말고 q² 로 환산하라
+δE0 = q·U₁ 이고 U₁ ∝ q 이므로 **δE0 ∝ q², 부호 무관**. 논문 Table II 도 BN/GeS 는 ±1 이 동일값.
+정공은 항상 시트 VBM 에서 나오므로 **도너 가지는 구조적으로 안전**하다.
+→ **δE0 는 q>0 에서만 계산하고 q² 로 스케일**하면 ghost state 를 원천적으로 피한다.
+남는 위험은 보정항이 아니라 *결함 계산 자체*이고, 그건 `vac_ok` 게이트로 본다.
+InAs 적용 시 이점: ε_VBM 만 있으면 되므로 **호스트 갭이 좁아도(또는 CBM 이 애매해도) δE0 를 얻을 수 있다.**
 
 관련: [[dfe_p1_vacuum_asrich_fixed]], [[shallow_donor_inas_supercell_limit]], [[charged_defect_vbm_ref]]
