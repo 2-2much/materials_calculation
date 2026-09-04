@@ -1,5 +1,6 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
 - [CQD n-type Origin Goal](cqd_ntype_origin_goal.md) — 최상위 목표: InAs CQD n형 기원을 표면 point defect로 규명. 판정=CTL+μ-diagram
+- [★JCC가 ΔH_f 발산을 지운다 (04/05)](jcc_dHf_lz_validation.md) — 도너 0.87eV→4.6meV·억셉터 0.88eV→1.5meV. q² 부호무관 실측. 깨진 δE₀(−1)은 47%만 지움
 - [★JCC 억셉터 진공 ghost state](jcc_acceptor_vacuum_ghost_state.md) — BN 재현: 도너 −0.894(논문 −0.943) 성공·억셉터 실패. 판정식 |δE0| ≳ EA
 - [Read Papers Memory](read_papers_memory.md) — 문헌 근거 필요 시 ~/papers/memory/paper_notes/README.md 인덱스 먼저
 - [InCl3 Cl-As_In Unbound](incl3_cl_as_in_unbound.md) — 03 Cl-As_In q0: Cl이 표면 In에 붙음. ⚠2026-08-04: bound minimum(T2)은 있으나 +183meV metastable · 03에서는 비자성
