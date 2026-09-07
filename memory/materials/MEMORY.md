@@ -161,3 +161,4 @@
 - [⚠run_joblist.sh 기본모드 함정](run_joblist_default_sequential_trap.md) — 기본 sequential = 로그인노드에서 VASP 실행. `submit` 명시 필수·정리는 mpiexec.hydra에 kill -9
 - [★MoTe2 단층막 2D 격자상수 스캔](mote2_2d_lattice_scan.md) — ★**2D엔 bulk modulus 없음**. c 고정·POSCAR 3·4번 줄만 배율·ISIF=2로 Te z 이완. 수렴값 Γ9×9×1/ENCUT500/vac15Å. ⚠ENCUT 요철은 이완 아닌 PREC=Normal 격자 점프
 - [MoTe2 1T' BM 피팅 보류](mote2_1tp_bm_fit_deferred.md) — a₀는 세 경로 일치(3.4077~3.4120)라 진행. 추후 **PSTRESS로 E-V 곡선** 재시도. 원인 4개 배제(⚠vasprun 응력은 이미 kB). 3상 발판 k0.17Å⁻¹/ENCUT400
+- [★MoTe2 V_Te 결함 셋업](mote2_vte_defect_setup.md) — 3단계(nsp→sp→band)·★02는 전자 새출발 안 하면 MAGMOM 죽음·★V_Te는 비자성(a₁²e⁰, Li 2018)·★K→Γ 접힘은 n이 3배수만 → Γ-only 금지·NPW 교정식
