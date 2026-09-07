@@ -160,3 +160,4 @@
 - [★10-01 HSE-d 트리(bloch g2) + 진공 맞추기 규약](inas100_hse_1shot_tree_10.md) — 진공은 c 복사가 아니라 **pure 기준 간극**·cartesian z 보존. PBE-pre→HSE 2단. ⚠09-01과 k/스핀 발판 다름·g2는 LSCALAPACK=.FALSE. 필수
 - [⚠run_joblist.sh 기본모드 함정](run_joblist_default_sequential_trap.md) — 기본 sequential = 로그인노드에서 VASP 실행. `submit` 명시 필수·정리는 mpiexec.hydra에 kill -9
 - [★MoTe2 단층막 2D 격자상수 스캔](mote2_2d_lattice_scan.md) — ★**2D엔 bulk modulus 없음**. c 고정·POSCAR 3·4번 줄만 배율·ISIF=2로 Te z 이완. 수렴값 Γ9×9×1/ENCUT500/vac15Å. ⚠ENCUT 요철은 이완 아닌 PREC=Normal 격자 점프
+- [MoTe2 1T' BM 피팅 보류](mote2_1tp_bm_fit_deferred.md) — a₀는 세 경로 일치(3.4077~3.4120)라 진행. 추후 **PSTRESS로 E-V 곡선** 재시도. 원인 4개 배제(⚠vasprun 응력은 이미 kB). 3상 발판 k0.17Å⁻¹/ENCUT400
