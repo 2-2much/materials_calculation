@@ -166,3 +166,6 @@
 - [★MoTe2 단층막 2D 격자상수 스캔](mote2_2d_lattice_scan.md) — ★**2D엔 bulk modulus 없음**. c 고정·POSCAR 3·4번 줄만 배율·ISIF=2로 Te z 이완. 수렴값 Γ9×9×1/ENCUT500/vac15Å. ⚠ENCUT 요철은 이완 아닌 PREC=Normal 격자 점프
 - [MoTe2 1T' BM 피팅 보류](mote2_1tp_bm_fit_deferred.md) — a₀는 세 경로 일치(3.4077~3.4120)라 진행. 추후 **PSTRESS로 E-V 곡선** 재시도. 원인 4개 배제(⚠vasprun 응력은 이미 kB). 3상 발판 k0.17Å⁻¹/ENCUT400
 - [★MoTe2 V_Te 결함 셋업](mote2_vte_defect_setup.md) — 3단계(nsp→sp→band)·★02는 전자 새출발 안 하면 MAGMOM 죽음·★V_Te는 비자성(a₁²e⁰, Li 2018)·★K→Γ 접힘은 n이 3배수만 → Γ-only 금지·NPW 교정식
+- [★MoTe2 V_Te 크기스캔 결과](mote2_vte_size_scan_results.md) — ★5×5 확정(W 10meV)·★결함 e는 **비어있고 비자성**·전자2개는 **Mo-Mo 결합**(−8.4%)에 소모→도너 아님·⚠갭 안 E_F선은 점유 아님
+- [★MoTe2 Defect_Package 전환](mote2_defect_package_setup.md) — 클론 2개(2H/1T)·★패키지에 magmom 다중중심+neighbor_count 커밋(053005b)·3단계 spin_mode·⚠defect_center_frac 의미 불변
+- [1T' PSTRESS 스캔](mote2_1tp_pstress_scan.md) — ★E(A) 최소는 정의상 P=0 → a0 재산출 아님. 목적은 b/a 변화·01-run→02-restart 2회(Pulay)·⚠FFT 격자 고정 금지
