@@ -4,6 +4,9 @@
 - [★k점 접힘 + 하전셀 k수렴](jcc_kpoint_folding_and_charged_convergence.md) — n이 3의 배수라야 K→Γ. Γ-only 고윳값은 정확(0.2meV)하나 **하전 총에너지는 k에 민감**(δE₀ 22.5meV)
 - [★JCC가 ΔH_f 발산을 지운다 (04/05)](jcc_dHf_lz_validation.md) — 도너 0.87eV→4.6meV·억셉터 0.88eV→1.5meV. q² 부호무관 실측. 깨진 δE₀(−1)은 47%만 지움
 - [★JCC 억셉터 진공 ghost state](jcc_acceptor_vacuum_ghost_state.md) — BN 재현: 도너 −0.894(논문 −0.943) 성공·억셉터 실패. 판정식 |δE0| ≳ EA
+- [★δE₀ = Koopmans 위반의 측정값](jcc_dE0_koopmans_janak.md) — qε_b는 전자저장고 항. δE₀=−½∂ε_H/∂N(Slater ½). VBM/CBM 분기=PPLB 미분불연속. 젤리움이 ΔSCF갭 1.79eV 부풀림
+- [★δE₀의 ±q 대칭 = 전하켤레 대칭](jcc_dE0_charge_symmetry.md) — 쿨롱은 ρ의 이차형식이라 부호 무관. Table II 비대칭 0~24meV. ★|δE₀(+q)−δE₀(−q)|는 호스트 건강검진
+- [Fig.3/Eq.(7) 결함 무관성](jcc_eq7_defect_independence.md) — ΔH_f⁰와 γ/L_S가 상쇄. 조건은 '결함 무관'이 아니라 '두 모델에서 같음'. 숨은 가정=ρ_d의 z-국재
 - [Read Papers Memory](read_papers_memory.md) — 문헌 근거 필요 시 ~/papers/memory/paper_notes/README.md 인덱스 먼저
 - [InCl3 Cl-As_In Unbound](incl3_cl_as_in_unbound.md) — 03 Cl-As_In q0: Cl이 표면 In에 붙음. ⚠2026-08-04: bound minimum(T2)은 있으나 +183meV metastable · 03에서는 비자성
 - [In_i_2 Adatom Ejection](in_i_2_adatom_ejection.md) — In이 Cl층 위 adatom으로 배출(01·03 공통). ⚠2026-08-03 정정: 그 자리는 In3 hollow였음
@@ -150,6 +153,7 @@
 - [계산 디렉토리 삭제 금지 → __attemptN__](feedback_never_delete_use_attempts.md) — 실패 런은 진단 증거. 재계산은 직전 CONTCAR 시드. ⚠CONTCAR 종이름 잘림·감시엔 maxdepth 3
 - [실행 중인 계산 건드리지 말 것](feedback_never_touch_running_calc.md) — ⚠prepare는 --only + --mode missing-stage, md5 전후 검증. SLURM은 스크립트를 복사하므로 위험한 건 stage 안 입력파일
 - [판정자는 답 아는 case로 먼저 검증](feedback_validate_diagnostic_first.md) — ⚠규칙 바꿔가며 답 만들지 말 것. 눈금자=21번 pure/As_In/V_In. 미확정 판정에 물리 해석 붙이지 않기
+- [터미널은 LaTeX 색을 못 그린다](feedback_terminal_latex_rendering.md) — \color·\hline·aligned 금지. 항 구분은 이름표+표로, 색 지시어 금지
 - [shared memory mirror](feedback_shared-memory-mirror.md) — Codex 메모리는 memory/materials·memory/codex 양쪽에 미러
 - [conversation log](conversation_log.md) — Codex 대화 요약 로그
 - [stages yaml dos band contamination](stages_yaml_dos_band_contamination.md) — 02/03 켜두면 전 case에 딸려 들어감. ⚠2026-08-11 정정: 3h→10h+는 **HSE에서만**, PBE는 켜둬도 됨
