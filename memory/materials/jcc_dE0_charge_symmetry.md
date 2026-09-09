@@ -1,6 +1,6 @@
 ---
 name: jcc_dE0_charge_symmetry
-description: "★δE₀(+q)=δE₀(−q)인 이유 = 쿨롱 에너지가 ρ의 이차형식(전하켤레 대칭). Table II 실측 비대칭 0~24 meV. ★|δE₀(+q)−δE₀(−q)|는 호스트 계산 건강검진 — ≫25meV면 밴드끝이 오염된 것"
+description: "★δE₀=D−C(Λ 포함). C만 정확히 q²대칭이라 비대칭이 Λ에만 갇힘. Table II 0~24meV·phosphorene vs arsenene 자연실험. ★|δE₀(+q)−δE₀(−q)|는 호스트 건강검진. ⚠우리가 잰 건 Λ가 아니라 Λ+K·L_eff"
 metadata:
   type: project
 ---
