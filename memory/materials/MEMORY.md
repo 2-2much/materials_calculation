@@ -99,6 +99,7 @@
 - [110bare 하전 14잡 + DFE/CTL](inas110_bare_q0_charged_dfe.md) — ★V_In 양방향 CTL 0.337/0.404(0.067 간격). ⚠image-charge 미적용·μ_Cl은 하한. 04-summary 그림 파이프라인(★진공은 H면 고정·점유는 02에서)
 - [par4×3 전단 셀 + 사교 k-path](inas100_par4x3_sheared_cell.md) — 127원자로 211원자보다 잘 수렴. 사교 k-path 좌표
 - [PBE→HSE06 2단 전략](pbe_then_hse_workflow_plan.md) — PBE 스크리닝→HSE 재판정. PBE 무자성은 HSE가 뒤집을 크기
+- [코드+README까지만, 실행은 사용자가](feedback_code_and_readme_only.md) — 계산 셋업은 생성기·실행스크립트·수집기·README까지. 내가 던지지 않는다
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 판정 바꾸는 계산만. caveat 나열 대신 권고+근거 한 줄
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — 기하 재사용 OK, 에너지는 섞지 말 것
 - [inas100 slab generation](inas100_slab_generation.md) — (100) 슬랩 생성, Cl 피복률 0.75ML
