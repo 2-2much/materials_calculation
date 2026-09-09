@@ -1,6 +1,6 @@
 ---
 name: jcc_acceptor_vacuum_ghost_state
-description: "JCC(Zhang2023) BN 재현 — 도너 성공(δE0=−0.894, Eq.3 기울기 3.2% 일치), 억셉터는 전 Lz 실패. 원인=π*/NFE 마진이 38meV로 포화. ⚠Lz 축소는 구제책이 아니다"
+description: "JCC(Zhang2023) BN 재현 — 도너 성공(δE0=−0.894), 억셉터는 전 Lz 실패. ★2026-09-09 QE+NC로 교차검증: 도너 0.4meV 일치·억셉터 동일 파탄 → NC 의사퍼텐셜 가설 기각"
 metadata:
   type: project
 ---
@@ -71,5 +71,30 @@ CHGCAR 차분 평면평균 (시트 ±4 Å 기준):
 → **δE0 는 q>0 에서만 계산하고 q² 로 스케일**하면 ghost state 를 원천적으로 피한다.
 남는 위험은 보정항이 아니라 *결함 계산 자체*이고, 그건 `vac_ok` 게이트로 본다.
 InAs 적용 시 이점: ε_VBM 만 있으면 되므로 **호스트 갭이 좁아도(또는 CBM 이 애매해도) δE0 를 얻을 수 있다.**
+
+## ★2026-09-09 QE(논문 코드)로 교차검증 — NC 의사퍼텐셜 가설 기각
+위에서 남겨 둔 마지막 후보("NC 의사퍼텐셜의 확산 interlayer 상태 기술")를 직접 시험했다.
+트리: `~/materials/__JCC-reproduce__/01-dE0_BN_6x6_Lz30_QE` (fermi에서 실행, README 있음).
+논문 발판 그대로 — **QE 7.5 / PBE / norm-conserving(PseudoDojo nc-sr-0.5) / ecutwfc 70 Ry /
+conv 1e-12 Ry / Γ-only**, 좌표 72개는 VASP POSCAR와 비트 단위 동일, `assume_isolated` 기본값(3DJM).
+
+| q | QE(NC,70Ry) E(σ→0) | VASP(PAW,400eV) | 논문 |
+|---|---|---|---|
+| **+1** | **−0.894426** | −0.893987 | −0.943 |
+| −1 | −0.056 | −0.073 | −0.943 |
+
+- **도너: 0.4 meV 일치.** 코드·PP·cutoff가 전부 다른데 이만큼 맞는다 = 발판이 건강하다는
+  강한 교차검증. 논문과의 49 meV 차이는 위에서 규명한 기울기 3.2%가 그대로 남은 것.
+- **억셉터: 두 코드가 같은 방식으로 깨진다(17 meV 이내).** → ★**NC vs PAW가 원인이 아니다.**
+  논문 Table II의 δE0(−1) = −0.943 은 우리가 재현할 수 있는 계산이 아니다.
+- QE 밴드끝: ε_VBM=−4.666, ε_CBM=+0.0126, gap 4.679 (VASP: −4.9317 / −0.2770, gap 4.655).
+- qm1 점유: `occ[145]=0.5`, `eig[145..148] = −0.071 / 0.049 / 0.210 / 0.223` —
+  준위 간격 0.04~0.15 eV 가 Lz=30 Å 상자의 ħ²π²/2mL² = 0.042 eV 와 같은 자릿수(정황).
+  평면평균 확정은 `ghost_check.sh`+`ghost_check.py` 미실행.
+
+**남는 질문 = 논문 쪽으로 넘어갔다.** 우리 계산이 틀린 게 아니라, 논문이 어떻게 Lz=30 Å에서
+±1 대칭값을 얻었는지가 미해결이다. 후보: (a) Table II의 −1 값이 실측이 아니라 δE0 ∝ q²
+대칭성에서 적어 넣은 것, (b) 격자상수/이완 차이, (c) ε_CBM 정의가 다름.
+→ 실전 방침은 위 "억셉터 δE0 는 q² 로 환산하라"가 그대로 유효하며, 이제 근거가 더 강하다.
 
 관련: [[dfe_p1_vacuum_asrich_fixed]], [[shallow_donor_inas_supercell_limit]], [[charged_defect_vbm_ref]]

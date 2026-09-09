@@ -3,7 +3,7 @@
 - [★Fig.2/SEJM 재현 완료](jcc_fig2_sejm_reproduction.md) — SEJM 절편 5.527/6.273 vs 논문 5.47/6.25. ★ε_VBM 두 자리에 다른 값(잔차 153→5 meV). 미해결=n12로 γ/Λ 분리
 - [★k점 접힘 + 하전셀 k수렴](jcc_kpoint_folding_and_charged_convergence.md) — n이 3의 배수라야 K→Γ. Γ-only 고윳값은 정확(0.2meV)하나 **하전 총에너지는 k에 민감**(δE₀ 22.5meV)
 - [★JCC가 ΔH_f 발산을 지운다 (04/05)](jcc_dHf_lz_validation.md) — 도너 0.87eV→4.6meV·억셉터 0.88eV→1.5meV. q² 부호무관 실측. 깨진 δE₀(−1)은 47%만 지움
-- [★JCC 억셉터 진공 ghost state](jcc_acceptor_vacuum_ghost_state.md) — BN 재현: 도너 −0.894(논문 −0.943) 성공·억셉터 실패. 판정식 |δE0| ≳ EA
+- [★JCC 억셉터 진공 ghost state](jcc_acceptor_vacuum_ghost_state.md) — BN 재현: 도너 −0.894(논문 −0.943) 성공·억셉터 실패. 판정식 |δE0| ≳ EA. ★2026-09-09 QE+NC 교차검증: 도너 0.4meV 일치·억셉터 동일 파탄 → PP 가설 기각
 - [★δE₀ = Koopmans 위반의 측정값](jcc_dE0_koopmans_janak.md) — qε_b는 전자저장고 항. δE₀=−½∂ε_H/∂N(Slater ½). VBM/CBM 분기=PPLB 미분불연속. 젤리움이 ΔSCF갭 1.79eV 부풀림
 - [★δE₀의 ±q 대칭 = 전하켤레 대칭](jcc_dE0_charge_symmetry.md) — ★δE₀=D−C(Λ 포함). 비대칭은 D에만 갇힘·phosphorene vs arsenene 자연실험. ⚠우리가 잰 건 Λ가 아니라 **Λ+K·L_eff**(42.49)·n=12로는 못 푼다·Λ_CBM−Λ_VBM은 미측정
 - [Fig.3/Eq.(7) 결함 무관성](jcc_eq7_defect_independence.md) — ΔH_f⁰와 γ/L_S가 상쇄. 조건은 '결함 무관'이 아니라 '두 모델에서 같음'. 숨은 가정=ρ_d의 z-국재
