@@ -8,7 +8,7 @@ metadata:
   modified: 2026-08-22T07:05:03.982Z
 ---
 
-**설치**: `~/bin/CoFFEE` (github.com/qtm-iisc/CoFFEE). 검증 = MoS₂ Model_Scaling α=4/5/6/8/10이 배포판 README와 전부 일치(0.421/0.463/0.489/0.516/0.530 eV). `Ecut`은 **DFT ENCUT과 무관** — 단위 Hartree이고 모델 푸아송 G-격자 해상도만 정함(가우시안 σ와 erf 프로파일만 담으면 됨). slabcc가 VASP FFT 격자에 묶이는 것과 달리 자기 격자를 씀.
+**설치**: `~/bin/CoFFEE` (github.com/qtm-iisc/CoFFEE). ⚠**2026-09-13: 위치가 kohn → bloch 로 옮겨졌다**(사용자가 직접 이동). kohn 에는 더 이상 없다. bloch 에서 패치 8건 전부 생존 확인 — `git status` 가 `classes.py`/`PS_main.py`/`coffee.py` + 재생성 `.c` 3개만 수정으로 보이고 upstream 은 `ba992b4`(github HEAD 와 동일). `.so` 3개 py3.12 import OK. **bloch 에는 `mpi4py` 가 없어서 새로 설치했다** (conda env `py4vasp`, pip wheel 4.1.2, Intel MPI 2021.9 ABI 호환 확인). MoS₂ Model_Scaling α=4/5/6/8/10 재검증 0.4212/0.4627/0.4887/0.5160/0.5296 = README 와 ≤0.7 meV, 각 0.07~0.36 s. `out` 첫 줄 `local patches active: solver=eigen ...` 로 패치 활성 확인 가능. 검증 = MoS₂ Model_Scaling α=4/5/6/8/10이 배포판 README와 전부 일치(0.421/0.463/0.489/0.516/0.530 eV). `Ecut`은 **DFT ENCUT과 무관** — 단위 Hartree이고 모델 푸아송 G-격자 해상도만 정함(가우시안 σ와 erf 프로파일만 담으면 됨). slabcc가 VASP FFT 격자에 묶이는 것과 달리 자기 격자를 씀.
 
 **⚠ 상류 버그 (2026-07-28 발견) — `PoissonSolver/classes.py`의 `np.arange(0,1,1./N)`**
 부동소수 스텝이라 길이가 N이 아니라 **N+1이 되는 경우가 5.6%**(N≤1200 중 67개: 49, 98, 103, 107, 196, …, **509**). ε(z) 배열은 N=2·Nz−1로 만들어지는데 여기서 어긋나면 푸리에 성분 인덱싱이 통째로 밀려 **조용히 틀린 유전 응답**을 쓴다. 인덱스 에러도 경고도 없다.
