@@ -6,6 +6,14 @@ metadata:
   type: reference
 ---
 
+⚠⚠ **2026-09-14 중요 정정 — 단층에는 `Slab` 프로파일을 쓰면 안 된다.**
+CoFFEE User Guide §4-3 이 "두께를 정의하기 애매한 그래핀·**단층 BN**용" 으로 `Gaussian`
+프로파일을 따로 둔다. 아래 Slab 환산은 **MoS2 처럼 두께가 정의되는 계**에만 유효하다.
+실측: Slab 으로 w=2.5/3.33/5.0 A (적분량 보존) -> E_lat 대용이 +0.005/+0.020/+0.062 eV 로
+갈린다. 모델 전하 sigma(1 A)가 슬랩 두께와 비슷해 '두께는 게이지' 논리가 깨지기 때문.
+단층 h-BN 용 Gaussian 진폭은 [[jcc_coffee_correction_tree]] 에 있다 (A_par 9.4768 /
+A_perp 3.1428, sigma_eps 0.783 A).
+
 **문제**: CoFFEE 의 2D 슬랩 모델은 **슬랩 내부** ε∥·ε⊥ 와 Width 를 요구한다. 그런데 DFPT/논문이
 주는 값은 대개 **셀 평균**이다. 그대로 넣으면 안 된다.
 
