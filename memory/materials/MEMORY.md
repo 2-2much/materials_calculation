@@ -173,3 +173,5 @@
 - [★MoTe2 V_Te 크기스캔 결과](mote2_vte_size_scan_results.md) — ★5×5 확정(W 10meV)·★결함 e는 **비어있고 비자성**·전자2개는 **Mo-Mo 결합**(−8.4%)에 소모→도너 아님·⚠갭 안 E_F선은 점유 아님
 - [★MoTe2 Defect_Package 전환](mote2_defect_package_setup.md) — 클론 2개(2H/1T)·★패키지에 magmom 다중중심+neighbor_count 커밋(053005b)·3단계 spin_mode·⚠defect_center_frac 의미 불변
 - [1T' PSTRESS 스캔](mote2_1tp_pstress_scan.md) — ★E(A) 최소는 정의상 P=0 → a0 재산출 아님. 목적은 b/a 변화·01-run→02-restart 2회(Pulay)·⚠FFT 격자 고정 금지
+- [★MoTe2 V_Te MLFF-MD 설계 (04-MD)](mote2_mlff_md_plan.md) — 7x4 직교셀·G 2x2x1 확정·★ML_MODE=train은 ISIF=0/1이면 즉사·온도는 pristine으로 상한만 잡고 스캔은 ML_MODE=run·⚠실행은 kohn, 초안은 bloch
+- [★MoTe2 Γ-only vs k-mesh 실측](mote2_gamma_vs_mesh_measured.md) — 2H는 기하 OK(0.015Å)/에너지 아웃(115meV), 1T는 기하도 파탄(0.092Å). ★금속성은 band-index로 판정(occ>0.5는 가짜 갭)
