@@ -98,3 +98,21 @@ conv 1e-12 Ry / Γ-only**, 좌표 72개는 VASP POSCAR와 비트 단위 동일, 
 → 실전 방침은 위 "억셉터 δE0 는 q² 로 환산하라"가 그대로 유효하며, 이제 근거가 더 강하다.
 
 관련: [[dfe_p1_vacuum_asrich_fixed]], [[shallow_donor_inas_supercell_limit]], [[charged_defect_vbm_ref]]
+
+## ★2026-09-15 대조군 확보 — "억셉터 가지가 깨진다"가 아니라 "h-BN 이 특수"로 확정
+[[jcc_tableII_reproduction]] 에서 Table II 전 재료를 돌렸다. 억셉터 8행의 게이트 w
+(중성 대비 점유가 가장 많이 바뀐 밴드의 PROCAR ion 투영 합):
+
+| BN −1 | WSe2 −1/−2 | GeS −1/−2 | BNNT −1 | arsenene −1 | phosphorene −1 |
+|---|---|---|---|---|---|
+| **0.015** | 0.799 | 0.332/0.326 | 0.521 | 0.368 | 0.322 |
+
+**BN 만 진공. 나머지 7행은 전부 재현(차 ≤65 meV).**
+`12-TableII_materials/analyze.py` 독스트링에 미리 적어 둔 예측("다른 재료는 CBM 이 훨씬 깊으니
+전부 재현되어야 진단이 산다")이 그대로 맞았다 — 반증 가능한 예측이 통과한 것이라 진단이 강해졌다.
+→ 위 "억셉터 δE0 는 q² 로 환산하라"는 **h-BN 류(π* 바로 위에 NFE/interlayer 상태가 있는 넓은갭
+2D)에만 필요한 회피책**이고, 일반 2D 억셉터에는 δE0 를 직접 계산해도 된다.
+게이트 w 를 걸어 두면 어느 쪽인지 계산 전이 아니라 계산 직후에 바로 판별된다.
+
+남아 있던 후보 (a)("논문이 −1 을 q² 대칭에서 적어 넣었다")도 정황 증거를 얻었다:
+논문 Table II 에서 ±q 가 비트 단위로 같은 재료는 **BN 과 GeS 둘뿐**이다([[jcc_tableII_reproduction]]).
