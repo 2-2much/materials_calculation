@@ -103,6 +103,7 @@
 - [PBE→HSE06 2단 전략](pbe_then_hse_workflow_plan.md) — PBE 스크리닝→HSE 재판정. PBE 무자성은 HSE가 뒤집을 크기
 - [⚠허락 없이 파일 생성 금지](feedback_code_and_readme_only.md) — 계산 입력/폴더도 시키기 전엔 안 만든다. 스크립트 실행·계산 kill도 금지. 읽기만 허용
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 판정 바꾸는 계산만. caveat 나열 대신 권고+근거 한 줄
+- [재현 판정 기준](feedback_reproduction_judgment.md) — 0.1eV 절대차는 허용. 판정자는 **trend 유지 + 극한값 일치** 둘뿐. 발판 잔차에 '불일치/어긋남' 라벨 붙이지 말 것
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — 기하 재사용 OK, 에너지는 섞지 말 것
 - [inas100 slab generation](inas100_slab_generation.md) — (100) 슬랩 생성, Cl 피복률 0.75ML
 - [InAs(111)A 슬랩 생성](inas111_slab_generation.md) — 03-111slab 생성기·ABC offset 규약·LDA 선례 0.0000Å 재현. ★As–H=1.5626Å(1.52 아님)·4BL은 아래 1BL만 고정. ⚠비직교(slabcc 불가)·bare p2x2는 NELECT 홀수 → (2×2) In-vacancy 재구성 필요
