@@ -67,3 +67,6 @@ a=5.60~5.90 전부 Ga43As44H76 유지 확인, a=5.6533 은 옛 파일과 좌표 
 01-scan/{host_q0 854e, host_qp1 853e (JCC δE0), SiGa_p1 844e}. vasp_gam, ISMEAR0/σ0.01, ENCUT400 PREC=A LREAL=A,
 KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As 5·Si 4·H1.25·H.75.
 옛 구조는 사용자가 `_formal_structures_/` 로 옮김. 스크립트는 스크래치 복사본에서 가짜 CONTCAR 로 시험 통과.
+- ⚠ **host_qp1 = 853e 홀수** (처음에 "전부 짝수"라고 잘못 말함). T_d QD 의 HOMO 는 t2 3중축퇴로 예상 → 5/6 분수점유 →
+  TOTEN 에 가짜 엔트로피 EENTRO/2 ≈ σ 비례 (σ0.01: 5 meV, σ0.05: 27 meV) 가 δE0 에 들어감. 그래서 SIGMA=0.01 유지 권고.
+  closed-shell 인 host_q0·SiGa_p1 은 σ 무관.
