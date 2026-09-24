@@ -38,8 +38,14 @@ L 축으로 그리면 거의 직선처럼 보이는 것은 L³ 항 때문. JM∞
 
 관련: [[trsm_1d_nanotube_literature]], [[jcc_dimension_hierarchy_measured]] (0D는 젤리움·이미지 둘 다 1/L)
 
-## 2026-09-24 생성물 — `~/materials/__JCC_Reproduction__/13-TRSM_Fig6_GaAsQD/`
+## 2026-09-24 생성물 — `~/materials/__JCC_Reproduction__/20-TRSM_Fig6_GaAsQD/`
 - `make_qd.py` (--a --L --rc --dH_*), `structures/{host,SiGa}_rc{7.35,8.40}_*_L20.vasp`
   종 이름 `Ga [Si] As H1.25 H.75`, a=5.6533(실험값 임시 — PBE a0 정해지면 재생성), X–H 1.52 초기값
 - ⚠ H–H 1.52 Å 충돌은 **rc8.40에만** 있음({100} dihydride). **rc7.35는 충돌 없음**(최소 H–H 2.48 = 같은 As의 dihydride). 2026-09-24 사용자 확인: **논문 모델 = rc7.35**, host·SiGa 두 개로 진행
 - `plot_JM_invL.py` → `fig_JM_invL.png` (L 축 / 1/L 축)
+
+## 2026-09-24 폴더 번호 규약 (사용자 지시)
+kohn `~/materials/__JCC-reproduce__` 의 **13·14·15 는 BNNT 가 사용 중** → GaAs QD 트리는 20번대.
+- `20-TRSM_Fig6_GaAsQD` (구 13) · `21-GaAs_lattice_PBE` (E–V 10점 + BM, Ga_d/ENCUT400/Γ12³) ·
+  `22-mu_reference_GaAsQD` (Si 벌크 + α-Ga, 01-relax ISIF=3 ENCUT520 → 02-sp ENCUT400)
+- 사용자가 README·스크립트 읽고 **직접 실행**. a0 의 목적 = QD 초기구조 이완 시간 단축(어차피 이완함)
