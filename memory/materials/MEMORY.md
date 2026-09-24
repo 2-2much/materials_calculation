@@ -5,6 +5,7 @@
 - [★JCC가 ΔH_f 발산을 지운다 (04/05)](jcc_dHf_lz_validation.md) — 도너 0.87eV→4.6meV·억셉터 0.88eV→1.5meV. q² 부호무관 실측. 깨진 δE₀(−1)은 47%만 지움
 - [★JCC 억셉터 진공 ghost state](jcc_acceptor_vacuum_ghost_state.md) — BN 재현: 도너 −0.894(논문 −0.943) 성공·억셉터 실패. 판정식 |δE0| ≳ EA. ★2026-09-09 QE+NC 교차검증: 도너 0.4meV 일치·억셉터 동일 파탄 → PP 가설 기각
 - [★JCC Table II 전 재료 재현](jcc_tableII_reproduction.md) — BN −1 빼면 13행 RMS 41 meV·셀설정 논문일치. ★논문은 GeS/BN만 ±q가 비트 동일 → q²로 적어 넣은 정황. ⚠판정문턱 절대 0.1eV는 |q|=2에 불리
+- [TRSM Fig.6 GaAs QD 모델](trsm_fig6_gaas_qd_model.md) — 마젠타=Ga·카키=As(반경비). Ga54Si1As68H100(24×H1.25+76×H0.75) 추정. ★JM은 발산 아님: A=20.43(ε=1) 고정+B/L³로 RMS 1.3meV
 - [★TRSM 1D/나노튜브 문헌 전수조사](trsm_1d_nanotube_literature.md) — 발표된 1D 적용은 **Zhang2023 의 (3,3) BNNT 단 하나**·CNT 전무. 1D 가능 스킴 3개뿐(CoFFEE는 속 찬 wire만). 쌍둥이=CCJM PRB102,035202. ⚠우리 프로젝트는 재현 아닌 신규 영역
 - [★δE₀ = Koopmans 위반의 측정값](jcc_dE0_koopmans_janak.md) — qε_b는 전자저장고 항. δE₀=−½∂ε_H/∂N(Slater ½). VBM/CBM 분기=PPLB 미분불연속. 젤리움이 ΔSCF갭 1.79eV 부풀림
 - [★δE₀의 ±q 대칭 = 전하켤레 대칭](jcc_dE0_charge_symmetry.md) — ★δE₀=D−C(Λ 포함). 비대칭은 D에만 갇힘·phosphorene vs arsenene 자연실험. ⚠우리가 잰 건 Λ가 아니라 **Λ+K·L_eff**(42.49)·n=12로는 못 푼다·Λ_CBM−Λ_VBM은 미측정
