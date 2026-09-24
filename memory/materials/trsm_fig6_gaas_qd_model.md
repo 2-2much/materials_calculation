@@ -37,3 +37,9 @@ L 축으로 그리면 거의 직선처럼 보이는 것은 L³ 항 때문. JM∞
 → 우리 JM 계산의 검증 기준: A≈20.4 재현, B ∝ (1−1/ε)R².
 
 관련: [[trsm_1d_nanotube_literature]], [[jcc_dimension_hierarchy_measured]] (0D는 젤리움·이미지 둘 다 1/L)
+
+## 2026-09-24 생성물 — `~/materials/__JCC_Reproduction__/13-TRSM_Fig6_GaAsQD/`
+- `make_qd.py` (--a --L --rc --dH_*), `structures/{host,SiGa}_rc{7.35,8.40}_*_L20.vasp`
+  종 이름 `Ga [Si] As H1.25 H.75`, a=5.6533(실험값 임시 — PBE a0 정해지면 재생성), X–H 1.52 초기값
+- ⚠ 두 모델 모두 **{100} 면 dihydride 끼리 H–H 1.52 Å 충돌** (구 절단의 전형). 이완 전 처리 필요
+- `plot_JM_invL.py` → `fig_JM_invL.png` (L 축 / 1/L 축)
