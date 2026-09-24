@@ -1,6 +1,6 @@
 ---
 name: trsm_fig6_gaas_qd_model
-description: TRSM(Xiao2020) Fig.6 GaAs QD 재현 준비 — 인셋 판독(마젠타=Ga·카키=As)·QD 모델 Ga54Si1As68H100 추정·JM 곡선은 발산 아닌 ε=1 Makov-Payne(1/L+1/L³)
+description: TRSM(Xiao2020) Fig.6 GaAs QD 재현 준비 — 인셋 판독(마젠타=Ga·카키=As)·QD 모델 rc7.35 Ga42Si1As44H76 확정(8.40 기각)·JM 곡선은 발산 아닌 ε=1 Makov-Payne(1/L+1/L³)
 metadata:
   node_type: memory
   type: project
@@ -20,8 +20,8 @@ QD 크기는 인셋 판독으로 정하기로 함. 파일·폴더는 아직 안 
 ## QD 후보 (Ga 중심 구 절단, 배위 1인 원자 제거 반복)
 | rc | 조성 | H(Ga쪽 1.25) | H(As쪽 0.75) |
 |---|---|---|---|
-| 7.35 | Ga43As44 | 36 | 40 |
-| **8.40 (선호)** | **Ga55As68 → Ga54Si1As68** | **24** | **76** |
+| **7.35 (확정, 논문 모델)** | Ga43As44 → Ga42Si1As44 | 36 | 40 |
+| 8.40 (처음엔 선호 → 사용자 판독으로 기각) | **Ga55As68 → Ga54Si1As68** | **24** | **76** |
 rc=8.95는 가장자리에 Ga가 나와서 제외. 8.40 선호 근거: 윗면 As dihydride 쌍 + 더 둥근 윤곽 +
 아래 JM 피팅의 R_eff≈8 Å(rmax 8.36). host 592e 닫힌 껍질, Si_Ga⁰ 593(홀수→ISPIN=2), q+1 592.
 L=20에서도 이웃 셀 이미지 사이 H–H 거리 4.2 Å라 들어간다.
@@ -41,5 +41,5 @@ L 축으로 그리면 거의 직선처럼 보이는 것은 L³ 항 때문. JM∞
 ## 2026-09-24 생성물 — `~/materials/__JCC_Reproduction__/13-TRSM_Fig6_GaAsQD/`
 - `make_qd.py` (--a --L --rc --dH_*), `structures/{host,SiGa}_rc{7.35,8.40}_*_L20.vasp`
   종 이름 `Ga [Si] As H1.25 H.75`, a=5.6533(실험값 임시 — PBE a0 정해지면 재생성), X–H 1.52 초기값
-- ⚠ 두 모델 모두 **{100} 면 dihydride 끼리 H–H 1.52 Å 충돌** (구 절단의 전형). 이완 전 처리 필요
+- ⚠ H–H 1.52 Å 충돌은 **rc8.40에만** 있음({100} dihydride). **rc7.35는 충돌 없음**(최소 H–H 2.48 = 같은 As의 dihydride). 2026-09-24 사용자 확인: **논문 모델 = rc7.35**, host·SiGa 두 개로 진행
 - `plot_JM_invL.py` → `fig_JM_invL.png` (L 축 / 1/L 축)
