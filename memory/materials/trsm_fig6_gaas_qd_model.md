@@ -61,3 +61,9 @@ a=5.60~5.90 전부 Ga43As44H76 유지 확인, a=5.6533 은 옛 파일과 좌표 
 ## 에너지 열 규약 (2026-09-24 사용자 결정)
 22 기준상은 **`free  energy   TOTEN`** 사용 (α-Ga 는 MP smearing → F 가 변분량, σ→0 외삽식은 Gaussian/FD 용).
 21 E–V 스캔은 sigma->0 그대로 둠(k 조밀·반도체라 차이 무시). → 전 트리 공통 규칙으로 확장됨: [[feedback_energy_toten]].
+
+## 2026-09-24 QD 본계산 입력 완성 (사용자가 읽고 직접 실행)
+`20-TRSM_Fig6_GaAsQD`: 00-relax/{host_q0,SiGa_p1}_L20 → make_Lseries.py 로 L=20..40 셀 중앙 이식 →
+01-scan/{host_q0 854e, host_qp1 853e (JCC δE0), SiGa_p1 844e}. vasp_gam, ISMEAR0/σ0.01, ENCUT400 PREC=A LREAL=A,
+KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As 5·Si 4·H1.25·H.75.
+옛 구조는 사용자가 `_formal_structures_/` 로 옮김. 스크립트는 스크래치 복사본에서 가짜 CONTCAR 로 시험 통과.
