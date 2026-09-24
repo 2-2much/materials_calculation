@@ -49,3 +49,11 @@ kohn `~/materials/__JCC-reproduce__` 의 **13·14·15 는 BNNT 가 사용 중** 
 - `20-TRSM_Fig6_GaAsQD` (구 13) · `21-GaAs_lattice_PBE` (E–V 10점 + BM, Ga_d/ENCUT400/Γ12³) ·
   `22-mu_reference_GaAsQD` (Si 벌크 + α-Ga, 01-relax ISIF=3 ENCUT520 → 02-sp ENCUT400)
 - 사용자가 README·스크립트 읽고 **직접 실행**. a0 의 목적 = QD 초기구조 이완 시간 단축(어차피 이완함)
+
+## ⚠ 2026-09-24 make_qd.py rc 함정 (수정 완료)
+21 BM 결과 **PBE a0 = 5.7509 Å** (B0 60.3 GPa). 이 a 로 재생성하자 Ga31As28 로 줄어듦 —
+rc 가 절대 Å 라서 바깥 껍질이 7.34→7.47 Å 로 밀려 컷오프 밖으로 빠짐.
+→ **rc 는 A_REF=5.6533 격자에서의 반지름(모양 이름)**, 실제 컷오프 = rc·a/A_REF 로 수정. 파일명에 `_a{a}` 추가.
+a=5.60~5.90 전부 Ga43As44H76 유지 확인, a=5.6533 은 옛 파일과 좌표 동일.
+본계산 구조 = `structures/{host,SiGa}_rc7.35_Ga43As44H76_a5.7509_L20.vasp` (L=20 진공 3.87 Å).
+잘못된 쌍은 `structures/__wrong_Ga31As28_absolute_rc__/` 로 격리.
