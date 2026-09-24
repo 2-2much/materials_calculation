@@ -86,7 +86,8 @@
 - [charge state + optical/slabcc setup](chargestate_optical_slabcc_setup.md) — 02 프로덕션 셋업, charge state 판정법
 - [Spin Stage Symmetry Never Broken](spin_stage_symmetry_never_broken.md) — ⚠01_Spin ISTART=1이 MAGMOM 무력화. 진단자는 [[spin_magnetism_ipr_predictor]]로 대체
 - [Spin Magnetism ← IPR Predictor](spin_magnetism_ipr_predictor.md) — frontier IPR 비가 자성을 예측. 위험구간 1.2~2×
-- [Energy Column: σ→0 vs TOTEN](energy_column_sigma0_vs_toten.md) — ⚠toten_eV는 가짜 엔트로피 포함 → energy_sigma0_eV 쓸 것
+- [★에너지 = free energy TOTEN](feedback_energy_toten.md) — 2026-09-24 사용자 결정, 전 트리 공통. sigma->0 제안 금지
+- [Energy Column: σ→0 vs TOTEN (대체됨)](energy_column_sigma0_vs_toten.md) — 옛 σ→0 권고는 폐기, 홀수전자 편향 −σ/(2√π) 크기 기록만
 - [Cl_As 음의 형성에너지: 원인 분리](cl_as_negative_eform_reference_slab.md) — Δn_Cl로 갈림: 참조슬랩 문제 vs μ_Cl 구속 누락
 - [V_Cl-Cl_As k-사다리: 두 경로 일치](vclclas_kpt_ladder_two_routes.md) — Γ+PHS ≡ mesh−LZ. 잔차 −0.12eV는 하전 유한크기
 - [Band-filling 실측 (2x2x1 DOS)](bandfilling_measured_from_dos.md) — pure CBM 기준 환산 0.219eV. 주입값 0.78 출처불명

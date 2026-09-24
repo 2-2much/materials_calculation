@@ -60,4 +60,4 @@ a=5.60~5.90 전부 Ga43As44H76 유지 확인, a=5.6533 은 옛 파일과 좌표 
 
 ## 에너지 열 규약 (2026-09-24 사용자 결정)
 22 기준상은 **`free  energy   TOTEN`** 사용 (α-Ga 는 MP smearing → F 가 변분량, σ→0 외삽식은 Gaussian/FD 용).
-21 E–V 스캔은 sigma->0 그대로 둠(k 조밀·반도체라 차이 무시). [[energy_column_sigma0_vs_toten]] 의 일반 규칙과 다르니 이 트리에선 이 결정을 따른다.
+21 E–V 스캔은 sigma->0 그대로 둠(k 조밀·반도체라 차이 무시). → 전 트리 공통 규칙으로 확장됨: [[feedback_energy_toten]].

@@ -1,12 +1,15 @@
 ---
 name: energy-column-sigma0-vs-toten
-description: DFE 파이프라인이 TOTEN(자유에너지)을 읽어 홀수 전자 결함만 28~42meV 계통적으로 안정해 보이는 편향 — energy_sigma0_eV로 전환 필요
+description: "⚠2026-09-24 대체됨 → feedback_energy_toten (사용자 결정: TOTEN 사용). 이하는 편향 크기 기록용" DFE 파이프라인이 TOTEN(자유에너지)을 읽어 홀수 전자 결함만 28~42meV 계통적으로 안정해 보이는 편향 — energy_sigma0_eV로 전환 필요
 metadata: 
   node_type: memory
   type: project
   originSessionId: f4bfd3d3-c080-491a-b5ba-f0c4ca66ef42
   modified: 2026-07-20T05:28:11.526Z
 ---
+
+> ⚠ **2026-09-24 사용자 결정으로 대체됨: 에너지는 free energy TOTEN 을 쓴다** → [[feedback_energy_toten]].
+> 아래 내용은 Gaussian smearing 홀수 전자 셀 편향의 크기 기록으로만 남긴다.
 
 2026-07-20 발견. `scripts/plot_DFE_from_raw_energies.py:402`가 `r.toten_eV`를 읽는다.
 `raw_energies.csv`는 `toten_eV` / `energy_without_entropy_eV` / `energy_sigma0_eV` 세 컬럼을
