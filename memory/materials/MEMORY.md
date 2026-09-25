@@ -182,3 +182,9 @@
 - [1T' PSTRESS 스캔](mote2_1tp_pstress_scan.md) — ★E(A) 최소는 정의상 P=0 → a0 재산출 아님. 목적은 b/a 변화·01-run→02-restart 2회(Pulay)·⚠FFT 격자 고정 금지
 - [★MoTe2 V_Te MLFF-MD 설계 (04-MD)](mote2_mlff_md_plan.md) — 7x4 직교셀·G 2x2x1 확정·★ML_MODE=train은 ISIF=0/1이면 즉사·온도는 pristine으로 상한만 잡고 스캔은 ML_MODE=run·⚠실행은 kohn, 초안은 bloch
 - [★MoTe2 Γ-only vs k-mesh 실측](mote2_gamma_vs_mesh_measured.md) — 2H는 기하 OK(0.015Å)/에너지 아웃(115meV), 1T는 기하도 파탄(0.092Å). ★금속성은 band-index로 판정(occ>0.5는 가짜 갭)
+- [★04-MD INCAR 실수정 + 사다리 개정](mote2_mlff_incar_fixes_and_ladder.md) — ⚠디스크 INCAR의 LANGEVIN_GAMMA가 값 1개=Te가 thermostat 밖이었다. ★사다리 개정(300/600 폐기·1500K 의도적 파괴 단 추가)·γ는 작을수록 좋다(Kramers)·⚠내 ISIF=0 오답 정정
+- [★MLFF-MD 실측 비용·스케일링](mote2_mlff_budget_and_scaling.md) — ★4→12노드 speedup 1.41배뿐(효율 47%·노드시간 2.1배 손해)→4노드가 맞다. FF step 0.017s vs DFT 9iter≈140s·f≈13%. ★FF-only 구간 뒤 DFT가 9→27 iter로 비싸짐(상한=cold 34). 코어 아닌 **구조로 병렬화**
+- [★distorted V_Te엔 5×5가 부족](mote2_distorted_vte_cell_size.md) — 변위장이 셀 경계 8.76Å에서 **되올라간다**. ★Te 하나가 자리를 완전히 이탈(재구성). ★**hex 7×7(147)이 rect 7×4(168)를 전 항목에서 이긴다**(C3 보존). 결정적 검증=큰 셀 이식 재이완
+- [MLFF 셀/k점 정책](mote2_mlff_cell_kpoint_policy.md) — Γ-only 철회(금속+상별 k오차가 가짜 2H-1T′차 학습). ★학습셀≠탐색셀. primitive는 온도 아닌 **변형** 데이터용. ⚠⚠작은셀 학습안은 ML_AB 동질성(Δk)과 충돌 — 확인 전엔 7×4 단일셀
+- [★SevenNet 7net-omni 래퍼 (JH)](sevennet_jh_tool.md) — ASE+LBFGS **static relax 전용**·CPU 단일프로세스. 예제=Au위 HHTP 969원자 61분. ⚠원본 env 소실·**torch는 sevenn 의존성에 없어 CPU index로 따로** 설치. DFT 대비 435배 싸나 footing 달라 **구조 생성기 전용**
+- [kohn 네트워크 + venv 권장](kohn_conda_forge_and_venv.md) — conda-forge HTTP 000은 **차단 아닌 일시장애**(IPv6 죽음+fetch_threads5×timeout9.15s). ⚠**py4vasp env는 pip 메타데이터가 깨져 있다**(numpy/ase dist-info 이중) → 새 패키지 금지, venv 쓸 것
