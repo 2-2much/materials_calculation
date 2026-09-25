@@ -79,3 +79,5 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 - δE0(∞) = −0.878 eV (고립 QD 의 충전 곡률). ΔH_JCC 는 ε_VBM 이 상쇄된 E(D,+1)−E(host,+1)+μ 꼴.
 - 확인: HOMO t2 3중축퇴, qp1 occ 5/6, EENTRO −10.6 meV 상수. 중성 host 도 L20→40 28.5 meV 변함(L20 이미지 겹침).
 - E_Si −5.424782, E_Ga −2.906360 eV/atom (TOTEN), E_Ga−E_Si = +2.518422.
+- 1/L³ 항: B(JM)=1708, |B(δE0)|=1701 → R_eff = 7.9 Å = QD 표면(heavy 7.47 ~ H 8.1). 편극 표면전하 해석과 일치.
+  직접 검증(∫Δρ r²)은 CHGCAR 가 0바이트(LCHARG=.F.)라 미실시 — 하려면 host q0/qp1 L25 를 LCHARG=.T. 로 재계산.
