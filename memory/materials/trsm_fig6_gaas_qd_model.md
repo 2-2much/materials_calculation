@@ -70,3 +70,12 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 - ⚠ **host_qp1 = 853e 홀수** (처음에 "전부 짝수"라고 잘못 말함). T_d QD 의 HOMO 는 t2 3중축퇴로 예상 → 5/6 분수점유 →
   TOTEN 에 가짜 엔트로피 EENTRO/2 ≈ σ 비례 (σ0.01: 5 meV, σ0.05: 27 meV) 가 δE0 에 들어감. 그래서 SIGMA=0.01 유지 권고.
   closed-shell 인 host_q0·SiGa_p1 은 σ 무관.
+
+## ★2026-09-25 결과 (01-scan 15잡, analyze.py)
+- **우리 3DJM ≈ 논문 JM, L 마다 12–16 meV 이내.** 피팅 A=19.54(자유, 논문판독 19.6), E∞=+0.31. 1/L 해석 확정.
+- **δE0 = JM 의 거울상** (A −19.51 / B −1701 vs JM +19.54 / +1710) → JCC 평평: L20→40 **+1.0 meV** (JM +303).
+- ΔH_JCC = −0.564 ± 0.002 eV vs 논문 TRSM −0.52~−0.53 → **35–45 meV** (재현 판정 기준 0.1 eV 안).
+  ⚠ 내가 예상한 "0D 에선 JCC≠TRSM(D⁺–e 인력 남음)" 은 이 QD 에서 0.1 eV 수준으론 안 보였다 — 과신했던 예측.
+- δE0(∞) = −0.878 eV (고립 QD 의 충전 곡률). ΔH_JCC 는 ε_VBM 이 상쇄된 E(D,+1)−E(host,+1)+μ 꼴.
+- 확인: HOMO t2 3중축퇴, qp1 occ 5/6, EENTRO −10.6 meV 상수. 중성 host 도 L20→40 28.5 meV 변함(L20 이미지 겹침).
+- E_Si −5.424782, E_Ga −2.906360 eV/atom (TOTEN), E_Ga−E_Si = +2.518422.
