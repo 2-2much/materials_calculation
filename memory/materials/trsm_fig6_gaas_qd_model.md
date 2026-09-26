@@ -84,7 +84,7 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 
 ## 2026-09-26 다음 단계 논의: CKT(0D) 로 Si_Ga⁺ 1shot
 - VASP CKT 태그 (Zenodo OUTCAR 에서 확인, 6.5.1): `LTRUNCATE=T`, `IDIMENSIONALITY=0`(분자)/2(표면), `ISURFACE`(2D 법선),
-  `LCOARSEN`(기본 T "preferred"), `IPAD`. 논문 저자 2D 계산은 LCOARSEN=F·IPAD=2. 0D 는 LCOARSEN=F 면 27배 FFT → 우리 격자(336³@L25)엔 불가.
+  `LCOARSEN`(**기본 F**, 위키가 0D 에 T 권장), `IPAD`(기본 0D=3, 2D=2), `FACTOR`(R_c/셀길이, 기본 0D=√3, 2D=1). 위키 https://vasp.at/wiki/KERNEL_TRUNCATION/LTRUNCATE — 블록형 `KERNEL_TRUNCATION { ... }` 권장, 경계에 원자 금지(모티프 중앙 배치), 문제 시 IPAD=1·FACTOR=0.5(무패딩)로 진단. 논문 저자 2D 계산은 LCOARSEN=F·IPAD=2. 0D LCOARSEN=F 는 27배 FFT → 우리 격자(336³@L25)엔 불가.
 - 예측: CKT = 고립 +1 QD = JM 의 L→∞ → ΔH_CKT ≈ +0.32~0.34 eV, L 무관. JCC(−0.564)와의 차 = −δE0(∞) ≈ 0.88 eV
   ≈ e²/2R(R=7.9 → 0.91): 고립 QD 충전에너지. host_qp1 CKT 로 δE0 가 L 무관 −0.88 인지 직접 검증 가능.
 - 이전 Fig.8 재현(`33-inAs/.../11-Surface-defect_TOY-model/CKT_PRB`)은 Zenodo OUTCAR 기반: 2D CKT 는 진공 무관(1–2 meV)이나 면내 L 의존 남음.

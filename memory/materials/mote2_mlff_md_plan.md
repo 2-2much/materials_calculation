@@ -149,22 +149,3 @@ NELECT(V_Te 셀) = 56x14 + 111x6 = **1450**, 기본 NBANDS ≈ 808.
 - 템플릿/계산 drift: `calc/V_Te/q0/02_relax_sp/INCAR`가 EDIFF=1E-4·KPAR=1로 구세대.
 
 관련: [[mote2_vte_defect_setup]] [[mote2_vte_size_scan_results]] [[mote2_gamma_vs_mesh_measured]]
-
----
-
-## 2026-09-15~25 갱신 (실행 + 측정)
-
-- **INCAR 실수정·thermostat 근거·사다리 개정** → [[mote2_mlff_incar_fixes_and_ladder]]
-  (⚠ 디스크 INCAR 의 `LANGEVIN_GAMMA` 가 값 **1개**였다 = Te 가 thermostat 밖이었음)
-- **실측 비용·병렬 스케일링** → [[mote2_mlff_budget_and_scaling]]
-  (4→12노드 speedup **1.41배**·효율 47%. FF step 0.017 s, DFT step 9 iter≈140 s, f≈13%.
-  ★FF-only 구간 뒤 DFT step 이 9→27 iter 로 비싸지고 상한은 cold start 34 iter)
-- **셀 크기 판정** → [[mote2_distorted_vte_cell_size]]
-  (★distorted V_Te 변위장이 5×5 경계에서 **되올라간다** → 5×5 부족.
-  ★hex 7×7(147원자)이 rect 7×4(168)를 원자수·image거리·C3 전 항목에서 이긴다)
-- **Γ-only / 학습셀 정책** → [[mote2_mlff_cell_kpoint_policy]]
-  (Γ-only 는 1T/1T′ 가 금속이라 불가 + 상별 k오차가 가짜 2H–1T′ 에너지차를 학습시킨다)
-- **범용 MLIP 대안** → [[sevennet_jh_tool]] (학습 비용 0, 단 footing 달라 구조 생성기 전용)
-
-★ 위 `01-Train/` 초안 폐기 여부는 여전히 미정. 새로 만든 것은
-`04-MD/00-budget_test/{t300,t1200}` + `submit.sh` + `README.md` (사용자 승인 후 생성).

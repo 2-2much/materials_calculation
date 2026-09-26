@@ -135,6 +135,11 @@
 - [★04 HSE 1shot 셋업](inas_facet_hse_1shot_setup.md) — a0=6.0982965656·스케일 규약. ★**09 트리는 LVHAR 없어 벌크 재실행 필요**·LHFSKIP은 sham에 없음·HSE 첫 4스텝 −1.3e4는 정상
 - [★HSE 슬랩 쌍극자 미수렴 함정](hse_slab_dipole_convergence_trap.md) — 총에너지 수렴해도 **쌍극자가 덜 수렴**→진공 잔류장→IP 118meV 오차. 게이트=vac_slope<1meV/Å. 처방=PBE시드+Damped(5.4배 싸다)
 - [inas111 aa hse 1shot 23](inas111_aa_hse_1shot_23.md) — kohn 23-111AA/__HSE06_1shot__ — 아세테이트 (111)A pure/V_In HSE06 1shot. 진공을 22트리 것으로 줄일 때 'HSE 격자에서' 맞춰야 35트리와 같은 footing
+- [mote2 distorted vte cell size](mote2_distorted_vte_cell_size.md) — ★distorted V_Te는 5×5에서 수렴 안 한다(변위장이 셀 경계에서 되올라감) — 크기스캔의 '5×5 충분'은 대칭 V_Te·전자적 기준이라 다른 질문. ★hex 7×7이 rect 7×4를 전 항목에서 이긴다
+- [mote2 mlff budget and scaling](mote2_mlff_budget_and_scaling.md) — ★168원자 MLFF-MD 실측 — 4→12노드 speedup 1.41배뿐(효율 47%)·FF step 0.017s vs DFT step 140s·★FF-only 구간 뒤 DFT step이 비싸진다(9→27 iter, 상한은 cold start 34)
+- [mote2 mlff cell kpoint policy](mote2_mlff_cell_kpoint_policy.md) — ★Γ-only 단축 철회(1T/1T'는 금속 + 상별 k오차가 가짜 2H-1T' 에너지차를 학습시킨다). ★MLFF는 국소적이라 학습셀≠탐색셀. primitive는 온도가 아니라 변형(strain) 데이터용
+- [mote2 mlff incar fixes and ladder](mote2_mlff_incar_fixes_and_ladder.md) — 04-MD INCAR 실수정 기록(★디스크의 LANGEVIN_GAMMA가 값 1개였다 = Te가 thermostat 밖) + Langevin 채택 근거 + ★사다리 개정(300/600 폐기, 1500K 의도적 파괴 단 추가). 설계 본문은 mote2_mlff_md_plan
+- [sevennet jh tool](sevennet_jh_tool.md) — JH가 준 SevenNet 7net-omni 래퍼(~/materials/__sevennet-test__) — ASE+LBFGS static relax 전용·CPU 단일프로세스. ⚠원본 env 소실(kuee1020 triqs 3.12→3.14). torch는 sevenn 의존성에 없어 CPU index로 따로 깔아야 함
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
@@ -156,6 +161,7 @@
 - [★11-CoFFEE_correction 트리](jcc_coffee_correction_tree.md) — Ecut8 수렴·정렬부호 −1·E_iso는 Lz무관·α=1 예외. ⚠doubling 증분이 커진다
 - [★h-BN 유전율 → CoFFEE 환산](hbn_dielectric_for_coffee.md) — ⚠**단층엔 Slab 말고 Gaussian 프로파일**. 셀평균→진폭 환산. JCC 논문엔 ε 없음
 - [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — ★CoFFEE 정본 문서. np.arange 격자 버그 + 로컬 패치 8건(고유분해 솔버로 bicgstab 대체 → **α=8이 1307→54초**, In_As_1 13케이스 4자리 재현). Ecut 20→8 2단계 검증 통과. 스위치·실행법은 `CoFFEE/LOCAL_PATCHES.md`
+- [kohn conda forge and venv](kohn_conda_forge_and_venv.md) — kohn 네트워크/파이썬 환경 — conda-forge CondaHTTPError 000 은 차단 아닌 일시장애(IPv6 죽어있음 + fetch_threads 5 × connect timeout 9.15s). ⚠py4vasp env 는 pip 메타데이터가 깨져 있다 → venv 권장
 
 ## 작업 방식 / 피드백
 - ["사다리" 대신 "수렴 스캔"](feedback_convergence_scan_wording.md) — 파라미터 계열 계산의 호칭. 옛 메모리·스크립트의 "사다리"는 같은 뜻
@@ -182,9 +188,3 @@
 - [1T' PSTRESS 스캔](mote2_1tp_pstress_scan.md) — ★E(A) 최소는 정의상 P=0 → a0 재산출 아님. 목적은 b/a 변화·01-run→02-restart 2회(Pulay)·⚠FFT 격자 고정 금지
 - [★MoTe2 V_Te MLFF-MD 설계 (04-MD)](mote2_mlff_md_plan.md) — 7x4 직교셀·G 2x2x1 확정·★ML_MODE=train은 ISIF=0/1이면 즉사·온도는 pristine으로 상한만 잡고 스캔은 ML_MODE=run·⚠실행은 kohn, 초안은 bloch
 - [★MoTe2 Γ-only vs k-mesh 실측](mote2_gamma_vs_mesh_measured.md) — 2H는 기하 OK(0.015Å)/에너지 아웃(115meV), 1T는 기하도 파탄(0.092Å). ★금속성은 band-index로 판정(occ>0.5는 가짜 갭)
-- [★04-MD INCAR 실수정 + 사다리 개정](mote2_mlff_incar_fixes_and_ladder.md) — ⚠디스크 INCAR의 LANGEVIN_GAMMA가 값 1개=Te가 thermostat 밖이었다. ★사다리 개정(300/600 폐기·1500K 의도적 파괴 단 추가)·γ는 작을수록 좋다(Kramers)·⚠내 ISIF=0 오답 정정
-- [★MLFF-MD 실측 비용·스케일링](mote2_mlff_budget_and_scaling.md) — ★4→12노드 speedup 1.41배뿐(효율 47%·노드시간 2.1배 손해)→4노드가 맞다. FF step 0.017s vs DFT 9iter≈140s·f≈13%. ★FF-only 구간 뒤 DFT가 9→27 iter로 비싸짐(상한=cold 34). 코어 아닌 **구조로 병렬화**
-- [★distorted V_Te엔 5×5가 부족](mote2_distorted_vte_cell_size.md) — 변위장이 셀 경계 8.76Å에서 **되올라간다**. ★Te 하나가 자리를 완전히 이탈(재구성). ★**hex 7×7(147)이 rect 7×4(168)를 전 항목에서 이긴다**(C3 보존). 결정적 검증=큰 셀 이식 재이완
-- [MLFF 셀/k점 정책](mote2_mlff_cell_kpoint_policy.md) — Γ-only 철회(금속+상별 k오차가 가짜 2H-1T′차 학습). ★학습셀≠탐색셀. primitive는 온도 아닌 **변형** 데이터용. ⚠⚠작은셀 학습안은 ML_AB 동질성(Δk)과 충돌 — 확인 전엔 7×4 단일셀
-- [★SevenNet 7net-omni 래퍼 (JH)](sevennet_jh_tool.md) — ASE+LBFGS **static relax 전용**·CPU 단일프로세스. 예제=Au위 HHTP 969원자 61분. ⚠원본 env 소실·**torch는 sevenn 의존성에 없어 CPU index로 따로** 설치. DFT 대비 435배 싸나 footing 달라 **구조 생성기 전용**
-- [kohn 네트워크 + venv 권장](kohn_conda_forge_and_venv.md) — conda-forge HTTP 000은 **차단 아닌 일시장애**(IPv6 죽음+fetch_threads5×timeout9.15s). ⚠**py4vasp env는 pip 메타데이터가 깨져 있다**(numpy/ase dist-info 이중) → 새 패키지 금지, venv 쓸 것
