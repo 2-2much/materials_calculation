@@ -80,4 +80,7 @@ submit_relax.sh (SLURM)
 - env = **conda `~/.conda/envs/sevennet`** (venv 아님, python 3.12.14 conda-forge). torch **2.14.0+cpu**, sevenn 0.13.0, ase 3.29.0
 - ⚠ `~/.local` user-site(pymatgen 등)가 섞여 보인다 → 설치·실행 모두 **`PYTHONNOUSERSITE=1`**
 - 제출 스크립트는 `conda activate` 대신 `export PATH=$HOME/.conda/envs/sevennet/bin:$PATH` (set -u 충돌 회피), kuee1020 LD_LIBRARY_PATH 줄 삭제
-- 빠른 테스트 = `JH-sevennet-cal/02-hfo2-primitive/` — SevenNet 저장소 `tests/data/systems/hfo2.extxyz` 첫 프레임(단사정 Hf4O8 12원자, DFT E=−347.81221934 eV), cascade 4코어
+- 빠른 테스트 = `JH-sevennet-cal/02-hfo2-primitive/` — SevenNet 저장소 `tests/data/systems/hfo2.extxyz` 첫 프레임(단사정 Hf4O8 12원자). job 61387(cascade2 4코어) **39초·19 step 수렴, E=−121.803 eV(−10.15 eV/atom)**
+  - ⚠ extxyz 안의 `energy=−347.81` 은 **비교 대상 아님**(−29 eV/atom = 다른 코드/기준). 7net 값은 MP-PBE 급(−10.1 eV/atom)과 맞다
+- ⚠ **체크포인트는 wheel 에 안 들어 있다** — 첫 실행 때 site-packages 로 받는다(61387 std.log 에 `Checkpoint downloaded`). 한 번 받으면 재사용. `7net-omni-i12`(220 MB)는 로그인 노드에서 미리 받아둠(`sevenn.util.pretrained_name_to_path`)
+- MD 노트북 = `~/materials/__sevennet-test__/01-temperature-MD/` — Colab cueq 노트북을 CPU/papermill 로 변환(원본 사본 동봉). `sbatch submit_md.sh [test]` → `out_<jobid>.ipynb`. env 에 papermill·ipykernel 추가, `python3` 커널이 env 것으로 잡힘(`~/.local` 커널은 `ipynb` 하나뿐)
