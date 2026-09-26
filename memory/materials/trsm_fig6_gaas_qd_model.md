@@ -88,3 +88,6 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 - 예측: CKT = 고립 +1 QD = JM 의 L→∞ → ΔH_CKT ≈ +0.32~0.34 eV, L 무관. JCC(−0.564)와의 차 = −δE0(∞) ≈ 0.88 eV
   ≈ e²/2R(R=7.9 → 0.91): 고립 QD 충전에너지. host_qp1 CKT 로 δE0 가 L 무관 −0.88 인지 직접 검증 가능.
 - 이전 Fig.8 재현(`33-inAs/.../11-Surface-defect_TOY-model/CKT_PRB`)은 Zenodo OUTCAR 기반: 2D CKT 는 진공 무관(1–2 meV)이나 면내 L 의존 남음.
+- ★2026-09-26 **02-CKT 는 kohn** `~/materials/__JCC-reproduce__/20-TRSM_Fig6_GaAsQD/02-CKT` (bloch 자원 부족). 15잡 입력·README 완성, 사용자가 실행.
+  cascade2 32rank/node, NCORE16/NSIM32, bin 6.5.1 wan90.beef.plugin.lhfskip.gam.x(=15-Lax). EDIFF=1E-5·LSCALAPACK=.T. 는
+  **사용자가 bloch 01-scan 에서 이미 바꾼 값** 을 따름. geom/ = bloch 00-relax POSCAR/CONTCAR (md5 동일). kohn SSH 는 BatchMode 로 됨.
