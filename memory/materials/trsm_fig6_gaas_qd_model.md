@@ -81,3 +81,10 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 - E_Si −5.424782, E_Ga −2.906360 eV/atom (TOTEN), E_Ga−E_Si = +2.518422.
 - 1/L³ 항: B(JM)=1708, |B(δE0)|=1701 → R_eff = 7.9 Å = QD 표면(heavy 7.47 ~ H 8.1). 편극 표면전하 해석과 일치.
   직접 검증(∫Δρ r²)은 CHGCAR 가 0바이트(LCHARG=.F.)라 미실시 — 하려면 host q0/qp1 L25 를 LCHARG=.T. 로 재계산.
+
+## 2026-09-26 다음 단계 논의: CKT(0D) 로 Si_Ga⁺ 1shot
+- VASP CKT 태그 (Zenodo OUTCAR 에서 확인, 6.5.1): `LTRUNCATE=T`, `IDIMENSIONALITY=0`(분자)/2(표면), `ISURFACE`(2D 법선),
+  `LCOARSEN`(기본 T "preferred"), `IPAD`. 논문 저자 2D 계산은 LCOARSEN=F·IPAD=2. 0D 는 LCOARSEN=F 면 27배 FFT → 우리 격자(336³@L25)엔 불가.
+- 예측: CKT = 고립 +1 QD = JM 의 L→∞ → ΔH_CKT ≈ +0.32~0.34 eV, L 무관. JCC(−0.564)와의 차 = −δE0(∞) ≈ 0.88 eV
+  ≈ e²/2R(R=7.9 → 0.91): 고립 QD 충전에너지. host_qp1 CKT 로 δE0 가 L 무관 −0.88 인지 직접 검증 가능.
+- 이전 Fig.8 재현(`33-inAs/.../11-Surface-defect_TOY-model/CKT_PRB`)은 Zenodo OUTCAR 기반: 2D CKT 는 진공 무관(1–2 meV)이나 면내 L 의존 남음.
