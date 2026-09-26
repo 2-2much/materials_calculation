@@ -91,3 +91,12 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 - ★2026-09-26 **02-CKT 는 kohn** `~/materials/__JCC-reproduce__/20-TRSM_Fig6_GaAsQD/02-CKT` (bloch 자원 부족). 15잡 입력·README 완성, 사용자가 실행.
   cascade2 32rank/node, NCORE16/NSIM32, bin 6.5.1 wan90.beef.plugin.lhfskip.gam.x(=15-Lax). EDIFF=1E-5·LSCALAPACK=.T. 는
   **사용자가 bloch 01-scan 에서 이미 바꾼 값** 을 따름. geom/ = bloch 00-relax POSCAR/CONTCAR (md5 동일). kohn SSH 는 BatchMode 로 됨.
+
+## ★2026-09-26 02-CKT 결과 (kohn, analyze_ckt.py)
+- **ΔH_f^CKT = +0.331 eV** (L35/40) = 3DJM 외삽 E∞ (+0.315 A자유 / +0.336 A고정) → 두 독립 경로가 고립 +1 QD 에 수렴. 예측 적중.
+- **δE0^CKT = −0.8955 (전 L 0.4 meV)** = 3DJM δE0 외삽. IP 6.372, ε_HOMO −5.476(진공 기준, L 무관), 갭 2.721.
+  ΔH_CKT − ΔH_JCC = 0.894 = −δE0 = 고립 QD 충전 곡률.
+- ⚠★ **0D CKT 이온–이온 항(TEWEN) 이 작은 셀에서 틀림**: L20 +13117, L25 +810, L30 +7.9 eV, L35=L40 8자리 동일.
+  가장자리 원자–경계 6.9 Å 실패 / 9.4 Å 수렴. host vs SiGa 오차 달라 ΔH raw 망가짐, 같은 이온(q0/qp1)끼리는 상쇄 → IP 멀쩡.
+  TOTEN−TEWEN(L)+TEWEN(∞) 교체하면 전 L 0.330–0.336. 원인 미확인. **0D CKT 쓸 땐 TEWEN 의 L 수렴 필수 점검.**
+  TEWEN(수렴) = 직접합 + 7.19(host)/7.00(SiGa) eV 상수.
