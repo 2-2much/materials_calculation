@@ -75,3 +75,9 @@ submit_relax.sh (SLURM)
 아는 답(5×5 distorted)으로 먼저 검증할 것.
 
 관련: [[kohn_conda_forge_and_venv]] [[mote2_mlff_budget_and_scaling]] [[feedback_validate_diagnostic_first]]
+
+## ★ 설치 완료 (2026-09-26, kohn)
+- env = **conda `~/.conda/envs/sevennet`** (venv 아님, python 3.12.14 conda-forge). torch **2.14.0+cpu**, sevenn 0.13.0, ase 3.29.0
+- ⚠ `~/.local` user-site(pymatgen 등)가 섞여 보인다 → 설치·실행 모두 **`PYTHONNOUSERSITE=1`**
+- 제출 스크립트는 `conda activate` 대신 `export PATH=$HOME/.conda/envs/sevennet/bin:$PATH` (set -u 충돌 회피), kuee1020 LD_LIBRARY_PATH 줄 삭제
+- 빠른 테스트 = `JH-sevennet-cal/02-hfo2-primitive/` — SevenNet 저장소 `tests/data/systems/hfo2.extxyz` 첫 프레임(단사정 Hf4O8 12원자, DFT E=−347.81221934 eV), cascade 4코어

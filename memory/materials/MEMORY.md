@@ -139,7 +139,7 @@
 - [mote2 mlff budget and scaling](mote2_mlff_budget_and_scaling.md) — ★168원자 MLFF-MD 실측 — 4→12노드 speedup 1.41배뿐(효율 47%)·FF step 0.017s vs DFT step 140s·★FF-only 구간 뒤 DFT step이 비싸진다(9→27 iter, 상한은 cold start 34)
 - [mote2 mlff cell kpoint policy](mote2_mlff_cell_kpoint_policy.md) — ★Γ-only 단축 철회(1T/1T'는 금속 + 상별 k오차가 가짜 2H-1T' 에너지차를 학습시킨다). ★MLFF는 국소적이라 학습셀≠탐색셀. primitive는 온도가 아니라 변형(strain) 데이터용
 - [mote2 mlff incar fixes and ladder](mote2_mlff_incar_fixes_and_ladder.md) — 04-MD INCAR 실수정 기록(★디스크의 LANGEVIN_GAMMA가 값 1개였다 = Te가 thermostat 밖) + Langevin 채택 근거 + ★사다리 개정(300/600 폐기, 1500K 의도적 파괴 단 추가). 설계 본문은 mote2_mlff_md_plan
-- [sevennet jh tool](sevennet_jh_tool.md) — JH가 준 SevenNet 7net-omni 래퍼(~/materials/__sevennet-test__) — ASE+LBFGS static relax 전용·CPU 단일프로세스. ⚠원본 env 소실(kuee1020 triqs 3.12→3.14). torch는 sevenn 의존성에 없어 CPU index로 따로 깔아야 함
+- [sevennet jh tool](sevennet_jh_tool.md) — ★2026-09-26 설치완료: conda env sevennet·PYTHONNOUSERSITE=1·테스트=02-hfo2-primitive. JH가 준 SevenNet 7net-omni 래퍼(~/materials/__sevennet-test__) — ASE+LBFGS static relax 전용·CPU 단일프로세스. ⚠원본 env 소실(kuee1020 triqs 3.12→3.14). torch는 sevenn 의존성에 없어 CPU index로 따로 깔아야 함
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
