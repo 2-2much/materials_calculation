@@ -84,3 +84,4 @@ submit_relax.sh (SLURM)
   - ⚠ extxyz 안의 `energy=−347.81` 은 **비교 대상 아님**(−29 eV/atom = 다른 코드/기준). 7net 값은 MP-PBE 급(−10.1 eV/atom)과 맞다
 - ⚠ **체크포인트는 wheel 에 안 들어 있다** — 첫 실행 때 site-packages 로 받는다(61387 std.log 에 `Checkpoint downloaded`). 한 번 받으면 재사용. `7net-omni-i12`(220 MB)는 로그인 노드에서 미리 받아둠(`sevenn.util.pretrained_name_to_path`)
 - MD 노트북 = `~/materials/__sevennet-test__/01-temperature-MD/` — Colab cueq 노트북을 CPU/papermill 로 변환(원본 사본 동봉). `sbatch submit_md.sh [test]` → `out_<jobid>.ipynb`. env 에 papermill·ipykernel 추가, `python3` 커널이 env 것으로 잡힘(`~/.local` 커널은 `ipynb` 하나뿐)
+- ★ **kohn CPU 실측 (job 61402, 2026-09-27)**: MoTe2 1079원자 · 7net-omni-i12 · cascade 36코어 → 벤치 14.74 s/step, **MD 실속도 12.5 s/step** (2,600 step ≈ 9 h). Colab T4+cueq 0.31 s/step 대비 **~40배 느림**. 1000원자급 짧은 MD 는 Colab, kohn 은 긴 MD·작은 셀 다중 잡용
