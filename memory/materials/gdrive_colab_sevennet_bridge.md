@@ -22,3 +22,8 @@ metadata:
 - `sevennet-test` 폴더 = `1xCqLN7DG6uOE7e7IlArTHg8g1EVmz2kC` (My Drive 루트)
 
 관련: [[sevennet_jh_tool]] [[feedback_code_and_readme_only]]
+
+## ⚠ 큰 파일 업로드
+커넥터 업로드는 내용을 tool 인자로 직접 넣어야 함 → 1000줄 POSCAR(59KB)는 비현실적·오류위험. 
+**Drive에 이미 있는 원본 + 작은 생성 스크립트(md5 자체검증)** 를 올리고 Colab에서 `!python` 으로 만들게 할 것.
+예: `Armchair_9x10/make_AC_DiV.py`(2026-09-27) → A/B/C 15·30·45 DiV AC 구조. 파일크기로 업로드 무결성 확인.

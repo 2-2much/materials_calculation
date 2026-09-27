@@ -21,3 +21,8 @@ metadata:
 - ★핵심: 고정 조성 MD의 T_anneal은 V_Te 농도를 못 바꾼다. 실험의 T_anneal은 Te 탈착(μ_Te)을 통해 농도를 바꿈 → 다리는 μ_Te(T,P).
 
 관련: [[sevennet_jh_tool]] [[gdrive_colab_sevennet_bridge]] [[mote2_vte_defect_setup]]
+
+## 고농도 DiV AC 구조 (2026-09-27, 사용자 요청 — "빠르게 실험팀에 metastable 보여주기")
+Drive `Armchair_9x10.vasp`(pristine AC, 1080원자, Mo dimer 전부 0°·2.94Å@1.07) 에 DiV 모티프(Te idx 675/955)를 Tile1 평행이동 복제.
+9×10 셀은 직사각 부분격자만 가능 → 15/30/45/90 DiV만 가능. A=15(흩음, Te−4.2%) · C=30(세로줄, −8.3%) · B=45(가로줄, −12.5%). 90은 분해위험으로 제외.
+생성기 = Drive `Armchair_9x10/make_AC_DiV.py`, 로컬 사본은 세션 scratchpad(휘발).
