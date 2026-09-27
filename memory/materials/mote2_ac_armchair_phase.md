@@ -26,3 +26,10 @@ metadata:
 Drive `Armchair_9x10.vasp`(pristine AC, 1080원자, Mo dimer 전부 0°·2.94Å@1.07) 에 DiV 모티프(Te idx 675/955)를 Tile1 평행이동 복제.
 9×10 셀은 직사각 부분격자만 가능 → 15/30/45/90 DiV만 가능. A=15(흩음, Te−4.2%) · C=30(세로줄, −8.3%) · B=45(가로줄, −12.5%). 90은 분해위험으로 제외.
 생성기 = Drive `Armchair_9x10/make_AC_DiV.py`, 로컬 사본은 세션 scratchpad(휘발).
+
+## ★A(15DiV) 결과 (2026-09-27, Drive md_20260927_061655_473437_15DiV_1.07strained)
+- run_config: **dt_fs=5.0**(weekly의 1fs 아님)·tau 100fs·seed 42·**do_relax=False**(→ energy_comparison의 "E_initial_relaxed"는 미이완 이상구조라 ΔE −121.6eV는 상 비교 아님)
+- 층 유지: Te 690 전부 Mo 3배위, Te 한 개만 위→아래 이동. 분해 없음
+- 결과 = **1Tp**(zigzag ∥ x, 60°/120° 짧은결합), AC 0° 짧은결합 180→21(잔존은 DiV 근처 무질서 영역)
+- ★순서변수(Mo마다 최근접 Mo 방향) 시간변화: AC 1.00 → 0.56(0.5ps, ~700K) → 0.27(1ps, ~800K). **승온 램프 중에 이미 붕괴**, 1000K hold는 무관. → AC는 SevenNet에서 ≥700K 0.5ps도 못 버팀. 다음=0K relax 후 300K hold로 준안정성 자체 시험
+- 분석 스크립트는 scratchpad(휘발) — 순서변수 정의: 각 Mo의 최근접 Mo 벡터 각도를 60° 단위로 반올림(0°=AC)
