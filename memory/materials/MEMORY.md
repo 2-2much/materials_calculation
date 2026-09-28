@@ -190,3 +190,4 @@
 - [1T' PSTRESS 스캔](mote2_1tp_pstress_scan.md) — ★E(A) 최소는 정의상 P=0 → a0 재산출 아님. 목적은 b/a 변화·01-run→02-restart 2회(Pulay)·⚠FFT 격자 고정 금지
 - [★MoTe2 V_Te MLFF-MD 설계 (04-MD)](mote2_mlff_md_plan.md) — 7x4 직교셀·G 2x2x1 확정·★ML_MODE=train은 ISIF=0/1이면 즉사·온도는 pristine으로 상한만 잡고 스캔은 ML_MODE=run·⚠실행은 kohn, 초안은 bloch
 - [★MoTe2 Γ-only vs k-mesh 실측](mote2_gamma_vs_mesh_measured.md) — 2H는 기하 OK(0.015Å)/에너지 아웃(115meV), 1T는 기하도 파탄(0.092Å). ★금속성은 band-index로 판정(occ>0.5는 가짜 갭)
+- [MoTe2 μ 기준상](mote2_mu_reservoir_phases.md) — Te=α-Te(T,P는 Te2), ★Te-poor 한계=Mo3Te4(bcc Mo 아님), W 상한=WTe2 → W_Mo는 μ_Te 약분
