@@ -41,3 +41,9 @@ Drive `Armchair_9x10.vasp`(pristine AC, 1080원자, Mo dimer 전부 0°·2.94Å@
 - 300K 5ps: 0.13~0.18 유지(추가 변화 거의 없음). 300K→0K E=−6219.2 · 이전 1000K→0K E=−6244.2 (고온이 29 eV 더 낮은 1Tp 정돈)
 - ★해석: 9×10+DiV로 대칭이 깨지면 SevenNet의 AC는 **극소점이 아니라 안장점**일 가능성. Tile1(4 f.u.) SevenNet/DFT의 'AC 준안정'은 작은 셀 대칭이 1Tp 방향 힘을 0으로 막은 결과일 수 있음
 - 다음 판정자 = pristine AC에 rattle(0.02Å) 후 이완 — Tile1·3×3·9×10, SevenNet 먼저, 살아남지 못하면 DFT(Tile1 rattle 또는 Γ phonon)로 확인
+
+## ★AC 결합 위상 확정 + 문헌 선례 (2026-09-28)
+- `Armchair_9x10_SingV_1.07strained.vasp` 분석: Mo **360개 전부 짧은 결합(2.9Å) 정확히 1개, 전부 0° 평행** → **고립 Mo₂ 이량체 180개**(나머지 3.5/3.6Å). 1T'(Mo당 2개, 지그재그 사슬)와 위상이 다르다
+- 문헌조사: 같은 패턴을 **다른 6족 TMD에서 보고한 것 못 찾음**. 최근접 선례 = **단층 IrTe₂ 2×1 이량체상**(Nat Commun 2022, 벌크엔 없음, 갭>1eV, Ir–Ir 3.12 vs 3.88Å, 국소 singlet) — 단 Ir d⁵(단일결합) vs Mo d², Fig.4b로 Ir당 결합 1개인지 미확인
+- d² 고립 이량체 선례는 TMD 밖: 비틀린 루틸 MoO₂/WO₂. "1T't'"(홀도핑 MoS₂)는 1T'과 같은 셀·부분 이량화라 AC 아님. "2×1"만으로는 1T'(chains of dimers)와 구분 안 됨
+- 제안(미실행): MoS₂/MoSe₂/WTe₂/WSe₂에 AC 만들어 SevenNet 추세 → DFT 확인
