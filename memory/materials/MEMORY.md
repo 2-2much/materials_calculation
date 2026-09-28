@@ -141,6 +141,7 @@
 - [mote2 mlff incar fixes and ladder](mote2_mlff_incar_fixes_and_ladder.md) — 04-MD INCAR 실수정 기록(★디스크의 LANGEVIN_GAMMA가 값 1개였다 = Te가 thermostat 밖) + Langevin 채택 근거 + ★사다리 개정(300/600 폐기, 1500K 의도적 파괴 단 추가). 설계 본문은 mote2_mlff_md_plan
 - [sevennet jh tool](sevennet_jh_tool.md) — SevenNet 7net-omni 래퍼·conda env sevennet·kohn CPU 1079원자 12.5 s/step(Colab T4의 40배)
 - [Drive↔Colab SevenNet 연동](gdrive_colab_sevennet_bridge.md) — Claude는 Drive 입출력만, Colab 실행은 사용자. 작업경로=내 드라이브/01-QnMSG-연구/MoTe2, cueq 노트북 사본으로
+- [Colab은 항상 cueq 가속기](feedback_colab_always_cueq.md) — 작은 셀도 enable_cueq. 사용자 지시
 - [★MoTe2 AC(1Tpp) 상](mote2_ac_armchair_phase.md) — ★AC=고립 Mo₂ 이량체(Mo당 결합1, 1T'은 2)·선례=단층 IrTe₂ 2×1. 1T' 변종 아닌 준안정상·벌점은 4f.u.셀당·SevenNet 1DiV/4f.u.에서 −11meV 역전(오차 이하)·★MD T_anneal은 V_Te 농도를 못 바꾼다
 
 ## 참고 자료
