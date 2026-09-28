@@ -47,3 +47,9 @@ Drive `Armchair_9x10.vasp`(pristine AC, 1080원자, Mo dimer 전부 0°·2.94Å@
 - 문헌조사: 같은 패턴을 **다른 6족 TMD에서 보고한 것 못 찾음**. 최근접 선례 = **단층 IrTe₂ 2×1 이량체상**(Nat Commun 2022, 벌크엔 없음, 갭>1eV, Ir–Ir 3.12 vs 3.88Å, 국소 singlet) — 단 Ir d⁵(단일결합) vs Mo d², Fig.4b로 Ir당 결합 1개인지 미확인
 - d² 고립 이량체 선례는 TMD 밖: 비틀린 루틸 MoO₂/WO₂. "1T't'"(홀도핑 MoS₂)는 1T'과 같은 셀·부분 이량화라 AC 아님. "2×1"만으로는 1T'(chains of dimers)와 구분 안 됨
 - 제안(미실행): MoS₂/MoSe₂/WTe₂/WSe₂에 AC 만들어 SevenNet 추세 → DFT 확인
+
+## ★rattle 시험 (2026-09-28, Drive Armchair_9x10/sevennet_rattle_results/20260928_104438_AC_4x5_vol-rlx_rattle, 노트북 sevennet_AC_rattle_test.ipynb)
+- 입력 AC_4x5_vol-rlx.vasp = DFT로 AC 격자까지 이완(무변형), 240원자, dimer ∥x 2.81Å
+- ★SevenNet에서 **AC는 진짜 극소점**: rattle ±0.02Å ×3 seed 모두 AC 1.00 복귀, E_final 비트 동일(−1413.1406), 29 step 수렴(FMAX 0.005)
+- ★격자 비교: AC 이완 tile a=7.192 b=6.010 (b/a 0.836 vs 육각 0.866). 2H 격자 대비 a +2.7%, b −0.9%. **"1.07" 셀은 AC 기준 a +4.2%, b +8.0%**(비등방)
+- → 9×10 15DiV 붕괴 원인 후보 = (a) AC에 비등방 인장 (b) DiV. 분리 시험 필요: pristine AC를 2H 격자·1.07 격자에서 rattle
