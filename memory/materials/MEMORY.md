@@ -12,7 +12,7 @@
 - [Fig.3/Eq.(7) 결함 무관성](jcc_eq7_defect_independence.md) — ΔH_f⁰와 γ/L_S가 상쇄. 조건은 '결함 무관'이 아니라 '두 모델에서 같음'. 숨은 가정=ρ_d의 z-국재
 - [★차원 계층 실측 + 1D엔 SEJM이 없다](jcc_dimension_hierarchy_measured.md) — δE₀=(q²e²/L_ax)(C−ln L⊥)+b/L⊥² — ★ln 계수 해석값과 **−0.08%** 일치(−5.5%는 1/L⊥² 오염)·JCC가 b도 지움. ★2D는 L_z→0이 기하극한이라 SEJM 가능, 1D는 0점이 ln L⊥=C≈ln R — **재료 길이가 들어온다**. ⚠0D는 젤리움·이미지가 둘 다 1/L이라 분리 축이 없다
 - [★축방향 L⊥고정 스캔엔 극한 없음 (09-24 정정)](jcc_lax_axial_jcc_slower.md) — L_ax>L⊥에서 국재전하가 시트 적층→+B·L 발산(B≈0.5·πe²/6L⊥²). 3DJM·JCC 공통, JCC 못 지움. n9 평평함은 교차 최소점. ⚠L⊥ 먼저 → L_ax 순서
-- [16 정육면체 셀 스캔 (09-29)](bnnt_lcube_scan_16.md) — L_x=L_y=L_z=L_ax로 3DJM 1/L 수렴 시험. 15 이완기하 1shot·18잡 입력 완비·**미제출**. n3은 번들→맞춤 제외
+- [16 정육면체 셀 스캔 (09-29)](bnnt_lcube_scan_16.md) — L_x=L_y=L_z=L_ax로 3DJM 1/L 수렴 시험. 17/18 완료·analyze.py. ★14 맞춤식→16/n9 0.6meV 일치. ⚠JCC/3DJM H∞ 124meV 차는 n18 전 판정 금지. n3 번들 제외
 - [BNNT V_N 기하 이식 규약](bnnt_vn_geometry_transplant.md) — 이완 변위가 경계에서 안 죽는다(무른 모드 k≈0.08 eV/Å²). 창+셀주기 접기. ★창값은 이완이 되찾음(0.2meV)·앵커는 14/L25가 이미 계산
 - [Read Papers Memory](read_papers_memory.md) — 문헌 근거 필요 시 ~/papers/memory/paper_notes/README.md 인덱스 먼저
 - [InCl3 Cl-As_In Unbound](incl3_cl_as_in_unbound.md) — 03 Cl-As_In q0: Cl이 표면 In에 붙음. ⚠2026-08-04: bound minimum(T2)은 있으나 +183meV metastable · 03에서는 비자성
