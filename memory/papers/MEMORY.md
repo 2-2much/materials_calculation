@@ -5,6 +5,7 @@
 - [arXiv source skill](feedback_arxiv_source_skill.md) — 수식중심 논문은 /arxiv-source로 원본 TeX 확보, 그림중심은 PDF 이미지 판독 병행
 - [Static math in lecture notes](feedback_lecture_note_static_math.md) — 렉노 수식은 MathJax CDN 금지, 정적 HTML(+CSS 분수)로. 일괄 변환기 `.claude/skills/lecture-note/references/tex2static.py`
 - [Figure extraction: composite on white](feedback_figure_extract_white_bg.md) — docx/PDF 그림은 투명배경(P/RGBA) 확인 후 흰 배경 합성. 안 하면 검은 축·라벨이 사라짐
+- [Lecture assets folder](feedback_lecture_assets_folder.md) — 렉노 그림은 `<주제>/lecture_assets/<논문slug>/`에만 저장, 루트에 두지 않음
 
 ## 작업 방식 / 피드백
 - [qa answer brevity](feedback_qa_answer_brevity.md) — 렉쳐노트 Q&A 답변은 짧게 — 비전문가 친화 설명은 가끔만, 길면 가독성이 떨어진다
