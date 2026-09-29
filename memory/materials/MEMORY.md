@@ -135,6 +135,7 @@
 - [★04 HSE 1shot 셋업](inas_facet_hse_1shot_setup.md) — a0=6.0982965656·스케일 규약. ★**09 트리는 LVHAR 없어 벌크 재실행 필요**·LHFSKIP은 sham에 없음·HSE 첫 4스텝 −1.3e4는 정상
 - [★HSE 슬랩 쌍극자 미수렴 함정](hse_slab_dipole_convergence_trap.md) — 총에너지 수렴해도 **쌍극자가 덜 수렴**→진공 잔류장→IP 118meV 오차. 게이트=vac_slope<1meV/Å. 처방=PBE시드+Damped(5.4배 싸다)
 - [inas111 aa hse 1shot 23](inas111_aa_hse_1shot_23.md) — kohn 23-111AA/__HSE06_1shot__ — 아세테이트 (111)A pure/V_In HSE06 1shot. 진공을 22트리 것으로 줄일 때 'HSE 격자에서' 맞춰야 35트리와 같은 footing
+- [mote2 ac armchair phase](mote2_ac_armchair_phase.md) — MoTe2 armchair(AC=1Tpp=LD2) 상 — 1T'의 대칭변종 아님(90°), 벌점은 셀당(4 f.u.) 값. 2V_Te 안정화 임계농도·SevenNet vs DFT 오차·MD T_anneal의 한계
 - [mote2 distorted vte cell size](mote2_distorted_vte_cell_size.md) — ★distorted V_Te는 5×5에서 수렴 안 한다(변위장이 셀 경계에서 되올라감) — 크기스캔의 '5×5 충분'은 대칭 V_Te·전자적 기준이라 다른 질문. ★hex 7×7이 rect 7×4를 전 항목에서 이긴다
 - [mote2 mlff budget and scaling](mote2_mlff_budget_and_scaling.md) — ★168원자 MLFF-MD 실측 — 4→12노드 speedup 1.41배뿐(효율 47%)·FF step 0.017s vs DFT step 140s·★FF-only 구간 뒤 DFT step이 비싸진다(9→27 iter, 상한은 cold start 34)
 - [mote2 mlff cell kpoint policy](mote2_mlff_cell_kpoint_policy.md) — ★Γ-only 단축 철회(1T/1T'는 금속 + 상별 k오차가 가짜 2H-1T' 에너지차를 학습시킨다). ★MLFF는 국소적이라 학습셀≠탐색셀. primitive는 온도가 아니라 변형(strain) 데이터용
@@ -143,6 +144,7 @@
 - [Drive↔Colab SevenNet 연동](gdrive_colab_sevennet_bridge.md) — Claude는 Drive 입출력만, Colab 실행은 사용자. 작업경로=내 드라이브/01-QnMSG-연구/MoTe2, cueq 노트북 사본으로
 - [Colab은 항상 cueq 가속기](feedback_colab_always_cueq.md) — 작은 셀도 enable_cueq. 사용자 지시
 - [★MoTe2 AC(1Tpp) 상](mote2_ac_armchair_phase.md) — ★AC=고립 Mo₂ 이량체(Mo당 결합1, 1T'은 2)·선례=단층 IrTe₂ 2×1. 1T' 변종 아닌 준안정상·벌점은 4f.u.셀당·SevenNet 1DiV/4f.u.에서 −11meV 역전(오차 이하)·★MD T_anneal은 V_Te 농도를 못 바꾼다
+- [sevennet jh tool](sevennet_jh_tool.md) — JH가 준 SevenNet 7net-omni 래퍼(~/materials/__sevennet-test__) — ASE+LBFGS static relax 전용·CPU 단일프로세스. ⚠원본 env 소실(kuee1020 triqs 3.12→3.14). torch는 sevenn 의존성에 없어 CPU index로 따로 깔아야 함
 
 ## 참고 자료
 - [VESTA가 InAs 결합을 안 그리는 이유](vesta_bond_table_inas.md) — SBOND 화이트리스트 In-As 상한 2.66642 < PBE-d 2.6803. ~/.VESTA/style/default.ini 수정 완료
@@ -164,6 +166,7 @@
 - [★11-CoFFEE_correction 트리](jcc_coffee_correction_tree.md) — Ecut8 수렴·정렬부호 −1·E_iso는 Lz무관·α=1 예외. ⚠doubling 증분이 커진다
 - [★h-BN 유전율 → CoFFEE 환산](hbn_dielectric_for_coffee.md) — ⚠**단층엔 Slab 말고 Gaussian 프로파일**. 셀평균→진폭 환산. JCC 논문엔 ε 없음
 - [coffee setup and arange bug](coffee_setup_and_arange_bug.md) — ★CoFFEE 정본 문서. np.arange 격자 버그 + 로컬 패치 8건(고유분해 솔버로 bicgstab 대체 → **α=8이 1307→54초**, In_As_1 13케이스 4자리 재현). Ecut 20→8 2단계 검증 통과. 스위치·실행법은 `CoFFEE/LOCAL_PATCHES.md`
+- [gdrive colab sevennet bridge](gdrive_colab_sevennet_bridge.md) — Google Drive 커넥터로 Colab SevenNet 연동 — Claude는 Drive 파일 읽기/쓰기만, Colab 셀 실행은 사용자가. 기존 노트북·결과 폴더 ID
 - [kohn conda forge and venv](kohn_conda_forge_and_venv.md) — kohn 네트워크/파이썬 환경 — conda-forge CondaHTTPError 000 은 차단 아닌 일시장애(IPv6 죽어있음 + fetch_threads 5 × connect timeout 9.15s). ⚠py4vasp env 는 pip 메타데이터가 깨져 있다 → venv 권장
 
 ## 작업 방식 / 피드백
