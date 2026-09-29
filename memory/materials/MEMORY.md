@@ -12,6 +12,7 @@
 - [Fig.3/Eq.(7) 결함 무관성](jcc_eq7_defect_independence.md) — ΔH_f⁰와 γ/L_S가 상쇄. 조건은 '결함 무관'이 아니라 '두 모델에서 같음'. 숨은 가정=ρ_d의 z-국재
 - [★차원 계층 실측 + 1D엔 SEJM이 없다](jcc_dimension_hierarchy_measured.md) — δE₀=(q²e²/L_ax)(C−ln L⊥)+b/L⊥² — ★ln 계수 해석값과 **−0.08%** 일치(−5.5%는 1/L⊥² 오염)·JCC가 b도 지움. ★2D는 L_z→0이 기하극한이라 SEJM 가능, 1D는 0점이 ln L⊥=C≈ln R — **재료 길이가 들어온다**. ⚠0D는 젤리움·이미지가 둘 다 1/L이라 분리 축이 없다
 - [★축방향 L⊥고정 스캔엔 극한 없음 (09-24 정정)](jcc_lax_axial_jcc_slower.md) — L_ax>L⊥에서 국재전하가 시트 적층→+B·L 발산(B≈0.5·πe²/6L⊥²). 3DJM·JCC 공통, JCC 못 지움. n9 평평함은 교차 최소점. ⚠L⊥ 먼저 → L_ax 순서
+- [16 정육면체 셀 스캔 (09-29)](bnnt_lcube_scan_16.md) — L_x=L_y=L_z=L_ax로 3DJM 1/L 수렴 시험. 15 이완기하 1shot·18잡 입력 완비·**미제출**. n3은 번들→맞춤 제외
 - [BNNT V_N 기하 이식 규약](bnnt_vn_geometry_transplant.md) — 이완 변위가 경계에서 안 죽는다(무른 모드 k≈0.08 eV/Å²). 창+셀주기 접기. ★창값은 이완이 되찾음(0.2meV)·앵커는 14/L25가 이미 계산
 - [Read Papers Memory](read_papers_memory.md) — 문헌 근거 필요 시 ~/papers/memory/paper_notes/README.md 인덱스 먼저
 - [InCl3 Cl-As_In Unbound](incl3_cl_as_in_unbound.md) — 03 Cl-As_In q0: Cl이 표면 In에 붙음. ⚠2026-08-04: bound minimum(T2)은 있으나 +183meV metastable · 03에서는 비자성
@@ -140,10 +141,7 @@
 - [mote2 mlff budget and scaling](mote2_mlff_budget_and_scaling.md) — ★168원자 MLFF-MD 실측 — 4→12노드 speedup 1.41배뿐(효율 47%)·FF step 0.017s vs DFT step 140s·★FF-only 구간 뒤 DFT step이 비싸진다(9→27 iter, 상한은 cold start 34)
 - [mote2 mlff cell kpoint policy](mote2_mlff_cell_kpoint_policy.md) — ★Γ-only 단축 철회(1T/1T'는 금속 + 상별 k오차가 가짜 2H-1T' 에너지차를 학습시킨다). ★MLFF는 국소적이라 학습셀≠탐색셀. primitive는 온도가 아니라 변형(strain) 데이터용
 - [mote2 mlff incar fixes and ladder](mote2_mlff_incar_fixes_and_ladder.md) — 04-MD INCAR 실수정 기록(★디스크의 LANGEVIN_GAMMA가 값 1개였다 = Te가 thermostat 밖) + Langevin 채택 근거 + ★사다리 개정(300/600 폐기, 1500K 의도적 파괴 단 추가). 설계 본문은 mote2_mlff_md_plan
-- [sevennet jh tool](sevennet_jh_tool.md) — SevenNet 7net-omni 래퍼·conda env sevennet·kohn CPU 1079원자 12.5 s/step(Colab T4의 40배)
-- [Drive↔Colab SevenNet 연동](gdrive_colab_sevennet_bridge.md) — Claude는 Drive 입출력만, Colab 실행은 사용자. 작업경로=내 드라이브/01-QnMSG-연구/MoTe2, cueq 노트북 사본으로
-- [Colab은 항상 cueq 가속기](feedback_colab_always_cueq.md) — 작은 셀도 enable_cueq. 사용자 지시
-- [★MoTe2 AC(1Tpp) 상](mote2_ac_armchair_phase.md) — ★AC=고립 Mo₂ 이량체(Mo당 결합1, 1T'은 2)·선례=단층 IrTe₂ 2×1. 1T' 변종 아닌 준안정상·벌점은 4f.u.셀당·SevenNet 1DiV/4f.u.에서 −11meV 역전(오차 이하)·★MD T_anneal은 V_Te 농도를 못 바꾼다
+- [mote2 mu reservoir phases](mote2_mu_reservoir_phases.md) — MoTe2 결함 μ 기준상 문헌조사(2026-09-28) — Te=α-Te 벌크(T,P는 Te2+JANAF), Mo=bcc지만 Te-poor 한계는 Mo3Te4(실험 2상 공존), W=bcc·상한 WTe2 → W_Mo는 μ_Te 약분
 - [sevennet jh tool](sevennet_jh_tool.md) — JH가 준 SevenNet 7net-omni 래퍼(~/materials/__sevennet-test__) — ASE+LBFGS static relax 전용·CPU 단일프로세스. ⚠원본 env 소실(kuee1020 triqs 3.12→3.14). torch는 sevenn 의존성에 없어 CPU index로 따로 깔아야 함
 
 ## 참고 자료
@@ -194,4 +192,4 @@
 - [1T' PSTRESS 스캔](mote2_1tp_pstress_scan.md) — ★E(A) 최소는 정의상 P=0 → a0 재산출 아님. 목적은 b/a 변화·01-run→02-restart 2회(Pulay)·⚠FFT 격자 고정 금지
 - [★MoTe2 V_Te MLFF-MD 설계 (04-MD)](mote2_mlff_md_plan.md) — 7x4 직교셀·G 2x2x1 확정·★ML_MODE=train은 ISIF=0/1이면 즉사·온도는 pristine으로 상한만 잡고 스캔은 ML_MODE=run·⚠실행은 kohn, 초안은 bloch
 - [★MoTe2 Γ-only vs k-mesh 실측](mote2_gamma_vs_mesh_measured.md) — 2H는 기하 OK(0.015Å)/에너지 아웃(115meV), 1T는 기하도 파탄(0.092Å). ★금속성은 band-index로 판정(occ>0.5는 가짜 갭)
-- [MoTe2 μ 기준상](mote2_mu_reservoir_phases.md) — Te=α-Te(T,P는 Te2), ★Te-poor 한계=Mo3Te4(bcc Mo 아님), W 상한=WTe2 → W_Mo는 μ_Te 약분
+- [colab always cueq](feedback_colab_always_cueq.md) — Colab SevenNet 노트북은 원자 수와 무관하게 항상 cuEquivariance 가속기(sevenn[cueq12], enable_cueq) 사용

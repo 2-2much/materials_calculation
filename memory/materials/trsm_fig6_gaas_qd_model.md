@@ -100,3 +100,10 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
   가장자리 원자–경계 6.9 Å 실패 / 9.4 Å 수렴. host vs SiGa 오차 달라 ΔH raw 망가짐, 같은 이온(q0/qp1)끼리는 상쇄 → IP 멀쩡.
   TOTEN−TEWEN(L)+TEWEN(∞) 교체하면 전 L 0.330–0.336. 원인 미확인. **0D CKT 쓸 땐 TEWEN 의 L 수렴 필수 점검.**
   TEWEN(수렴) = 직접합 + 7.19(host)/7.00(SiGa) eV 상수.
+
+## 2026-09-28 문헌조사: QD 충전에너지 ↔ 결함 형성에너지
+보고서 `~/materials/reports/QD 충전에너지와 결함형성에너지.md` (노트 `~/materials/research_notes/QD 충전에너지와 결함형성에너지/`).
+- **"E_ext − E_int = QD 충전에너지 → ε_out 환산으로 환경 의존 결함 형성에너지/CTL" 제일원리 선례 못 찾음.** TRSM 은 "다른 계" 선언만, 피인용 67편 중 QD 적용 0.
+- 가장 가까운 것: Delerue–Lannoo 교과서(2004) §6.1–6.2 (TB/고전: 같은 결정 안이면 1/ε_out 항 소멸), Franceschetti–Zunger JPCB 2000 (InAs addition energy ε_out 의존), Diarra 2007 (나노와이어 도너).
+- ⚠ 신규성 위험: Chan–Lee–Chelikowsky CPC 185, 1564 (2014) "effective work function + capacitance(q²/2C)" — 슈퍼셀 보정 맥락, **본문 미확인**. 도서관으로 확인 필요.
+- 주의: 표면결함은 E_int 도 ε_out 의존(쌍극자), Vogel…Houtepen JACS 2024 = 용매효과 "not purely dielectric".
