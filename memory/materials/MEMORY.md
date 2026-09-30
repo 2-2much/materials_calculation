@@ -11,7 +11,7 @@
 - [★δE₀의 ±q 대칭 = 전하켤레 대칭](jcc_dE0_charge_symmetry.md) — ★δE₀=D−C(Λ 포함). 비대칭은 D에만 갇힘·phosphorene vs arsenene 자연실험. ⚠우리가 잰 건 Λ가 아니라 **Λ+K·L_eff**(42.49)·n=12로는 못 푼다·Λ_CBM−Λ_VBM은 미측정
 - [Fig.3/Eq.(7) 결함 무관성](jcc_eq7_defect_independence.md) — ΔH_f⁰와 γ/L_S가 상쇄. 조건은 '결함 무관'이 아니라 '두 모델에서 같음'. 숨은 가정=ρ_d의 z-국재
 - [★차원 계층 실측 + 1D엔 SEJM이 없다](jcc_dimension_hierarchy_measured.md) — δE₀=(q²e²/L_ax)(C−ln L⊥)+b/L⊥² — ★ln 계수 해석값과 **−0.08%** 일치(−5.5%는 1/L⊥² 오염)·JCC가 b도 지움. ★2D는 L_z→0이 기하극한이라 SEJM 가능, 1D는 0점이 ln L⊥=C≈ln R — **재료 길이가 들어온다**. ⚠0D는 젤리움·이미지가 둘 다 1/L이라 분리 축이 없다
-- [★축방향 L⊥고정 스캔엔 극한 없음 (09-24 정정)](jcc_lax_axial_jcc_slower.md) — L_ax>L⊥에서 국재전하가 시트 적층→+B·L 발산(B≈0.5·πe²/6L⊥²). 3DJM·JCC 공통, JCC 못 지움. n9 평평함은 교차 최소점. ⚠L⊥ 먼저 → L_ax 순서
+- [★축방향 L⊥고정 스캔엔 극한 없음 (09-24 정정)](jcc_lax_axial_jcc_slower.md) — L_ax>L⊥에서 국재전하가 시트 적층→+B·L 발산(B≈0.5·πe²/6L⊥²). 3DJM·JCC 공통, JCC 못 지움. n9 평평함은 교차 최소점. ⚠L⊥ 먼저 → L_ax 순서 ★09-30: L⊥=25 창은 어떤 꼴로도 외삽 불가(Ewald 검증), L⊥=45 면 H∞+A/L+K·lnL/L 검증됨
 - [★16 정육면체 셀 스캔 결과](bnnt_lcube_scan_16.md) — 3DJM 깨끗한 1/L, H∞=5.098 eV(log 상쇄 K₃≈0). δE₀ 1/L³ 항이 14 ⟨r²⟩ 항과 2.4% 일치. JCC 는 lnL/L 로 느림→1D 극한엔 3DJM. 논문 단일셀값 ~0.9 eV 낮음
 - [BNNT V_N 기하 이식 규약](bnnt_vn_geometry_transplant.md) — 이완 변위가 경계에서 안 죽는다(무른 모드 k≈0.08 eV/Å²). 창+셀주기 접기. ★창값은 이완이 되찾음(0.2meV)·앵커는 14/L25가 이미 계산
 - [Read Papers Memory](read_papers_memory.md) — 문헌 근거 필요 시 ~/papers/memory/paper_notes/README.md 인덱스 먼저
