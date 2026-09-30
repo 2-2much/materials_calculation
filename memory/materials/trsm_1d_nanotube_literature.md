@@ -54,3 +54,12 @@ Zhu, Gong, Yang, **PRB 102, 035202 (2020)**, arXiv:2001.03895. 젤리움 배경�
 
 관련: [[jcc_tableII_reproduction]], [[jcc_acceptor_vacuum_ghost_state]], [[coffee_setup_and_arange_bug]],
 [[jcc_coffee_correction_tree]]
+
+## 2026-09-30 추가: 우리가 유도한 1D 식의 선행 문헌
+- ★ **Wang·Li·Zhang PRL 114, 196801 (2015) 서플** (로컬 `~/papers/charged_defect_correction_in_slab/[SUPPLE]...docx`):
+  (S3) 동축 원기둥 가우스 에너지 q²/(8πε₀L_z)[2ln(L_s/2r₀) − 1 + 4r₀²/L_s²] = 우리 모형 B 와 동일(R_c=L_s/2).
+  (S9) 1D: IE = IE₀ + (1/L_z)[q²/(4πε₀) ln(√S/2r₀) + γ] = 우리 3DJM ln L⊥ 항(무차폐, ε₀)과 같다 → **이 부분은 기발표**.
+- 그들의 이중 로랑 전개 Σc_ij L_s^i L_z^j 는 **ln L_z/L_z 를 못 담는다** → 축방향 −κ ln(L_ax/r₀) 누락.
+  L_s=L_z 에서 κ lnL/L 이 남아 쿨롱 척도불변(고정 종횡비 → 정확히 1/L)과 모순. 우리 ① ln(L⊥/L_ax) 가 보정. 16 의 K₃≈0 이 증거.
+- 미발표로 보이는 것(검색 범위 한정): 1DJM 축방향 로그, Λ/L_ax 차수, 고정 진공에서 TRSM·JCC 의 시트 발산, 1D JCC 의 lnL/L 느린 수렴, BNNT DFT 검증.
+- 미확인: Chan·Zhang·Chelikowsky PRB 83, 245440 (2011, Wang 이 1D 선 발산으로 인용), Park·Kim·Chang PRB 90, 085435 (2014) 본문.
