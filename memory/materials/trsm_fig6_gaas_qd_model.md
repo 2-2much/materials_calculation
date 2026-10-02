@@ -107,3 +107,5 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 - 가장 가까운 것: Delerue–Lannoo 교과서(2004) §6.1–6.2 (TB/고전: 같은 결정 안이면 1/ε_out 항 소멸), Franceschetti–Zunger JPCB 2000 (InAs addition energy ε_out 의존), Diarra 2007 (나노와이어 도너).
 - ⚠ 신규성 위험: Chan–Lee–Chelikowsky CPC 185, 1564 (2014) "effective work function + capacitance(q²/2C)" — 슈퍼셀 보정 맥락, **본문 미확인**. 도서관으로 확인 필요.
 - 주의: 표면결함은 E_int 도 ε_out 의존(쌍극자), Vogel…Houtepen JACS 2024 = 용매효과 "not purely dielectric".
+- 2026-10-02 bloch 20 에 **L50·L60 추가 셋업**(6폴더, 사용자 제출). L40 8노드 0.97 GB/rank·77분 → L50 12노드, L60 16노드(31 GB/node 한계).
+  analyze.py 는 완료된 L 자동 탐지로 변경. 예측 ΔH_JM L50 ≈ −0.06, L60 ≈ 0.00 eV.
