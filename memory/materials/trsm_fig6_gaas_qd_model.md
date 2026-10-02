@@ -109,3 +109,6 @@ KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As
 - 주의: 표면결함은 E_int 도 ε_out 의존(쌍극자), Vogel…Houtepen JACS 2024 = 용매효과 "not purely dielectric".
 - 2026-10-02 bloch 20 에 **L50·L60 추가 셋업**(6폴더, 사용자 제출). L40 8노드 0.97 GB/rank·77분 → L50 12노드, L60 16노드(31 GB/node 한계).
   analyze.py 는 완료된 L 자동 탐지로 변경. 예측 ΔH_JM L50 ≈ −0.06, L60 ≈ 0.00 eV.
+- ⚠ 2026-10-02 메모리 정정: VASP 랭크당 메모리 실측 ≈ 0.37 GB + 1.05e-5 GB/Å³·V, **노드 수 무관**(NCORE=12 고정 데이터만).
+  추정 원인 = 미세격자가 NCORE 밴드그룹마다 복제 → 노드당 ∝ (랭크/노드)·V/NCORE. NCORE↓ 는 악화, 노드↑ 는 무효,
+  줄이려면 랭크/노드 < NCORE. L50(12노드·NCORE12·LVHAR/LVTOT off)만 먼저, L60 은 HOLD 파일로 보류(submit.sh HOLD 상태 추가).
