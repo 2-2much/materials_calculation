@@ -27,6 +27,8 @@
 - [scaLAPACK mlx OFI Hang](scalapack_mlx_ofi_hang.md) — VASP hang 원인=scaLAPACK BLACS Bcast. fix=LSCALAPACK=.FALSE.
 - [Defect Package Repo](defect_package_repo.md) — ⚠2026-08-04 **기준=GitHub origin 하나뿐**(2-2much/Defect_Package, private/master). 커밋·푸시는 `__Defect_Package_Reference__` 클론에서. **/mnt/hohenberg 사본은 폐기, pull/copy/commit 금지**(파일 복사하면 pull이 거부됨). GitHub 배포 구성·POTCAR 스크럽·사용 모델도 여기 ⚠2026-08-25 bloch·kohn의 03 계산폴더를 GitHub 클론으로 **in-place 전환**(낡은 hohenberg remote가 계산 config를 되돌리던 문제 해소, 절차·되돌리기 포함)
 - [★InAs HSE(α,μ) 동시 튜닝](inas_hybrid_alpha_mu_tuning.md) — 갭+gKT. PBE-d 격자 피팅 금지(HSE06@PBE-d a0 갭 0.13). SOC 없으면 목표갭≈0.54
+- [gKT·Janak·Koopmans 원리](hybrid_gkt_janak_koopmans_principles.md) — 앙상블=혼합→직선, Janak+Koopmans⇔직선, erfc 분할
+- [Kane k·p InAs 적용](inas_kane_kp_application.md) — m0/m*≈1+E_P/Eg, 섞임은 Γ밖에서만, (α,μ) 3번째 판정자
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
 - [SCPC Debug](scpc_debug.md) — SCPC 함정: CKT 비호환, getgrid 버그, 권장 설정
 - [SCPC Reference](scpc_reference.md) — SCPC README 참조, INVCOR/REFCHG 그리드 호환
