@@ -62,3 +62,5 @@ Heyd 2005 추가 요점: ω는 분자 생성엔탈피(0.15–0.30 bohr⁻¹ 구�
 - 보정 = **FWP**(`~/bin/finite-size-corrections-defect-levels.py`, state (qC,qR) float 지원, R(0)이면 qpol=0 → ε∞ 단독). **gKT 에는 ε∞ = 12.3(실험값) 사용 — 프로젝트 correction.yaml 의 11.0 과 다름, 사용자 결정.** ε0=15.15. 래퍼 run_charged_corrections.py 는 charge 를 int 로 잘라 분수 불가 → FWP 입력 직접 작성. (0,0) 기준 = R(0) q=0 LOCPOT (R(+2) 시험에도 공용).
 - 출력: LVHAR=.T. 필수, LCHARG=.T.(ρ(q)−ρ(0) 진단), LORBIT=11.
 - **트리 생성 (2026-10-06, bloch)**: `07-Bulk-defect_calculation/__gKT_linearity_test__/` — R0 = 11번(PBE@HSE격자) q0 CONTCAR(13번 HSE 이완과 결합 0.008 Å 차, 이후 모든 범함수 공통 구조). `As_In/R0/PBE/q0.00…q2.00`(g1, 정수 4노드·분수 2노드), NUPDOWN 으로 스핀채널 강제, `fwp/input_R0_PBE.dat`, `scripts/gkt_table.py check|analyze`. 실행은 사용자가 README 보고 직접. LPARD 는 본 런에서 제외(정수점 WAVECAR 로 후처리).
+- 2026-10-06 갱신: q 폴더 대신 **템플릿(INCAR/KPOINTS/run.sh, @@자리표시@@) + `scripts/setup_gkt.py`** 방식. EDIFF=1E-5(사용자 지정). 사용자가 템플릿 고치고 직접 셋업·제출.
+- ⚠기존 11·13번 As_In q+1 은 **ISPIN=1**(분수스핀 상태) → 스핀편극 시 E(+1) 하강 Δ 만큼 (+2/+1)↓·(+1/0)↑. "공명 이중도너" 주장 위험 — HSE(0.27) q+1 ISPIN=2 재계산으로 Δ 확인 필요. 결함 본계산은 NUPDOWN 없이 ISPIN=2, 자화 확인.
