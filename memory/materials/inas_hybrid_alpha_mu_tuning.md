@@ -65,3 +65,5 @@ Heyd 2005 추가 요점: ω는 분자 생성엔탈피(0.15–0.30 bohr⁻¹ 구�
 - 2026-10-06 갱신: q 폴더 대신 **템플릿(INCAR/KPOINTS/run.sh, @@자리표시@@) + `scripts/setup_gkt.py`** 방식. EDIFF=1E-5(사용자 지정). 사용자가 템플릿 고치고 직접 셋업·제출.
 - ⚠기존 11·13번 As_In q+1 은 **ISPIN=1**(분수스핀 상태) → 스핀편극 시 E(+1) 하강 Δ 만큼 (+2/+1)↓·(+1/0)↑. "공명 이중도너" 주장 위험 — HSE(0.27) q+1 ISPIN=2 재계산으로 Δ 확인 필요. 결함 본계산은 NUPDOWN 없이 ISPIN=2, 자화 확인.
 - 2026-10-06: bloch 자리 부족 → **kohn 에 같은 트리 복사**(`~/materials/.../07-Bulk-defect_calculation/__gKT_linearity_test__`, cascade 판: ntasks 36, NCORE=18/NSIM=36, 바이너리 `vasp.6.5.1.wan90.beef.plugin.lhfskip.std.x`(kohn 엔 dftd4 빌드 없음), setup 기본 노드 1/1). bloch 판은 g1 용으로 남아 있음 — 실제 계산은 kohn 판.
+- 2026-10-06 PBE(σ) 정수점 결과: 968번=a₁* 확정(결함 5원자 무게 0.56–0.61 vs host 0.01–0.04). q+1 mag 1.001, 스핀분열 0.15 eV. **q+2 에서 a₁*(4.172)가 VB 꼭대기(4.149) 위 0.023 eV → σ=0.01 스미어링 누출(968 occ 0.07, VB 0.963)**. 원시값으로 두 구간 모두 볼록 순서(0→+1: 4.535/4.478/4.417). 사용자 결정: σ 시리즈 끝까지+FWP 로 "얼마나 망가지나" 본 뒤 비교.
+- kohn 에 `As_In/R0/PBE_ISMEAR-2/` 템플릿 추가(ISMEAR=-2, FERWE/FERDO 자리표시). setup_gkt.py 는 템플릿에 @@FERWE@@ 있으면 자동 점유고정(--defect-band 968 --nbands 1020). 배포 때 PBE/ INCAR md5 전후 동일 확인.
