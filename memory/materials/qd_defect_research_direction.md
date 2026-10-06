@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 11c6ee48-6b18-4123-8e5e-a326020ccf79
-  modified: 2026-10-02T07:00:47.648Z
+  modified: 2026-10-06T06:13:11.757Z
 ---
 
 GaAs QD 결과([[trsm_fig6_gaas_qd_model]])와 [[cqd_ntype_origin_goal]]·[[inas_cnl_branch_point]] 를 묶어 제안 (사용자 확정 아님 — "Big question 아직 뚜렷하지 않다"에 대한 내 권고).
@@ -41,6 +41,7 @@ GaAs QD 결과([[trsm_fig6_gaas_qd_model]])와 [[cqd_ntype_origin_goal]]·[[inas
 - **Xu–Luo–Li–Xia–Li–Wei PRB 75, 235304 (2007)** (렉노 `~/papers/charged_QD/lecture_note_SiQD_dopants_Xu2007.html`, 노트 `SiQD_dopants_chemical_trend_Xu2007.md`):
   Si QD 하전 도펀트를 주기상자+젤리움·보정 없음·L 미기재로 계산, 이온화에너지(P 0.62→0.06 eV)를 구속+혼성으로만 해석.
   내 분해: 보고값 = ① 내부결합 + ② QD 충전 e²/2C(~1 eV) + ③ 젤리움(−A/L, ~−0.8 eV) → ②③ 상쇄 결과.
+  Table II/III(벌크 Si, 셀크기 미기재, 보정 없음)는 ε(0/∓) 열역학 CTL vs 실험 ε_b(Ramdas–Rodriguez 1981, IR 1s→np 분광+EMT 들뜬상태)로 **화학(①)만 검증 — ②③은 벌크에서 0 이라 이 벤치마크로는 안 보임**. 게다가 Si 도너 Bohr 반경 ~25 Å > QD 지름 5.5–10.9 Å → 벌크 ε_b 개념 자체가 QD 로 안 넘어감.
   기여 방향: A Si QD 재계산 분해 / B 내부·외부 두 지표 / C ε_out / D CKT 절대준위(Wang–Zunger 비율 불필요) / E 하전 위치선호 / F InAs 긴장.
 - Wei·Zhang 관련 PDF 는 사용자가 전부 `~/papers/charged_QD` 에 넣음(2026-10-06). **"Origin of the doping bottleneck in semiconductor QDs: A first-principles study" 미독 — 위 방향과 겹치는지 다음에 확인.**
 
