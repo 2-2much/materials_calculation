@@ -5,7 +5,8 @@
 - [★JCC가 ΔH_f 발산을 지운다 (04/05)](jcc_dHf_lz_validation.md) — 도너 0.87eV→4.6meV·억셉터 0.88eV→1.5meV. q² 부호무관 실측. 깨진 δE₀(−1)은 47%만 지움
 - [★JCC 억셉터 진공 ghost state](jcc_acceptor_vacuum_ghost_state.md) — BN 재현: 도너 −0.894(논문 −0.943) 성공·억셉터 실패. 판정식 |δE0| ≳ EA. ★2026-09-09 QE+NC 교차검증: 도너 0.4meV 일치·억셉터 동일 파탄 → PP 가설 기각
 - [★JCC Table II 전 재료 재현](jcc_tableII_reproduction.md) — BN −1 빼면 13행 RMS 41 meV·셀설정 논문일치. ★논문은 GeS/BN만 ±q가 비트 동일 → q²로 적어 넣은 정황. ⚠판정문턱 절대 0.1eV는 |q|=2에 불리
-- [TRSM Fig.6 GaAs QD 모델](trsm_fig6_gaas_qd_model.md) — 트리 20-TRSM_Fig6_GaAsQD·★3DJM이 논문 JM 12~16meV 재현·JCC 평평(L20→40 1meV) −0.564 vs TRSM −0.52·★CKT(kohn) +0.331=3DJM E∞, ⚠0D CKT TEWEN 은 L≥35 에서만 수렴·★논문 모델=rc7.35(Ga43As44H76, 충돌 없음)·마젠타=Ga·카키=As(반경비). Ga54Si1As68H100(24×H1.25+76×H0.75) 추정. ★JM은 발산 아님: A=20.43(ε=1) 고정+B/L³로 RMS 1.3meV
+- [★TRSM Fig.6 GaAs QD 재현](trsm_fig6_gaas_qd_model.md) — 모델 rc7.35 Ga43As44H76(Si_Ga 중심). 3DJM=논문 JM 12–16 meV(1/L+1/L³, ε=1) · JCC −0.564 평평(TRSM −0.52) · CKT +0.331=3DJM E∞ · CKT−JCC 0.894=e²/2C. 트리 bloch 20/21/22 + kohn 02-CKT. L50 진행·L60 HOLD
+- [VASP CKT(0D) 사용법·함정](vasp_ckt_0d_kernel_truncation.md) — KERNEL_TRUNCATION 블록, LCOARSEN 기본 F. ⚠0D TEWEN 이 작은 셀(경계 <~9 Å)에서 keV 급 오류 → L 수렴 점검 필수. 기준상엔 쓰지 말 것
 - [★QD 충전에너지 이론 틀](qd_charging_energy_framework.md) — CKT−JCC=−δE0=e²/2C(Janak). A/ε_out(가우스 정확)+B(β/ε_in). 진공 VASP 값엔 ε_in·쌍극자 포함, 문제는 환경 환산뿐. 표면결함·리간드껍질·수화껍질
 - [QD 결함 연구 방향](qd_defect_research_direction.md) — 제안 BQ: 1S_e 가 CNL 위인데 InAs CQD 왜 n형? 내부이온화 판정·로드맵. ⚠충전에너지 곡률은 CPC 2014 선점, 남는 신규성=기준상태 분해·ε_out·하전 표면결함
 - [★TRSM 1D/나노튜브 문헌 전수조사](trsm_1d_nanotube_literature.md) — 발표된 1D 적용은 **Zhang2023 의 (3,3) BNNT 단 하나**·CNT 전무. 1D 가능 스킴 3개뿐(CoFFEE는 속 찬 wire만). 쌍둥이=CCJM PRB102,035202. ⚠우리 프로젝트는 재현 아닌 신규 영역

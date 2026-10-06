@@ -1,6 +1,6 @@
 ---
 name: qd_defect_research_direction
-description: "QD 결함형성에너지 연구 방향 (2026-09-27~28 논의) — 제안 Big Question: 구속이 1S_e 를 CNL 위로 올려도 InAs CQD 는 왜 n형? 판정 = 결함전자가 1S_e 로 가는 내부이온화. 문헌상 공백 판정·신규성 위험(CPC 2014)·로드맵"
+description: "QD 결함형성에너지 연구 방향 (2026-09-27~10-06) — 제안 Big Question: 구속이 1S_e 를 CNL 위로 올려도 InAs CQD 는 왜 n형? 판정 = 결함전자가 1S_e 로 가는 내부이온화. 문헌 공백 판정(충전곡률은 CPC 2014 선점)·Xu–Wei 2007 분해·로드맵"
 metadata:
   node_type: memory
   type: project
@@ -38,12 +38,11 @@ GaAs QD 결과([[trsm_fig6_gaas_qd_model]])와 [[cqd_ntype_origin_goal]]·[[inas
 - ⚠ **Chan–Lee–Chelikowsky CPC 185, 1564 (2014) 본문 확인됨(2026-10-05, `~/papers/charged_QD` PDF·렉노)**: 고립 Si₃₄H₃₆P/Si₁₄₆H₁₀₀P 에서 IE(q)=Wq+q²/2C, C 를 **물리적 NC 정전용량**으로 해석(R=2C 가 6.3/8.8 Å ≈ 기하). → "QD 충전에너지를 DFT 곡률로 뽑는 것"은 선점됨.
 - 권장 포지셔닝(정정): 남는 신규성 = **(1) TRSM/JCC vs CKT/3DJM 기준상태로 형성에너지·CTL 분해 (2) ε_out 환산 (3) 하전 표면결함 위치·환경 의존**. 충전에너지 재해석 자체는 CPC 2014 선점.
 - 실험: Yoon Sci.Adv. 2023 DFT 는 Zn 억셉터만(In₅₅As₆₈ 클러스터 FNV) — InAs QD n형 결함 DFT 는 공백.
+- **Xu–Luo–Li–Xia–Li–Wei PRB 75, 235304 (2007)** (렉노 `~/papers/charged_QD/lecture_note_SiQD_dopants_Xu2007.html`, 노트 `SiQD_dopants_chemical_trend_Xu2007.md`):
+  Si QD 하전 도펀트를 주기상자+젤리움·보정 없음·L 미기재로 계산, 이온화에너지(P 0.62→0.06 eV)를 구속+혼성으로만 해석.
+  내 분해: 보고값 = ① 내부결합 + ② QD 충전 e²/2C(~1 eV) + ③ 젤리움(−A/L, ~−0.8 eV) → ②③ 상쇄 결과.
+  기여 방향: A Si QD 재계산 분해 / B 내부·외부 두 지표 / C ε_out / D CKT 절대준위(Wang–Zunger 비율 불필요) / E 하전 위치선호 / F InAs 긴장.
+- Wei·Zhang 관련 PDF 는 사용자가 전부 `~/papers/charged_QD` 에 넣음(2026-10-06). **"Origin of the doping bottleneck in semiconductor QDs: A first-principles study" 미독 — 위 방향과 겹치는지 다음에 확인.**
 
 ## 다음 행동 후보
-1 (완료) CPC 2014 확인 / 2 진공 표면 Si_Ga vs 중심 Si_Ga / 3 GaAs 크기 스캔 / 4 implicit solvent + CKT 호환성 시험 후 ε_out 스캔 / 5 InAs CQD 이전.
-
-## 2026-10-06 Xu–Wei PRB 75, 235304 (2007) 정독 (렉노 `~/papers/charged_QD/lecture_note_SiQD_dopants_Xu2007.html`)
-- Si QD 하전 도펀트를 **주기상자+젤리움, 보정 없음, L 미기재**로 계산. 이온화에너지(P 0.62→0.06 eV)를 구속+혼성으로만 해석.
-- 내 분해: 보고값 = ① 내부결합 + ② QD 충전 e²/2C(~1 eV) + ③ 젤리움(−A/L, ~−0.8 eV) → ②③ 상쇄 결과. 우리 3DJM/CKT/JCC로 분해 가능.
-- 기여 방향 A–F: Si QD 재계산 분해 / 내부·외부 두 지표 / ε_out / CKT 절대준위 / 하전 위치선호 / InAs 긴장.
-- 같은 폴더 "Origin of the doping bottleneck in semiconductor QDs: A first-principles study" 미독 — 겹침 확인 필요. 사용자가 Wei·Zhang 관련 PDF 전부 `~/papers/charged_QD`에 넣음.
+1 "doping bottleneck" 논문 확인 / 2 진공 표면 Si_Ga vs 중심 Si_Ga / 3 GaAs 크기 스캔 / 4 implicit solvent + CKT 호환성 시험 후 ε_out 스캔 / 5 InAs CQD 이전.

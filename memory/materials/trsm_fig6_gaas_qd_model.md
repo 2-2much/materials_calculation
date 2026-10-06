@@ -1,114 +1,56 @@
 ---
 name: trsm_fig6_gaas_qd_model
-description: TRSM(Xiao2020) Fig.6 GaAs QD 재현 준비 — 인셋 판독(마젠타=Ga·카키=As)·QD 모델 rc7.35 Ga42Si1As44H76 확정(8.40 기각)·JM 곡선은 발산 아닌 ε=1 Makov-Payne(1/L+1/L³)
+description: "★TRSM(Xiao2020) Fig.6 GaAs QD Si_Ga⁺ 재현 — 3DJM 이 논문 JM 12–16 meV 재현(1/L+1/L³, ε=1), JCC 평평 −0.564(TRSM −0.52), CKT +0.331 = 3DJM E∞, 차이 0.894 eV = QD 충전 e²/2C. 트리 위치·모델·설정·진행상황(L50/L60)"
 metadata:
   node_type: memory
   type: project
   originSessionId: 11c6ee48-6b18-4123-8e5e-a326020ccf79
-  modified: 2026-09-24T04:17:26.949Z
+  modified: 2026-10-06T05:36:19.859Z
 ---
 
-2026-09-24 시작. 사용자 결정: **TRSM 구현은 보류**, VASP PAW로 host/JM(q=+1)까지 + JCC 보정 적용.
-QD 크기는 인셋 판독으로 정하기로 함. 파일·폴더는 아직 안 만듦(스크래치패드에서만 작업).
+2026-09-24~10-02. 이론 해석은 [[qd_charging_energy_framework]], 연구 방향·문헌은 [[qd_defect_research_direction]], CKT 사용법·함정은 [[vasp_ckt_0d_kernel_truncation]].
 
-## 인셋 원자 판독
-- 색은 VESTA 기본색이 아님(VESTA는 Ga·As 둘 다 초록). **공 크기 비가 VESTA 원자반경과 일치**:
-  마젠타 : 카키 ≈ 1.25 = Ga 1.53 / As 1.21, 파란 Si(1.18) ≈ 카키 크기, H 0.46 → **마젠타=Ga, 카키=As**.
-  Si는 마젠타 자리(=Ga)에 있고 카키와 결합 → Si_Ga와 모순 없음.
-- 뷰는 ≈[001] + 약 10° 기울임. Ga 행 5개(간격 a/2), As 행 6개, 투영 As 폭 ≈14.1 Å, **가장 바깥 dihydride는 전부 As**.
+## 트리 (사용자가 README 읽고 직접 실행)
+| 위치 | 내용 |
+|---|---|
+| bloch `~/materials/__JCC_Reproduction__/20-TRSM_Fig6_GaAsQD` | 구조 생성·이완(00-relax)·3DJM/JCC 스캔(01-scan)·analyze.py·그림 |
+| bloch `.../21-GaAs_lattice_PBE` | E–V 10점 + BM → **a0 = 5.7509 Å** (B0 60.3 GPa) |
+| bloch `.../22-mu_reference_GaAsQD` | Si 벌크·α-Ga (01-relax ISIF3 ENCUT520 → 02-sp ENCUT400). 기준상엔 CKT 안 씀(μ 는 경계조건 무관) |
+| kohn `~/materials/__JCC-reproduce__/20-TRSM_Fig6_GaAsQD/02-CKT` | 0D CKT 15잡 + analyze_ckt.py (bloch 자원 부족으로 이관) |
+⚠ kohn 의 13·14·15 번은 BNNT 가 사용 중 → GaAs QD 는 20번대 (사용자 규약).
 
-## QD 후보 (Ga 중심 구 절단, 배위 1인 원자 제거 반복)
-| rc | 조성 | H(Ga쪽 1.25) | H(As쪽 0.75) |
-|---|---|---|---|
-| **7.35 (확정, 논문 모델)** | Ga43As44 → Ga42Si1As44 | 36 | 40 |
-| 8.40 (처음엔 선호 → 사용자 판독으로 기각) | **Ga55As68 → Ga54Si1As68** | **24** | **76** |
-rc=8.95는 가장자리에 Ga가 나와서 제외. 8.40 선호 근거: 윗면 As dihydride 쌍 + 더 둥근 윤곽 +
-아래 JM 피팅의 R_eff≈8 Å(rmax 8.36). host 592e 닫힌 껍질, Si_Ga⁰ 593(홀수→ISPIN=2), q+1 592.
-L=20에서도 이웃 셀 이미지 사이 H–H 거리 4.2 Å라 들어간다.
+## 모델
+- 논문 인셋 판독: **마젠타=Ga, 카키=As** (색 아닌 공 크기비 = VESTA 반경 Ga 1.53/As 1.21 로 판정), ≈[001] 뷰.
+- **rc7.35 Ga 중심 구 절단 = Ga43As44H76 (H1.25×36 on Ga, H.75×40 on As), 163원자 — 사용자 확정.** Si_Ga 는 중심 Ga.
+  (rc8.40 Ga55As68H100 은 처음 내가 선호했으나 사용자 판독으로 기각. {100} H–H 1.52 Å 충돌도 8.40 에만 있음.)
+- ⚠ make_qd.py 함정(수정됨): rc 를 절대 Å 로 자르면 a 를 키울 때 바깥 껍질이 빠짐(a0 5.7509 에서 Ga31As28).
+  → **rc = A_REF 5.6533 격자 기준 반지름, 실제 컷오프 rc·a/A_REF**, 파일명 `_a{a}`. 본계산 = `structures/*_rc7.35_Ga43As44H76_a5.7509_L20.vasp`.
+- 전자수(ZVAL Ga_d 13·As 5·Si 4·H1.25·H.75): host 854, **host_qp1 853(홀수)**, SiGa_p1 844(SiGa⁰ 845).
 
-## ★논문 JM 곡선 = 1/L (발산 아님)
-논문 점(눈으로 읽은 값) L=20..40: −0.437/−0.344/−0.260/−0.190/−0.132.
-- a+b/L RMS 12 meV · a+bL RMS 10 meV
-- **E∞ − A/L + B/L³, A=q²α_M e²/2=20.43 eV·Å 고정(ε=1)** → RMS **1.3 meV**, E∞=+0.35, B=1880 eV·Å³
-- 세 계수 모두 자유롭게 두면 A=19.6(−4%)
-- 1/L³ 항 = QD 표면으로 밀려난 편극전하 (1−1/ε)q의 2차 모멘트 → R_eff≈8 Å
-물리: 유전체 구 안의 전하는 **밖에서는 가려지지 않음** → 진공이 셀을 채우면 ε_eff→1.
-L 축으로 그리면 거의 직선처럼 보이는 것은 L³ 항 때문. JM∞ − TRSM ≈ 0.87 eV.
-→ 우리 JM 계산의 검증 기준: A≈20.4 재현, B ∝ (1−1/ε)R².
+## 설정 요약
+PBE.54 Ga_d, ENCUT 400, PREC=A, LREAL=A, Γ(vasp_gam), ISMEAR0 **σ=0.01**, EDIFF 1E-5·LSCALAPACK=.T.(사용자가 바꾼 값), 에너지 = TOTEN([[feedback_energy_toten]]).
+L=20 에서 한 번 이완 → 같은 원자배치를 L 셀 중앙에 이식(make_Lseries.py, CONTCAR 좌표 + POSCAR 종이름) → L 의존 = 순수 정전기.
+host_qp1: HOMO **t2 3중축퇴 → 5/6 분수점유, EENTRO −10.6 meV 상수**(δE0 에 +5.3 meV, L 무관). σ 를 키우면 비례해 커짐.
 
-관련: [[trsm_1d_nanotube_literature]], [[jcc_dimension_hierarchy_measured]] (0D는 젤리움·이미지 둘 다 1/L)
+## 결과 (eV, μ_i=0, ε_F=ε_VBM; E_Ga−E_Si = +2.518422, E_Si −5.424782, E_Ga −2.906360 eV/atom)
+| L | 3DJM | 논문 JM | JCC | 논문 TRSM | δE0 |
+|---|---|---|---|---|---|
+| 20 | −0.449 | −0.437 | −0.564 | −0.530 | −0.115 |
+| 30 | −0.276 | −0.260 | −0.566 | −0.521 | −0.290 |
+| 40 | −0.146 | −0.132 | −0.563 | −0.519 | −0.417 |
+- 3DJM = E∞ − A/L + B/L³: **A 19.54(자유)/20.43 고정(ε=1), E∞ +0.315/+0.336, B ≈1708** → 발산 아님.
+- δE0 = JM 의 거울상(A −19.51, B −1701) → JCC 는 L20→40 에 1 meV 변화.
+- **CKT(L35/40) +0.331 = 3DJM E∞**, δE0^CKT = −0.8955(전 L), IP 6.372, ε_HOMO −5.476(진공 기준, L 무관), 갭 2.72.
+- **CKT − JCC = 0.894 = −δE0 = 고립 QD 충전 e²/2C** (R_eff ≈ 8 Å; B 에서 역산한 7.9 Å 와 일치).
+- JCC vs TRSM 35–45 meV: 재현 기준 안. ⚠ 내가 했던 "0D 에선 JCC≠TRSM 이 드러날 것" 예측은 이 QD 에선 안 보임(과신).
+- 중성 host 도 L20→40 에 28.5 meV 변함 = 다중극 아님(octupole 1/L⁷) → L20 이미지 H층 겹침(간격 3.87 Å).
 
-## 2026-09-24 생성물 — `~/materials/__JCC_Reproduction__/20-TRSM_Fig6_GaAsQD/`
-- `make_qd.py` (--a --L --rc --dH_*), `structures/{host,SiGa}_rc{7.35,8.40}_*_L20.vasp`
-  종 이름 `Ga [Si] As H1.25 H.75`, a=5.6533(실험값 임시 — PBE a0 정해지면 재생성), X–H 1.52 초기값
-- ⚠ H–H 1.52 Å 충돌은 **rc8.40에만** 있음({100} dihydride). **rc7.35는 충돌 없음**(최소 H–H 2.48 = 같은 As의 dihydride). 2026-09-24 사용자 확인: **논문 모델 = rc7.35**, host·SiGa 두 개로 진행
-- `plot_JM_invL.py` → `fig_JM_invL.png` (L 축 / 1/L 축)
+## 진행 중 (2026-10-02 기준)
+- **L50**: g1 12노드·12랭크/노드·NCORE12, L50 INCAR 만 `LVHAR=.FALSE.`·`LVTOT=.F.`(LOCPOT 미기록, 에너지 무관). host_q0 실측 노드당 RSS **12.6 GB**(31 GB 중 41%).
+- **L60**: 3폴더에 `HOLD` 파일(submit.sh 가 HOLD 상태로 건너뜀, `rm HOLD` 로 해제). L50 실측 기준 노드당 ~22 GB 예상 → **L50 과 같은 설정으로 충분**(LVHAR/LVTOT off·g1 run.sh 반영 필요, submit.sh 의 L60 노드 16→12).
+- 예측: 3DJM L50 ≈ −0.06, L60 ≈ 0.00 eV, JCC −0.564 근처 평평. analyze.py 는 완료된 L 자동 탐지.
+- ⚠ HPC 메모리: OUTCAR "Maximum memory used"(rank0)를 전 랭크에 곱해 추정하면 과대평가(내가 L60 32 GB/노드로 잘못 예측).
+  실측은 `sstat -j <id>.0` MaxRSS(Intel MPI 는 노드당 합). NCORE 를 줄이면 랭크당 격자 메모리가 오히려 늘 수 있음(추정, 미실측).
 
-## 2026-09-24 폴더 번호 규약 (사용자 지시)
-kohn `~/materials/__JCC-reproduce__` 의 **13·14·15 는 BNNT 가 사용 중** → GaAs QD 트리는 20번대.
-- `20-TRSM_Fig6_GaAsQD` (구 13) · `21-GaAs_lattice_PBE` (E–V 10점 + BM, Ga_d/ENCUT400/Γ12³) ·
-  `22-mu_reference_GaAsQD` (Si 벌크 + α-Ga, 01-relax ISIF=3 ENCUT520 → 02-sp ENCUT400)
-- 사용자가 README·스크립트 읽고 **직접 실행**. a0 의 목적 = QD 초기구조 이완 시간 단축(어차피 이완함)
-
-## ⚠ 2026-09-24 make_qd.py rc 함정 (수정 완료)
-21 BM 결과 **PBE a0 = 5.7509 Å** (B0 60.3 GPa). 이 a 로 재생성하자 Ga31As28 로 줄어듦 —
-rc 가 절대 Å 라서 바깥 껍질이 7.34→7.47 Å 로 밀려 컷오프 밖으로 빠짐.
-→ **rc 는 A_REF=5.6533 격자에서의 반지름(모양 이름)**, 실제 컷오프 = rc·a/A_REF 로 수정. 파일명에 `_a{a}` 추가.
-a=5.60~5.90 전부 Ga43As44H76 유지 확인, a=5.6533 은 옛 파일과 좌표 동일.
-본계산 구조 = `structures/{host,SiGa}_rc7.35_Ga43As44H76_a5.7509_L20.vasp` (L=20 진공 3.87 Å).
-잘못된 쌍은 `structures/__wrong_Ga31As28_absolute_rc__/` 로 격리.
-
-## 에너지 열 규약 (2026-09-24 사용자 결정)
-22 기준상은 **`free  energy   TOTEN`** 사용 (α-Ga 는 MP smearing → F 가 변분량, σ→0 외삽식은 Gaussian/FD 용).
-21 E–V 스캔은 sigma->0 그대로 둠(k 조밀·반도체라 차이 무시). → 전 트리 공통 규칙으로 확장됨: [[feedback_energy_toten]].
-
-## 2026-09-24 QD 본계산 입력 완성 (사용자가 읽고 직접 실행)
-`20-TRSM_Fig6_GaAsQD`: 00-relax/{host_q0,SiGa_p1}_L20 → make_Lseries.py 로 L=20..40 셀 중앙 이식 →
-01-scan/{host_q0 854e, host_qp1 853e (JCC δE0), SiGa_p1 844e}. vasp_gam, ISMEAR0/σ0.01, ENCUT400 PREC=A LREAL=A,
-KPAR1/NCORE12/NSIM12/LSCALAPACK.F., g2 4노드(L≥35 8노드). ZVAL Ga_d 13·As 5·Si 4·H1.25·H.75.
-옛 구조는 사용자가 `_formal_structures_/` 로 옮김. 스크립트는 스크래치 복사본에서 가짜 CONTCAR 로 시험 통과.
-- ⚠ **host_qp1 = 853e 홀수** (처음에 "전부 짝수"라고 잘못 말함). T_d QD 의 HOMO 는 t2 3중축퇴로 예상 → 5/6 분수점유 →
-  TOTEN 에 가짜 엔트로피 EENTRO/2 ≈ σ 비례 (σ0.01: 5 meV, σ0.05: 27 meV) 가 δE0 에 들어감. 그래서 SIGMA=0.01 유지 권고.
-  closed-shell 인 host_q0·SiGa_p1 은 σ 무관.
-
-## ★2026-09-25 결과 (01-scan 15잡, analyze.py)
-- **우리 3DJM ≈ 논문 JM, L 마다 12–16 meV 이내.** 피팅 A=19.54(자유, 논문판독 19.6), E∞=+0.31. 1/L 해석 확정.
-- **δE0 = JM 의 거울상** (A −19.51 / B −1701 vs JM +19.54 / +1710) → JCC 평평: L20→40 **+1.0 meV** (JM +303).
-- ΔH_JCC = −0.564 ± 0.002 eV vs 논문 TRSM −0.52~−0.53 → **35–45 meV** (재현 판정 기준 0.1 eV 안).
-  ⚠ 내가 예상한 "0D 에선 JCC≠TRSM(D⁺–e 인력 남음)" 은 이 QD 에서 0.1 eV 수준으론 안 보였다 — 과신했던 예측.
-- δE0(∞) = −0.878 eV (고립 QD 의 충전 곡률). ΔH_JCC 는 ε_VBM 이 상쇄된 E(D,+1)−E(host,+1)+μ 꼴.
-- 확인: HOMO t2 3중축퇴, qp1 occ 5/6, EENTRO −10.6 meV 상수. 중성 host 도 L20→40 28.5 meV 변함(L20 이미지 겹침).
-- E_Si −5.424782, E_Ga −2.906360 eV/atom (TOTEN), E_Ga−E_Si = +2.518422.
-- 1/L³ 항: B(JM)=1708, |B(δE0)|=1701 → R_eff = 7.9 Å = QD 표면(heavy 7.47 ~ H 8.1). 편극 표면전하 해석과 일치.
-  직접 검증(∫Δρ r²)은 CHGCAR 가 0바이트(LCHARG=.F.)라 미실시 — 하려면 host q0/qp1 L25 를 LCHARG=.T. 로 재계산.
-
-## 2026-09-26 다음 단계 논의: CKT(0D) 로 Si_Ga⁺ 1shot
-- VASP CKT 태그 (Zenodo OUTCAR 에서 확인, 6.5.1): `LTRUNCATE=T`, `IDIMENSIONALITY=0`(분자)/2(표면), `ISURFACE`(2D 법선),
-  `LCOARSEN`(**기본 F**, 위키가 0D 에 T 권장), `IPAD`(기본 0D=3, 2D=2), `FACTOR`(R_c/셀길이, 기본 0D=√3, 2D=1). 위키 https://vasp.at/wiki/KERNEL_TRUNCATION/LTRUNCATE — 블록형 `KERNEL_TRUNCATION { ... }` 권장, 경계에 원자 금지(모티프 중앙 배치), 문제 시 IPAD=1·FACTOR=0.5(무패딩)로 진단. 논문 저자 2D 계산은 LCOARSEN=F·IPAD=2. 0D LCOARSEN=F 는 27배 FFT → 우리 격자(336³@L25)엔 불가.
-- 예측: CKT = 고립 +1 QD = JM 의 L→∞ → ΔH_CKT ≈ +0.32~0.34 eV, L 무관. JCC(−0.564)와의 차 = −δE0(∞) ≈ 0.88 eV
-  ≈ e²/2R(R=7.9 → 0.91): 고립 QD 충전에너지. host_qp1 CKT 로 δE0 가 L 무관 −0.88 인지 직접 검증 가능.
-- 이전 Fig.8 재현(`33-inAs/.../11-Surface-defect_TOY-model/CKT_PRB`)은 Zenodo OUTCAR 기반: 2D CKT 는 진공 무관(1–2 meV)이나 면내 L 의존 남음.
-- ★2026-09-26 **02-CKT 는 kohn** `~/materials/__JCC-reproduce__/20-TRSM_Fig6_GaAsQD/02-CKT` (bloch 자원 부족). 15잡 입력·README 완성, 사용자가 실행.
-  cascade2 32rank/node, NCORE16/NSIM32, bin 6.5.1 wan90.beef.plugin.lhfskip.gam.x(=15-Lax). EDIFF=1E-5·LSCALAPACK=.T. 는
-  **사용자가 bloch 01-scan 에서 이미 바꾼 값** 을 따름. geom/ = bloch 00-relax POSCAR/CONTCAR (md5 동일). kohn SSH 는 BatchMode 로 됨.
-
-## ★2026-09-26 02-CKT 결과 (kohn, analyze_ckt.py)
-- **ΔH_f^CKT = +0.331 eV** (L35/40) = 3DJM 외삽 E∞ (+0.315 A자유 / +0.336 A고정) → 두 독립 경로가 고립 +1 QD 에 수렴. 예측 적중.
-- **δE0^CKT = −0.8955 (전 L 0.4 meV)** = 3DJM δE0 외삽. IP 6.372, ε_HOMO −5.476(진공 기준, L 무관), 갭 2.721.
-  ΔH_CKT − ΔH_JCC = 0.894 = −δE0 = 고립 QD 충전 곡률.
-- ⚠★ **0D CKT 이온–이온 항(TEWEN) 이 작은 셀에서 틀림**: L20 +13117, L25 +810, L30 +7.9 eV, L35=L40 8자리 동일.
-  가장자리 원자–경계 6.9 Å 실패 / 9.4 Å 수렴. host vs SiGa 오차 달라 ΔH raw 망가짐, 같은 이온(q0/qp1)끼리는 상쇄 → IP 멀쩡.
-  TOTEN−TEWEN(L)+TEWEN(∞) 교체하면 전 L 0.330–0.336. 원인 미확인. **0D CKT 쓸 땐 TEWEN 의 L 수렴 필수 점검.**
-  TEWEN(수렴) = 직접합 + 7.19(host)/7.00(SiGa) eV 상수.
-
-## 2026-09-28 문헌조사: QD 충전에너지 ↔ 결함 형성에너지
-보고서 `~/materials/reports/QD 충전에너지와 결함형성에너지.md` (노트 `~/materials/research_notes/QD 충전에너지와 결함형성에너지/`).
-- **"E_ext − E_int = QD 충전에너지 → ε_out 환산으로 환경 의존 결함 형성에너지/CTL" 제일원리 선례 못 찾음.** TRSM 은 "다른 계" 선언만, 피인용 67편 중 QD 적용 0.
-- 가장 가까운 것: Delerue–Lannoo 교과서(2004) §6.1–6.2 (TB/고전: 같은 결정 안이면 1/ε_out 항 소멸), Franceschetti–Zunger JPCB 2000 (InAs addition energy ε_out 의존), Diarra 2007 (나노와이어 도너).
-- ⚠ 신규성 위험: Chan–Lee–Chelikowsky CPC 185, 1564 (2014) "effective work function + capacitance(q²/2C)" — 슈퍼셀 보정 맥락, **본문 미확인**. 도서관으로 확인 필요.
-- 주의: 표면결함은 E_int 도 ε_out 의존(쌍극자), Vogel…Houtepen JACS 2024 = 용매효과 "not purely dielectric".
-- 2026-10-02 bloch 20 에 **L50·L60 추가 셋업**(6폴더, 사용자 제출). L40 8노드 0.97 GB/rank·77분 → L50 12노드, L60 16노드(31 GB/node 한계).
-  analyze.py 는 완료된 L 자동 탐지로 변경. 예측 ΔH_JM L50 ≈ −0.06, L60 ≈ 0.00 eV.
-- ⚠ 2026-10-02 메모리 정정: VASP 랭크당 메모리 실측 ≈ 0.37 GB + 1.05e-5 GB/Å³·V, **노드 수 무관**(NCORE=12 고정 데이터만).
-  추정 원인 = 미세격자가 NCORE 밴드그룹마다 복제 → 노드당 ∝ (랭크/노드)·V/NCORE. NCORE↓ 는 악화, 노드↑ 는 무효,
-  줄이려면 랭크/노드 < NCORE. L50(12노드·NCORE12·LVHAR/LVTOT off)만 먼저, L60 은 HOLD 파일로 보류(submit.sh HOLD 상태 추가).
+## 남은 일
+1/L³ 의 직접 검증(∫Δρr², LCHARG=.T. 로 host q0/qp1 L25 재계산) / 표면 Si_Ga vs 중심 Si_Ga(쌍극자 항) / GaAs 크기 스캔 / ε_out 스캔.
