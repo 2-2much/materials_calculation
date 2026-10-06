@@ -56,3 +56,8 @@ Heyd 2005 추가 요점: ω는 분자 생성엔탈피(0.15–0.30 bohr⁻¹ 구�
 - 결정(권고, 사용자 동의 방향): **(α,μ) 튜닝 후 최종 벌크 결함 계산부터 ENCUT 400 + 슬랩과 같은 PRECFOCK 로 통일.** 300 결과는 SI 수렴시험으로 보존. 이유: 재계산 어차피 필요 → 추가비용 없음 / 후속 슬랩 논문이 벌크 μ·VBM·결함에너지 재사용 / μ 확정세트([[mu_window_hse_aexx27_21]])가 이미 400/Fast.
 - ⚠확인할 것: 현 300 eV 벌크 결함 계산에 쓴 μ 가 400/Fast 세트인지(섞였으면 원소당 수 meV 오차), PRECFOCK 값.
 - 논문 범위: 1편 = 벌크 결함만, 슬랩은 후속 논문.
+
+## gKT 시험 셋업 결정 (2026-10-06)
+- 1단계 = **PBE, R(0) 고정**(13번 kohn HSE(0.27) q0 CONTCAR, a=6.09898, As_In idx 108, C3v: As–As 2.607/2.625×3; q+1 2.553/2.565×3; q+2 Td 2.490), q=0→+2 9점(0.25 간격), ENCUT 400, ISPIN=2, ISMEAR=0 σ=0.01, k=(¼,¼,¼), 968번=a₁*. 0→+1 은 down 968 에서, +1→+2 는 up 968 에서만 뺌(분수 스핀 오차 회피). 이후 R(+2) 동일 9점.
+- 보정 = **FWP**(`~/bin/finite-size-corrections-defect-levels.py`, state (qC,qR) float 지원, R(0)이면 qpol=0 → ε∞ 단독). **gKT 에는 ε∞ = 12.3(실험값) 사용 — 프로젝트 correction.yaml 의 11.0 과 다름, 사용자 결정.** ε0=15.15. 래퍼 run_charged_corrections.py 는 charge 를 int 로 잘라 분수 불가 → FWP 입력 직접 작성. (0,0) 기준 = R(0) q=0 LOCPOT (R(+2) 시험에도 공용).
+- 출력: LVHAR=.T. 필수, LCHARG=.T.(ρ(q)−ρ(0) 진단), LORBIT=11.
