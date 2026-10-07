@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 11c6ee48-6b18-4123-8e5e-a326020ccf79
-  modified: 2026-10-02T07:00:29.147Z
+  modified: 2026-10-07T04:58:55.923Z
 ---
 
 GaAs QD Si_Ga⁺ 결과([[trsm_fig6_gaas_qd_model]])를 해석하며 정리한 틀. 계산 아니라 유도·논의.
@@ -43,6 +43,12 @@ GaAs QD Si_Ga⁺ 결과([[trsm_fig6_gaas_qd_model]])를 해석하며 정리한 �
 ## 5. 1/L, 1/L³ = 다중극
 1/L = monopole–monopole Madelung(ε=1, A=20.43). 1/L³ = 젤리움 포물선 × 2차 반지름 모멘트(사중극자 텐서의 trace, 방향성 l=2 는 입방격자에서 0).
 1/L², 1/L⁴ 은 T_d·입방 반전대칭으로 0. 중성 host 의 L20 28.5 meV 는 다중극 아님(octupole 1/L⁷) → 파동함수 겹침.
+
+## QD 에서 CTL 의 의미 (2026-10-07 논의)
+- 벌크: E_F 는 연속 변수, 저장고는 결정 자신(충전 0) → ε(q/q+1) 은 결함 고유.
+- QD: 전하가 둘로 갈림 — **QD 알짜전하 Q(정수, 외부 저장고 μ_res 가 결정)** vs **결함 국소 전하(고정 N 에서 내부 배치가 결정)**.
+  외부 CTL ε(Q/Q+1) = QD 전체의 전기화학퍼텐셜 μ(N)=E(N)−E(N−1) = **Coulomb blockade 전도 피크 위치**, 연속 준위 간격 ≥ e²/C(+Δε). 내부 판정은 E_F 무관(TRSM/JCC).
+- 고립 QD 에선 E_F 가 자유 변수가 아님(N 고정). 필름/용액의 E_F 는 앙상블·대이온·redox 가 정함.
 
 ## How to apply
 - 진공 결과 인용 시 "ε_in·모양 포함된 완전한 값"으로. 환경 값은 반드시 A/B 분리 또는 직접 계산.
