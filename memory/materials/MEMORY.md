@@ -8,6 +8,7 @@
 - [★TRSM Fig.6 GaAs QD 재현](trsm_fig6_gaas_qd_model.md) — 모델 rc7.35 Ga43As44H76(Si_Ga 중심). 3DJM=논문 JM 12–16 meV(1/L+1/L³, ε=1) · JCC −0.564 평평(TRSM −0.52) · CKT +0.331=3DJM E∞ · CKT−JCC 0.894=e²/2C. 트리 bloch 20/21/22 + kohn 02-CKT. L50 진행·L60 HOLD
 - [VASP CKT(0D) 사용법·함정](vasp_ckt_0d_kernel_truncation.md) — KERNEL_TRUNCATION 블록, LCOARSEN 기본 F. ⚠0D TEWEN 이 작은 셀(경계 <~9 Å)에서 keV 급 오류 → L 수렴 점검 필수. 기준상엔 쓰지 말 것
 - [★QD 충전에너지 이론 틀](qd_charging_energy_framework.md) — CKT−JCC=−δE0=e²/2C(Janak). A/ε_out(가우스 정확)+B(β/ε_in). 진공 VASP 값엔 ε_in·쌍극자 포함, 문제는 환경 환산뿐. 표면결함·리간드껍질·수화껍질
+- [Notion 연구 페이지](notion_research_pages.md) — 10월 연구-0D하전결함 등 page id. 커넥터로 읽기
 - [QD 결함 연구 방향](qd_defect_research_direction.md) — 제안 BQ: 1S_e 가 CNL 위인데 InAs CQD 왜 n형? 내부이온화 판정·로드맵. ⚠충전에너지 곡률은 CPC 2014 선점, 남는 신규성=기준상태 분해·ε_out·하전 표면결함
 - [★TRSM 1D/나노튜브 문헌 전수조사](trsm_1d_nanotube_literature.md) — 발표된 1D 적용은 **Zhang2023 의 (3,3) BNNT 단 하나**·CNT 전무. 1D 가능 스킴 3개뿐(CoFFEE는 속 찬 wire만). 쌍둥이=CCJM PRB102,035202. ⚠우리 프로젝트는 재현 아닌 신규 영역
 - [★δE₀ = Koopmans 위반의 측정값](jcc_dE0_koopmans_janak.md) — qε_b는 전자저장고 항. δE₀=−½∂ε_H/∂N(Slater ½). VBM/CBM 분기=PPLB 미분불연속. 젤리움이 ΔSCF갭 1.79eV 부풀림
