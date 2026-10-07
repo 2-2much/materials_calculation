@@ -5,8 +5,12 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 11c6ee48-6b18-4123-8e5e-a326020ccf79
-  modified: 2026-10-06T06:13:11.757Z
+  modified: 2026-10-07T05:05:53.334Z
 ---
+
+## ★사용자 확정 축 (2026-10-07)
+**Wei(TRSM)와 Zhang(3DJM/외부) 하전결함 모델 차이에서 나오는 JCC 값(−δE0)을 QD 에선 단순 보정값이 아니라 물리적 의미가 있는 충전에너지로 본다** → 이걸 이용한 다음 연구를 고민 중.
+후보로 언급(메시지 중단됨): QD 하전결함 형성에너지 식 정립 / QD 반지름(크기) 의존 …
 
 GaAs QD 결과([[trsm_fig6_gaas_qd_model]])와 [[cqd_ntype_origin_goal]]·[[inas_cnl_branch_point]] 를 묶어 제안 (사용자 확정 아님 — "Big question 아직 뚜렷하지 않다"에 대한 내 권고).
 
