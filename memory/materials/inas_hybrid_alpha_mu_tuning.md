@@ -58,7 +58,7 @@ Heyd 2005 추가 요점: ω는 분자 생성엔탈피(0.15–0.30 bohr⁻¹ 구�
 - 논문 범위: 1편 = 벌크 결함만, 슬랩은 후속 논문.
 
 ## gKT 시험 셋업 결정 (2026-10-06)
-- 1단계 = **PBE, R(0) 고정**(13번 kohn HSE(0.27) q0 CONTCAR, a=6.09898, As_In idx 108, C3v: As–As 2.607/2.625×3; q+1 2.553/2.565×3; q+2 Td 2.490), q=0→+2 9점(0.25 간격), ENCUT 400, ISPIN=2, ISMEAR=0 σ=0.01, k=(¼,¼,¼), 968번=a₁*. 0→+1 은 down 968 에서, +1→+2 는 up 968 에서만 뺌(분수 스핀 오차 회피). 이후 R(+2) 동일 9점.
+- 1단계 = **PBE, R(0) 고정**(⚠정정 2026-10-07 md5 확인: **11번 bloch PBE-이완 q0 CONTCAR**(HSE(0.27) 격자) = R0_POSCAR md5 02107c8b, R2_POSCAR = 11번 q+2 md5 ac490731. 13번 HSE 이완 CONTCAR(aa21d516/04979f1f)는 안 씀. a=6.09898, As_In idx 108, R0 C3v As–As 2.599/2.616×3. 참고로 13번 HSE 이완값: q0 2.607/2.625×3, q+1 2.553/2.565×3, q+2 Td 2.490), q=0→+2 9점(0.25 간격), ENCUT 400, ISPIN=2, ISMEAR=0 σ=0.01, k=(¼,¼,¼), 968번=a₁*. 0→+1 은 down 968 에서, +1→+2 는 up 968 에서만 뺌(분수 스핀 오차 회피). 이후 R(+2) 동일 9점.
 - 보정 = **FWP**(`~/bin/finite-size-corrections-defect-levels.py`, state (qC,qR) float 지원, R(0)이면 qpol=0 → ε∞ 단독). **gKT 에는 ε∞ = 12.3(실험값) 사용 — 프로젝트 correction.yaml 의 11.0 과 다름, 사용자 결정.** ε0=15.15. 래퍼 run_charged_corrections.py 는 charge 를 int 로 잘라 분수 불가 → FWP 입력 직접 작성. (0,0) 기준 = R(0) q=0 LOCPOT (R(+2) 시험에도 공용).
 - 출력: LVHAR=.T. 필수, LCHARG=.T.(ρ(q)−ρ(0) 진단), LORBIT=11.
 - **트리 생성 (2026-10-06, bloch)**: `07-Bulk-defect_calculation/__gKT_linearity_test__/` — R0 = 11번(PBE@HSE격자) q0 CONTCAR(13번 HSE 이완과 결합 0.008 Å 차, 이후 모든 범함수 공통 구조). `As_In/R0/PBE/q0.00…q2.00`(g1, 정수 4노드·분수 2노드), NUPDOWN 으로 스핀채널 강제, `fwp/input_R0_PBE.dat`, `scripts/gkt_table.py check|analyze`. 실행은 사용자가 README 보고 직접. LPARD 는 본 런에서 제외(정수점 WAVECAR 로 후처리).
