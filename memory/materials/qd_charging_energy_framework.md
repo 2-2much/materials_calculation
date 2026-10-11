@@ -50,6 +50,13 @@ GaAs QD Si_Ga⁺ 결과([[trsm_fig6_gaas_qd_model]])를 해석하며 정리한 �
   외부 CTL ε(Q/Q+1) = QD 전체의 전기화학퍼텐셜 μ(N)=E(N)−E(N−1) = **Coulomb blockade 전도 피크 위치**, 연속 준위 간격 ≥ e²/C(+Δε). 내부 판정은 E_F 무관(TRSM/JCC).
 - 고립 QD 에선 E_F 가 자유 변수가 아님(N 고정). 필름/용액의 E_F 는 앙상블·대이온·redox 가 정함.
 
+## 문헌 근거 (2026-10-11 조사, 원문확인 여부 표시)
+- 고전 기원: Brus JCP 79,5566(1983)/80,4403(1984) Σ_pol·1.786 (원문 미확인, 표준인용). Makov–Nitzan–Brus JCP 88,5076(1988) 금속·유전체 구 IP: 고전 W+3/8 e²/R 은 틀리고 **W+½e²/R** (초록 확인).
+- Franceschetti–Williamson–Zunger PRL 83,1999 / PRB 62,2614(2000): μ1=ε+Σ_pol, μ2=μ1+J_ee(Coul+pol) 분해 (arXiv cond-mat/9908417 원문 확인).
+- **DFT ΔSCF ≈ 고전 편극** 논쟁: Ögüt–Chelikowsky–Louie PRL 79,1770(1997) → Godby–White PRL 80,3161(1998, ΔLDA 는 밀도이완=정전 부분만, 비국소 SE 약 0.68 eV 누락) → Franceschetti–Wang–Zunger PRL 83,1269(1999, OCL 자기에너지는 "almost entirely classical polarization", Σ_pol 식 0.94 계수, 원문 확인).
+- ε_in 개념: Delerue–Lannoo–Allan PRB 68,115411(2003, 표면 결합 끊김이 평균 ε 감소 원인), PRL 84,2457(2000).
+- 1/ε_out+0.79/ε_in 형태: Niquet–Delerue–Allan–Lannoo PRB 65,165334(2002)·Delerue–Lannoo 교과서 추정 — **원문 미확인**.
+
 ## How to apply
 - 진공 결과 인용 시 "ε_in·모양 포함된 완전한 값"으로. 환경 값은 반드시 A/B 분리 또는 직접 계산.
 - 표면 결함은 해석식 대신 원하는 ε_out 에서 직접 계산(implicit solvent + CKT/JCC, 호환성 미확인).
