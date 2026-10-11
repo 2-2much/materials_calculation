@@ -5,12 +5,17 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 11c6ee48-6b18-4123-8e5e-a326020ccf79
-  modified: 2026-10-07T05:05:53.334Z
+  modified: 2026-10-11T11:14:16.801Z
 ---
 
 ## ★사용자 확정 축 (2026-10-07)
 **Wei(TRSM)와 Zhang(3DJM/외부) 하전결함 모델 차이에서 나오는 JCC 값(−δE0)을 QD 에선 단순 보정값이 아니라 물리적 의미가 있는 충전에너지로 본다** → 이걸 이용한 다음 연구를 고민 중.
 후보로 언급(메시지 중단됨): QD 하전결함 형성에너지 식 정립 / QD 반지름(크기) 의존 …
+
+## 사용자 아이디어 (2026-10-11): QD 앙상블 = 벌크 결정, QD 하나 = 자리
+Melnikov–Chelikowsky PRL 92, 046802 (2004) Eq.(1)–(3) E_B = I_d(doped) − A_p(pure) 를 "QD 간 전자이동 형성에너지"로 → 도핑 QD 농도.
+내 평가: E_B 는 μ_e 축 위 두 CTL 간격 = **E_b^int + 2E_c**(진공에선 2E_c 가 지배, 저자는 '약한 가림'으로 해석). E_B 가 정하는 건 **이온화 분율(운반자)**, 도핑 QD 개수는 중성 ΔH(μ_dopant)(+합성은 kinetic). 조각들은 기존(Lannoo PRL 74,3415 1995 / Shklovskii 그룹 모형 통계 — 서지 확인 필요 / Dalpian–Chelikowsky 2006), 통합 제일원리 대정준 틀 + 분해 + ε_out 해석환산은 공백으로 추정(미검증).
+이번 주 후보: GaAs **host_qm1·SiGa_q0** (CKT, +JCC 젤리움) → E_B 계산·분해. ⚠ q−1 젤리움 ghost state 점검([[jcc_acceptor_vacuum_ghost_state]]).
 
 GaAs QD 결과([[trsm_fig6_gaas_qd_model]])와 [[cqd_ntype_origin_goal]]·[[inas_cnl_branch_point]] 를 묶어 제안 (사용자 확정 아님 — "Big question 아직 뚜렷하지 않다"에 대한 내 권고).
 
