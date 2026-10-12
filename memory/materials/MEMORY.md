@@ -30,7 +30,7 @@
 - [Defect Package Repo](defect_package_repo.md) — ⚠2026-08-04 **기준=GitHub origin 하나뿐**(2-2much/Defect_Package, private/master). 커밋·푸시는 `__Defect_Package_Reference__` 클론에서. **/mnt/hohenberg 사본은 폐기, pull/copy/commit 금지**(파일 복사하면 pull이 거부됨). GitHub 배포 구성·POTCAR 스크럽·사용 모델도 여기 ⚠2026-08-25 bloch·kohn의 03 계산폴더를 GitHub 클론으로 **in-place 전환**(낡은 hohenberg remote가 계산 config를 되돌리던 문제 해소, 절차·되돌리기 포함)
 - [★InAs HSE(α,μ) 동시 튜닝](inas_hybrid_alpha_mu_tuning.md) — 갭+gKT. ★HSE(0.27,0.20) As_In R0 gKT 충족(c≈+0.004 vs PBE 0.14, FWP 의존). PBE-d 격자 피팅 금지. ★목표갭=0.44(2026-10-12 결정) → (0.27,0.20) 확정 방향, μ 스캔 불필요
 - [gKT·Janak·Koopmans 원리](hybrid_gkt_janak_koopmans_principles.md) — 앙상블=혼합→직선, Janak+Koopmans⇔직선, erfc 분할
-- [Kane k·p InAs 적용](inas_kane_kp_application.md) — m0/m*≈1+E_P/Eg, 섞임은 Γ밖에서만, (α,μ) 3번째 판정자
+- [Kane k·p InAs 적용](inas_kane_kp_application.md) — m*=0.023(F포함 0.026)·p–d는 VBM만 올림·8-band 구성·g*≈−14.6. 노션 5문항 답(10-12). (α,μ) 3번째 판정자
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
 - [SCPC Debug](scpc_debug.md) — SCPC 함정: CKT 비호환, getgrid 버그, 권장 설정
 - [SCPC Reference](scpc_reference.md) — SCPC README 참조, INVCOR/REFCHG 그리드 호환
