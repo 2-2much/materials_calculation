@@ -21,3 +21,4 @@ metadata:
 - 관련: [[inas_bulk_scfermi_frozen_13]] · [[feedback_build_on_prior_work_not_critique]] · [[inas_hybrid_alpha_mu_tuning]]
 - 2026-10-13 보류함(parked, Q번호) 추가: 막힌 것 한 줄, blocks yes/no, 풀리면 status solved + notion 링크.
 - **노션과의 분업(사용자와 합의)**: html = 숫자·빈칸·퍼즐·보류의 *상태판*(Claude가 입력, 짧게). 노션 = 사용자가 **직접 자기 언어로** 쓰는 이해·생각(풀린 보류 설명, Z 선택 이유, 빅퀘스쳔 문장). 같은 내용 두 곳에 쓰지 않기 — html은 노션 링크로만 가리킴. 사용자는 직접 써야 머리에 들어온다고 함 → 노션 내용을 Claude가 대신 쓰지 말 것.
+- 3번째: Jiang 2027 (N35–43, G15–18, Z6·Z7). 실험: PL Peak A 0.415/B 0.403 eV(12 meV 아래, As 플럭스↑에 증가), TRPL τ_SRH 3.16e-7 s, Hall 없음. 연결: G16 = 우리 DFE로 753 K As-rich [As_In] → 자릿수 커지면 'As_In 수명 지배'와 긴장(HSE 0).
