@@ -32,6 +32,7 @@
 - [gKT·Janak·Koopmans 원리](hybrid_gkt_janak_koopmans_principles.md) — 앙상블=혼합→직선, Janak+Koopmans⇔직선, erfc 분할
 - [Kane k·p InAs 적용](inas_kane_kp_application.md) — m*=0.023(F포함 0.026)·p–d는 VBM만 올림·8-band 구성·g*≈−14.6. 노션 5문항 답(10-12). (α,μ) 3번째 판정자
 - [벌크 sc-fermi 동결 1215→300K (13번)](inas_bulk_scfermi_frozen_13.md) — In-rich 진성 n≈4e13, As-rich As_In으로 n≤9e16. ⚠DOS N_c 13배 과소가 결과 좌우
+- [★InAs 숫자 사냥판](inas_number_hunt_hub.md) — ~/papers/InAs/number_hunt_InAs.html. 실험논문 읽으면 렉노 대신 여기 DATA에 숫자·빈칸·퍼즐 추가(배열 끝에)
 - [Lab Members](lab_members.md) — 연구실 구성원 명단
 - [SCPC Debug](scpc_debug.md) — SCPC 함정: CKT 비호환, getgrid 버그, 권장 설정
 - [SCPC Reference](scpc_reference.md) — SCPC README 참조, INVCOR/REFCHG 그리드 호환
