@@ -1,5 +1,6 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
 - [CQD n-type Origin Goal](cqd_ntype_origin_goal.md) — 최상위 목표: InAs CQD n형 기원을 표면 point defect로 규명. 판정=CTL+μ-diagram
+- [★2026-10 범위: 벌크만](inas_bulk_only_scope_2026_10.md) — 사용자 결정: 표면 결함 제외, 벌크 본연 결함으로 학위 마무리. 후보 BQ=E_F 고정(E_V+0.52)·n형 한계, 아직 미확정
 - [★Fig.2/SEJM 재현 완료](jcc_fig2_sejm_reproduction.md) — SEJM 절편 5.527/6.273 vs 논문 5.47/6.25. ★ε_VBM 두 자리에 다른 값(잔차 153→5 meV). 미해결=n12로 γ/Λ 분리
 - [★k점 접힘 + 하전셀 k수렴](jcc_kpoint_folding_and_charged_convergence.md) — n이 3의 배수라야 K→Γ. Γ-only 고윳값은 정확(0.2meV)하나 **하전 총에너지는 k에 민감**(δE₀ 22.5meV)
 - [★JCC가 ΔH_f 발산을 지운다 (04/05)](jcc_dHf_lz_validation.md) — 도너 0.87eV→4.6meV·억셉터 0.88eV→1.5meV. q² 부호무관 실측. 깨진 δE₀(−1)은 47%만 지움
