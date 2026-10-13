@@ -118,6 +118,7 @@
 - [PBE→HSE06 2단 전략](pbe_then_hse_workflow_plan.md) — PBE 스크리닝→HSE 재판정. PBE 무자성은 HSE가 뒤집을 크기
 - [⚠허락 없이 파일 생성 금지](feedback_code_and_readme_only.md) — 계산 입력/폴더도 시키기 전엔 안 만든다. 스크립트 실행·계산 kill도 금지. 읽기만 허용
 - [모델 우선, 정밀도는 HSE에서](feedback_model_first_not_precision.md) — 판정 바꾸는 계산만. caveat 나열 대신 권고+근거 한 줄
+- [★숲 먼저, 나무는 하나만](feedback_forest_over_trees.md) — 사용자는 나무에 몰입해 소진하는 경향. 산으로 가면 먼저 짧게 말해줄 것 ("이게 고른 퍼즐의 답을 바꾸나?")
 - [재현 판정 기준](feedback_reproduction_judgment.md) — 0.1eV 절대차는 허용. 판정자는 **trend 유지 + 극한값 일치** 둘뿐. 발판 잔차에 '불일치/어긋남' 라벨 붙이지 말 것
 - [선행연구는 발전 구도로](feedback_build_on_prior_work_not_critique.md) — 비판·대립 금지(초보 평판 위험). 상대 진단법을 우리 검증으로 채택, 차이는 열린 질문으로
 - [pseudo-H 미이완 + LASPH 부재](inas100_pseudoh_lasph_footing.md) — 기하 재사용 OK, 에너지는 섞지 말 것
