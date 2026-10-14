@@ -1,4 +1,5 @@
 - [User Profile](user_profile.md) — KAIST 소속, DFT 계산 연구
+- [지도교수 성향](advisor_style.md) — 방임형·사람은 안 버림·관심=마찰·열(결함·QD 잘 모름) → 쉬운 말로, 제안형으로
 - [CQD n-type Origin Goal](cqd_ntype_origin_goal.md) — 최상위 목표: InAs CQD n형 기원을 표면 point defect로 규명. 판정=CTL+μ-diagram
 - [★2026-10 범위: 벌크만→저차원?](inas_bulk_only_scope_2026_10.md) — 10-13 벌크만 결정 → ★10-14 교수님: 저차원·다물질(TMD/II-VI/III-V/perovskite)로 확장 제안. 면담 전
 - [★Fig.2/SEJM 재현 완료](jcc_fig2_sejm_reproduction.md) — SEJM 절편 5.527/6.273 vs 논문 5.47/6.25. ★ε_VBM 두 자리에 다른 값(잔차 153→5 meV). 미해결=n12로 γ/Λ 분리
