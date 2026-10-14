@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 11c6ee48-6b18-4123-8e5e-a326020ccf79
-  modified: 2026-10-11T11:14:16.801Z
+  modified: 2026-10-14T02:10:18.290Z
 ---
 
 ## ★사용자 확정 축 (2026-10-07)
@@ -53,6 +53,11 @@ GaAs QD 결과([[trsm_fig6_gaas_qd_model]])와 [[cqd_ntype_origin_goal]]·[[inas
   Table II/III(벌크 Si, 셀크기 미기재, 보정 없음)는 ε(0/∓) 열역학 CTL vs 실험 ε_b(Ramdas–Rodriguez 1981, IR 1s→np 분광+EMT 들뜬상태)로 **화학(①)만 검증 — ②③은 벌크에서 0 이라 이 벤치마크로는 안 보임**. 게다가 Si 도너 Bohr 반경 ~25 Å > QD 지름 5.5–10.9 Å → 벌크 ε_b 개념 자체가 QD 로 안 넘어감.
   기여 방향: A Si QD 재계산 분해 / B 내부·외부 두 지표 / C ε_out / D CKT 절대준위(Wang–Zunger 비율 불필요) / E 하전 위치선호 / F InAs 긴장.
 - Wei·Zhang 관련 PDF 는 사용자가 전부 `~/papers/charged_QD` 에 넣음(2026-10-06). **"Origin of the doping bottleneck in semiconductor QDs: A first-principles study" 미독 — 위 방향과 겹치는지 다음에 확인.**
+
+## 문헌조사 2 (2026-10-14, `~/materials/reports/QD 결함 도핑과 유전환경.md`, 논문별 몰랐던/알게된/남긴질문)
+- **콜로이드 QD 에서 ε_out 바꿔 도핑효율 직접 측정한 논문 못 찾음.** 실측은 1D·소자뿐(Björk 2009 NW r=15nm 캐리어 −50%, Pierre 2010 E_I 54→108 meV) — 모두 ε_out↑ → 도핑↑. 0D 는 이론(Reich–Shklovskii 2E_c∝1/ε_m)만.
+- ⚠ 콜로이드 실험에서 실제 지배 변수는 반대이온(Gamelin·Houtepen), Si NC SiO₂ vs Si₃N₄ 는 계면 오프셋 해석 → ε_out 증거로 인용 금지.
+- doping bottleneck = Li, Wei, Li, Xia PRB 77, 113304 (2008) ZnSe QD. Self-purification 은 Du–Erwin–Efros–Norris Comment PRL 100,179702 로 반박됨.
 
 ## 다음 행동 후보
 1 "doping bottleneck" 논문 확인 / 2 진공 표면 Si_Ga vs 중심 Si_Ga / 3 GaAs 크기 스캔 / 4 implicit solvent + CKT 호환성 시험 후 ε_out 스캔 / 5 InAs CQD 이전.
