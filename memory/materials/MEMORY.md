@@ -9,6 +9,7 @@
 - [★JCC 억셉터 진공 ghost state](jcc_acceptor_vacuum_ghost_state.md) — BN 재현: 도너 −0.894(논문 −0.943) 성공·억셉터 실패. 판정식 |δE0| ≳ EA. ★2026-09-09 QE+NC 교차검증: 도너 0.4meV 일치·억셉터 동일 파탄 → PP 가설 기각
 - [★JCC Table II 전 재료 재현](jcc_tableII_reproduction.md) — BN −1 빼면 13행 RMS 41 meV·셀설정 논문일치. ★논문은 GeS/BN만 ±q가 비트 동일 → q²로 적어 넣은 정황. ⚠판정문턱 절대 0.1eV는 |q|=2에 불리
 - [★TRSM Fig.6 GaAs QD 재현](trsm_fig6_gaas_qd_model.md) — 모델 rc7.35 Ga43As44H76(Si_Ga 중심). 3DJM=논문 JM 12–16 meV(1/L+1/L³, ε=1) · JCC −0.564 평평(TRSM −0.52) · CKT +0.331=3DJM E∞ · CKT−JCC 0.894=e²/2C. 트리 bloch 20/21/22 + kohn 02-CKT. L50 진행·L60 HOLD
+- [(보류) 0D 표면결함 JCC 위치항](jcc_0d_position_term_parked.md) — CKT−JCC 시험은 동어반복. 위치항 아이디어만 보관, 사용자가 접음
 - [VASP CKT(0D) 사용법·함정](vasp_ckt_0d_kernel_truncation.md) — KERNEL_TRUNCATION 블록, LCOARSEN 기본 F. ⚠0D TEWEN 이 작은 셀(경계 <~9 Å)에서 keV 급 오류 → L 수렴 점검 필수. 기준상엔 쓰지 말 것
 - [★QD 충전에너지 이론 틀](qd_charging_energy_framework.md) — CKT−JCC=−δE0=e²/2C(Janak). A/ε_out(가우스 정확)+B(β/ε_in). 진공 VASP 값엔 ε_in·쌍극자 포함, 문제는 환경 환산뿐. 표면결함·리간드껍질·수화껍질
 - [Notion 연구 페이지](notion_research_pages.md) — 10월 연구-0D하전결함 등 page id. 커넥터로 읽기
